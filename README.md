@@ -54,3 +54,16 @@ npm start                                 -- Installs the initial project packag
 Now connect an Android device to the computer through USB. Note that the device should be in developer mode: https://developer.android.com/studio/debug/dev-options  
 Open up a new Command Prompt and navigate to the project directory. Now run the following command to install and run the app on the device:  
 react-native run-android (in a new window)
+
+
+
+CLONING THE REPO
+---------------------------------------------------------------------------------------
+git clone <link to https/ssh git link>\
+Enter directory\
+npm install\
+\
+Linux: chmod 755 android/gradlew -- set gradle execute permission
+
+
+
