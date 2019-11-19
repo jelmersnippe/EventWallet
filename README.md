@@ -43,12 +43,6 @@ Add the following lines:
 - C:\Program Files\Java\jdk1.8.0_231    -- Set to directory where JDK8 was installed, this is the default directory  
 
 
-npm install
-chmod 755 android/gradlew -- set gradle execute permission for linux
-
-
-
-
 CREATING THE PROJECT
 ---------------------------------------------------------------------------------------
 Open up a Command Prompt, navigate to the directory you want to create the React Native project and run the following commands:  
@@ -60,3 +54,13 @@ npm start                                 -- Installs the initial project packag
 Now connect an Android device to the computer through USB. Note that the device should be in developer mode: https://developer.android.com/studio/debug/dev-options  
 Open up a new Command Prompt and navigate to the project directory. Now run the following command to install and run the app on the device:  
 react-native run-android (in a new window)
+
+
+AFTER CLONING THE REPO
+---------------------------------------------------------------------------------------
+
+npm install -- Install all packages and dependencies
+Linux: chmod 755 android/gradlew -- set gradle execute permission
+
+
+
