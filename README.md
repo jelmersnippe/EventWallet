@@ -56,10 +56,13 @@ Open up a new Command Prompt and navigate to the project directory. Now run the 
 react-native run-android (in a new window)
 
 
-AFTER CLONING THE REPO
----------------------------------------------------------------------------------------
 
-npm install -- Install all packages and dependencies\
+CLONING THE REPO
+---------------------------------------------------------------------------------------
+git clone <link to https/ssh git link>\
+Enter directory\
+npm install\
+\
 Linux: chmod 755 android/gradlew -- set gradle execute permission
 
 
