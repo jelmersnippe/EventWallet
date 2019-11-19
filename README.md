@@ -59,7 +59,7 @@ react-native run-android (in a new window)
 AFTER CLONING THE REPO
 ---------------------------------------------------------------------------------------
 
-npm install -- Install all packages and dependencies
+npm install -- Install all packages and dependencies\
 Linux: chmod 755 android/gradlew -- set gradle execute permission
 
 
