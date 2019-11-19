@@ -43,6 +43,12 @@ Add the following lines:
 - C:\Program Files\Java\jdk1.8.0_231    -- Set to directory where JDK8 was installed, this is the default directory  
 
 
+npm install
+chmod 755 android/gradlew -- set gradle execute permission for linux
+
+
+
+
 CREATING THE PROJECT
 ---------------------------------------------------------------------------------------
 Open up a Command Prompt, navigate to the directory you want to create the React Native project and run the following commands:  
