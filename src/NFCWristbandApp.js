@@ -1,32 +1,40 @@
-import React, { Component } from 'react'
-import { 
-    createSwitchNavigator, 
-    createAppContainer
-} from 'react-navigation'
-import {
-    createBottomTabNavigator 
-} from 'react-navigation-tabs'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 
-import { Login, Profile, Tickets, Wallet } from './views'
+import { AuthLoading, Login, Register, ForgotPassword, Profile, Tickets, Wallet } from './views'
 
-const Tabs = createBottomTabNavigator({
-    profile: Profile,
-    tickets: Tickets,
-    wallet: Wallet
-})
-
-const MainNavigator = createSwitchNavigator({
-    login: {screen: Login},
-    main: Tabs,
-  })
-  
-const AppContainer = createAppContainer(MainNavigator)
-
-
-export default class NFCWristbandApp extends Component {
-    render() {
-        return (
-            <AppContainer />
-        );
+const AppStack = createBottomTabNavigator(
+    {
+    Profile: Profile,
+    Tickets: Tickets,
+    Wallet: Wallet
+    },
+    {
+        initialRouteName: 'Profile'
     }
-}
+)
+
+const AuthStack = createStackNavigator(
+    {
+        Login: Login,
+        Register: Register,
+        ForgotPassword: ForgotPassword
+    },
+    {
+        initialRouteName: 'Login'
+    }
+)
+
+export default createAppContainer(
+    createSwitchNavigator(
+        {
+            AuthLoading: AuthLoading,
+            App: AppStack,
+            Auth: AuthStack,
+        },
+        {
+            initialRouteName: 'AuthLoading'
+        }
+    )
+);

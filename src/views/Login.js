@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { 
     View, 
     Text,
+    Button,
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
@@ -9,19 +10,29 @@ import {
 
 export default class Login extends Component {
     login () {
-        this.props.navigation.navigate('profile')
+        // Make call to validate login attempt
     }
 
     render() {
         return (
-            <TouchableOpacity 
-                style={styles.container}
-                onPress={() => {
-                    this.login();
-                }}
-            >
-                <Text>Login page</Text>
-            </TouchableOpacity>
+            <View style={styles.container}>
+                <TouchableOpacity 
+                    onPress={() => {
+                        this.login();
+                    }}
+                >
+                    <Text>Login page</Text>
+                    <Button
+                        title='To register page'
+                        onPress={() => this.props.navigation.navigate('Register')}
+                    />
+                    <Button
+                        title='Forgot password?'
+                        onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                    />
+                </TouchableOpacity>
+            </View>
+            
         );
     }
 }

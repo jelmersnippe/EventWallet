@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { 
     View, 
     Text,
+    Button,
     StyleSheet
 } from 'react-native'
 
@@ -11,6 +12,10 @@ export default class Profile extends Component {
         return (
             <View style={styles.container}>
                 <Text>Profile page</Text>
+                <Button
+                    title='Back to landing page'
+                    onPress={() => this.props.navigation.navigate('AuthLoading')}
+                />
             </View>
         );
     }
