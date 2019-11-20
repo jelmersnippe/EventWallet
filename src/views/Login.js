@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { 
     View, 
     Text,
-    Button,
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
@@ -22,7 +21,7 @@ export default class Login extends Component {
                     <Text>To register page</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{paddingVertical: 10, marginBottom: 20}}
+                    style={{paddingVertical: 10}}
                     onPress={() => this.props.navigation.navigate('ForgotPassword')}
                 >
                     <Text>Forgot password?</Text>

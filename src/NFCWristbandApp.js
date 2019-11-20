@@ -22,6 +22,7 @@ const AuthStack = createStackNavigator(
         ForgotPassword: ForgotPassword
     },
     {
+        headerMode:'none',
         initialRouteName: 'Login'
     }
 )

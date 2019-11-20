@@ -5,10 +5,12 @@ import {
     Button,
     StyleSheet,
 } from 'react-native'
+import { withNavigation } from 'react-navigation'
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
     login () {
-        // Make call to validate login attempt
+        // Make call to validate login attempt, for now just redirect to app
+        this.props.navigation.navigate('App')
     }
 
     render() {
@@ -24,7 +26,7 @@ export default class LoginForm extends Component {
                     placeholder='Password'
                     placeholderTextColor='rgba(255,255,255,0.8)'
                 />
-                <Button 
+                <Button  // Switch to a TouchableOpacity item so styling can be modified.
                     title='Login'
                     onPress={() => { this.login() }}
                 />
@@ -32,19 +34,22 @@ export default class LoginForm extends Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      width: 100+'%',
-      height: 100+'%',
-      justifyContent: 'center',
-      alignItems: 'center'
+        width: 100+'%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20
     },
     input: {
         width: 80+'%',
+        marginVertical: 5,
         backgroundColor: 'rgb(150, 150, 150)',
         borderColor: 'rgb(200, 200, 200)',
         borderWidth: StyleSheet.hairlineWidth
     }
 });
+
+export default withNavigation(LoginForm)
   
