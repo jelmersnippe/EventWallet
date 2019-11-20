@@ -7,29 +7,25 @@ import {
     TouchableOpacity
 } from 'react-native'
 
+import LoginForm from '../components/LoginForm'
 
 export default class Login extends Component {
-    login () {
-        // Make call to validate login attempt
-    }
-
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity 
-                    onPress={() => {
-                        this.login();
-                    }}
+                <LoginForm />
+                
+                <TouchableOpacity
+                    style={{paddingVertical: 10}}
+                    onPress={() => this.props.navigation.navigate('Register')}
                 >
-                    <Text>Login page</Text>
-                    <Button
-                        title='To register page'
-                        onPress={() => this.props.navigation.navigate('Register')}
-                    />
-                    <Button
-                        title='Forgot password?'
-                        onPress={() => this.props.navigation.navigate('ForgotPassword')}
-                    />
+                    <Text>To register page</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{paddingVertical: 10, marginBottom: 20}}
+                    onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                >
+                    <Text>Forgot password?</Text>
                 </TouchableOpacity>
             </View>
             
