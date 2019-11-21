@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { 
     View, 
+	Text,
     TextInput,
     Button,
     StyleSheet,
@@ -16,6 +17,7 @@ class LoginForm extends Component {
     render() {
         return (
             <View style={styles.container}>
+				<Text>Login page</Text>
                 <TextInput 
                     style={styles.input}
                     placeholder='Username'
