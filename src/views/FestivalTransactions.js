@@ -7,11 +7,11 @@ import {
 } from 'react-native'
 
 
-export default class Profile extends Component {
+export default class FestivalTransactions extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Profile page</Text>
+                <Text>{this.props.navigation.getParam('festival')} page</Text>
                 <Button
                     title='Back to landing page'
                     onPress={() => this.props.navigation.navigate('AuthLoading')}

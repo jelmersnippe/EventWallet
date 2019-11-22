@@ -1,9 +1,11 @@
+
+import AuthLoading from './AuthLoading'
+
 import Login from './Login'
 import Register from './Register'
-import Profile from './Profile'
-import Tickets from './Tickets'
-import Wallet from './Wallet'
-import AuthLoading from './AuthLoading'
 import ForgotPassword from './ForgotPassword'
 
-export { AuthLoading, Login, Register, ForgotPassword, Profile, Tickets, Wallet }
+import FestivalOverview from './FestivalOverview'
+import FestivalTransactions from './FestivalTransactions'
+
+export { AuthLoading, Login, Register, ForgotPassword, FestivalOverview, FestivalTransactions }
