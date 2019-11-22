@@ -15,25 +15,23 @@ export default class Register extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.header}>Registration</Text>
+                <TextInput style={styles.textinput} placeholder="Username"
+                underlineColorAndroid={'transparent'}/>
+
+                <TextInput style={styles.textinput} placeholder="Password"
+                secureTextEntry={true} underlineColorAndroid={'transparent'}/>
+
+                <TextInput style={styles.textinput} placeholder="Email address"
+                underlineColorAndroid={'transparent'}/>
+
                 <TouchableOpacity 
                     onPress={() => {
                         this.register();
                     }}
+                    style={styles.button}
                 >
-                    <Text style={styles.header}>Registration</Text>
-
-                    <TextInput style={styles.textinput} placeholder="Username"
-                    underlineColorAndroid={'transparent'}/>
-
-                    <TextInput style={styles.textinput} placeholder="Password"
-                    secureTextEntry={true} underlineColorAndroid={'transparent'}/>
-
-                    <TextInput style={styles.textinput} placeholder="Email address"
-                    underlineColorAndroid={'transparent'}/>
-
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.bttntext}>Register</Text>
-                    </TouchableOpacity>
+                    <Text style={styles.bttntext}>Register</Text>
                 </TouchableOpacity>
             </View>
         );
