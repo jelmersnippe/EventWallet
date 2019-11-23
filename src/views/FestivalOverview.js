@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { 
-    View, 
-    Text,
+    View,
     Button,
-    TouchableOpacity,
-    FlatList,
     StyleSheet
 } from 'react-native'
 
@@ -43,9 +40,15 @@ export default class FestivalOverview extends Component{
 
     render() {
         return (
-            <FestivalList 
-                festivalData={festivals}
-            />
+            <View>
+                <FestivalList 
+                    festivalData={festivals}
+                />
+                <Button
+                     title='Back to landing page'
+                     onPress={() => this.props.navigation.navigate('AuthLoading')}
+                 />
+            </View>
         );
     }
 }

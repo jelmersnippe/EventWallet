@@ -10,14 +10,50 @@ class FestivalItem extends Component {
     render() {
         return (
             <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('FestivalTransactions', {festival: this.props.festival})}
+                style = { styles.container }
+                onPress={() => this.props.navigation.navigate('FestivalTransactions', {festival: this.props.festival, amount: this.props.amount})}
             >
-                <Text>{this.props.festival}</Text>
-                <Text>{this.props.amount}</Text>
+                <Text style = { styles.name }>{this.props.festival}</Text>
+                <Text style = { styles.amount }>{this.props.amount}</Text>
+                <TouchableOpacity style = { styles.cta_button }>
+                    <Text style = { styles.cta_button_text}>Add currency</Text>
+                </TouchableOpacity>
             </TouchableOpacity>
         );
     }
 }
+  
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: "space-between",
+        width: 100+'%',
+        backgroundColor: 'rgb(200,200,200)',
+        marginVertical: 10,
+    },
+    name: {
+        width: 70+'%',
+        borderWidth: 1,
+        textAlign: 'center',
+        padding: 15
+    },
+    amount: {
+        width: 30+'%',
+        borderWidth: 1,
+        textAlign: 'center',
+        textAlignVertical: 'center'
+    },
+    cta_button: {
+        width: 100+'%',
+        padding: 20,
+        borderBottomWidth: 1,
+    },
+    cta_button_text: {
+        textAlign: 'center',
+    },
+
+})
 
 export default withNavigation(FestivalItem)
-  
