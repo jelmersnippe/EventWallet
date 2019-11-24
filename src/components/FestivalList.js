@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { 
-    View,
+    SafeAreaView,
     Text,
     FlatList,
     StyleSheet,
@@ -11,7 +11,7 @@ import FestivalItem from './FestivalItem'
 export default class FestivalList extends Component {
     render() {
         return (
-            <View>
+            <SafeAreaView>
                 <Text style={styles.title}>Attending festivals</Text>
                 <FlatList
                     data={this.props.festivalData}
@@ -24,7 +24,7 @@ export default class FestivalList extends Component {
                     )}
                     keyExtractor={item => item.festival}
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }

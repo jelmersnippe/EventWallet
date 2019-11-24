@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { 
-    View,
-    Button,
+    SafeAreaView,
+    TextInput,
     StyleSheet
 } from 'react-native'
 
@@ -25,6 +25,18 @@ const festivals = [
       festival: 'Festival 4',
       amount: '5',
     },
+    {
+      festival: 'Festival 5',
+      amount: '12',
+    },
+    {
+      festival: 'Festival 6',
+      amount: '23',
+    },
+    {
+      festival: 'Festival 7',
+      amount: '50',
+    },
 ];
 
 
@@ -40,15 +52,15 @@ export default class FestivalOverview extends Component{
 
     render() {
         return (
-            <View>
+            <SafeAreaView  style={{flex: 1, paddingBottom: 80}}>
+				<TextInput 
+					placeholder='Searchbar placeholder' 
+					style={{borderWidth: 1}}
+				/>
                 <FestivalList 
                     festivalData={festivals}
                 />
-                <Button
-                     title='Back to landing page'
-                     onPress={() => this.props.navigation.navigate('AuthLoading')}
-                 />
-            </View>
+            </SafeAreaView >
         );
     }
 }
