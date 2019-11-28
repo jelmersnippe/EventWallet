@@ -3,12 +3,11 @@ import {
     View, 
     Text,
     TouchableOpacity,
-    Button,
     StyleSheet
 } from 'react-native'
 
 
-export default class FestivalTransactions extends Component {
+export default class Transactions extends Component {
     render() {
         return (
             <View style={styles.container}>

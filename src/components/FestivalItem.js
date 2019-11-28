@@ -11,13 +11,10 @@ class FestivalItem extends Component {
         return (
             <TouchableOpacity
                 style = { styles.container }
-                onPress={() => this.props.navigation.navigate('FestivalTransactions', {festival: this.props.festival, amount: this.props.amount})}
+                onPress={() => this.props.navigation.navigate('SpecificEvent', {festival: this.props.festival, amount: this.props.amount})}
             >
                 <Text style = { styles.name }>{this.props.festival}</Text>
                 <Text style = { styles.amount }>{this.props.amount}</Text>
-                <TouchableOpacity style = { styles.cta_button }>
-                    <Text style = { styles.cta_button_text}>Add currency</Text>
-                </TouchableOpacity>
             </TouchableOpacity>
         );
     }

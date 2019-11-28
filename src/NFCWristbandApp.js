@@ -2,26 +2,58 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 
-import { AuthLoading, Login, Register, ForgotPassword, FestivalOverview, FestivalTransactions } from './views'
+import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, Announcements, Content, FriendOverview } from './views'
 
-// const AppStack = createBottomTabNavigator(
-//     {
-//     Profile: Profile,
-//     Tickets: Tickets,
-//     Wallet: Wallet
-//     },
-//     {
-//         initialRouteName: 'Profile'
-//     }
-// )
 
-const AppStack = createStackNavigator(
+
+const SpecificEventContent = createBottomTabNavigator(
     {
-        FestivalOverview: FestivalOverview,
-        FestivalTransactions: FestivalTransactions
+        Transactions: Transactions,
+        Announcements: Announcements,
+        Content: Content
     },
     {
-        initialRouteName: 'FestivalOverview'
+        initialRouteName: 'Transactions'
+    }
+)
+
+const EventStack = createStackNavigator(
+    {
+        Overview: EventOverview,
+        SpecificEvent: SpecificEventContent
+    },
+    {
+        initialRouteName: 'Overview'
+    }
+)
+
+EventStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+      tabBarVisible = false;
+    }
+  
+    return {
+      tabBarVisible,
+    };
+  };
+
+const FriendStack = createStackNavigator(
+    {
+        Overview: FriendOverview,
+    },
+    {
+        initialRouteName: 'Overview'
+    }
+)
+
+const AppStack = createBottomTabNavigator(
+    {
+        Friends: FriendStack,
+        Events: EventStack
+    },
+    {
+        initialRouteName: 'Events'
     }
 )
 

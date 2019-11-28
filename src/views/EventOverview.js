@@ -40,7 +40,7 @@ const festivals = [
 ];
 
 
-export default class FestivalOverview extends Component{
+export default class EventOverview extends Component{
 
     fetchFestivalData(){
         // Fetch festival data for the user
