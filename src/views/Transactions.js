@@ -12,14 +12,13 @@ export default class Transactions extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <View style={styles.info}>
-                        <Text style = { styles.name }>{this.props.navigation.getParam('festival')}</Text>
-                        <TouchableOpacity style = { styles.cta_button }>
-                            <Text style = { styles.cta_button_text}>Add currency</Text>
-                        </TouchableOpacity>
-                    </View>
                     <Text style = { styles.amount }>{this.props.navigation.getParam('amount')}</Text>
+                    <TouchableOpacity style = { styles.cta_button }>
+                        <Text style = { styles.cta_button_text}>Add currency</Text>
+                    </TouchableOpacity>
                 </View>
+
+                <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
 
                 <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
                 
@@ -60,23 +59,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: 100+'%',
         height: 20+'%',
-    },
-    info: {
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        width: 60+'%',
-        height: 100+'%',
-
-        borderWidth: 1,
-    },
-    cta_button: {
-        backgroundColor: 'rgb(100,100,255)'
+        justifyContent: "space-evenly",
     },
     amount: {
-        width: 40+'%',
+        width: 50+'%',
         textAlign: "center",
         textAlignVertical: "center",
 
         borderWidth: 1,
-    }
+    },
+    cta_button: {
+        width: 50+'%',
+        backgroundColor: 'rgb(100,100,255)',
+    },
 });
