@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
-class FestivalItem extends Component {
+class EventItem extends Component {
     render() {
         return (
             <TouchableOpacity
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default withNavigation(FestivalItem)
+export default withNavigation(EventItem)

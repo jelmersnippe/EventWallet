@@ -6,6 +6,59 @@ import {
     StyleSheet
 } from 'react-native'
 
+import TransactionList from '../components/TransactionList';
+
+const transactions = [
+    {
+        id: 1,
+        sender: 'Henk',
+        receiver: 'Maarten',
+        amount: '+'+10,
+        datetime: '24/07 19:23'
+    },
+    {
+        id: 2,
+        sender: 'Pieter',
+        receiver: 'Sander',
+        amount: '-'+5,
+        datetime: '21/07 19:23'
+    },
+    {
+        id: 3,
+        sender: 'Jelmer',
+        receiver: 'Sander',
+        amount: '-'+5,
+        datetime: '21/07 19:23'
+    },
+    {
+        id: 4,
+        sender: 'Jan',
+        receiver: 'Pedro',
+        amount: '+'+11,
+        datetime: '21/07 19:23'
+    },
+    {
+        id: 5,
+        sender: 'Pieter',
+        receiver: 'Sander',
+        amount: '+'+3,
+        datetime: '21/07 19:23'
+    },
+    {
+        id: 6,
+        sender: 'Pieter',
+        receiver: 'Sander',
+        amount: '-'+4,
+        datetime: '21/07 19:23'
+    },
+    {
+        id: 7,
+        sender: 'Pieter',
+        receiver: 'Sander',
+        amount: '+'+6,
+        datetime: '21/07 19:23'
+    }
+];
 
 export default class Transactions extends Component {
     render() {
@@ -21,26 +74,10 @@ export default class Transactions extends Component {
                 <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
 
                 <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
-                
-                <Text style={{width: 100+'%', borderWidth: 1, padding: 10}}>Date</Text>
-                <View style={{flexDirection: 'row', borderWidth: 1, padding: 10}}>
-                    <Text style={{width:70+'%'}}>From/To</Text>
-                    <Text style={{width:30+'%'}}>Amount</Text>
-                </View>
-                <View style={{flexDirection: 'row', borderWidth: 1, padding: 10}}>
-                    <Text style={{width:70+'%'}}>From/To</Text>
-                    <Text style={{width:30+'%'}}>Amount</Text>
-                </View>
-                <View style={{flexDirection: 'row', borderWidth: 1, padding: 10}}>
-                    <Text style={{width:70+'%'}}>From/To</Text>
-                    <Text style={{width:30+'%'}}>Amount</Text>
-                </View>
 
-                <Text style={{width: 100+'%', borderWidth: 1, padding: 10}}>Date</Text>
-                <View style={{flexDirection: 'row', borderWidth: 1, padding: 10}}>
-                    <Text style={{width:70+'%'}}>From/To</Text>
-                    <Text style={{width:30+'%'}}>Amount</Text>
-                </View>
+                <TransactionList
+                    transactionData={transactions}
+                />
             </View>
         );
     }
@@ -53,7 +90,8 @@ const styles = StyleSheet.create({
         height: 100+'%',
         justifyContent: "flex-start",
         alignItems: 'center',
-        backgroundColor: '#F5FCFF'
+        backgroundColor: '#F5FCFF',
+        paddingBottom: 180
     },
     header: {
         flexDirection: "row",
