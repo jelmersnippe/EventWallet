@@ -1,151 +1,135 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
-    Platform,
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-	TextInput,
-	CheckBox,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  Keyboard
 } from 'react-native';
 
-export default class Register extends Component {
-    constructor() {
-        super()
-        this.state={
-            name:'',
-            nameValidate: true,
-            password:'',
-            passwordValidate: true,
-            email:'',
-            emailValidate: true,
-        }
-
+export default class App extends Component<{}> {
+  constructor(props){
+    super(props);
+    this.state={
+      username:'',
+      validatePassword: true,
+      password:'',
+      validatePassword: true,
+      email:'',
+      validateEmail: true
     }
+  }
 
-    buttonClicked = () => alert
-
-    validate(text, type)
-    {
-        const alph = /^[a-zA-Z]+$/
-        const num = /^[a-zA-Z0-9]+$/
-        const beta = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if(type=='username')
-            {
-                if(alph.test(text))
-                {
-                this.setState({nameValidate: true,})
-                }
-                else
-                    {
-                    this.setState({nameValidate: false,})
-                    alert("Username is not correct")
-                    }
+validateEmail = (email) => {
+    console.log(email);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        if(reg.test(email) === false){
+            this.setState({Error:"Kut email"})
+            this.setState({email:email})
+            return false;
             }
-                 else if(type=='password')
-                     {
-                         if(num.test(text))
-                         {
-                         this.setState({passwordValidate: true,})
-                         }
-                         else
-                             {
-                             this.setState({passwordValidate: false,})
-                             alert("Password is not correct")
-                             }
-                     }
-                              else if(type=='email')
-                                  {
-                                      if(beta.test(text))
-                                      {
-                                      this.setState({emailValidate: true,})
-                                      }
-                                      else
-                                          {
-                                          this.setState({emailValidate: false,})
-                                          alert("Email is not correct")
-                                          }
-                                  }
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.header}>Registration</Text>
+        else if(reg.test(email) === true){
+            this.setState({email:email})
+            this.setState({Error:"Goede email"});
+            return true;
+        }
+    };
 
-                <TextInput style={[styles.textinput,
-                !this.state.nameValidate ? styles.error:null]}
-                placeholder="Username"
-                onChangeText={(text)=>this.validate(text, 'username')}
-                underlineColorAndroid={'transparent'}/>
+validatePassword = (password) => {
+    console.log(password);
+    let reg2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+        if(reg2.test(password) === false){
+            this.setState({Error:"Kut password"})
+            this.setState({password:password})
+            return false;
+            }
+        else if(reg2.test(password) === true){
+            this.setState({password:password})
+            this.setState({Error:"Goed wachtwoord"});
+            return true;
+        }
+    };
 
-                <TextInput style={[styles.textinput,
-                !this.state.passwordValidate ? styles.error:null]}
-                placeholder="Password"
-                onChangeText={(text)=>this.validate(text, 'password')}
-                //secureTextEntry={true}
-                underlineColorAndroid={'transparent'}/>
+validateUsername = (username) => {
 
-                <TextInput style={[styles.textinput,
-                !this.state.emailValidate ? styles.error:null]}
-                placeholder="Email address"
-                onChangeText={(text)=>this.validate(text, 'email')}
-                underlineColorAndroid={'transparent'}/>
+    console.log(username);
+    let reg3 = /^[a-zA-Z0-9]{5,}$/
+        if(reg3.test(username) === false){
+            this.setState({Error:"Kut username"})
+            this.setState({username:username})
+            return false;
+            }
+        else if (reg3.test(username) === true){
+            this.setState({username:username})
+            this.setState({Error:"Goede username"})
+            return true;
+        }
+    };
 
-                <TouchableOpacity
-                    style={styles.button}
-                    //onpress
-                >
-                    <Text style={styles.bttntext}>Register</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+validate=() => {
+    if (this.validateUsername === true);
+    else if (this.validatePassword === true);
+    else if (this.validateEmail === true);
+   //this.setState({Error: 'thank you, your form is submitted successfully'});
 }
 
+
+
+  render() {
+    return (
+      <View style={styles.container}>
+
+      <Text style={{color:'red', textAlign:'center'}}>
+      {this.state.Error}
+      </Text>
+
+      <TextInput
+      placeholder="Username"
+      style={styles.textstyle}
+      onChangeText={username => this.validateUsername(username)}
+      value={this.state.username}
+      />
+
+      <TextInput
+      placeholder="Password"
+      style={styles.textstyle}
+      //secureTextEntry={true}
+      onChangeText={password => this.validatePassword(password)}
+      value={this.state.password}
+      />
+
+      <TextInput
+      placeholder="Email"
+      style={styles.textstyle}
+      onChangeText={email => this.validateEmail(email)}
+      value={this.state.email}
+      />
+
+
+      <TouchableOpacity
+      onPress={this.validate}
+      style={{backgroundColor:'red',padding:10,width:150}}
+      >
+      <Text style={{color:'white',textAlign:'center',
+      fontSize:20,fontWeight:'bold'}}>Submit</Text>
+      </TouchableOpacity>
+
+      </View>
+    );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 50,
-    paddingRight: 50,
     justifyContent: 'center',
-    backgroundColor: '#40e0d0'
-  },
-  header: {
-    fontSize: 35,
-    color: 'white',
-    paddingBottom: 5,
-    marginBottom: 40,
-    borderBottomColor: 'white',
-    borderBottomWidth: 3,
-  },
-  textinput: {
-    alignSelf: 'stretch',
-    fontSize: 20,
-    height: 45,
-    marginBottom: 25,
-    color: 'white',
-    borderBottomColor: 'white',
-    borderBottomWidth: 2,
-    },
-   button: {
     alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#20b2aa',
-    marginTop: 20,
-    marginTop: 40,
-    paddingLeft: 60,
-    paddingRight: 60,
-    },
-   bttntext: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold',
-    marginTop: 3,
-    marginBottom: 3,
-    },
-   error: {
-    borderWidth: 3,
-    borderColor: 'red',
-   }
-
+    backgroundColor: '#F5FCFF',
+  },
+  textstyle:{
+    borderWidth:1,borderColor:'#ccc',
+    margin:10, padding:10, width:'90%'
+  }
 });
