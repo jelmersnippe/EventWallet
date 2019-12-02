@@ -2,13 +2,21 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 
-import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, Announcements, Content, FriendOverview } from './views'
+import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, WalletLink, Announcements, Content, FriendOverview } from './views'
 
-
+const TransactionStack = createStackNavigator(
+    {
+        Transactions: Transactions,
+        WalletLink: WalletLink
+    },
+    {
+        initialRouteName: 'Transactions'
+    }
+)
 
 const SpecificEventContent = createBottomTabNavigator(
     {
-        Transactions: Transactions,
+        Transactions: TransactionStack,
         Announcements: Announcements,
         Content: Content
     },

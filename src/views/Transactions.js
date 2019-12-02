@@ -70,8 +70,11 @@ export default class Transactions extends Component {
                         <Text style = { styles.cta_button_text}>Add currency</Text>
                     </TouchableOpacity>
                 </View>
-
-                <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                <TouchableOpacity
+                    onPress = {() => {this.props.navigation.navigate('WalletLink')}}
+                >
+                    <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                </TouchableOpacity>
 
                 <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
 
