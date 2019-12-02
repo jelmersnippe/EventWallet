@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native'
 
-import FestivalList from '../components/FestivalList'
+import EventList from '../components/EventList'
 
 
 const festivals = [
@@ -53,11 +53,11 @@ export default class EventOverview extends Component{
     render() {
         return (
             <SafeAreaView  style={{flex: 1, paddingBottom: 80}}>
-				<TextInput 
-					placeholder='Searchbar placeholder' 
-					style={{borderWidth: 1}}
-				/>
-                <FestivalList 
+                <TextInput 
+                  placeholder='Searchbar placeholder' 
+                  style={{borderWidth: 1}}
+                />
+                <EventList 
                     festivalData={festivals}
                 />
             </SafeAreaView >

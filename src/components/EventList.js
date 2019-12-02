@@ -6,9 +6,9 @@ import {
     StyleSheet,
 } from 'react-native'
 
-import FestivalItem from './FestivalItem'
+import EventItem from './EventItem'
 
-export default class FestivalList extends Component {
+export default class EventList extends Component {
     render() {
         return (
             <SafeAreaView>
@@ -16,7 +16,7 @@ export default class FestivalList extends Component {
                 <FlatList
                     data={this.props.festivalData}
                     renderItem={({ item }) => (
-                        <FestivalItem
+                        <EventItem
                             festival={item.festival}
                             amount={item.amount}
                             key={item.festival}
