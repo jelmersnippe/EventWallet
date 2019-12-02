@@ -7,8 +7,9 @@ import ForgotPassword from './ForgotPassword'
 
 import EventOverview from './EventOverview'
 import Transactions from './Transactions'
+import BuyTokens from './BuyTokens'
 import Announcements from './Announcements'
 import Content from './Content'
 import FriendOverview from './FriendOverview'
 
-export { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, Announcements, Content, FriendOverview }
+export { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, BuyTokens, Announcements, Content, FriendOverview }

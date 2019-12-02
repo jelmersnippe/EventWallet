@@ -66,7 +66,10 @@ export default class Transactions extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style = { styles.amount }>{this.props.navigation.getParam('amount')}</Text>
-                    <TouchableOpacity style = { styles.cta_button }>
+                    <TouchableOpacity
+                        style = { styles.cta_button }
+                        onPress = {() => {this.props.navigation.navigate('BuyTokens')}}
+                    >
                         <Text style = { styles.cta_button_text}>Add currency</Text>
                     </TouchableOpacity>
                 </View>
