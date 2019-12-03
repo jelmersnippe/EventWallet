@@ -12,7 +12,9 @@ class FriendItem extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.name}>{this.props.name}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {this.props.navigation.navigate('ShareTokens')}}
+                >
                     <Text style={styles.button}>Share</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
