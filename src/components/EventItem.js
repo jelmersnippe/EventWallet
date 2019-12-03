@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { 
     Text,
+    View,
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
@@ -13,8 +14,15 @@ class EventItem extends Component {
                 style = { styles.container }
                 onPress={() => this.props.navigation.navigate('SpecificEvent', {festival: this.props.festival, amount: this.props.amount})}
             >
-                <Text style = { styles.name }>{this.props.festival}</Text>
-                <Text style = { styles.amount }>{this.props.amount}</Text>
+                <View style={styles.info}>
+                    <Text>Date time</Text>
+                    <Text style = { styles.name }>{this.props.festival}</Text>
+                    <Text>Location</Text>
+                </View>
+                <View style={styles.tokens}>
+                    <Text>Arrow</Text>
+                    <Text style = { styles.amount }>{this.props.amount}</Text>
+                </View>
             </TouchableOpacity>
         );
     }
@@ -30,6 +38,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(200,200,200)',
         marginVertical: 10,
     },
+    info: {
+        width: 70+'%',    
+    },
+    tokens: {
+
+    },
     name: {
         width: 70+'%',
         borderWidth: 1,
@@ -42,15 +56,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center'
     },
-    cta_button: {
-        width: 100+'%',
-        padding: 20,
-        borderBottomWidth: 1,
-    },
-    cta_button_text: {
-        textAlign: 'center',
-    },
-
 })
 
 export default withNavigation(EventItem)
