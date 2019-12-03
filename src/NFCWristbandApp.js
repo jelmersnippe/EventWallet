@@ -2,7 +2,7 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 
-import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, WalletLink, BuyTokens, Announcements, Content, FriendOverview } from './views'
+import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, WalletLink, BuyTokens, Announcements, Content, FriendOverview, ShareTokens } from './views'
 
 const TransactionStack = createStackNavigator(
     {
@@ -50,6 +50,7 @@ EventStack.navigationOptions = ({ navigation }) => {
 const FriendStack = createStackNavigator(
     {
         Overview: FriendOverview,
+        ShareTokens: ShareTokens
     },
     {
         initialRouteName: 'Overview'

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
     Text,
-    TextInput,
     View,
     StyleSheet,
     TouchableOpacity,
@@ -12,7 +11,7 @@ import NumericInput from 'react-native-numeric-input'
 
 
 
-export default class BuyTokens extends Component {
+export default class ShareTokens extends Component {
     constructor(){
         super();
         this.state={
