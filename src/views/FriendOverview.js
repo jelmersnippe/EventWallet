@@ -7,91 +7,64 @@ import {
     TouchableOpacity,
 } from 'react-native'
 
-export default class Announcements extends Component {
-    render() {
-            return (
-                <View style={styles.container}>
-                    <Text style={styles.header}>FestiWallet</Text>
+import FriendList from '../components/FriendList'
 
-                    <TextInput style={styles.textinput} placeholder="Search for friends"/>
+const friends = [
+	{
+		name: 'berend101'
+	},
+	{
+		name: 'berend102'
+	},
+	{
+		name: 'berend103'
+	},
+	{
+		name: 'berend104'
+	},
+	{
+		name: 'berend105'
+	},
+	{
+		name: 'berend106'
+	},
+	{
+		name: 'berend107'
+	},
+	{
+		name: 'berend108'
+	}
+]
 
-                    <View>
-                        <Text style={styles.header2}>Add friends</Text>
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend101</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Accept</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Decline</Text>
-                                        </TouchableOpacity>
-                                    </View>
+export default class FriendOverview extends Component {
+  render() {
+    return (
+		<View style={styles.container}>
+		<Text style={styles.header}>FestiWallet</Text>
 
-                        <Text style={styles.header2}>Friendlist</Text>
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend102</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
+		<TextInput style={styles.textinput} placeholder="Search for friends"/>
 
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend103</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
+		<View>
+			<Text style={styles.header2}>Add friends</Text>
+			<View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
+			<Text style={{width:200, fontSize: 18}}>Berend101</Text>
+			<TouchableOpacity>
+				<Text style={{width:80, fontSize: 18}}>Accept</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={styles.button}>
+				<Text style={{width:80, fontSize: 18}}>Decline</Text>
+			</TouchableOpacity>
+			</View>
 
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend104</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend105</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend106</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend107</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                        </View>
-                </View>
-            );
-        }
-    }
+			<Text style={styles.header2}>Friendlist</Text>
+			<FriendList 
+				friendData={friends}
+			/>
+		</View>
+		</View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -100,7 +73,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 25,
-    color: 'black',
     paddingBottom: 10,
     marginBottom: 10,
     paddingLeft: 140,
@@ -109,7 +81,6 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontSize: 23,
-    color: 'black',
     paddingBottom: 5,
     marginBottom: 5,
     paddingLeft: 30,
@@ -119,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 45,
     marginBottom: 15,
-    color: 'black',
     backgroundColor: 'gray',
     paddingLeft: 10,
     marginLeft: 30,
