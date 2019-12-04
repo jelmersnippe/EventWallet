@@ -6,7 +6,8 @@ import {
 	TouchableOpacity,
 	Picker,
 } from 'react-native'
-import NumericInput from 'react-native-numeric-input'
+
+import NumericTokenInput from '../components/NumericTokenInput'
 
 
 
@@ -40,22 +41,7 @@ export default class ShareTokens extends Component {
 
 				<Text style={styles.header}>Balance</Text>
 
-				<View style={{ flexDirection: 'row', paddingLeft: 10, paddingBottom: 10, alignItems: 'center' }}>
-					<Text style={styles.header2}>Ammount</Text>
-					<NumericInput
-						value={this.state.value}
-						onChange={value => this.setState({ value })}
-						onLimitReached={(isMax, msg) => console.log(isMax, msg)}
-						totalWidth={150}
-						totalHeight={50}
-						iconSize={100}
-						step={1}
-						valueType='real'
-						textColor='black'
-						iconStyle={{ color: 'white' }}
-						rightButtonBackgroundColor='green'
-						leftButtonBackgroundColor='red' />
-				</View>
+				<NumericTokenInput />
 
 
 				<View style={{ flexDirection: 'row', paddingLeft: 80, paddingRight: 30, paddingBottom: 10 }}>
@@ -88,15 +74,6 @@ const styles = StyleSheet.create({
 		//paddingLeft: 80,
 		//paddingRight: 80,
 		textAlign: 'center',
-	},
-	header2: {
-		fontSize: 23,
-		color: 'black',
-		paddingBottom: 5,
-		marginBottom: 5,
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginRight: 30,
 	},
 	textinput: {
 		fontSize: 20,
