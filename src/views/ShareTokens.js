@@ -62,7 +62,9 @@ export default class ShareTokens extends Component {
             <TouchableOpacity>
                 <Text  style={styles.button1}>Send</Text>
              </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { this.props.navigation.goBack() }}
+            >
                 <Text style={styles.button2}>Cancel</Text>
              </TouchableOpacity>
         </View>

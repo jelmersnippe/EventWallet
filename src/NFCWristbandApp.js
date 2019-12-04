@@ -1,4 +1,4 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer, getActiveChildNavigationOptions } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 
@@ -8,12 +8,28 @@ const TransactionStack = createStackNavigator(
     {
         Transactions: Transactions,
         WalletLink: WalletLink,
-        BuyTokens: BuyTokens,
+        BuyTokens: {
+            screen: BuyTokens,
+            navigationOptions: {
+                header: null,
+            }
+        }
     },
     {
         initialRouteName: 'Transactions'
     }
 )
+
+TransactionStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+
+    return {
+        tabBarVisible,
+    }
+}
 
 const SpecificEventContent = createBottomTabNavigator(
     {
@@ -26,10 +42,21 @@ const SpecificEventContent = createBottomTabNavigator(
     }
 )
 
+SpecificEventContent.navigationOptions = ({ navigation }) => {
+    let headerShown = true;
+    if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
+        headerShown = false;
+    }
+  
+    return {
+        headerShown,
+    };
+}
+
 const EventStack = createStackNavigator(
     {
         Overview: EventOverview,
-        SpecificEvent: SpecificEventContent
+        SpecificEvent: SpecificEventContent,
     },
     {
         initialRouteName: 'Overview'
@@ -39,23 +66,41 @@ const EventStack = createStackNavigator(
 EventStack.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true;
     if (navigation.state.index > 0) {
-      tabBarVisible = false;
+        tabBarVisible = false;
     }
   
     return {
-      tabBarVisible,
+        tabBarVisible,
     };
-  };
+};
 
 const FriendStack = createStackNavigator(
     {
         Overview: FriendOverview,
-        ShareTokens: ShareTokens
+        ShareTokens: {
+            screen: ShareTokens,
+            navigationOptions: {
+                header: null,
+            }
+        }
     },
     {
-        initialRouteName: 'Overview'
+        initialRouteName: 'Overview',
     }
+
 )
+
+FriendStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+
+    return {
+        tabBarVisible,
+    };
+};
+
 
 const AppStack = createBottomTabNavigator(
     {
@@ -74,7 +119,7 @@ const AuthStack = createStackNavigator(
         ForgotPassword: ForgotPassword
     },
     {
-        headerMode:'none',
+        headerMode: 'none',
         initialRouteName: 'Login'
     }
 )

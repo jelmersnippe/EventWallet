@@ -60,7 +60,9 @@ export default class BuyTokens extends Component {
             <TouchableOpacity>
                 <Text  style={styles.button}>Buy</Text>
              </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { this.props.navigation.goBack() }}
+            >
                 <Text style={styles.button}>Cancel</Text>
              </TouchableOpacity>
         </View>
