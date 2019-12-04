@@ -6,6 +6,7 @@ import {
     StyleSheet
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 class EventItem extends Component {
     render() {
@@ -14,13 +15,13 @@ class EventItem extends Component {
                 style = { styles.container }
                 onPress={() => this.props.navigation.navigate('SpecificEvent', {festival: this.props.festival, amount: this.props.amount})}
             >
-                <View>
-                    <Text>Date time</Text>
-                    <Text style = { styles.name }>{this.props.festival}</Text>
-                    <Text>Location</Text>
+                <View style={styles.info}>
+                    <Text style={styles.datetime}>Zaterdag 14 dec 14:00 - 01:00</Text>
+                    <Text style={styles.name}>{this.props.festival}</Text>
+                    <Text style={styles.location}>Autotron, Rosmalen</Text>
                 </View>
                 <View style={styles.tokens}>
-                    <Text>Arrow</Text>
+                    <Icon name='right' size={30} color="#80868B" style={{padding:5}} />
                     <Text style = { styles.amount }>{this.props.amount} Tokens</Text>
                 </View>
             </TouchableOpacity>
@@ -30,27 +31,38 @@ class EventItem extends Component {
   
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: "space-between",
-        width: 90+'%',
 
         padding: 5,
 
         borderTopWidth: 1,
         borderBottomWidth: 1,
-
-        backgroundColor: 'lightgray'
+    },
+    info: {
+        maxWidth: 70+'%',
     },
     tokens: {
         alignItems: 'center',
         justifyContent: "space-evenly",
     },
+    datetime: {
+        color: '#80868B',
+        textTransform: 'uppercase',
+        fontSize: 12,
+        marginLeft: 10,
+    },
+    location: {
+        color: '#505155',
+        marginLeft: 10,
+    },  
     name: {
-        fontSize: 25,
-        fontWeight: 'bold'
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#2D2D2D'
     },
     amount: {
+        fontWeight: 'bold',
         borderWidth: 1,
         borderRadius: 5,
         padding: 5,

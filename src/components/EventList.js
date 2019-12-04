@@ -11,11 +11,9 @@ import EventItem from './EventItem'
 export default class EventList extends Component {
     render() {
         return (
-            <SafeAreaView>
-                <Text style={styles.title}>Attending festivals</Text>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.title}>Events</Text>
                 <FlatList
-                contentContainerStyle='center'
-                    style={styles.list}
                     data={this.props.festivalData}
                     renderItem={({ item }) => (
                         <EventItem
@@ -32,13 +30,14 @@ export default class EventList extends Component {
 }
   
 const styles = StyleSheet.create({
-    title: {
-        width: 100+'%',
-        textAlign: 'center',
-        marginVertical: 10,
+    container: {
+        marginHorizontal: 5+'%',
     },
-    list: {
-        width: 100+'%',
-        backgroundColor: 'gray'
+    title: {
+        marginVertical: 10,
+        marginRight: 5,
+        textAlign: 'right',
+        textTransform: "uppercase",
+        fontSize: 18,
     }
 })

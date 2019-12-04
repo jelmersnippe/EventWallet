@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+	View,
 	SafeAreaView,
 	TextInput,
 	StyleSheet
@@ -10,8 +11,8 @@ import EventList from '../components/EventList'
 
 const festivals = [
 	{
-		festival: 'Festival 1',
-		amount: '10',
+		festival: 'Shockerz - The Raw Gathering',
+		amount: '8',
 	},
 	{
 		festival: 'Festival 2',
@@ -53,10 +54,12 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
-				<TextInput
-					placeholder='Searchbar placeholder'
-					style={{ borderWidth: 1 }}
-				/>
+				<View style={styles.search_container}>
+					<TextInput
+						placeholder='Searchbar placeholder'
+						style={styles.search_bar}
+					/>
+				</View>
 				<EventList
 					festivalData={festivals}
 				/>
@@ -70,7 +73,18 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: 100+'%',
 		paddingBottom: 80,
-		backgroundColor: '#F9F8FB',
-		
+		backgroundColor: '#F8F9FB',
 	},
+	search_container: {
+		backgroundColor: '#F6CF3A',
+	},
+	search_bar: {
+		borderWidth: 1,
+		borderRadius: 5,
+		padding: 10,
+		marginHorizontal: 5+'%',
+		marginVertical: 3+'%',
+
+		backgroundColor: '#FFF'
+	}
 });
