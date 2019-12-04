@@ -14,6 +14,8 @@ export default class EventList extends Component {
             <SafeAreaView>
                 <Text style={styles.title}>Attending festivals</Text>
                 <FlatList
+                contentContainerStyle='center'
+                    style={styles.list}
                     data={this.props.festivalData}
                     renderItem={({ item }) => (
                         <EventItem
@@ -34,5 +36,9 @@ const styles = StyleSheet.create({
         width: 100+'%',
         textAlign: 'center',
         marginVertical: 10,
+    },
+    list: {
+        width: 100+'%',
+        backgroundColor: 'gray'
     }
 })

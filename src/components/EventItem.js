@@ -14,14 +14,14 @@ class EventItem extends Component {
                 style = { styles.container }
                 onPress={() => this.props.navigation.navigate('SpecificEvent', {festival: this.props.festival, amount: this.props.amount})}
             >
-                <View style={styles.info}>
+                <View>
                     <Text>Date time</Text>
                     <Text style = { styles.name }>{this.props.festival}</Text>
                     <Text>Location</Text>
                 </View>
                 <View style={styles.tokens}>
                     <Text>Arrow</Text>
-                    <Text style = { styles.amount }>{this.props.amount}</Text>
+                    <Text style = { styles.amount }>{this.props.amount} Tokens</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -32,29 +32,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        flexWrap: 'wrap',
         justifyContent: "space-between",
-        width: 100+'%',
-        backgroundColor: 'rgb(200,200,200)',
-        marginVertical: 10,
-    },
-    info: {
-        width: 70+'%',    
+        width: 90+'%',
+
+        padding: 5,
+
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+
+        backgroundColor: 'lightgray'
     },
     tokens: {
-
+        alignItems: 'center',
+        justifyContent: "space-evenly",
     },
     name: {
-        width: 70+'%',
-        borderWidth: 1,
-        textAlign: 'center',
-        padding: 15
+        fontSize: 25,
+        fontWeight: 'bold'
     },
     amount: {
-        width: 30+'%',
         borderWidth: 1,
-        textAlign: 'center',
-        textAlignVertical: 'center'
+        borderRadius: 5,
+        padding: 5,
     },
 })
 
