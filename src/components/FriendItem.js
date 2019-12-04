@@ -12,12 +12,17 @@ class FriendItem extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.name}>{this.props.name}</Text>
-                <TouchableOpacity>
-                    <Text style={styles.button}>Share</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.button}>Remove</Text>
-                </TouchableOpacity>
+
+                <View style={styles.button_container}>
+                    <TouchableOpacity
+                        onPress={() => {this.props.navigation.navigate('ShareTokens')}}
+                    >
+                        <Text style={styles.button}>Share</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.button}>Remove</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -26,17 +31,20 @@ class FriendItem extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        paddingHorizontal: 30,
+        justifyContent: 'space-between',
+        width: 100+'%',
         paddingBottom: 10,
     },
     name: {
-        width: 200,
         fontSize: 18,
     },
+    button_container: {
+        flexDirection: 'row'
+    },
     button: {
-        width: 80,
         fontSize: 18,
-    }
+        paddingHorizontal: 15,
+    },
 })
 
 

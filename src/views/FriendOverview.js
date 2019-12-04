@@ -40,27 +40,26 @@ export default class FriendOverview extends Component {
   render() {
     return (
 		<View style={styles.container}>
-		<Text style={styles.header}>FestiWallet</Text>
 
 		<TextInput style={styles.textinput} placeholder="Search for friends"/>
 
-		<View>
-			<Text style={styles.header2}>Add friends</Text>
-			<View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-			<Text style={{width:200, fontSize: 18}}>Berend101</Text>
-			<TouchableOpacity>
-				<Text style={{width:80, fontSize: 18}}>Accept</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.button}>
-				<Text style={{width:80, fontSize: 18}}>Decline</Text>
-			</TouchableOpacity>
-			</View>
+            <View style={styles.list_container}>
+                <Text style={styles.list_header}>Add friends</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.name}>berend101</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.button1}>Accept</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.button2}>Decline</Text>
+                    </TouchableOpacity>
+                </View>
 
-			<Text style={styles.header2}>Friendlist</Text>
-			<FriendList 
-				friendData={friends}
-			/>
-		</View>
+                <Text style={styles.list_header}>Friendlist</Text>
+                <FriendList
+                    friendData={friends}
+                />
+            </View>
 		</View>
     );
   }
@@ -69,30 +68,24 @@ export default class FriendOverview extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-  },
-  header: {
-    fontSize: 25,
-    paddingBottom: 10,
-    marginBottom: 10,
-    paddingLeft: 140,
-    paddingRight: 50,
-    justifyContent: 'center',
-  },
-  header2: {
+    alignItems: 'center',
+    padding: 10+'%',
+    },
+    list_container: {
+
+    },
+  list_header: {
     fontSize: 23,
-    paddingBottom: 5,
     marginBottom: 5,
-    paddingLeft: 30,
-    paddingRight: 30,
   },
   textinput: {
+    width: 80+'%',
     fontSize: 20,
     height: 45,
     marginBottom: 15,
     backgroundColor: 'gray',
-    paddingLeft: 10,
-    marginLeft: 30,
-    marginRight: 30,
+    padding: 10,
     },
+   
+
 });
