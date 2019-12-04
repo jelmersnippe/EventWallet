@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     padding: 10,
     },
-   name
+   
 
 });
