@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { 
-    SafeAreaView,
+    View,
     Text,
     FlatList,
     StyleSheet,
@@ -11,7 +11,7 @@ import EventItem from './EventItem'
 export default class EventList extends Component {
     render() {
         return (
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <Text style={styles.title}>Events</Text>
                 <FlatList
                     data={this.props.festivalData}
@@ -24,18 +24,19 @@ export default class EventList extends Component {
                     )}
                     keyExtractor={item => item.festival}
                 />
-            </SafeAreaView>
+            </View>
         );
     }
 }
   
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         marginHorizontal: 5+'%',
     },
     title: {
         marginVertical: 10,
-        marginRight: 5,
+        paddingRight: 5,
         textAlign: 'right',
         textTransform: "uppercase",
         fontSize: 18,
