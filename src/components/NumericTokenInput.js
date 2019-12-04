@@ -19,7 +19,6 @@ export default class NumericTokenInput extends Component {
                 <NumericInput
                     value={this.state.value}
                     onChange={value => this.setState({ value })}
-                    onLimitReached={(isMax, msg) => console.log(isMax, msg)}
                     totalWidth={150}
                     totalHeight={50}
                     iconSize={100}
