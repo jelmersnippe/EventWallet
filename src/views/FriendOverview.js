@@ -5,67 +5,109 @@ import {
 	View,
 	StyleSheet,
 	TouchableOpacity,
-} from 'react-native'
+	ScrollView,
+} from 'react-native';
+import SearchInput, { createFilter } from 'react-native-search-filter';
+
+const KEYS_TO_FILTERS = ['name'];
 
 import FriendList from '../components/FriendList'
 
-const friends = [
+const users = [
 	{
-		name: 'berend101'
+		name: 'berend101',
+		status: 'pending'
 	},
 	{
-		name: 'berend102'
+		name: 'berend102',
+		status: 'friend'
 	},
 	{
-		name: 'berend103'
+		name: 'berend103',
+		status: 'unknown'
 	},
 	{
-		name: 'berend104'
+		name: 'berend104',
+        status: 'unknown'
 	},
 	{
-		name: 'berend105'
+		name: 'berend105',
+		status: 'unknown'
 	},
 	{
-		name: 'berend106'
+		name: 'berend106',
+		status: 'friend'
 	},
 	{
-		name: 'berend107'
+		name: 'berend107',
+		status: 'friend'
 	},
 	{
-		name: 'berend108'
+		name: 'berend108',
+		status: 'pending'
 	},
 	{
-		name: 'berend109'
+		name: 'berend109',
+		status: 'pending'
 	},
 	{
-		name: 'berend110'
+		name: 'berend110',
+		status: 'friend'
 	},
 	{
-		name: 'berend111'
+		name: 'berend111',
+		status: 'unknown'
 	},
 	{
-		name: 'berend112'
+		name: 'berend112',
+		status: 'friend'
 	},
 	{
-		name: 'berend113'
+		name: 'berend113',
+		status: 'friend'
 	},
 	{
-		name: 'berend114'
+		name: 'berend114',
+		status: 'pending'
 	},
 	{
-		name: 'berend115'
+		name: 'berend115',
+		status: 'friend'
 	},
 	{
-		name: 'berend116'
+		name: 'berend116',
+		status: 'friend'
 	}
 ]
 
 export default class FriendOverview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchTerm: '',
+            filteredUsers: [],
+        }
+
+    }
+
+    searchUpdated(term) {
+        this.setState({searchTerm: term})
+        this.setState({filteredUsers: users.filter(createFilter(term, KEYS_TO_FILTERS))})
+
+        if(term == ''){
+            this.setState({filteredUsers: []})
+        }
+    }
+
 	render() {
-		return (
+	    return (
 			<View style={styles.container}>
 
-				<TextInput style={styles.textinput} placeholder="Search for friends" />
+			    <SearchInput
+                    onChangeText={(term) => {this.searchUpdated(term)}}
+                        style={styles.searchInput}
+                        placeholder="Search for another user"
+                />
 
 				<Text style={styles.list_header}>Add friends</Text>
 				<View style={{ flexDirection: 'row' }}>
@@ -78,9 +120,9 @@ export default class FriendOverview extends Component {
 					</TouchableOpacity>
 				</View>
 
-				<FriendList
-					friendData={friends}
-				/>
+                <FriendList
+                    friendData={this.state.filteredUsers}
+                />
 			</View>
 		);
 	}
