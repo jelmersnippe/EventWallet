@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import TransactionList from '../components/TransactionList';
 
@@ -65,21 +66,26 @@ export default class Transactions extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style = { styles.amount }>{this.props.navigation.getParam('amount')}</Text>
+                    <Text style = { styles.cta_button }>{this.props.navigation.getParam('amount')}</Text>
+
+
                     <TouchableOpacity
                         style = { styles.cta_button }
                         onPress = {() => {this.props.navigation.navigate('BuyTokens')}}
+
                     >
-                        <Text style = { styles.cta_button_text}>Add currency</Text>
+                        <Text style = { styles.cta_button_text}>Buy Tokens</Text>
+                        <Icon name='angle-right' size={25} color="black" style={{padding:4}} />
                     </TouchableOpacity>
+
                 </View>
                 <TouchableOpacity
                     onPress = {() => {this.props.navigation.navigate('WalletLink')}}
                 >
-                    <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                    <Text style={styles.header2}>Wallet link</Text>
                 </TouchableOpacity>
 
-                <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
+                <Text style={styles.header2}>Transaction History</Text>
 
                 <TransactionList
                     transactionData={transactions}
@@ -92,27 +98,41 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: 100+'%',
-        height: 100+'%',
-        justifyContent: "flex-start",
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F8F9Fb',
     },
     header: {
         flexDirection: "row",
         width: 100+'%',
-        height: 20+'%',
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
     },
-    amount: {
-        width: 50+'%',
-        textAlign: "center",
-        textAlignVertical: "center",
-
-        borderWidth: 1,
+    header2: {
+        marginVertical: 10,
+        textAlign: 'left',
+        textTransform: "uppercase",
+        fontSize: 18,
+        marginHorizontal: 3 +'%',
+        borderBottomWidth: 1,
+        borderBottomColor: 'black',
+        paddingBottom: 5,
     },
     cta_button: {
-        width: 50+'%',
-        backgroundColor: 'rgb(100,100,255)',
+        flex: 1,
+        marginVertical: 15,
+        height: 70,
+        backgroundColor: 'gray',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        borderRadius: 20,
+        marginHorizontal: 20,
+        marginBottom: 10,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0,0,0,0.1)',
     },
+    cta_button_text: {
+        fontSize: 20,
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: "space-evenly",
+        textAlignVertical: 'center'
+     }
 });
