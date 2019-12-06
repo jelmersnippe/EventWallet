@@ -90,6 +90,7 @@ export default class App extends Component {
 		}
 
 		let reg = /^[a-zA-Z0-9]{5,}$/
+		this.setState({ usernameError: '' })
 
 		if (!reg.test(username)) {
 			this.setState({ usernameError: "Invalid username" })
@@ -108,6 +109,7 @@ export default class App extends Component {
 		}
 
 		let reg = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/
+		this.setState({ emailError: '' })
 
 		if (!reg.test(email)) {
 			this.setState({ emailError: "Invalid email.\nFollow the format 'johndoe@example.com'" })
