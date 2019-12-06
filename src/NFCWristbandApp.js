@@ -6,7 +6,12 @@ import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactio
 
 const TransactionStack = createStackNavigator(
     {
-        Transactions: Transactions,
+        Transactions: {
+            screen: Transactions,
+            navigationOptions: {
+                header: null,
+            }
+        },
         WalletLink: WalletLink,
         BuyTokens: {
             screen: BuyTokens,
