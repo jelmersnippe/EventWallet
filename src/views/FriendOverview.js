@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import {
 	Text,
-	TextInput,
 	View,
 	StyleSheet,
 	TouchableOpacity,
-	ScrollView,
 } from 'react-native';
-import SearchInput, { createFilter } from 'react-native-search-filter';
-
-const KEYS_TO_FILTERS = ['name'];
 
 import FriendList from '../components/FriendList'
+import SearchBar from '../components/SearchBar'
 
 const users = [
 	{
@@ -87,28 +83,18 @@ export default class FriendOverview extends Component {
             searchTerm: '',
             filteredUsers: [],
         }
-
     }
-
-    searchUpdated(term) {
-        this.setState({searchTerm: term})
-        this.setState({filteredUsers: users.filter(createFilter(term, KEYS_TO_FILTERS))})
-
-        if(term == ''){
-            this.setState({filteredUsers: []})
-        }
-    }
+	
+	updateFilteredList = (newFilteredList) => {
+		this.setState({filteredUsers: newFilteredList})
+	}
 
 	render() {
 	    return (
 			<View style={styles.container}>
 
-			    <SearchInput
-                    onChangeText={(term) => {this.searchUpdated(term)}}
-                        style={styles.searchInput}
-                        placeholder="Search for another user"
-                />
-
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} />
+			    
 				<Text style={styles.list_header}>Add friends</Text>
 				<View style={{ flexDirection: 'row' }}>
 					<Text style={styles.name}>berend101</Text>
@@ -132,20 +118,34 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		marginHorizontal: 5+'%',
-	},
-	textinput: {
-		width: 80 + '%',
-		fontSize: 20,
-		height: 45,
-		marginVertical: 15,
-		backgroundColor: 'gray',
-		padding: 10,
 	},
 	list_header: {
 		fontSize: 23,
 		marginBottom: 5,
 	},
+	search_container: {
+		justifyContent: 'center',
+		width: 100+'%',
+		backgroundColor: '#F6CF3A',
+		paddingHorizontal: 5+'%',
+	},
+	search_bar: {
+		flexDirection: 'row',
+		width: 100+'%',
+		borderWidth: 1,
+		borderRadius: 5,
+		paddingHorizontal: 5,
+		marginVertical: 15,
+
+		backgroundColor: '#FFF'
+	},
+	search_icon: {
+		alignSelf: 'center',
+		flex: 1,
+	},
+	search_input: {
+		flex: 9,
+	}
 
 
 });
