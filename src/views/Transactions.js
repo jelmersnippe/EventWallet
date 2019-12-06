@@ -98,7 +98,12 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F9Fb',
+        width: 100+'%',
+        height: 100+'%',
+        justifyContent: "flex-start",
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        paddingBottom: 180
     },
     header: {
         flexDirection: "row",
