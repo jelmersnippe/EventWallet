@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
 	View,
-	SafeAreaView,
 	TextInput,
 	StyleSheet
 } from 'react-native'
@@ -53,7 +52,7 @@ export default class EventOverview extends Component {
 
 	render() {
 		return (
-			<SafeAreaView style={styles.container}>
+			<View style={styles.container}>
 				<View style={styles.search_container}>
 					<TextInput
 						placeholder='Searchbar placeholder'
@@ -63,7 +62,7 @@ export default class EventOverview extends Component {
 				<EventList
 					festivalData={festivals}
 				/>
-			</SafeAreaView >
+			</View >
 		);
 	}
 }
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		width: 100+'%',
-		paddingBottom: 80,
 		backgroundColor: '#F8F9FB',
 	},
 	search_container: {
