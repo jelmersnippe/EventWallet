@@ -43,7 +43,7 @@ export default class App extends Component {
         // 1 uppercase letter or more
         // 1 lowercase letter or more
 
-		let length_error = 'Must be longer than 8 characters'
+		let length_error = 'Must be atleast 8 characters'
 		let digit_error = 'Must contain a digit'
 		let uppercase_error = 'Must contain an uppercase character'
 		let lowercase_error = 'Must contain a lowercase character'
@@ -57,30 +57,38 @@ export default class App extends Component {
 
 		this.setState({ passwordError: [] })
 
-		let valid_password = true
+		let validPassword = true
+		let errors = []
 
 		if(password.length < 8){
-			valid_password = false
-			this.addPasswordError(length_error)
+			validPassword = false
+			errors.push(length_error)
 		}
 		if(password.search(digit_reg) < 0){
-			valid_password = false
-			this.addPasswordError(digit_error)
+			validPassword = false
+			errors.push(digit_error)
 		}
 		if(password.search(uppercase_reg) < 0){
-			valid_password = false
-			this.addPasswordError(uppercase_error)
+			validPassword = false
+			errors.push(uppercase_error)
 		}
 		if(password.search(lowercase_reg) < 0){
-			valid_password = false
-			this.addPasswordError(lowercase_error)
+			validPassword = false
+			errors.push(lowercase_error)
 		}
 		if(password.search(symbol_reg) < 0){
-			valid_password = false
-			this.addPasswordError(symbol_error)
+			validPassword = false
+			errors.push(symbol_error)
 		}
 
-		return valid_password;
+		if(!validPassword){
+			this.addPasswordError('Invalid password');
+			errors.forEach(error => {
+				this.addPasswordError(error)
+			})
+		}
+
+		return validPassword;
 	};
 
 	validateUsername = (username) => {
@@ -93,7 +101,7 @@ export default class App extends Component {
 		this.setState({ usernameError: '' })
 
 		if (!reg.test(username)) {
-			this.setState({ usernameError: "Invalid username" })
+			this.setState({ usernameError: "Invalid username\nMust be atleast 6 characters\nOnly alphanumeric characters allowed" })
 			return false;
 		}
 
@@ -157,7 +165,6 @@ export default class App extends Component {
 				/>
 				<View>
 					{
-						console.log(this.state.passwordError),
 						this.state.passwordError.map(item => {
 							return(
 								<Text style={{ color: 'red', textAlign: 'center' }}>{item}</Text>
