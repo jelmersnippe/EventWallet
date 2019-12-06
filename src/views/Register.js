@@ -43,7 +43,7 @@ export default class App extends Component {
         // 1 uppercase letter or more
         // 1 lowercase letter or more
 
-		let length_error = 'Must be atleast 8 characters'
+		let length_error = 'Must be at least 8 characters'
 		let digit_error = 'Must contain a digit'
 		let uppercase_error = 'Must contain an uppercase character'
 		let lowercase_error = 'Must contain a lowercase character'
@@ -101,7 +101,7 @@ export default class App extends Component {
 		this.setState({ usernameError: '' })
 
 		if (!reg.test(username)) {
-			this.setState({ usernameError: "Invalid username\nMust be atleast 6 characters\nOnly alphanumeric characters allowed" })
+			this.setState({ usernameError: "Invalid username\nMust be at least 6 characters\nOnly alphanumeric characters are allowed" })
 			return false;
 		}
 
