@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+
 
 export default class TransactionItem extends Component {
     render() {
@@ -24,7 +24,6 @@ export default class TransactionItem extends Component {
                         </View>
                     </View>
                     <Text style={styles.amount}>{this.props.amount}</Text>
-                    <Icon name='coins' size={30} color="#F6CF3A" style={{padding:10}} />
                 </View>
             </View>
         );
@@ -38,36 +37,29 @@ const styles = StyleSheet.create({
         width: 100+'%',
         marginVertical: 5,
         borderWidth: 1,
-        marginBottom: 10,
     },
     datetime: {
         width: 100+'%', 
         padding: 5,
-        textAlign: 'center',
-        backgroundColor: 'rgb(200,200,200)',
-        fontSize: 16,
+        textAlign: 'center'
     },
     transaction_info: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         width: 100+'%',
-
+        backgroundColor: 'rgb(200,200,200)',
     },
     user_info: {
-        flex: 8,
         flexDirection: 'row',
         margin: 5,
-
     },
     user_info_title: {
         alignItems: "flex-end",
         marginRight: 5,
     },
     amount: {
-        flex: 1,
+        borderWidth: 1,
         textAlignVertical: "center",
-        textAlign: 'right',
-        paddingRight: 7,
-        fontSize: 20
-
+        padding: 10
     }
 })
