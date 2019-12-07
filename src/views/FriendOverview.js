@@ -93,7 +93,7 @@ export default class FriendOverview extends Component {
 	    return (
 			<View style={styles.container}>
 
-				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} />
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' />
 			    
 				<Text style={styles.list_header}>Add friends</Text>
 				<View style={{ flexDirection: 'row' }}>

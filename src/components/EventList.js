@@ -14,15 +14,15 @@ export default class EventList extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Events</Text>
                 <FlatList
-                    data={this.props.festivalData}
+                    data={this.props.eventData}
                     renderItem={({ item }) => (
                         <EventItem
-                            festival={item.festival}
+                            name={item.name}
                             amount={item.amount}
-                            key={item.festival}
+                            key={item.name}
                         />
                     )}
-                    keyExtractor={item => item.festival}
+                    keyExtractor={item => item.name}
                 />
             </View>
         );

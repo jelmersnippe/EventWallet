@@ -17,7 +17,7 @@ class EventItem extends Component {
             >
                 <View style={styles.info}>
                     <Text style={styles.datetime}>Zaterdag 14 dec 14:00 - 01:00</Text>
-                    <Text style={styles.name}>{this.props.festival}</Text>
+                    <Text style={styles.name}>{this.props.name}</Text>
                     <Text style={styles.location}>Autotron, Rosmalen</Text>
                 </View>
                 <View style={styles.tokens}>

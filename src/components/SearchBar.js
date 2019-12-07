@@ -32,7 +32,7 @@ export default class SearchBar extends Component {
                     <Icon name='search' size={30} color="#80868B" style={styles.search_icon} />
                     <TextInput
                         onChangeText={(term) => {this.searchUpdated(term)}}
-                        placeholder="Search for another user"
+                        placeholder={this.props.placeholder}
                         placeholderTextColor='#80868B'
                         style={styles.search_input}
                     />
