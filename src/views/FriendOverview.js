@@ -123,29 +123,4 @@ const styles = StyleSheet.create({
 		fontSize: 23,
 		marginBottom: 5,
 	},
-	search_container: {
-		justifyContent: 'center',
-		width: 100+'%',
-		backgroundColor: '#F6CF3A',
-		paddingHorizontal: 5+'%',
-	},
-	search_bar: {
-		flexDirection: 'row',
-		width: 100+'%',
-		borderWidth: 1,
-		borderRadius: 5,
-		paddingHorizontal: 5,
-		marginVertical: 15,
-
-		backgroundColor: '#FFF'
-	},
-	search_icon: {
-		alignSelf: 'center',
-		flex: 1,
-	},
-	search_input: {
-		flex: 9,
-	}
-
-
 });
