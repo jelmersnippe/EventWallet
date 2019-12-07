@@ -9,9 +9,6 @@ import {
 } from 'react-native'
 import NumericInput from 'react-native-numeric-input'
 
-
-
-
 export default class BuyTokens extends Component {
     constructor(){
         super();
@@ -23,29 +20,40 @@ export default class BuyTokens extends Component {
   render() {
      return (
         <View style={styles.container}>
-                <Text style={styles.header}>Name of event</Text>
-
+            <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
+            <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
+            <Text style={styles.location}>Autotron, Rosmalen</Text>
+            <Text style={styles.header}>Select the amount of tokens you want to buy</Text>
 
         <View style={styles.picker}>
             <NumericInput
-                        value={this.state.value}
-                        onChange={value => this.setState({value})}
-                        onLimitReached={(isMax,msg) => console.log(isMax,msg)}
-                        totalWidth={110}
-                        totalHeight={35}
-                        iconSize={100}
-                        step={1}
-                        valueType='real'
-                        textColor='black'
-                        iconStyle={{ color: 'white' }}
-                        rightButtonBackgroundColor='green'
-                        leftButtonBackgroundColor='red'/>
-         </View>
+                initValue={this.state.number}
+                value={this.state.number}
+                onChange={value => this.setState({number: value})}
+                onLimitReached={(isMax,msg) => console.log(isMax,msg)}
+                totalWidth={385}
+                totalHeight={60}
+                iconSize={70}
+                minValue={0}
+                step={1}
+                rounded
+                borderColor='black'
+                separatorWidth={0}
+                valueType='real'
+                textColor='black'
+                iconStyle={{ color: 'black' }}
+                rightButtonBackgroundColor='#F8F9FB'
+                leftButtonBackgroundColor='#F8F9FB'
+            />
+        </View>
+
+        <Text style={styles.header}>Select the payment method</Text>
 
         <View>
             <Picker
                 selectedValue={this.state.language}
-                style={styles.picker2}
+                style={{height: 50, width: '100%'}}
+                itemStyle={{fontSize: 17, backgroundColor: 'black'}}
                 onValueChange={(itemValue, itemIndex) =>
                 this.setState({language: itemValue})
              }>
@@ -55,15 +63,15 @@ export default class BuyTokens extends Component {
             </Picker>
         </View>
 
-        <View style={{flexDirection: 'row', paddingLeft: 80, paddingRight:30, paddingBottom: 10}}>
-            <TouchableOpacity>
-                <Text  style={styles.button}>Buy</Text>
+        <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttontext}>CANCEL</Text>
              </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={styles.button}>Cancel</Text>
+            <TouchableOpacity style={styles.button2}>
+                <Text style={styles.buttontext2}>CHECHOUT</Text>
              </TouchableOpacity>
         </View>
-  </View>
+     </View>
 
     );
   }
@@ -71,56 +79,69 @@ export default class BuyTokens extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginHorizontal: 3 +'%',
+       flex: 1,
+       backgroundColor: '#F8F9FB',
+       marginHorizontal: 3 +'%'
   },
-  header: {
-    fontSize: 25,
-    color: 'black',
-
-    marginBottom: 10,
-    justifyContent: 'center',
-  },
-  header2: {
-    fontSize: 23,
-    color: 'black',
-    paddingBottom: 5,
-    marginBottom: 5,
-  },
-  textinput: {
-    fontSize: 20,
-    height: 45,
-    marginBottom: 15,
-    color: 'black',
-    backgroundColor: 'gray',
-    paddingLeft: 10,
-    marginLeft: 30,
-    marginRight: 30,
-    },
    button: {
-   fontSize: 20,
-   height: 45,
-   marginLeft: 40,
-   marginRight: 40,
-   marginTop: 30,
-   backgroundColor: 'lightgray',
-   paddingLeft: 10,
-   paddingRight: 10,
-   paddingBottom: 10,
-   paddingTop: 10,
+       flex: 1,
+       height: 70,
+       width: 40+'%',
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginHorizontal: 15,
+       backgroundColor: 'gray',
+       borderRadius: 20,
+       marginVertical: 30,
+   },
+   buttontext: {
+       fontSize: 20,
+       textAlign: 'center',
+       padding: 4,
+   },
+   button2: {
+       flex: 1,
+       height: 70,
+       width: 40+'%',
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginHorizontal: 15,
+       backgroundColor: 'blue',
+       borderRadius: 20,
+       marginVertical: 30,
+   },
+   buttontext2: {
+       fontSize: 20,
+       textAlign: 'center',
+       padding: 4,
    },
    picker: {
-   flexDirection: 'row',
-   paddingLeft: 30,
-   paddingRight:30,
-   paddingBottom: 10
+       flexDirection: 'row',
+       paddingBottom: 10,
    },
    picker2: {
-   height: 30,
-   width:'80%',
-   marginLeft: 30,
-   marginRight: 30
+       height: 30,
+       //fontSize: 30, Werkt niet
    },
+   datetime: {
+       marginTop: 20,
+       color: '#80868B',
+       textTransform: 'uppercase',
+       fontSize: 12,
+   },
+   location: {
+       color: '#505155',
+       marginBottom: 15,
+       width: '90%'
+   },
+   name: {
+       fontSize: 29,
+       fontWeight: 'bold',
+       color: '#2D2D2D'
+   },
+   header: {
+       fontSize: 18,
+    }
 });
 
 
