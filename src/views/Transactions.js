@@ -75,7 +75,7 @@ export default class Transactions extends Component {
                         onPress = {() => {this.props.navigation.navigate('BuyTokens')}}
                     >
                         <Text style = { styles.cta_button_text}>Buy tokens</Text>
-                        <Icon name='angle-right' size={25} color='black' />
+                        <Icon name='angle-right' size={30} color='black' style={{padding:5}}/>
                     </TouchableOpacity>
                 </View>
 
