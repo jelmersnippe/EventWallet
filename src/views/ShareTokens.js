@@ -57,7 +57,7 @@ export default class ShareTokens extends Component {
 					</Picker>
 				</View>
 
-				<Text style={styles.description}>Select the ammount of tokens you want to share:</Text>
+				<Text style={styles.description}>Select the amount of tokens you want to share:</Text>
 
         <NumericTokenInput />
 
@@ -80,9 +80,8 @@ export default class ShareTokens extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginHorizontal: 3 +'%',
+		paddingHorizontal: 3 +'%',
 		backgroundColor: '#F8F9FB',
-		marginTop: 20
 	},
 	header: {
         marginVertical: 10,
