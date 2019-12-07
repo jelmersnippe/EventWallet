@@ -24,29 +24,27 @@ export default class ShareTokens extends Component {
 		return (
 			<View style={styles.container}>
 
-    			<Text style={styles.header}>MY BALANCE</Text>
+    			<Text style={styles.header}>My balance</Text>
   			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
 
-				<Text style={styles.header}>SHARE</Text>
+				<Text style={styles.header}>Share</Text>
                 <Text style={styles.description}>Select the person you want to share tokens with:</Text>
-        			<View>
-        			    <Picker
-        					selectedValue={this.state.language}
-        						style={{ width: '100%' }}
-        						onValueChange={(itemValue, itemIndex) =>
-        							this.setState({ language: itemValue })
-        						}>
-        						<Picker.Item label="Berend101" value="wallet1" />
-        						<Picker.Item label="Berend102" value="wallet2" />
-        						<Picker.Item label="Berend103" value="wallet3" />
-        				</Picker>
-        			</View>
+				<View style={styles.dropdown_container}>
+					<Picker
+						style={{ width: '100%' }}
+						onValueChange={(itemValue, itemIndex) =>
+							this.setState({ language: itemValue })
+						}>
+						<Picker.Item label="Berend101" value="wallet1" />
+						<Picker.Item label="Berend102" value="wallet2" />
+						<Picker.Item label="Berend103" value="wallet3" />
+					</Picker>
+				</View>
 
                 <Text style={styles.description}>Select the specific wallet of a event:</Text>
 
-				<View>
+				<View style={styles.dropdown_container}>
 					<Picker
-						selectedValue={this.state.language}
 						style={{ width: '100%', marginTop: 5 }}
 						onValueChange={(itemValue, itemIndex) =>
 							this.setState({ language: itemValue })
@@ -152,5 +150,10 @@ const styles = StyleSheet.create({
        textAlign: 'center',
        padding: 4,
    },
+   dropdown_container: {
+	   borderWidth: 1,
+	   borderRadius: 10,
+	   marginBottom: 15,
+   }
 
 });
