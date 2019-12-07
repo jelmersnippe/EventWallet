@@ -15,9 +15,11 @@ import NumericTokenInput from '../components/NumericTokenInput'
 export default class ShareTokens extends Component {
 	constructor() {
 		super();
-		this.state = {
-			PickerValue: ''
-		}
+		this.state = { }
+	}
+
+	componentDidMount() {
+		this.setState({friend: this.props.navigation.getParam('friend')})
 	}
 
 	render() {
@@ -28,8 +30,10 @@ export default class ShareTokens extends Component {
   			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
 
 				<Text style={styles.header}>Share</Text>
-                <Text style={styles.description}>Select the person you want to share tokens with:</Text>
-				<View style={styles.dropdown_container}>
+                <Text style={styles.description}>Receiver:</Text>
+				
+				<Text>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
+				{/* <View style={styles.dropdown_container}>
 					<Picker
 						style={{ width: '100%' }}
 						onValueChange={(itemValue, itemIndex) =>
@@ -39,7 +43,7 @@ export default class ShareTokens extends Component {
 						<Picker.Item label="Berend102" value="wallet2" />
 						<Picker.Item label="Berend103" value="wallet3" />
 					</Picker>
-				</View>
+				</View> */}
 
                 <Text style={styles.description}>Select the specific wallet of a event:</Text>
 

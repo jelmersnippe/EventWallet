@@ -17,11 +17,9 @@ export default class FriendList extends Component {
                     data={this.props.friendData}
                     renderItem={({ item }) => (
                         <FriendItem
-                            name={item.name}
-                            key={item.name}
+                            item={item}
                         />
                     )}
-                    keyExtractor={item => item.name}
                 />
             </View>
         );

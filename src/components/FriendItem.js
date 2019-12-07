@@ -11,11 +11,11 @@ class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.name}>{this.props.name}</Text>
+                <Text style={styles.name}>{this.props.item.name}</Text>
 
                 <View style={styles.button_container}>
                     <TouchableOpacity
-                        onPress={() => {this.props.navigation.navigate('ShareTokens')}}
+                        onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
                     >
                         <Text style={styles.button}>Share</Text>
                     </TouchableOpacity>
