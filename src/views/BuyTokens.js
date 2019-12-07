@@ -26,23 +26,7 @@ export default class BuyTokens extends Component {
 
         <View style={styles.picker}>
             <NumericTokenInput
-                // initValue={this.state.number}
-                // value={this.state.number}
-                // onChange={value => this.setState({number: value})}
-                // onLimitReached={(isMax,msg) => console.log(isMax,msg)}
-                // totalWidth={385}
-                // totalHeight={60}
-                // iconSize={70}
-                // minValue={0}
-                // step={1}
-                // rounded
-                // borderColor='black'
-                // separatorWidth={0}
-                // valueType='real'
-                // textColor='black'
-                // iconStyle={{ color: 'black' }}
-                // rightButtonBackgroundColor='#F8F9FB'
-                // leftButtonBackgroundColor='#F8F9FB'
+                
             />
         </View>
 
