@@ -1,128 +1,109 @@
 import React, { Component } from 'react'
 import {
-    Text,
-    TextInput,
-    View,
-    StyleSheet,
-    TouchableOpacity,
+	Text,
+	TextInput,
+	View,
+	StyleSheet,
+	TouchableOpacity,
 } from 'react-native'
 
-export default class Announcements extends Component {
-    render() {
-            return (
-                <View style={styles.container}>
-                    <Text style={styles.header}>FestiWallet</Text>
+import FriendList from '../components/FriendList'
 
-                    <TextInput style={styles.textinput} placeholder="Search for friends"/>
+const friends = [
+	{
+		name: 'berend101'
+	},
+	{
+		name: 'berend102'
+	},
+	{
+		name: 'berend103'
+	},
+	{
+		name: 'berend104'
+	},
+	{
+		name: 'berend105'
+	},
+	{
+		name: 'berend106'
+	},
+	{
+		name: 'berend107'
+	},
+	{
+		name: 'berend108'
+	},
+	{
+		name: 'berend109'
+	},
+	{
+		name: 'berend110'
+	},
+	{
+		name: 'berend111'
+	},
+	{
+		name: 'berend112'
+	},
+	{
+		name: 'berend113'
+	},
+	{
+		name: 'berend114'
+	},
+	{
+		name: 'berend115'
+	},
+	{
+		name: 'berend116'
+	}
+]
 
-                    <View>
-                        <Text style={styles.header2}>Add friends</Text>
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend101</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Accept</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Decline</Text>
-                                        </TouchableOpacity>
-                                    </View>
+export default class FriendOverview extends Component {
+	render() {
+		return (
+			<View style={styles.container}>
 
-                        <Text style={styles.header2}>Friendlist</Text>
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend102</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
+				<TextInput style={styles.textinput} placeholder="Search for friends" />
 
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend103</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
+				<Text style={styles.list_header}>Add friends</Text>
+				<View style={{ flexDirection: 'row' }}>
+					<Text style={styles.name}>berend101</Text>
+					<TouchableOpacity>
+						<Text style={styles.button1}>Accept</Text>
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Text style={styles.button2}>Decline</Text>
+					</TouchableOpacity>
+				</View>
 
-                                     <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend104</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend105</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend106</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                  <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-                                        <Text style={{width:200, fontSize: 18}}>Berend107</Text>
-                                        <TouchableOpacity>
-                                        <Text style={{width:80, fontSize: 18}}>Share</Text>
-                                        </TouchableOpacity>
-                                         <TouchableOpacity style={styles.button}>
-                                        <Text style={{width:80, fontSize: 18}}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                        </View>
-                </View>
-            );
-        }
-    }
+				<FriendList
+					friendData={friends}
+				/>
+			</View>
+		);
+	}
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  header: {
-    fontSize: 25,
-    color: 'black',
-    paddingBottom: 10,
-    marginBottom: 10,
-    paddingLeft: 140,
-    paddingRight: 50,
-    justifyContent: 'center',
-  },
-  header2: {
-    fontSize: 23,
-    color: 'black',
-    paddingBottom: 5,
-    marginBottom: 5,
-    paddingLeft: 30,
-    paddingRight: 30,
-  },
-  textinput: {
-    fontSize: 20,
-    height: 45,
-    marginBottom: 15,
-    color: 'black',
-    backgroundColor: 'gray',
-    paddingLeft: 10,
-    marginLeft: 30,
-    marginRight: 30,
-    },
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		marginHorizontal: 5+'%',
+	},
+	textinput: {
+		width: 80 + '%',
+		fontSize: 20,
+		height: 45,
+		marginVertical: 15,
+		backgroundColor: 'gray',
+		padding: 10,
+	},
+	list_header: {
+		fontSize: 23,
+		marginBottom: 5,
+	},
+
+
 });

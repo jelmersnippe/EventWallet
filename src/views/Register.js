@@ -1,83 +1,171 @@
-import React, { Component } from 'react'
-import { 
-    View, 
-    Text,
-    StyleSheet,
-    TouchableOpacity, 
+import React, { Component } from 'react';
+import {
+	Platform,
+	StyleSheet,
+	Text,
+	View,
 	TextInput,
+	Button,
+	TouchableOpacity,
+	Keyboard
 } from 'react-native';
 
-export default class Register extends Component {
-    register () {
-        // Make call to validate register attempt
-    }
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: '',
+			usernameError: '',
+			validatePassword: true,
+			password: '',
+			passwordError: '',
+			validatePassword: true,
+			email: '',
+			emailError: '',
+			validateEmail: true
+		}
+	}
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.header}>Registration</Text>
-                <TextInput style={styles.textinput} placeholder="Username"
-                underlineColorAndroid={'transparent'}/>
+	validateEmail = (email) => {
+		let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
-                <TextInput style={styles.textinput} placeholder="Password"
-                secureTextEntry={true} underlineColorAndroid={'transparent'}/>
+		this.setState({ email: email })
 
-                <TextInput style={styles.textinput} placeholder="Email address"
-                underlineColorAndroid={'transparent'}/>
+		if (email == '') {
+			return false;
+		}
 
-                <TouchableOpacity 
-                    onPress={() => {
-                        this.register();
-                    }}
-                    style={styles.button}
-                >
-                    <Text style={styles.bttntext}>Register</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+		if (reg.test(email) === false) {
+			this.setState({ emailError: "Invaid email" })
+		}
+		else if (reg.test(email) === true) {
+			this.setState({ emailError: 'Valid email' });
+		}
+
+		return reg.test(email);
+	};
+
+	validatePassword = (password) => {
+		let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+
+		this.setState({ password: password })
+
+		if (password == '') {
+			return false;
+		}
+
+		if (reg.test(password) === false) {
+			this.setState({ passwordError: "Invalid password" })
+		}
+		else if (reg.test(password) === true) {
+			this.setState({ passwordError: "Valid password" });
+		}
+
+		return reg.test(password);
+	};
+
+	validateUsername = (username) => {
+		let reg = /^[a-zA-Z0-9]{5,}$/
+
+		this.setState({ username: username })
+
+		if (username == '') {
+			return false;
+		}
+
+		if (reg.test(username) === false) {
+			this.setState({ usernameError: "Invalid username" })
+		}
+		else if (reg.test(username) === true) {
+			this.setState({ usernameError: "Valid username" })
+		}
+
+		return reg.test(username);
+	};
+
+	validate = () => {
+		if (this.state.username == '' || this.state.password == '' || this.state.email == '') {
+			alert('One or more fields have not been filled out');
+			return;
+		}
+
+		if (this.validateUsername(this.state.username) === false) {
+			alert('Invalid input, check input comments');
+			return;
+		}
+		else if (this.validatePassword(this.state.password) === false) {
+			alert('Invalid input, check input comments');
+			return;
+		}
+		else if (this.validateEmail(this.state.email) === false) {
+			alert('Invalid input, check input comments');
+			return;
+		}
+
+		alert('Thank you, you registered successfully');
+	}
+
+
+
+	render() {
+		return (
+			<View style={styles.container}>
+
+				<TextInput
+					placeholder="Username"
+					style={styles.textstyle}
+					onChangeText={username => this.validateUsername(username)}
+					value={this.state.username}
+				/>
+				<Text style={{ color: 'red', textAlign: 'center' }}>
+					{this.state.usernameError}
+				</Text>
+
+				<TextInput
+					placeholder="Password"
+					style={styles.textstyle}
+					secureTextEntry={true}
+					onChangeText={password => this.validatePassword(password)}
+					value={this.state.password}
+				/>
+				<Text style={{ color: 'red', textAlign: 'center' }}>
+					{this.state.passwordError}
+				</Text>
+
+				<TextInput
+					placeholder="Email"
+					style={styles.textstyle}
+					onChangeText={email => this.validateEmail(email)}
+					value={this.state.email}
+				/>
+				<Text style={{ color: 'red', textAlign: 'center' }}>
+					{this.state.emailError}
+				</Text>
+
+
+				<TouchableOpacity
+					onPress={this.validate}
+					style={{ backgroundColor: 'red', padding: 10, width: 150 }}
+				>
+					<Text style={{
+						color: 'white', textAlign: 'center',
+						fontSize: 20, fontWeight: 'bold'
+					}}>Submit</Text>
+				</TouchableOpacity>
+
+			</View>
+		);
+	}
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: 50,
-    paddingRight: 50,
-    justifyContent: 'center',
-    backgroundColor: '#40e0d0'
-  },
-  header: {
-    fontSize: 35,
-    color: 'white',
-    paddingBottom: 5,
-    marginBottom: 40,
-    borderBottomColor: 'white',
-    borderBottomWidth: 3,
-  },
-  textinput: {
-    alignSelf: 'stretch',
-    fontSize: 20,
-    height: 45,
-    marginBottom: 25,
-    color: 'white',
-    borderBottomColor: 'white',
-    borderBottomWidth: 2,
-    },
-   button: {
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#20b2aa',
-    marginTop: 20,
-    marginTop: 40,
-    paddingLeft: 60,
-    paddingRight: 60,
-    },
-   bttntext: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold',
-    marginTop: 3,
-    marginBottom: 3,
-    }
-
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF',
+	},
+	textstyle: {
+		borderWidth: 1, borderColor: '#ccc',
+		margin: 10, padding: 10, width: '90%'
+	}
 });

@@ -73,8 +73,11 @@ export default class Transactions extends Component {
                         <Text style = { styles.cta_button_text}>Add currency</Text>
                     </TouchableOpacity>
                 </View>
-
-                <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                <TouchableOpacity
+                    onPress = {() => {this.props.navigation.navigate('WalletLink')}}
+                >
+                    <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                </TouchableOpacity>
 
                 <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
 
@@ -89,12 +92,7 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: 100+'%',
-        height: 100+'%',
-        justifyContent: "flex-start",
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        paddingBottom: 180
+        backgroundColor: '#F8F9Fb',
     },
     header: {
         flexDirection: "row",

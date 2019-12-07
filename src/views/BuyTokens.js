@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import {
-    Text,
-    TextInput,
-    View,
-    StyleSheet,
-    TouchableOpacity,
-    Picker,
+	Text,
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	Picker,
 } from 'react-native'
-import NumericInput from 'react-native-numeric-input'
+import NumericTokenInput from '../components/NumericTokenInput'
 
 export default class BuyTokens extends Component {
     constructor(){
