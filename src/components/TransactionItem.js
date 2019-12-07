@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: 100+'%',
-        marginVertical: 5,
         borderWidth: 1,
     },
     datetime: {

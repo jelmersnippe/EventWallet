@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { 
-    SafeAreaView,
+    View,
     FlatList,
     StyleSheet
 } from 'react-native'
@@ -10,7 +10,7 @@ import TransactionItem from './TransactionItem'
 export default class TransactionList extends Component {
     render() {
         return (
-            <SafeAreaView>
+            <View style={styles.container}>
                 <FlatList
                     data={this.props.transactionData}
                     renderItem={({ item }) => (
@@ -24,7 +24,14 @@ export default class TransactionList extends Component {
                     )}
                     keyExtractor={item => item.id}
                 />
-            </SafeAreaView>
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginHorizontal: 3 +'%',
+    },
+})
