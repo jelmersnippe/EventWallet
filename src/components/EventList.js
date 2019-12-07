@@ -17,12 +17,9 @@ export default class EventList extends Component {
                     data={this.props.eventData}
                     renderItem={({ item }) => (
                         <EventItem
-                            name={item.name}
-                            amount={item.amount}
-                            key={item.name}
+                            item={item}
                         />
                     )}
-                    keyExtractor={item => item.name}
                 />
             </View>
         );

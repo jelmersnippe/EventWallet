@@ -62,12 +62,19 @@ const transactions = [
 ];
 
 export default class Transactions extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            event: this.props.navigation.getParam('item'),
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.cta_button}>
-                        <Text style = { styles.cta_button_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
+                        <Text style = { styles.cta_button_text }>You have {this.state.event.amount} tokens</Text>
                     </View>
                     
                     <TouchableOpacity
