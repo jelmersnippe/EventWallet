@@ -15,20 +15,23 @@ export default class NumericTokenInput extends Component {
     render() {
         return (
             <View style={{ flexDirection: 'row', paddingLeft: 10, paddingBottom: 10, alignItems: 'center' }}>
-                <Text style={styles.header2}>Amount</Text>
                 <NumericInput
                     value={this.state.value}
                     onChange={value => this.setState({ value })}
-                    totalWidth={150}
-                    totalHeight={50}
-                    iconSize={100}
-                    step={1}
-                    minValue={0}
-                    valueType='real'
-                    textColor='black'
-                    iconStyle={{ color: 'white' }}
-                    rightButtonBackgroundColor='lightgray'
-                    leftButtonBackgroundColor='lightgray' />
+                   totalWidth={300}
+                   totalHeight={50}
+                   iconSize={70}
+                   minValue={0}
+                   step={1}
+                   rounded
+                   borderColor='black'
+                   separatorWidth={0}
+                   valueType='real'
+                   textColor='black'
+                   iconStyle={{ color: 'black' }}
+                   rightButtonBackgroundColor='#F8F9FB'
+                   leftButtonBackgroundColor='#F8F9FB'
+                />
             </View>
         );
     }

@@ -59,31 +59,7 @@ export default class ShareTokens extends Component {
 
 				<Text style={styles.description}>Select the ammount of tokens you want to share:</Text>
 
-<<<<<<< HEAD
-        <View style={styles.picker}>
-            <NumericInput
-                initValue={this.state.number}
-                value={this.state.number}
-                onChange={value => this.setState({number: value})}
-                onLimitReached={(isMax,msg) => console.log(isMax,msg)}
-                totalWidth={300}
-                totalHeight={50}
-                iconSize={70}
-                minValue={0}
-                step={1}
-                rounded
-                borderColor='black'
-                separatorWidth={0}
-                valueType='real'
-                textColor='black'
-                iconStyle={{ color: 'black' }}
-                rightButtonBackgroundColor='#F8F9FB'
-                leftButtonBackgroundColor='#F8F9FB'
-            />
-        </View>
-=======
-				<NumericTokenInput />
->>>>>>> master
+        <NumericTokenInput />
 
 		    <View style={{ flexDirection: 'row' }}>
 				<TouchableOpacity style={styles.button}>
@@ -121,14 +97,11 @@ const styles = StyleSheet.create({
 	    fontSize: 17,
 	    marginBottom: 10,
 	},
-<<<<<<< HEAD
 	header2: {
 		fontSize: 23,
 		color: 'black',
 		//marginBottom: 5,
 	},
-=======
->>>>>>> master
 	textinput: {
 		fontSize: 20,
 		height: 45,
