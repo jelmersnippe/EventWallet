@@ -13,7 +13,12 @@ const inactiveTabColor = 'gray'
 
 const TransactionStack = createStackNavigator(
     {
-        Transactions: Transactions,
+        Transactions: {
+            screen: Transactions,
+            navigationOptions: {
+                header: null,
+            }
+        },
         WalletLink: WalletLink,
         BuyTokens: {
             screen: BuyTokens,
