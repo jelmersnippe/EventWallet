@@ -30,7 +30,8 @@ export default class FriendList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 5+'%',
     },
     title: {
         marginVertical: 10,

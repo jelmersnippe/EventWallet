@@ -1,72 +1,100 @@
 import React, { Component } from 'react'
 import {
 	Text,
-	TextInput,
 	View,
 	StyleSheet,
 	TouchableOpacity,
-} from 'react-native'
+} from 'react-native';
 
 import FriendList from '../components/FriendList'
+import SearchBar from '../components/SearchBar'
 
-const friends = [
+const users = [
 	{
-		name: 'berend101'
+		name: 'berend101',
+		status: 'pending'
 	},
 	{
-		name: 'berend102'
+		name: 'berend102',
+		status: 'friend'
 	},
 	{
-		name: 'berend103'
+		name: 'berend103',
+		status: 'unknown'
 	},
 	{
-		name: 'berend104'
+		name: 'berend104',
+        status: 'unknown'
 	},
 	{
-		name: 'berend105'
+		name: 'berend105',
+		status: 'unknown'
 	},
 	{
-		name: 'berend106'
+		name: 'berend106',
+		status: 'friend'
 	},
 	{
-		name: 'berend107'
+		name: 'berend107',
+		status: 'friend'
 	},
 	{
-		name: 'berend108'
+		name: 'berend108',
+		status: 'pending'
 	},
 	{
-		name: 'berend109'
+		name: 'berend109',
+		status: 'pending'
 	},
 	{
-		name: 'berend110'
+		name: 'berend110',
+		status: 'friend'
 	},
 	{
-		name: 'berend111'
+		name: 'berend111',
+		status: 'unknown'
 	},
 	{
-		name: 'berend112'
+		name: 'berend112',
+		status: 'friend'
 	},
 	{
-		name: 'berend113'
+		name: 'berend113',
+		status: 'friend'
 	},
 	{
-		name: 'berend114'
+		name: 'berend114',
+		status: 'pending'
 	},
 	{
-		name: 'berend115'
+		name: 'berend115',
+		status: 'friend'
 	},
 	{
-		name: 'berend116'
+		name: 'berend116',
+		status: 'friend'
 	}
 ]
 
 export default class FriendOverview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchTerm: '',
+            filteredUsers: [],
+        }
+    }
+	
+	updateFilteredList = (newFilteredList) => {
+		this.setState({filteredUsers: newFilteredList})
+	}
+
 	render() {
-		return (
+	    return (
 			<View style={styles.container}>
 
-				<TextInput style={styles.textinput} placeholder="Search for friends" />
-
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} />
+			    
 				<Text style={styles.list_header}>Add friends</Text>
 				<View style={{ flexDirection: 'row' }}>
 					<Text style={styles.name}>berend101</Text>
@@ -78,9 +106,9 @@ export default class FriendOverview extends Component {
 					</TouchableOpacity>
 				</View>
 
-				<FriendList
-					friendData={friends}
-				/>
+                <FriendList
+                    friendData={this.state.filteredUsers}
+                />
 			</View>
 		);
 	}
@@ -90,20 +118,9 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		marginHorizontal: 5+'%',
-	},
-	textinput: {
-		width: 80 + '%',
-		fontSize: 20,
-		height: 45,
-		marginVertical: 15,
-		backgroundColor: 'gray',
-		padding: 10,
 	},
 	list_header: {
 		fontSize: 23,
 		marginBottom: 5,
 	},
-
-
 });
