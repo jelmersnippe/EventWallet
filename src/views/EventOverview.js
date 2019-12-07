@@ -6,44 +6,58 @@ import {
 } from 'react-native'
 
 import EventList from '../components/EventList'
+import SearchBar from '../components/SearchBar'
 
 
-const festivals = [
+const events = [
 	{
-		festival: 'Shockerz - The Raw Gathering',
+		name: 'Shockerz - The Raw Gathering',
 		amount: '8',
 	},
 	{
-		festival: 'Festival 2',
+		name: 'Festival 2',
 		amount: '20',
 	},
 	{
-		festival: 'Festival 3',
+		name: 'Festival 3',
 		amount: '30',
 	},
 	{
-		festival: 'Festival 4',
+		name: 'Festival 4',
 		amount: '5',
 	},
 	{
-		festival: 'Festival 5',
+		name: 'Festival 5',
 		amount: '12',
 	},
 	{
-		festival: 'Festival 6',
+		name: 'Festival 6',
 		amount: '23',
 	},
 	{
-		festival: 'Festival 7',
+		name: 'Festival 7',
 		amount: '50',
 	},
 ];
 
 
 export default class EventOverview extends Component {
+	constructor(props) {
+        super(props);
+        this.state = {
+            searchTerm: '',
+            filteredEvents: [],
+        }
+    }
+	
+	updateFilteredList = (newFilteredList) => {
+		console.log(newFilteredList)
+		this.setState({filteredEvents: newFilteredList})
+	}
+
 
 	fetchFestivalData() {
-		// Fetch festival data for the user
+		// Fetch event data for the user
 	}
 
 	componentDidMount() {
@@ -53,14 +67,10 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.search_container}>
-					<TextInput
-						placeholder='Searchbar placeholder'
-						style={styles.search_bar}
-					/>
-				</View>
+				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} />
+				
 				<EventList
-					festivalData={festivals}
+					eventData={this.state.filteredEvents}
 				/>
 			</View >
 		);

@@ -13,16 +13,16 @@ class EventItem extends Component {
         return (
             <TouchableOpacity
                 style = { styles.container }
-                onPress={() => this.props.navigation.navigate('SpecificEvent', {festival: this.props.festival, amount: this.props.amount})}
+                onPress={() => this.props.navigation.navigate('Transactions', {item: this.props.item})}
             >
                 <View style={styles.info}>
                     <Text style={styles.datetime}>Zaterdag 14 dec 14:00 - 01:00</Text>
-                    <Text style={styles.name}>{this.props.festival}</Text>
+                    <Text style={styles.name}>{this.props.item.name}</Text>
                     <Text style={styles.location}>Autotron, Rosmalen</Text>
                 </View>
                 <View style={styles.tokens}>
                     <Icon name='right' size={30} color="#80868B" style={{padding:5}} />
-                    <Text style = { styles.amount }>{this.props.amount} Tokens</Text>
+                    <Text style = { styles.amount }>{this.props.item.amount} Tokens</Text>
                 </View>
             </TouchableOpacity>
         );
