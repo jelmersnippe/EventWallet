@@ -21,13 +21,12 @@ export default class BuyTokens extends Component {
     }
 
   render() {
-    return (
-           <View>
+     return (
+        <View style={styles.container}>
                 <Text style={styles.header}>Name of event</Text>
 
 
-        <View style={{flexDirection: 'row', paddingLeft: 30, paddingRight:30, paddingBottom: 10}}>
-            <Text style={styles.header}>Ammount</Text>
+        <View style={styles.picker}>
             <NumericInput
                         value={this.state.value}
                         onChange={value => this.setState({value})}
@@ -46,7 +45,7 @@ export default class BuyTokens extends Component {
         <View>
             <Picker
                 selectedValue={this.state.language}
-                style={{height: 30, width:'80%', marginLeft: 30, marginRight: 30}}
+                style={styles.picker2}
                 onValueChange={(itemValue, itemIndex) =>
                 this.setState({language: itemValue})
              }>
@@ -73,15 +72,13 @@ export default class BuyTokens extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    marginHorizontal: 3 +'%',
   },
   header: {
     fontSize: 25,
     color: 'black',
-    paddingBottom: 10,
+
     marginBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 50,
     justifyContent: 'center',
   },
   header2: {
@@ -89,8 +86,6 @@ const styles = StyleSheet.create({
     color: 'black',
     paddingBottom: 5,
     marginBottom: 5,
-    paddingLeft: 30,
-    paddingRight: 30,
   },
   textinput: {
     fontSize: 20,
@@ -113,7 +108,19 @@ const styles = StyleSheet.create({
    paddingRight: 10,
    paddingBottom: 10,
    paddingTop: 10,
-   }
+   },
+   picker: {
+   flexDirection: 'row',
+   paddingLeft: 30,
+   paddingRight:30,
+   paddingBottom: 10
+   },
+   picker2: {
+   height: 30,
+   width:'80%',
+   marginLeft: 30,
+   marginRight: 30
+   },
 });
 
 
