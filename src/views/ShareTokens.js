@@ -49,9 +49,10 @@ export default class ShareTokens extends Component {
 
 				<View style={styles.dropdown_container}>
 					<Picker
+						selectedValue={this.state.value}
 						style={{ width: '100%', marginTop: 5 }}
 						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
+							this.setState({ value: itemValue })
 						}>
 						<Picker.Item label="Wallet1" value="wallet1" />
 						<Picker.Item label="Wallet2" value="wallet2" />
