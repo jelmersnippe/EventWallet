@@ -62,12 +62,12 @@ export default class ShareTokens extends Component {
         <NumericTokenInput />
 
 		    <View style={{ flexDirection: 'row' }}>
-				<TouchableOpacity style={styles.button}>
+				<TouchableOpacity style={styles.button}
+                    onPress={() => { this.props.navigation.goBack() }}
+				>
 					<Text style={styles.buttontext}>Cancel</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.button2}
-					onPress={() => { this.props.navigation.goBack() }}
-				>
+				<TouchableOpacity style={styles.button2}>
 					<Text style={styles.buttontext2}>Send</Text>
 				</TouchableOpacity>
 			</View>
