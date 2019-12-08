@@ -12,21 +12,21 @@ class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={{marginRight: 10, marginLeft: 15, marginTop: 5, flex: 1}}>
-                    <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
-                </TouchableOpacity>
-
-                <Text style={styles.name}>{this.props.name}</Text>
-
-                <View style={styles.button_container}>
-                    <TouchableOpacity style={{flexDirection: 'row'}}
-                        onPress={() => {this.props.navigation.navigate('ShareTokens')}}
-                    >
-                        <Text style={styles.button}>Share</Text>
-                        <Icon name='coins' size={20} color="white" style={{padding:2, marginLeft: 6}} />
+                <View style={styles.name_container}>
+                    <TouchableOpacity style={styles.remove_button}>
+                        <Icon name='times' size={35} color="#80868B" />
                     </TouchableOpacity>
 
+                    <Text style={styles.name}>{this.props.item.name}</Text>
                 </View>
+
+                <TouchableOpacity
+                    style={styles.button_container}
+                    onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
+                >
+                    <Text style={styles.button_text}>Share</Text>
+                    <Icon name='coins' size={20} color="white" style={styles.button_icon} />
+                </TouchableOpacity>
             </View>
         );
     }
@@ -34,47 +34,47 @@ class FriendItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        width: 100+'%',
+        padding: 5,
         flexDirection: 'row',
-        //alignItems: 'left',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         textAlignVertical: 'center',
         alignItems: 'center',
 
-        width: 94+'%',
-        paddingBottom: 10,
-        marginHorizontal: 3+'%',
-        //marginRight: 3 +'%',
-        borderBottomColor: 'black',
         borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10,
+
         backgroundColor: 'white',
         marginBottom: 10,
-        borderRadius: 10,
-        //flex: 1
+    },
+    name_container: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    remove_button: {
+        paddingHorizontal: 10,
     },
     name: {
         fontSize: 22,
-        //padding: 3,
-        flex: 5,
-        marginTop: 5
-        //
-
     },
     button_container: {
-        marginTop: 9,
-        flex: 2,
+        flexDirection: 'row',
         borderWidth: 1,
         borderBottomColor: 'black',
         borderRadius: 10,
-        marginRight: 10,
-        padding: 3,
-        alignItems: 'center',
+        padding: 5,
         justifyContent: 'space-between',
         backgroundColor: '#0070C0'
     },
-    button: {
+    button_text: {
+        marginRight: 5,
         fontSize: 18,
         color: 'white'
     },
+    button_icon: {
+        padding: 2,
+    }
 })
 
 

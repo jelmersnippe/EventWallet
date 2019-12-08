@@ -94,7 +94,7 @@ export default class FriendOverview extends Component {
 	    return (
 			<View style={styles.container}>
 
-				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' />
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
 			    
 				<Text style={styles.header}>Add friends</Text>
 				<View style={styles.button_container}>
@@ -122,15 +122,11 @@ export default class FriendOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		//alignItems: 'center',
 		backgroundColor: '#F8F9FB',
-
-		//marginHorizontal: 5 + '%'
 	},
 	header: {
         marginVertical: 10,
         textAlign: 'right',
-        //marginRight: -5,
         textTransform: 'uppercase',
         fontSize: 20,
         marginHorizontal: 3+'%',
@@ -138,13 +134,10 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
 	},
     button_container: {
-        marginTop: 9,
-        //flex: 2,
+        marginTop: 10,
         borderWidth: 1,
         borderBottomColor: 'black',
-
         borderRadius: 10,
-        //marginRight: 10,
         padding: 3,
         alignItems: 'center',
         justifyContent: 'space-between',

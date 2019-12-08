@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		paddingHorizontal: 5,
 		marginVertical: 15,
-
 		backgroundColor: '#FFF'
 	},
 	search_icon: {
