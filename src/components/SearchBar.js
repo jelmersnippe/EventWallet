@@ -27,7 +27,7 @@ export default class SearchBar extends Component {
 
     render(){
         return(
-            <View style={styles.search_container}>
+            <View style={[styles.search_container, {backgroundColor: this.props.backgroundColor}]}>
                 <View style={styles.search_bar}>
                     <Icon name='search' size={30} color="#80868B" style={styles.search_icon} />
                     <TextInput
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
 	search_container: {
 		justifyContent: 'center',
 		width: 100+'%',
-		backgroundColor: '#0070C0',
 		paddingHorizontal: 5+'%',
 	},
 	search_bar: {
