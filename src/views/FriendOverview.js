@@ -117,8 +117,8 @@ export default class FriendOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
-		backgroundColor: '#F8F9FB'
+		//alignItems: 'center',
+		backgroundColor: '#F8F9FB',
 		//marginHorizontal: 5 + '%'
 	},
 	list_header: {
