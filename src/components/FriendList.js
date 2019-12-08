@@ -34,10 +34,11 @@ const styles = StyleSheet.create({
     },
     title: {
         marginVertical: 10,
-        paddingLeft: 5,
-        textAlign: 'left',
-        textTransform: "uppercase",
-        fontSize: 18,
+        textAlign: 'right',
+        textTransform: 'uppercase',
+        fontSize: 20,
+        marginHorizontal: 3+'%',
         borderBottomWidth: 1,
+        paddingBottom: 5,
     }
 })

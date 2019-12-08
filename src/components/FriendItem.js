@@ -12,18 +12,18 @@ class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={{marginRight: 10, marginLeft: 10, flex: 1}}>
-                    <Icon name='times' size={30} color="#80868B" style={{padding:0}} />
+                <TouchableOpacity style={{marginRight: 10, marginLeft: 15, marginTop: 5, flex: 1}}>
+                    <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
                 </TouchableOpacity>
 
                 <Text style={styles.name}>{this.props.name}</Text>
 
                 <View style={styles.button_container}>
-                    <TouchableOpacity
+                    <TouchableOpacity style={{flexDirection: 'row'}}
                         onPress={() => {this.props.navigation.navigate('ShareTokens')}}
                     >
                         <Text style={styles.button}>Share</Text>
-                        <Icon name='times' size={30} color="#80868B" style={{padding:0}} />
+                        <Icon name='coins' size={20} color="white" style={{padding:2, marginLeft: 6}} />
                     </TouchableOpacity>
 
                 </View>
@@ -52,34 +52,28 @@ const styles = StyleSheet.create({
         //flex: 1
     },
     name: {
-        fontSize: 18,
-        padding: 3,
+        fontSize: 22,
+        //padding: 3,
         flex: 5,
+        marginTop: 5
         //
 
     },
     button_container: {
-
+        marginTop: 9,
         flex: 2,
-        flexDirection: 'row',
         borderWidth: 1,
         borderBottomColor: 'black',
         borderRadius: 10,
         marginRight: 10,
         padding: 3,
-        //alignItems: 'right'
-        textAlignVertical: 'center',
-        //textAlignHorizontal: 'center',
-        //flex: 1,
-
-        //marginLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#0070C0'
     },
     button: {
-        flexDirection: 'row',
         fontSize: 18,
-        //textAlignVertical: 'center',
-        //paddingHorizontal: 15,
-        //alignItems: 'right'
+        color: 'white'
     },
 })
 
