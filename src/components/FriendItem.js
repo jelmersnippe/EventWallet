@@ -6,22 +6,26 @@ import {
     StyleSheet
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.name}>{this.props.item.name}</Text>
+                <TouchableOpacity style={{marginRight: 10, marginLeft: 15, marginTop: 5, flex: 1}}>
+                    <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
+                </TouchableOpacity>
+
+                <Text style={styles.name}>{this.props.name}</Text>
 
                 <View style={styles.button_container}>
-                    <TouchableOpacity
-                        onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
+                    <TouchableOpacity style={{flexDirection: 'row'}}
+                        onPress={() => {this.props.navigation.navigate('ShareTokens')}}
                     >
                         <Text style={styles.button}>Share</Text>
+                        <Icon name='coins' size={20} color="white" style={{padding:2, marginLeft: 6}} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.button}>Remove</Text>
-                    </TouchableOpacity>
+
                 </View>
             </View>
         );
@@ -31,19 +35,45 @@ class FriendItem extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 100+'%',
+        //alignItems: 'left',
+        justifyContent: 'flex-start',
+        textAlignVertical: 'center',
+        alignItems: 'center',
+
+        width: 94+'%',
         paddingBottom: 10,
+        marginHorizontal: 3+'%',
+        //marginRight: 3 +'%',
+        borderBottomColor: 'black',
+        borderWidth: 1,
+        backgroundColor: 'white',
+        marginBottom: 10,
+        borderRadius: 10,
+        //flex: 1
     },
     name: {
-        fontSize: 18,
+        fontSize: 22,
+        //padding: 3,
+        flex: 5,
+        marginTop: 5
+        //
+
     },
     button_container: {
-        flexDirection: 'row'
+        marginTop: 9,
+        flex: 2,
+        borderWidth: 1,
+        borderBottomColor: 'black',
+        borderRadius: 10,
+        marginRight: 10,
+        padding: 3,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#0070C0'
     },
     button: {
         fontSize: 18,
-        paddingHorizontal: 15,
+        color: 'white'
     },
 })
 

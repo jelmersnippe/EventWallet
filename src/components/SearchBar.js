@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	search_container: {
 		justifyContent: 'center',
 		width: 100+'%',
-		backgroundColor: '#F6CF3A',
+		backgroundColor: '#0070C0',
 		paddingHorizontal: 5+'%',
 	},
 	search_bar: {

@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import FriendList from '../components/FriendList'
 import SearchBar from '../components/SearchBar'
@@ -95,15 +96,19 @@ export default class FriendOverview extends Component {
 
 				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' />
 			    
-				<Text style={styles.list_header}>Add friends</Text>
-				<View style={{ flexDirection: 'row' }}>
+				<Text style={styles.header}>Add friends</Text>
+				<View style={styles.button_container}>
+					<TouchableOpacity style={{marginRight: 5, marginLeft: 10, marginTop: 5, marginBottom: 5, flex: 1}}>
+                        <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
+					</TouchableOpacity>
+
 					<Text style={styles.name}>berend101</Text>
-					<TouchableOpacity>
+
+					<TouchableOpacity style={styles.button_container2}>
 						<Text style={styles.button1}>Accept</Text>
+						<Icon name='user-plus' size={17} color="white" style={{marginRight: 5, marginLeft: 5}} />
 					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.button2}>Decline</Text>
-					</TouchableOpacity>
+
 				</View>
 
                 <FriendList
@@ -117,8 +122,60 @@ export default class FriendOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
+		//alignItems: 'center',
+		backgroundColor: '#F8F9FB',
+
+		//marginHorizontal: 5 + '%'
 	},
+	header: {
+        marginVertical: 10,
+        textAlign: 'right',
+        //marginRight: -5,
+        textTransform: 'uppercase',
+        fontSize: 20,
+        marginHorizontal: 3+'%',
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+	},
+    button_container: {
+        marginTop: 9,
+        //flex: 2,
+        borderWidth: 1,
+        borderBottomColor: 'black',
+
+        borderRadius: 10,
+        //marginRight: 10,
+        padding: 3,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        marginHorizontal: 3 + '%'
+    },
+    button_container2: {
+        marginTop: 9,
+        flex: 3,
+        borderWidth: 1,
+        borderBottomColor: 'black',
+        flexDirection: 'row',
+        borderRadius: 10,
+        marginRight: 6,
+        padding: 3,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: 'green',
+        marginBottom: 5,
+        marginTop: 5
+    },
+    button1: {
+        fontSize: 17,
+        color: 'white',
+    },
+    name: {
+        flex: 8,
+        fontSize: 22,
+        marginLeft: 20,
+    },
 	list_header: {
 		fontSize: 23,
 		marginBottom: 5,
