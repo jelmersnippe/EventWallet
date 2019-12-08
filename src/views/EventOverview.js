@@ -67,7 +67,7 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} />
+				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
 				
 				<EventList
 					eventData={this.state.filteredEvents}
