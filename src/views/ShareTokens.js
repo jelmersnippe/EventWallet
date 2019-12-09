@@ -27,13 +27,14 @@ export default class ShareTokens extends Component {
 			<View style={styles.container}>
 
 				<Text style={styles.header}>Receiver</Text>
-				<Text>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
+				<Text style={styles.description}>You selected {this.state.friend ? this.state.friend.name : 'loading'} to share tokens with.</Text>
 
 				<Text style={styles.header}>Wallet</Text>
+				<Text style={styles.description}>Select the wallet of the event you want to share:</Text>
 				<View style={styles.dropdown_container}>
 					<Picker
 						selectedValue={this.state.value}
-						style={{ width: '100%', marginTop: 5 }}
+						style={{ width: '100%'}}
 						onValueChange={(itemValue, itemIndex) =>
 							this.setState({ value: itemValue })
 						}>
@@ -44,7 +45,7 @@ export default class ShareTokens extends Component {
 				</View>
 
     			<Text style={styles.header}>Balance</Text>
-  			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
+  			    <Text style = { styles.tokenammount_text }>You have in total {this.props.navigation.getParam('amount')} tokens</Text>
 
 				
 				{/* <View style={styles.dropdown_container}>
@@ -61,7 +62,7 @@ export default class ShareTokens extends Component {
 
                 
 
-				<Text style={styles.description}>Select the amount of tokens you want to share:</Text>
+
 
         	<NumericTokenInput />
 
@@ -72,7 +73,7 @@ export default class ShareTokens extends Component {
 					<Text style={styles.buttontext}>Cancel</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.button2}>
-					<Text style={styles.buttontext2}>Send</Text>
+					<Text style={styles.buttontext2}>Share</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -95,10 +96,12 @@ const styles = StyleSheet.create({
         fontSize: 21,
         borderBottomWidth: 1,
         paddingBottom: 5,
+
 	},
 	description: {
-	    fontSize: 17,
-	    marginBottom: 10,
+	    fontSize: 20,
+	    marginBottom: 5,
+	    marginLeft: 5,
 	},
 	header2: {
 		fontSize: 23,
@@ -116,13 +119,15 @@ const styles = StyleSheet.create({
 	    fontSize: 20,
 	    width: '100%',
 	    textAlign: 'left',
-	    borderColor: 'black',
-	    borderWidth: 1,
-	    padding: 10,
-	    marginBottom: 5,
-	    marginTop: 5,
-	    borderRadius: 10,
-	    backgroundColor: 'white'
+	    marginBottom: 15,
+	    marginLeft: 5,
+	    //borderColor: 'black',
+	    //borderWidth: 1,
+	    //padding: 10,
+	    //marginBottom: 5,
+	    //marginTop: 5,
+	    //borderRadius: 10,
+	    //backgroundColor: 'white'
 	},
    button: {
        flex: 1,
@@ -139,6 +144,7 @@ const styles = StyleSheet.create({
        fontSize: 20,
        textAlign: 'center',
        padding: 4,
+       color: 'white'
    },
    button2: {
        flex: 1,
@@ -155,11 +161,14 @@ const styles = StyleSheet.create({
        fontSize: 20,
        textAlign: 'center',
        padding: 4,
+       color: 'white'
    },
    dropdown_container: {
 	   borderWidth: 1,
 	   borderRadius: 10,
-	   marginBottom: 15,
+	   marginBottom: 5,
+	   marginTop: 5,
+	   //paddingTop: 5,
    }
 
 });

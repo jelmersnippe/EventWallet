@@ -14,12 +14,12 @@ export default class NumericTokenInput extends Component {
 
     render() {
         return (
-            <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{textTransform: 'uppercase', fontSize: 25, marginRight: 10}}>Tokens:</Text>
+            <View style={{ justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                <Text style={{fontSize: 20, marginRight: 10, marginBottom: 5}}>Select the amount of tokens:</Text>
                 <NumericInput
                     value={this.state.value}
                     onChange={value => this.setState({ value })}
-                    
+                    totalWidth={150}
                     totalHeight={50}
                     iconSize={70}
                     minValue={0}
