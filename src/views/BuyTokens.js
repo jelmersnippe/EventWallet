@@ -1,108 +1,126 @@
 import React, { Component } from 'react'
 import {
-	Text,
-	View,
-	StyleSheet,
-	TouchableOpacity,
-	Picker,
+    Text,
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    Picker,
 } from 'react-native'
 import NumericTokenInput from '../components/NumericTokenInput'
 
-
-
-
 export default class BuyTokens extends Component {
-	constructor() {
-		super();
-		this.state = {
-			PickerValue: ''
-		}
-	}
+    constructor() {
+        super();
+        this.state = {
+            PickerValue: ''
+        }
+    }
 
-	render() {
-		return (
-			<View>
-				<Text style={styles.header}>Name of event</Text>
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
+                <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
+                <Text style={styles.location}>Autotron, Rosmalen</Text>
+                <Text style={styles.header}>Select the amount of tokens you want to buy</Text>
 
+                <NumericTokenInput />
 
-				<NumericTokenInput />
+                <Text style={styles.header}>Select the payment method</Text>
 
-				<View>
-					<Picker
-						selectedValue={this.state.language}
-						style={{ height: 30, width: '80%', marginLeft: 30, marginRight: 30 }}
-						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
-						}>
-						<Picker.Item label="IDEAL" value="IDEAL" />
-						<Picker.Item label="Paypal" value="Paypal" />
-						<Picker.Item label="Visa" value="Visa" />
-					</Picker>
-				</View>
+                <View>
+                    <Picker
+                        style={{ height: 50, width: '100%' }}
+                        itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ language: itemValue })
+                        }>
+                        <Picker.Item label="IDEAL" value="IDEAL" />
+                        <Picker.Item label="Paypal" value="Paypal" />
+                        <Picker.Item label="Visa" value="Visa" />
+                    </Picker>
+                </View>
 
-				<View style={{ flexDirection: 'row', paddingLeft: 80, paddingRight: 30, paddingBottom: 10 }}>
-					<TouchableOpacity>
-						<Text style={styles.button}>Buy</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => { this.props.navigation.goBack() }}
-					>
-						<Text style={styles.button}>Cancel</Text>
-					</TouchableOpacity>
-				</View>
-			</View>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => { this.props.navigation.goBack() }}
+                    >
+                        <Text style={styles.buttontext}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button2}>
+                        <Text style={styles.buttontext2}>Checkout</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
 
-		);
-	}
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-	},
-	header: {
-		fontSize: 25,
-		color: 'black',
-		paddingBottom: 10,
-		marginBottom: 10,
-		paddingLeft: 10,
-		paddingRight: 50,
-		justifyContent: 'center',
-	},
-	header2: {
-		fontSize: 23,
-		color: 'black',
-		paddingBottom: 5,
-		marginBottom: 5,
-		paddingLeft: 30,
-		paddingRight: 30,
-	},
-	textinput: {
-		fontSize: 20,
-		height: 45,
-		marginBottom: 15,
-		color: 'black',
-		backgroundColor: 'gray',
-		paddingLeft: 10,
-		marginLeft: 30,
-		marginRight: 30,
-	},
-	button: {
-		fontSize: 20,
-		height: 45,
-		marginLeft: 40,
-		marginRight: 40,
-		marginTop: 30,
-		backgroundColor: 'lightgray',
-		paddingLeft: 10,
-		paddingRight: 10,
-		paddingBottom: 10,
-		paddingTop: 10,
-	}
+    container: {
+        flex: 1,
+        backgroundColor: '#F8F9FB',
+        paddingHorizontal: 3 + '%'
+    },
+    button: {
+        flex: 1,
+        height: 70,
+        width: 40 + '%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 15,
+        backgroundColor: 'gray',
+        borderRadius: 20,
+        marginVertical: 30,
+    },
+    buttontext: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+    },
+    button2: {
+        flex: 1,
+        height: 70,
+        width: 40 + '%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 15,
+        backgroundColor: 'blue',
+        borderRadius: 20,
+        marginVertical: 30,
+    },
+    buttontext2: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+    },
+    picker: {
+        flexDirection: 'row',
+        paddingBottom: 10,
+    },
+    picker2: {
+        height: 30,
+        //fontSize: 30, Werkt niet
+    },
+    datetime: {
+        marginTop: 20,
+        color: '#80868B',
+        textTransform: 'uppercase',
+        fontSize: 12,
+    },
+    location: {
+        color: '#505155',
+        marginBottom: 15,
+        width: '90%'
+    },
+    name: {
+        fontSize: 29,
+        fontWeight: 'bold',
+        color: '#2D2D2D'
+    },
+    header: {
+        fontSize: 18,
+    }
 });
-
-
-
-
-

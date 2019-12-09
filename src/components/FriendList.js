@@ -17,11 +17,9 @@ export default class FriendList extends Component {
                     data={this.props.friendData}
                     renderItem={({ item }) => (
                         <FriendItem
-                            name={item.name}
-                            key={item.name}
+                            item={item}
                         />
                     )}
-                    keyExtractor={item => item.name}
                 />
             </View>
         );
@@ -30,14 +28,15 @@ export default class FriendList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 5+'%',
     },
     title: {
         marginVertical: 10,
-        paddingLeft: 5,
-        textAlign: 'left',
-        textTransform: "uppercase",
-        fontSize: 18,
+        textAlign: 'right',
+        textTransform: 'uppercase',
+        fontSize: 20,
         borderBottomWidth: 1,
+        paddingBottom: 5,
     }
 })

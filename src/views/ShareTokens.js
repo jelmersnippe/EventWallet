@@ -15,23 +15,27 @@ import NumericTokenInput from '../components/NumericTokenInput'
 export default class ShareTokens extends Component {
 	constructor() {
 		super();
-		this.state = {
-			PickerValue: ''
-		}
+		this.state = { }
+	}
+
+	componentDidMount() {
+		this.setState({friend: this.props.navigation.getParam('friend')})
 	}
 
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
 
 				<Text style={styles.header}>Receiver</Text>
+				<Text>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
 
-				<View>
+				<Text style={styles.header}>Wallet</Text>
+				<View style={styles.dropdown_container}>
 					<Picker
-						selectedValue={this.state.language}
-						style={{ height: 60, width: '80%', marginLeft: 30, marginRight: 30, alignItems: 'center' }}
+						selectedValue={this.state.value}
+						style={{ width: '100%', marginTop: 5 }}
 						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
+							this.setState({ value: itemValue })
 						}>
 						<Picker.Item label="Wallet1" value="wallet1" />
 						<Picker.Item label="Wallet2" value="wallet2" />
@@ -39,22 +43,39 @@ export default class ShareTokens extends Component {
 					</Picker>
 				</View>
 
-				<Text style={styles.header}>Balance</Text>
+    			<Text style={styles.header}>Balance</Text>
+  			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
 
-				<NumericTokenInput />
+				
+				{/* <View style={styles.dropdown_container}>
+					<Picker
+						style={{ width: '100%' }}
+						onValueChange={(itemValue, itemIndex) =>
+							this.setState({ language: itemValue })
+						}>
+						<Picker.Item label="Berend101" value="wallet1" />
+						<Picker.Item label="Berend102" value="wallet2" />
+						<Picker.Item label="Berend103" value="wallet3" />
+					</Picker>
+				</View> */}
 
+                
 
-				<View style={{ flexDirection: 'row', paddingLeft: 80, paddingRight: 30, paddingBottom: 10 }}>
-					<TouchableOpacity>
-						<Text style={styles.button}>Send</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => { this.props.navigation.goBack() }}
-					>
-						<Text style={styles.button}>Cancel</Text>
-					</TouchableOpacity>
-				</View>
+				<Text style={styles.description}>Select the amount of tokens you want to share:</Text>
+
+        	<NumericTokenInput />
+
+		    <View style={{ flexDirection: 'row' }}>
+				<TouchableOpacity style={styles.button}
+                    onPress={() => { this.props.navigation.goBack() }}
+				>
+					<Text style={styles.buttontext}>Cancel</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.button2}>
+					<Text style={styles.buttontext2}>Send</Text>
+				</TouchableOpacity>
 			</View>
+		</View>
 
 		);
 	}
@@ -63,32 +84,82 @@ export default class ShareTokens extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		paddingHorizontal: 3 +'%',
+		backgroundColor: '#F8F9FB',
 	},
 	header: {
-		fontSize: 25,
+        marginVertical: 10,
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+	},
+	description: {
+	    fontSize: 17,
+	    marginBottom: 10,
+	},
+	header2: {
+		fontSize: 23,
 		color: 'black',
-		paddingBottom: 10,
-		marginTop: 10,
-		marginBottom: 10,
-		//paddingLeft: 80,
-		//paddingRight: 80,
-		textAlign: 'center',
+		//marginBottom: 5,
 	},
 	textinput: {
 		fontSize: 20,
 		height: 45,
 		marginBottom: 15,
 		color: 'black',
-		backgroundColor: 'gray',
-		paddingLeft: 10,
-		marginLeft: 30,
-		marginRight: 30,
+		backgroundColor: 'gray'
 	},
-	button: {
-		fontSize: 20,
-		backgroundColor: 'lightgray',
-		padding: 10,
-		marginHorizontal: 10
+	tokenammount_text: {
+	    fontSize: 20,
+	    width: '100%',
+	    textAlign: 'left',
+	    borderColor: 'black',
+	    borderWidth: 1,
+	    padding: 10,
+	    marginBottom: 5,
+	    marginTop: 5,
+	    borderRadius: 10,
+	    backgroundColor: 'white'
 	},
+   button: {
+       flex: 1,
+       height: 70,
+       width: 40+'%',
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginHorizontal: 15,
+       backgroundColor: 'gray',
+       borderRadius: 20,
+       marginVertical: 30,
+   },
+   buttontext: {
+       fontSize: 20,
+       textAlign: 'center',
+       padding: 4,
+   },
+   button2: {
+       flex: 1,
+       height: 70,
+       width: 40+'%',
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginHorizontal: 15,
+       backgroundColor: '#0070C0',
+       borderRadius: 20,
+       marginVertical: 30,
+   },
+   buttontext2: {
+       fontSize: 20,
+       textAlign: 'center',
+       padding: 4,
+   },
+   dropdown_container: {
+	   borderWidth: 1,
+	   borderRadius: 10,
+	   marginBottom: 15,
+   }
+
 });

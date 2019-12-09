@@ -6,21 +6,34 @@ import {
     StyleSheet
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.name}>{this.props.name}</Text>
+                <Text style={styles.name}>{this.props.item.name}</Text>
 
-                <View style={styles.button_container}>
+                <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity
-                        onPress={() => {this.props.navigation.navigate('ShareTokens')}}
+                        style={[
+                            styles.button_container, 
+                            {backgroundColor: '#0070C0'}
+                        ]}
+                        onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
                     >
-                        <Text style={styles.button}>Share</Text>
+                        <Text style={styles.button_text}>Share</Text>
+                        <Icon name='coins' size={20} color="white" style={styles.button_icon} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.button}>Remove</Text>
+
+                    <TouchableOpacity
+                        style={[
+                            styles.button_container, 
+                            {backgroundColor: 'red'}
+                        ]}
+                    >
+                        <Text style={styles.button_text}>Remove</Text>
+                        <Icon name='times' size={20} color="white" style={styles.button_icon} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -30,21 +43,46 @@ class FriendItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        width: 100+'%',
+        padding: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 100+'%',
-        paddingBottom: 10,
+        textAlignVertical: 'center',
+        alignItems: 'center',
+
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10,
+
+        backgroundColor: 'white',
+        marginBottom: 10,
+    },
+    name_container: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    remove_button: {
+        paddingHorizontal: 10,
     },
     name: {
-        fontSize: 18,
+        fontSize: 22,
     },
     button_container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderBottomColor: 'black',
+        borderRadius: 10,
+        padding: 5,
+        justifyContent: 'space-between',
     },
-    button: {
+    button_text: {
+        marginRight: 5,
         fontSize: 18,
-        paddingHorizontal: 15,
+        color: 'white'
     },
+    button_icon: {
+        padding: 2,
+    }
 })
 
 

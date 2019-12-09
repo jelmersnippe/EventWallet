@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import TransactionList from '../components/TransactionList';
 
@@ -61,25 +62,37 @@ const transactions = [
 ];
 
 export default class Transactions extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            event: this.props.navigation.getParam('item'),
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style = { styles.amount }>{this.props.navigation.getParam('amount')}</Text>
+                    <View style={styles.cta_button}>
+                        <Text style = { styles.cta_button_text }>You have {this.state.event.amount} tokens</Text>
+                    </View>
+                    
                     <TouchableOpacity
                         style = { styles.cta_button }
                         onPress = {() => {this.props.navigation.navigate('BuyTokens')}}
                     >
-                        <Text style = { styles.cta_button_text}>Add currency</Text>
+                        <Text style = { styles.cta_button_text}>Buy tokens</Text>
+                        <Icon name='angle-right' size={25} color='black' />
                     </TouchableOpacity>
                 </View>
+
                 <TouchableOpacity
                     onPress = {() => {this.props.navigation.navigate('WalletLink')}}
                 >
-                    <Text style={{marginTop: 10, padding: 10}}>Wallet link</Text>
+                    <Text style={styles.header2}>Wallet link</Text>
                 </TouchableOpacity>
 
-                <Text style={{marginTop: 10, padding: 10}}>Transaction History</Text>
+                <Text style={styles.header2}>Transaction History</Text>
 
                 <TransactionList
                     transactionData={transactions}
@@ -92,27 +105,35 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: 100+'%',
-        height: 100+'%',
-        justifyContent: "flex-start",
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F8F9Fb',
     },
     header: {
-        flexDirection: "row",
+        flexDirection: 'row',
         width: 100+'%',
-        height: 20+'%',
-        justifyContent: "space-evenly",
+        justifyContent: 'space-evenly',
     },
-    amount: {
-        width: 50+'%',
-        textAlign: "center",
-        textAlignVertical: "center",
-
-        borderWidth: 1,
+    header2: {
+        marginVertical: 10,
+        textAlign: 'left',
+        textTransform: 'uppercase',
+        fontSize: 18,
+        marginHorizontal: 3+'%',
+        borderBottomWidth: 1,
+        paddingBottom: 5,
     },
     cta_button: {
-        width: 50+'%',
-        backgroundColor: 'rgb(100,100,255)',
+        flexDirection: 'row',
+        height: 70,
+        width: 40+'%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 15,
+        backgroundColor: 'white',
+        borderRadius: 20,
     },
+    cta_button_text: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+    }
 });
