@@ -1,11 +1,3 @@
-import React, { Component } from 'react'
-import { 
-    View, 
-	Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity
-} from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 class LoginForm extends Component {
@@ -20,12 +12,12 @@ class LoginForm extends Component {
                 <Text style={styles.header1}>FestiFaggot</Text>
 
 				<Text style={styles.header2}>Login page</Text>
-                <TextInput 
+                <TextInput
                     style={styles.input}
                     placeholder='Username'
                     //placeholderTextColor='rgba(255,255,255,0.8)'
                 />
-                <TextInput 
+                <TextInput
                     style={styles.input}
                     placeholder='Password'
                     //placeholderTextColor='rgba(255,255,255,0.8)'
@@ -39,6 +31,20 @@ class LoginForm extends Component {
 					    Login
 					</Text>
 				</TouchableOpacity>
+
+                <View style={styles.button2}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Register')}
+                    >
+                        <Text style={styles.text_button2}>Register</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                    >
+                        <Text style={styles.text_button2}>Forgot password?</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         );
     }
@@ -46,10 +52,12 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-	    flex: 2,
+	    flex: 1,
 		justifyContent: 'center',
 		backgroundColor: '#F5FCFF',
 		paddingHorizontal: 5+'%',
+		backgroundColor: '#F5FCFF',
+
 	},
     input: {
 		borderBottomWidth: 1,
@@ -85,8 +93,22 @@ const styles = StyleSheet.create({
         color: 'black',
         //marginBottom: 1,
         //paddingTop: 15
+   	},
+   	button2: {
+   	    flexDirection: 'row',
+   	    width: '90%',
+   	    justifyContent: 'space-between',
+   	    marginLeft: 18,
+   	    //fontSize: 30,
+   	    //alignItems: 'center',
+   	    //textAlign: 'center'
+   	},
+   	text_button2: {
+   	    fontSize: 18,
+   	    borderBottomColor: 'black',
+   	    borderBottomWidth: 1,
+   	    marginTop: 15
    	}
 });
 
 export default withNavigation(LoginForm)
-  
