@@ -13,14 +13,21 @@ export default class UserList extends Component {
         return (
             <View style={styles.container}>
 				<Text style={styles.title}>{this.props.headerText}</Text>
-                <FlatList
+                {this.props.data.map(
+                    (item) => {
+                        return <UserItem item={item}/>
+                    }
+                )}
+                {/* <FlatList
+
+
                     data={this.props.friendData}
                     renderItem={({ item }) => (
                         <UserItem
                             item={item}
                         />
                     )}
-                />
+                /> */}
             </View>
         );
     }

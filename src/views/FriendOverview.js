@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import {
-	Text,
 	View,
 	StyleSheet,
-	TouchableOpacity,
 } from 'react-native'
 import { createFilter } from 'react-native-search-filter'
 
 import UserList from '../components/UserList'
 import SearchBar from '../components/SearchBar'
-import UserItem from '../components/UserItem'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const users = [
 	{
@@ -104,22 +102,13 @@ export default class FriendOverview extends Component {
 			<View style={styles.container}>
 				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
 			
-				{ this.state.searchTerm == '' &&
-					<View style={styles.pending_list_container}>
-						{this.state.pendingList.length > 0 && <Text style={styles.pending_list_title}>Pending requests</Text>}
-						{ this.state.pendingList.map((item) => {
-							return <UserItem item={item} />
-						}) }
-					</View>
-				}
-				
-
-
-				{/* {this.state.searchTerm == '' && <UserList headerText='Pending requests' friendData={this.state.pendingList}/>} */}
-				
-				{this.state.searchTerm == '' 
-				? <UserList headerText='Friendlist' friendData={this.state.friendList}/>
-				: <UserList headerText='Users' friendData={this.state.filteredUsers} />}
+				<ScrollView>
+					{this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList}/>}
+					
+					{this.state.searchTerm == '' 
+					? <UserList headerText='Friendlist' data={this.state.friendList}/>
+					: <UserList headerText='Users' data={this.state.filteredUsers} />}
+				</ScrollView>
 			</View>
 		);
 	}
