@@ -6,17 +6,17 @@ import {
     StyleSheet
 } from 'react-native'
 
-import FriendItem from './FriendItem'
+import UserItem from './UserItem'
 
-export default class FriendList extends Component {
+export default class UserList extends Component {
     render() {
         return (
             <View style={styles.container}>
-				<Text style={styles.title}>Friendlist</Text>
+				<Text style={styles.title}>{this.props.headerText}</Text>
                 <FlatList
                     data={this.props.friendData}
                     renderItem={({ item }) => (
-                        <FriendItem
+                        <UserItem
                             item={item}
                         />
                     )}

@@ -57,9 +57,9 @@ export default class EventOverview extends Component {
         }
     }
 	
-	updateFilteredList = (newFilteredList) => {
-		console.log(newFilteredList)
+	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredEvents: newFilteredList})
+		this.setState({searchTerm: newSearchTerm})
 	}
 
 
@@ -77,8 +77,7 @@ export default class EventOverview extends Component {
 				<SearchBar keys={['name', 'location']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
 				
 				<EventList
-					// if (filteredEvents) filteredEvents, else events
-					eventData={events}
+                    eventData={this.state.searchTerm != '' ? this.state.filteredEvents : events}
 				/>
 			</View >
 		);
