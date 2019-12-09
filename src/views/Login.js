@@ -12,20 +12,22 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.header}>FestiFaggot</Text>
+
 
                 <LoginForm />
-                
-                <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('Register')}
-                >
-                    <Text>To register page</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('ForgotPassword')}
-                >
-                    <Text>Forgot password?</Text>
-                </TouchableOpacity>
+
+                <View style={styles.button2}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Register')}
+                    >
+                        <Text>To register page</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                    >
+                        <Text>Forgot password?</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
             
         );
@@ -35,9 +37,9 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
 		backgroundColor: '#F5FCFF',
-		//textAlign: 'center',
+		textAlign: 'center',
+		justifyContent: 'center'
 		//alignItems: 'center'
 		//paddingHorizontal: 5+'%',
 	},
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
 	    fontSize: 30,
 	    marginBottom: 10,
 	    textAlign: 'center',
-        justifyContent: 'center',
+	    //justifyContent: 'center',
 	    //alignItems: 'center'
 	},
 	subheader: {
@@ -75,5 +77,14 @@ const styles = StyleSheet.create({
 	    borderColor: 'black',
 	    borderWidth: 1,
 	    color: 'black'
+	},
+	button2: {
+	    width: '100%',
+	    flexDirection: 'row',
+	    justifyContent: 'center',
+	    marginTop: 1,
+	    
+	    //marginBottom: 200,
+	    //paddingTop: 50,
 	}
 });

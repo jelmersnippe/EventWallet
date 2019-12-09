@@ -17,7 +17,9 @@ class LoginForm extends Component {
     render() {
         return (
             <View style={styles.container}>
-				<Text style={styles.header}>Login page</Text>
+                <Text style={styles.header1}>FestiFaggot</Text>
+
+				<Text style={styles.header2}>Login page</Text>
                 <TextInput 
                     style={styles.input}
                     placeholder='Username'
@@ -33,7 +35,7 @@ class LoginForm extends Component {
 					onPress={this.validate}
 
 				>
-					<Text style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold',}}>
+					<Text style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold', marginBottom: 1, }}>
 					    Login
 					</Text>
 				</TouchableOpacity>
@@ -44,7 +46,7 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-	    flex: 1,
+	    flex: 2,
 		justifyContent: 'center',
 		backgroundColor: '#F5FCFF',
 		paddingHorizontal: 5+'%',
@@ -57,7 +59,12 @@ const styles = StyleSheet.create({
 		padding: 10,
 		width: '90%',
     },
-    header: {
+    header1: {
+	    fontSize: 30,
+	    marginBottom: 10,
+	    textAlign: 'center'
+    },
+    header2: {
         marginVertical: 10,
         textAlign: 'right',
         paddingRight: 5,
@@ -76,6 +83,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         color: 'black',
+        //marginBottom: 1,
         //paddingTop: 15
    	}
 });
