@@ -64,8 +64,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: '#F5FCFF',
 		paddingHorizontal: 5+'%',
-		backgroundColor: '#F5FCFF',
-
 	},
     input: {
 		borderBottomWidth: 1,
@@ -99,17 +97,14 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         color: 'black',
-        //marginBottom: 1,
-        //paddingTop: 15
    	},
    	button2: {
    	    flexDirection: 'row',
    	    width: '90%',
    	    justifyContent: 'space-between',
-   	    marginLeft: 18,
-   	    //fontSize: 30,
-   	    //alignItems: 'center',
-   	    //textAlign: 'center'
+   	    //marginHorizontal: '90%',
+   	    margin: 15,
+   	    marginTop: 5
    	},
    	text_button2: {
    	    fontSize: 18,
