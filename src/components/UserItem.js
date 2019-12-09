@@ -36,7 +36,7 @@ class UserItem extends Component {
                     <TouchableOpacity style={styles.remove_button}>
                         <Icon name='times' size={15} color="gray" style={[styles.button_icon, {borderColor: 'white'}]} />
                     </TouchableOpacity>
-                    <Text style={styles.name}>{this.props.item.name}</Text>
+                    <Text style={styles.name} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.name}</Text>
                 </View>
 
                 
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     name_container: {
+        width: 55+'%',
         flexDirection: 'row',
         alignItems: 'center'
     },
