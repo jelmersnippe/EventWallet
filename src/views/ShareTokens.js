@@ -26,27 +26,10 @@ export default class ShareTokens extends Component {
 		return (
 			<View style={styles.container}>
 
-    			<Text style={styles.header}>My balance</Text>
-  			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
-
-				<Text style={styles.header}>Share</Text>
-                <Text style={styles.description}>Receiver:</Text>
-				
+				<Text style={styles.header}>Receiver</Text>
 				<Text>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
-				{/* <View style={styles.dropdown_container}>
-					<Picker
-						style={{ width: '100%' }}
-						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
-						}>
-						<Picker.Item label="Berend101" value="wallet1" />
-						<Picker.Item label="Berend102" value="wallet2" />
-						<Picker.Item label="Berend103" value="wallet3" />
-					</Picker>
-				</View> */}
 
-                <Text style={styles.description}>Select the specific wallet of a event:</Text>
-
+				<Text style={styles.header}>Wallet</Text>
 				<View style={styles.dropdown_container}>
 					<Picker
 						selectedValue={this.state.value}
@@ -60,9 +43,27 @@ export default class ShareTokens extends Component {
 					</Picker>
 				</View>
 
+    			<Text style={styles.header}>Balance</Text>
+  			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')} tokens</Text>
+
+				
+				{/* <View style={styles.dropdown_container}>
+					<Picker
+						style={{ width: '100%' }}
+						onValueChange={(itemValue, itemIndex) =>
+							this.setState({ language: itemValue })
+						}>
+						<Picker.Item label="Berend101" value="wallet1" />
+						<Picker.Item label="Berend102" value="wallet2" />
+						<Picker.Item label="Berend103" value="wallet3" />
+					</Picker>
+				</View> */}
+
+                
+
 				<Text style={styles.description}>Select the amount of tokens you want to share:</Text>
 
-        <NumericTokenInput />
+        	<NumericTokenInput />
 
 		    <View style={{ flexDirection: 'row' }}>
 				<TouchableOpacity style={styles.button}

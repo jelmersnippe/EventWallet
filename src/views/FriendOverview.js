@@ -98,14 +98,18 @@ export default class FriendOverview extends Component {
 			    
 				<Text style={styles.header}>Add friends</Text>
 				<View style={styles.button_container}>
-					<TouchableOpacity style={{marginRight: 5, marginLeft: 10, marginTop: 5, marginBottom: 5, flex: 1}}>
+					{/* <TouchableOpacity style={{marginRight: 5, marginLeft: 10, marginTop: 5, marginBottom: 5, flex: 1}}>
                         <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
-					</TouchableOpacity>
+					</TouchableOpacity> */}
 
 					<Text style={styles.name}>berend101</Text>
 
 					<TouchableOpacity style={styles.button_container2}>
 						<Text style={styles.button1}>Accept</Text>
+						<Icon name='user-plus' size={17} color="white" style={{marginRight: 5, marginLeft: 5}} />
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.button_container2}>
+						<Text style={styles.button1}>Decline</Text>
 						<Icon name='user-plus' size={17} color="white" style={{marginRight: 5, marginLeft: 5}} />
 					</TouchableOpacity>
 

@@ -70,6 +70,7 @@ export default class EventOverview extends Component {
 				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
 				
 				<EventList
+					// if (filteredEvents) filteredEvents, else events
 					eventData={this.state.filteredEvents}
 				/>
 			</View >

@@ -12,21 +12,30 @@ class FriendItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.name_container}>
-                    <TouchableOpacity style={styles.remove_button}>
-                        <Icon name='times' size={35} color="#80868B" />
+                <Text style={styles.name}>{this.props.item.name}</Text>
+
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity
+                        style={[
+                            styles.button_container, 
+                            {backgroundColor: '#0070C0'}
+                        ]}
+                        onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
+                    >
+                        <Text style={styles.button_text}>Share</Text>
+                        <Icon name='coins' size={20} color="white" style={styles.button_icon} />
                     </TouchableOpacity>
 
-                    <Text style={styles.name}>{this.props.item.name}</Text>
+                    <TouchableOpacity
+                        style={[
+                            styles.button_container, 
+                            {backgroundColor: 'red'}
+                        ]}
+                    >
+                        <Text style={styles.button_text}>Remove</Text>
+                        <Icon name='times' size={20} color="white" style={styles.button_icon} />
+                    </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity
-                    style={styles.button_container}
-                    onPress={() => {this.props.navigation.navigate('ShareTokens', {friend: this.props.item})}}
-                >
-                    <Text style={styles.button_text}>Share</Text>
-                    <Icon name='coins' size={20} color="white" style={styles.button_icon} />
-                </TouchableOpacity>
             </View>
         );
     }
@@ -65,7 +74,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         justifyContent: 'space-between',
-        backgroundColor: '#0070C0'
     },
     button_text: {
         marginRight: 5,

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F8F9FB',
-        marginHorizontal: 3 + '%'
+        paddingHorizontal: 3 + '%'
     },
     button: {
         flex: 1,

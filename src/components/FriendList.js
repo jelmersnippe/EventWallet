@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         textTransform: 'uppercase',
         fontSize: 20,
-        marginHorizontal: 3+'%',
         borderBottomWidth: 1,
         paddingBottom: 5,
     }
