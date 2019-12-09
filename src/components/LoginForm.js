@@ -3,8 +3,8 @@ import {
     View, 
 	Text,
     TextInput,
-    Button,
     StyleSheet,
+    TouchableOpacity
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
@@ -17,21 +17,26 @@ class LoginForm extends Component {
     render() {
         return (
             <View style={styles.container}>
-				<Text>Login page</Text>
+				<Text style={styles.header}>Login page</Text>
                 <TextInput 
                     style={styles.input}
                     placeholder='Username'
-                    placeholderTextColor='rgba(255,255,255,0.8)'
+                    //placeholderTextColor='rgba(255,255,255,0.8)'
                 />
                 <TextInput 
                     style={styles.input}
                     placeholder='Password'
-                    placeholderTextColor='rgba(255,255,255,0.8)'
+                    //placeholderTextColor='rgba(255,255,255,0.8)'
                 />
-                <Button  // Switch to a TouchableOpacity item so styling can be modified.
-                    title='Login'
-                    onPress={() => { this.login() }}
-                />
+
+				<TouchableOpacity style={styles.button}
+					onPress={this.validate}
+
+				>
+					<Text style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold',}}>
+					    Login
+					</Text>
+				</TouchableOpacity>
             </View>
         );
     }
@@ -39,18 +44,40 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: 100+'%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20
-    },
+	    flex: 1,
+		justifyContent: 'center',
+		backgroundColor: '#F5FCFF',
+		paddingHorizontal: 5+'%',
+	},
     input: {
-        width: 80+'%',
-        marginVertical: 5,
-        backgroundColor: 'rgb(150, 150, 150)',
-        borderColor: 'rgb(200, 200, 200)',
-        borderWidth: StyleSheet.hairlineWidth
-    }
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		margin: 15,
+		padding: 10,
+		width: '90%',
+    },
+    header: {
+        marginVertical: 10,
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+    },
+    button: {
+        borderRadius: 15,
+        backgroundColor: '#F6CF3A',
+        padding: 10,
+        width: 150,
+        width: '90%',
+        margin: 15,
+        borderColor: 'black',
+        borderWidth: 1,
+        color: 'black',
+        //paddingTop: 15
+   	}
 });
 
 export default withNavigation(LoginForm)

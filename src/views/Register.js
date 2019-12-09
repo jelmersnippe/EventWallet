@@ -146,15 +146,22 @@ export default class App extends Component {
 		return (
 			<View style={styles.container}>
 
+			    <Text style={styles.header}>FestiFaggot</Text>
+
+			    <Text style={styles.subheader}>Register</Text>
+
 				<TextInput
 					placeholder="Username"
 					style={styles.textstyle}
 					onChangeText={username => this.setState({username: username})}
 					value={this.state.username}
 				/>
-				<Text style={{ color: 'red', textAlign: 'center' }}>
-					{this.state.usernameError}
-				</Text>
+
+                {this.state.usernameError != '' &&
+                            <Text style={{ color: 'red', textAlign: 'center' }}>
+                                {this.state.usernameError}
+                            </Text>
+                        }
 
 				<TextInput
 					placeholder="Password"
@@ -163,6 +170,7 @@ export default class App extends Component {
 					onChangeText={password => this.setState({password: password})}
 					value={this.state.password}
 				/>
+
 				<View>
 					{
 						this.state.passwordError.map(item => {
@@ -179,19 +187,21 @@ export default class App extends Component {
 					onChangeText={email => this.setState({email: email})}
 					value={this.state.email}
 				/>
+
 				<Text style={{ color: 'red', textAlign: 'center' }}>
 					{this.state.emailError}
 				</Text>
 
-
-				<TouchableOpacity
+				<TouchableOpacity style={styles.button}
 					onPress={this.validate}
-					style={{ backgroundColor: 'red', padding: 10, width: 150 }}
+
 				>
 					<Text style={{
-						color: 'white', textAlign: 'center',
-						fontSize: 20, fontWeight: 'bold'
-					}}>Submit</Text>
+						textAlign: 'center',
+						fontSize: 20,
+						fontWeight: 'bold',
+
+					}}>Register</Text>
 				</TouchableOpacity>
 
 			</View>
@@ -202,11 +212,40 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+		paddingHorizontal: 5+'%',
 	},
 	textstyle: {
-		borderWidth: 1, borderColor: '#ccc',
-		margin: 10, padding: 10, width: '90%'
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		margin: 15,
+		padding: 10,
+		width: '90%',
+	},
+	header: {
+	    fontSize: 30,
+	    marginBottom: 10,
+	    textAlign: 'center'
+	},
+	subheader: {
+        marginVertical: 10,
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+	},
+	button: {
+	    borderRadius: 15,
+	    backgroundColor: '#F6CF3A',
+	    padding: 10,
+	    width: 150,
+	    width: '90%',
+	    margin: 15,
+	    borderColor: 'black',
+	    borderWidth: 1,
+	    color: 'black'
 	}
 });
