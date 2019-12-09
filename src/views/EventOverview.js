@@ -13,30 +13,37 @@ const events = [
 	{
 		name: 'Shockerz - The Raw Gathering',
 		amount: '8',
+		location: 'Autotron, Rosmalen'
 	},
 	{
 		name: 'Festival 2',
 		amount: '20',
+		location: 'Dikke zwans'
 	},
 	{
 		name: 'Festival 3',
 		amount: '30',
+		location: 'Autotron, Rosmalen'
 	},
 	{
 		name: 'Festival 4',
 		amount: '5',
+		location: 'Autotron, Rosmalen'
 	},
 	{
 		name: 'Festival 5',
 		amount: '12',
+		location: 'Autotron, Rosmalen'
 	},
 	{
 		name: 'Festival 6',
 		amount: '23',
+		location: 'Autotron, Rosmalen'
 	},
 	{
 		name: 'Festival 7',
 		amount: '50',
+		location: 'Autotron, Rosmalen'
 	},
 ];
 
@@ -67,11 +74,11 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
+				<SearchBar keys={['name', 'location']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
 				
 				<EventList
 					// if (filteredEvents) filteredEvents, else events
-					eventData={this.state.filteredEvents}
+					eventData={events}
 				/>
 			</View >
 		);
