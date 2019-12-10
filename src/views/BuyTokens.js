@@ -19,16 +19,20 @@ export default class BuyTokens extends Component {
     render() {
         return (
             <View style={styles.container}>
+
+                
+
                 <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
                 <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
                 <Text style={styles.location}>Autotron, Rosmalen</Text>
-                <Text style={styles.header}>Select the amount of tokens you want to buy</Text>
+
+                <Text style={styles.header}>Payment</Text>
 
                 <NumericTokenInput />
 
-                <Text style={styles.header}>Select the payment method</Text>
 
-                <View>
+                <Text style={styles.description}>Select the payment method</Text>
+                <View style={styles.dropdown_container}>
                     <Picker
                         style={{ height: 50, width: '100%' }}
                         itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
@@ -41,15 +45,15 @@ export default class BuyTokens extends Component {
                     </Picker>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity
-                        style={styles.button}
+
+                <View style={styles.button_container}>
+                    <TouchableOpacity style={styles.cancel_button}
                         onPress={() => { this.props.navigation.goBack() }}
                     >
-                        <Text style={styles.buttontext}>Cancel</Text>
+                        <Text style={styles.button_text}>Cancel</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button2}>
-                        <Text style={styles.buttontext2}>Checkout</Text>
+                    <TouchableOpacity style={styles.cta_button}>
+                        <Text style={styles.button_text}>Checkout</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -60,50 +64,24 @@ export default class BuyTokens extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#F8F9FB',
-        paddingHorizontal: 3 + '%'
-    },
-    button: {
-        flex: 1,
-        height: 70,
-        width: 40 + '%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 15,
-        backgroundColor: 'gray',
-        borderRadius: 20,
-        marginVertical: 30,
-    },
-    buttontext: {
-        fontSize: 20,
-        textAlign: 'center',
-        padding: 4,
-    },
-    button2: {
-        flex: 1,
-        height: 70,
-        width: 40 + '%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 15,
-        backgroundColor: 'blue',
-        borderRadius: 20,
-        marginVertical: 30,
-    },
-    buttontext2: {
-        fontSize: 20,
-        textAlign: 'center',
-        padding: 4,
-    },
-    picker: {
-        flexDirection: 'row',
-        paddingBottom: 10,
-    },
-    picker2: {
-        height: 30,
-        //fontSize: 30, Werkt niet
-    },
+		flex: 1,
+		paddingHorizontal: 3 + '%',
+		backgroundColor: '#F8F9FB',
+	},
+	header: {
+		marginVertical: 10,
+		textAlign: 'right',
+		paddingRight: 5,
+		textTransform: 'uppercase',
+		fontSize: 21,
+		borderBottomWidth: 1,
+		paddingBottom: 5,
+	},
+	description: {
+		fontSize: 20,
+		marginBottom: 5,
+		marginLeft: 5,
+	},
     datetime: {
         marginTop: 20,
         color: '#80868B',
@@ -120,7 +98,37 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#2D2D2D'
     },
-    header: {
-        fontSize: 18,
-    }
+	dropdown_container: {
+		borderWidth: 1,
+		borderRadius: 10,
+		marginBottom: 5,
+		marginTop: 5,
+	},
+    button_container: { 
+		flexDirection: 'row', 
+		justifyContent: 'space-evenly', 
+		marginTop: 20 
+	},
+	cancel_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'lightgray',
+		borderRadius: 20,
+	},
+	cta_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#0070C0',
+		borderRadius: 20,
+	},
+    button_text: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+        color: 'white'
+    },
 });

@@ -16,25 +16,23 @@ export default class NumericTokenInput extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Select the amount of tokens:</Text>
-                <View style={styles.numeric_input_container}>
-                    <NumericInput
-                        value={this.state.value}
-                        onChange={value => this.setState({ value })}
-                        totalWidth={150}
-                        totalHeight={50}
-                        iconSize={70}
-                        minValue={0}
-                        step={1}
-                        rounded
-                        borderColor='black'
-                        separatorWidth={0}
-                        valueType='real'
-                        textColor='black'
-                        iconStyle={{ color: 'black' }}
-                        rightButtonBackgroundColor='#F8F9FB'
-                        leftButtonBackgroundColor='#F8F9FB'
-                    />
-                </View>
+                <NumericInput
+                    value={this.state.value}
+                    onChange={value => this.setState({ value })}
+                    totalWidth={150}
+                    totalHeight={50}
+                    iconSize={70}
+                    minValue={0}
+                    step={1}
+                    rounded
+                    borderColor='black'
+                    separatorWidth={0}
+                    valueType='real'
+                    textColor='black'
+                    iconStyle={{ color: 'black' }}
+                    rightButtonBackgroundColor='#F8F9FB'
+                    leftButtonBackgroundColor='#F8F9FB'
+                />
             </View>
         );
     }
@@ -45,13 +43,11 @@ const styles = StyleSheet.create({
         width: 100+'%',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 20,
     },
     text: {
         width: 40+'%',
         fontSize: 20,
     },
-    numeric_input_container: {
-        
-    }
 })
