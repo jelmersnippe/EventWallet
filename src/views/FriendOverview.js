@@ -1,86 +1,116 @@
 import React, { Component } from 'react'
 import {
-	Text,
-	TextInput,
 	View,
 	StyleSheet,
-	TouchableOpacity,
 } from 'react-native'
+import { createFilter } from 'react-native-search-filter'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import FriendList from '../components/FriendList'
+import { 
+	UserList, 
+	SearchBar 
+} from '../components'
 
-const friends = [
+const users = [
 	{
-		name: 'berend101'
+		name: 'AnaalAdmiraal69',
+		status: 'pending'
 	},
 	{
-		name: 'berend102'
+		name: 'berend102',
+		status: 'friend'
 	},
 	{
-		name: 'berend103'
+		name: 'berend103',
+		status: 'unknown'
 	},
 	{
-		name: 'berend104'
+		name: 'berend104',
+        status: 'unknown'
 	},
 	{
-		name: 'berend105'
+		name: 'berend105',
+		status: 'pending'
 	},
 	{
-		name: 'berend106'
+		name: 'berend106',
+		status: 'friend'
 	},
 	{
-		name: 'berend107'
+		name: 'berend107',
+		status: 'unknown'
 	},
 	{
-		name: 'berend108'
+		name: 'berend108',
+		status: 'friend'
 	},
 	{
-		name: 'berend109'
+		name: 'Jeukende bilnaad 88',
+		status: 'pending'
 	},
 	{
-		name: 'berend110'
+		name: 'Massieve Zwanus',
+		status: 'friend'
 	},
 	{
-		name: 'berend111'
+		name: 'berend111',
+		status: 'unknown'
 	},
 	{
-		name: 'berend112'
+		name: 'berend112',
+		status: 'friend'
 	},
 	{
-		name: 'berend113'
+		name: 'berend113',
+		status: 'friend'
 	},
 	{
-		name: 'berend114'
+		name: 'berend114',
+		status: 'pending'
 	},
 	{
-		name: 'berend115'
+		name: 'berend115',
+		status: 'friend'
 	},
 	{
-		name: 'berend116'
+		name: 'berend116',
+		status: 'friend'
 	}
 ]
 
 export default class FriendOverview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchTerm: '',
+			filteredUsers: [],
+			friendList: [],
+			pendingList: [],
+        }
+    }
+	
+	updateFilteredList = (newFilteredList, newSearchTerm) => {
+		this.setState({filteredUsers: newFilteredList})
+		this.setState({searchTerm: newSearchTerm})
+	}
+
+	componentDidMount(){
+		this.setState({friendList: users.filter(createFilter('friend', ['status']))})
+		this.setState({pendingList: users.filter(createFilter('pending', ['status']))})
+	}
+
 	render() {
-		return (
+	    return (
 			<View style={styles.container}>
-
-				<TextInput style={styles.textinput} placeholder="Search for friends" />
-
-				<Text style={styles.list_header}>Add friends</Text>
-				<View style={{ flexDirection: 'row' }}>
-					<Text style={styles.name}>berend101</Text>
-					<TouchableOpacity>
-						<Text style={styles.button1}>Accept</Text>
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.button2}>Decline</Text>
-					</TouchableOpacity>
-				</View>
-
-				<FriendList
-					friendData={friends}
-				/>
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
+			
+				<ScrollView>
+					{this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList}/>}
+					
+					{this.state.searchTerm == '' 
+					? <UserList headerText='Friendlist' data={this.state.friendList}/>
+					: <UserList headerText='Users' data={this.state.filteredUsers} />}
+				</ScrollView>
 			</View>
 		);
 	}
@@ -89,21 +119,17 @@ export default class FriendOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
-		marginHorizontal: 5+'%',
+		backgroundColor: '#F8F9FB',
 	},
-	textinput: {
-		width: 80 + '%',
-		fontSize: 20,
-		height: 45,
-		marginVertical: 15,
-		backgroundColor: 'gray',
-		padding: 10,
-	},
-	list_header: {
-		fontSize: 23,
-		marginBottom: 5,
-	},
-
-
+	pending_list_container: {
+        paddingHorizontal: 5+'%',
+    },
+    pending_list_title: {
+        marginVertical: 10,
+        textAlign: 'right',
+        textTransform: 'uppercase',
+        fontSize: 20,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+    }
 });

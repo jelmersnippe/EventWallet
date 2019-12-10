@@ -8,30 +8,32 @@ import {
 } from 'react-native'
 
 import NumericTokenInput from '../components/NumericTokenInput'
-
-
-
+import HeaderText from '../components/HeaderText'
 
 export default class ShareTokens extends Component {
 	constructor() {
 		super();
-		this.state = {
-			PickerValue: ''
-		}
+		this.state = {}
+	}
+
+	componentDidMount() {
+		this.setState({ friend: this.props.navigation.getParam('friend') })
 	}
 
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
+				<HeaderText text='Receiver' />
+				<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
 
-				<Text style={styles.header}>Receiver</Text>
-
-				<View>
+				<HeaderText text='Wallet' />
+				<Text style={styles.description}>Select the wallet of the event you want to share tokens for:</Text>
+				<View style={styles.dropdown_container}>
 					<Picker
-						selectedValue={this.state.language}
-						style={{ height: 60, width: '80%', marginLeft: 30, marginRight: 30, alignItems: 'center' }}
+						selectedValue={this.state.value}
+						style={{ width: '100%' }}
 						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
+							this.setState({ value: itemValue })
 						}>
 						<Picker.Item label="Wallet1" value="wallet1" />
 						<Picker.Item label="Wallet2" value="wallet2" />
@@ -39,19 +41,19 @@ export default class ShareTokens extends Component {
 					</Picker>
 				</View>
 
-				<Text style={styles.header}>Balance</Text>
+				<HeaderText text='Balance' />
+  			    <Text style = { styles.description}>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
 
 				<NumericTokenInput />
 
-
-				<View style={{ flexDirection: 'row', paddingLeft: 80, paddingRight: 30, paddingBottom: 10 }}>
-					<TouchableOpacity>
-						<Text style={styles.button}>Send</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
+				<View style={styles.button_container}>
+					<TouchableOpacity style={styles.cancel_button}
 						onPress={() => { this.props.navigation.goBack() }}
 					>
-						<Text style={styles.button}>Cancel</Text>
+						<Text style={styles.button_text}>Cancel</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.cta_button}>
+						<Text style={styles.button_text}>Share</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -63,32 +65,49 @@ export default class ShareTokens extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		paddingHorizontal: 3 + '%',
+		backgroundColor: '#F8F9FB',
 	},
-	header: {
+	description: {
+		fontSize: 20,
+		marginBottom: 5,
+		marginLeft: 5,
+	},
+	receiver: {
 		fontSize: 25,
-		color: 'black',
-		paddingBottom: 10,
-		marginTop: 10,
-		marginBottom: 10,
-		//paddingLeft: 80,
-		//paddingRight: 80,
-		textAlign: 'center',
+		marginLeft: 5,
+		fontWeight: 'bold'
 	},
-	textinput: {
-		fontSize: 20,
-		height: 45,
-		marginBottom: 15,
-		color: 'black',
-		backgroundColor: 'gray',
-		paddingLeft: 10,
-		marginLeft: 30,
-		marginRight: 30,
+	dropdown_container: {
+		borderWidth: 1,
+		borderRadius: 10,
+		marginBottom: 5,
+		marginTop: 5,
 	},
-	button: {
-		fontSize: 20,
+	button_container: { 
+		flexDirection: 'row', 
+		justifyContent: 'space-evenly', 
+	},
+	cancel_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
 		backgroundColor: 'lightgray',
-		padding: 10,
-		marginHorizontal: 10
+		borderRadius: 20,
+	},
+	cta_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#0070C0',
+		borderRadius: 20,
+	},
+	button_text: {
+		fontSize: 20,
+		textAlign: 'center',
+		padding: 4,
+		color: 'white'
 	},
 });

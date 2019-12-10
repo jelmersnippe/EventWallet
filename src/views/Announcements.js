@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import {
-    Text,
+    View,
+    StyleSheet
 } from 'react-native'
 
-import AnnouncementList from '../components/AnnouncementList'
+import { 
+    AnnouncementList, 
+    HeaderText 
+} from '../components'
 
 const announcements = [
     {
@@ -47,9 +51,29 @@ const announcements = [
 export default class Announcements extends Component {
     render() {
         return(
-            <AnnouncementList 
-                announcementData={announcements}
-            />
+            <View style={styles.container}>
+                <HeaderText text='Announcements' />
+                <AnnouncementList 
+                    announcementData={announcements}
+                />
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#F8F9FB',
+        paddingHorizontal: 3+'%'
+    },
+    header: {
+        marginVertical: 10,
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+	},
+})

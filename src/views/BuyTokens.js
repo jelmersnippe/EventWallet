@@ -1,108 +1,134 @@
 import React, { Component } from 'react'
 import {
-	Text,
-	View,
-	StyleSheet,
-	TouchableOpacity,
-	Picker,
+    Text,
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    Picker,
 } from 'react-native'
 import NumericTokenInput from '../components/NumericTokenInput'
 
-
-
-
 export default class BuyTokens extends Component {
-	constructor() {
-		super();
-		this.state = {
-			PickerValue: ''
-		}
-	}
+    constructor() {
+        super();
+        this.state = {
+            PickerValue: ''
+        }
+    }
 
-	render() {
-		return (
-			<View>
-				<Text style={styles.header}>Name of event</Text>
+    render() {
+        return (
+            <View style={styles.container}>
+
+                
+
+                <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
+                <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
+                <Text style={styles.location}>Autotron, Rosmalen</Text>
+
+                <Text style={styles.header}>Payment</Text>
+
+                <NumericTokenInput />
 
 
-				<NumericTokenInput />
+                <Text style={styles.description}>Select the payment method</Text>
+                <View style={styles.dropdown_container}>
+                    <Picker
+                        style={{ height: 50, width: '100%' }}
+                        itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ language: itemValue })
+                        }>
+                        <Picker.Item label="IDEAL" value="IDEAL" />
+                        <Picker.Item label="Paypal" value="Paypal" />
+                        <Picker.Item label="Visa" value="Visa" />
+                    </Picker>
+                </View>
 
-				<View>
-					<Picker
-						selectedValue={this.state.language}
-						style={{ height: 30, width: '80%', marginLeft: 30, marginRight: 30 }}
-						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
-						}>
-						<Picker.Item label="IDEAL" value="IDEAL" />
-						<Picker.Item label="Paypal" value="Paypal" />
-						<Picker.Item label="Visa" value="Visa" />
-					</Picker>
-				</View>
 
-				<View style={{ flexDirection: 'row', paddingLeft: 80, paddingRight: 30, paddingBottom: 10 }}>
-					<TouchableOpacity>
-						<Text style={styles.button}>Buy</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => { this.props.navigation.goBack() }}
-					>
-						<Text style={styles.button}>Cancel</Text>
-					</TouchableOpacity>
-				</View>
-			</View>
+                <View style={styles.button_container}>
+                    <TouchableOpacity style={styles.cancel_button}
+                        onPress={() => { this.props.navigation.goBack() }}
+                    >
+                        <Text style={styles.button_text}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.cta_button}>
+                        <Text style={styles.button_text}>Checkout</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
 
-		);
-	}
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-	container: {
+    container: {
 		flex: 1,
-		justifyContent: 'center',
+		paddingHorizontal: 3 + '%',
+		backgroundColor: '#F8F9FB',
 	},
 	header: {
-		fontSize: 25,
-		color: 'black',
-		paddingBottom: 10,
-		marginBottom: 10,
-		paddingLeft: 10,
-		paddingRight: 50,
-		justifyContent: 'center',
-	},
-	header2: {
-		fontSize: 23,
-		color: 'black',
+		marginVertical: 10,
+		textAlign: 'right',
+		paddingRight: 5,
+		textTransform: 'uppercase',
+		fontSize: 21,
+		borderBottomWidth: 1,
 		paddingBottom: 5,
+	},
+	description: {
+		fontSize: 20,
 		marginBottom: 5,
-		paddingLeft: 30,
-		paddingRight: 30,
+		marginLeft: 5,
 	},
-	textinput: {
-		fontSize: 20,
-		height: 45,
-		marginBottom: 15,
-		color: 'black',
-		backgroundColor: 'gray',
-		paddingLeft: 10,
-		marginLeft: 30,
-		marginRight: 30,
+    datetime: {
+        marginTop: 20,
+        color: '#80868B',
+        textTransform: 'uppercase',
+        fontSize: 12,
+    },
+    location: {
+        color: '#505155',
+        marginBottom: 15,
+        width: '90%'
+    },
+    name: {
+        fontSize: 29,
+        fontWeight: 'bold',
+        color: '#2D2D2D'
+    },
+	dropdown_container: {
+		borderWidth: 1,
+		borderRadius: 10,
+		marginBottom: 5,
+		marginTop: 5,
 	},
-	button: {
-		fontSize: 20,
-		height: 45,
-		marginLeft: 40,
-		marginRight: 40,
-		marginTop: 30,
+    button_container: { 
+		flexDirection: 'row', 
+		justifyContent: 'space-evenly', 
+		marginTop: 20 
+	},
+	cancel_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
 		backgroundColor: 'lightgray',
-		paddingLeft: 10,
-		paddingRight: 10,
-		paddingBottom: 10,
-		paddingTop: 10,
-	}
+		borderRadius: 20,
+	},
+	cta_button: {
+		height: 70,
+		width: 40 + '%',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#0070C0',
+		borderRadius: 20,
+	},
+    button_text: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+        color: 'white'
+    },
 });
-
-
-
-
-

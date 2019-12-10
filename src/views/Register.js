@@ -1,108 +1,146 @@
 import React, { Component } from 'react';
 import {
-	Platform,
 	StyleSheet,
 	Text,
 	View,
 	TextInput,
-	Button,
 	TouchableOpacity,
-	Keyboard
 } from 'react-native';
 
-export default class App extends Component {
+import {
+	HeaderText
+} from '../components'
+
+export default class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			username: '',
 			usernameError: '',
-			validatePassword: true,
 			password: '',
-			passwordError: '',
-			validatePassword: true,
+			passwordError: [],
 			email: '',
 			emailError: '',
-			validateEmail: true
 		}
 	}
 
-	validateEmail = (email) => {
-		let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-
-		this.setState({ email: email })
-
-		if (email == '') {
-			return false;
-		}
-
-		if (reg.test(email) === false) {
-			this.setState({ emailError: "Invaid email" })
-		}
-		else if (reg.test(email) === true) {
-			this.setState({ emailError: 'Valid email' });
-		}
-
-		return reg.test(email);
-	};
+	addPasswordError = (error) => {
+		this.setState(state => { 
+			const passwordError = [...state.passwordError, error];
+			
+			return {
+				passwordError,
+			}
+		})
+	}
 
 	validatePassword = (password) => {
-		let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
-
-		this.setState({ password: password })
-
-		if (password == '') {
+		if(password == ''){
+			this.addPasswordError("This field can't be empty")
 			return false;
 		}
 
-		if (reg.test(password) === false) {
-			this.setState({ passwordError: "Invalid password" })
+		// 8 characters length or more
+        // 1 digit or more
+        // 1 symbol or more
+        // 1 uppercase letter or more
+        // 1 lowercase letter or more
+
+		let length_error = 'Must be at least 8 characters'
+		let digit_error = 'Must contain a digit'
+		let uppercase_error = 'Must contain an uppercase character'
+		let lowercase_error = 'Must contain a lowercase character'
+		let symbol_error = 'Must contain a symbol: !@#$%^&* or a space'
+
+		let digit_reg = /[\d]/ // digits
+		let uppercase_reg = /[A-Z]/ // uppercase alphabet
+		let lowercase_reg = /[a-z]/ // lowercase alphabet
+		let symbol_reg = /[!@#$%^&*\s]/ // symbols: !@#%^&* and space
+
+
+		this.setState({ passwordError: [] })
+
+		let validPassword = true
+		let errors = []
+
+		if(password.length < 8){
+			validPassword = false
+			errors.push(length_error)
 		}
-		else if (reg.test(password) === true) {
-			this.setState({ passwordError: "Valid password" });
+		if(password.search(digit_reg) < 0){
+			validPassword = false
+			errors.push(digit_error)
+		}
+		if(password.search(uppercase_reg) < 0){
+			validPassword = false
+			errors.push(uppercase_error)
+		}
+		if(password.search(lowercase_reg) < 0){
+			validPassword = false
+			errors.push(lowercase_error)
+		}
+		if(password.search(symbol_reg) < 0){
+			validPassword = false
+			errors.push(symbol_error)
 		}
 
-		return reg.test(password);
+		if(!validPassword){
+			this.addPasswordError('Invalid password');
+			errors.forEach(error => {
+				this.addPasswordError(error)
+			})
+		}
+
+		return validPassword;
 	};
 
 	validateUsername = (username) => {
-		let reg = /^[a-zA-Z0-9]{5,}$/
-
-		this.setState({ username: username })
-
 		if (username == '') {
+			this.setState({ usernameError: "This field can't be empty" })
 			return false;
 		}
 
-		if (reg.test(username) === false) {
-			this.setState({ usernameError: "Invalid username" })
-		}
-		else if (reg.test(username) === true) {
-			this.setState({ usernameError: "Valid username" })
+		let reg = /^[a-zA-Z0-9]{5,}$/
+		this.setState({ usernameError: '' })
+
+		if (!reg.test(username)) {
+			this.setState({ usernameError: "Invalid username\nMust be at least 6 characters\nOnly alphanumeric characters are allowed" })
+			return false;
 		}
 
-		return reg.test(username);
+		return true;
+	};
+
+
+
+	validateEmail = (email) => {
+		if (email == '') {
+			this.setState({ emailError: "This field can't be empty" })
+			return false;
+		}
+
+		let reg = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/
+		this.setState({ emailError: '' })
+
+		if (!reg.test(email)) {
+			this.setState({ emailError: "Invalid email.\nFollow the format 'johndoe@example.com'" })
+			return false;
+		}
+
+		return true;
 	};
 
 	validate = () => {
-		if (this.state.username == '' || this.state.password == '' || this.state.email == '') {
-			alert('One or more fields have not been filled out');
-			return;
-		}
+		let validUsername = this.validateUsername(this.state.username)
+		let validPassword = this.validatePassword(this.state.password)
+		let validEmail = this.validateEmail(this.state.email)
 
-		if (this.validateUsername(this.state.username) === false) {
-			alert('Invalid input, check input comments');
-			return;
+		if(validUsername && validEmail && validPassword){
+			alert('Thank you, you registered successfully');
+		} 
+		else {
+			alert('Invalid input. Please correct the comments')
 		}
-		else if (this.validatePassword(this.state.password) === false) {
-			alert('Invalid input, check input comments');
-			return;
-		}
-		else if (this.validateEmail(this.state.email) === false) {
-			alert('Invalid input, check input comments');
-			return;
-		}
-
-		alert('Thank you, you registered successfully');
 	}
 
 
@@ -111,48 +149,63 @@ export default class App extends Component {
 		return (
 			<View style={styles.container}>
 
+			    <Text style={styles.header}>FestiFaggot</Text>
+
+                <HeaderText text='Register' />
+
 				<TextInput
 					placeholder="Username"
-					style={styles.textstyle}
-					onChangeText={username => this.validateUsername(username)}
+					style={styles.input_text}
+					onChangeText={username => this.setState({username: username})}
 					value={this.state.username}
 				/>
-				<Text style={{ color: 'red', textAlign: 'center' }}>
-					{this.state.usernameError}
-				</Text>
+
+                {this.state.usernameError != '' &&
+					<Text style={{ color: 'red', textAlign: 'center' }}>
+						{this.state.usernameError}
+					</Text>
+				}
 
 				<TextInput
 					placeholder="Password"
-					style={styles.textstyle}
+					style={styles.input_text}
 					secureTextEntry={true}
-					onChangeText={password => this.validatePassword(password)}
+					onChangeText={password => this.setState({password: password})}
 					value={this.state.password}
 				/>
-				<Text style={{ color: 'red', textAlign: 'center' }}>
-					{this.state.passwordError}
-				</Text>
+
+				<View>
+					{this.state.passwordError.map(item => {
+						return(
+							<Text style={{ color: 'red', textAlign: 'center' }}>{item}</Text>
+						)	
+					})}
+				</View>
 
 				<TextInput
 					placeholder="Email"
-					style={styles.textstyle}
-					onChangeText={email => this.validateEmail(email)}
+					style={styles.input_text}
+					onChangeText={email => this.setState({email: email})}
 					value={this.state.email}
 				/>
+
 				<Text style={{ color: 'red', textAlign: 'center' }}>
 					{this.state.emailError}
 				</Text>
 
-
-				<TouchableOpacity
+				<TouchableOpacity 
+					style={styles.button}
 					onPress={this.validate}
-					style={{ backgroundColor: 'red', padding: 10, width: 150 }}
 				>
-					<Text style={{
-						color: 'white', textAlign: 'center',
-						fontSize: 20, fontWeight: 'bold'
-					}}>Submit</Text>
+					<Text style={styles.button_text}>Register</Text>
 				</TouchableOpacity>
 
+				<View style={{marginTop: 15, flexDirection: 'row', justifyContent: 'center'}}>
+					<Text style={{fontSize: 18}}>Already have an account? </Text>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+						<Text style={{fontSize: 18, textDecorationLine: 'underline'}}>Log in</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
@@ -161,11 +214,36 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+		paddingHorizontal: 5+'%',
 	},
-	textstyle: {
-		borderWidth: 1, borderColor: '#ccc',
-		margin: 10, padding: 10, width: '90%'
-	}
+	input_text: {
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		margin: 15,
+		padding: 10,
+		width: '90%',
+	},
+	header: {
+	    fontSize: 30,
+	    marginBottom: 10,
+	    textAlign: 'center'
+	},
+	button: {
+	    borderRadius: 15,
+	    backgroundColor: '#F6CF3A',
+	    padding: 10,
+	    width: 150,
+	    width: '90%',
+	    margin: 15,
+	    borderColor: 'black',
+	    borderWidth: 1,
+	    color: 'black'
+	},
+	button_text: {
+		textAlign: 'center',
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
 });
