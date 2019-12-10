@@ -6,15 +6,16 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import HeaderText from '../components/HeaderText'
 
 export default class WalletLink extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text style={styles.header}>Wallet Link</Text>
+                <HeaderText text='Wallet Link' />
                 <Text style={styles.content}>U73A9bf27Jkr</Text>
 
-                <Text style={styles.header}>QR Code</Text>
+				<HeaderText text='QR Code' />
                 <Image 
                     source={{uri:'https://chart.googleapis.com/chart?cht=qr&chl=U73A9bf27Jkr&chs=180x180&choe=UTF-8&chld=L|2'}}
                     style={styles.qr_code}  
