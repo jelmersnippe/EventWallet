@@ -4,10 +4,12 @@ import {
 	StyleSheet,
 } from 'react-native'
 import { createFilter } from 'react-native-search-filter'
-
-import UserList from '../components/UserList'
-import SearchBar from '../components/SearchBar'
 import { ScrollView } from 'react-native-gesture-handler'
+
+import { 
+	UserList, 
+	SearchBar 
+} from '../components'
 
 const users = [
 	{

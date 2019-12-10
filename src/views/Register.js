@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-	Platform,
 	StyleSheet,
 	Text,
 	View,
@@ -8,7 +7,7 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
-export default class App extends Component {
+export default class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

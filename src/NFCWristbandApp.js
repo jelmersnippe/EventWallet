@@ -5,7 +5,20 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, WalletLink, BuyTokens, Announcements, Content, FriendOverview, ShareTokens } from './views'
+import { 
+    AuthLoading, 
+    Login, 
+    Register, 
+    ForgotPassword, 
+    EventOverview, 
+    Transactions, 
+    WalletLink, 
+    BuyTokens, 
+    Announcements, 
+    Content, 
+    FriendOverview, 
+    ShareTokens 
+} from './views'
 
 const activeTabColor = 'tomato'
 const inactiveTabColor = 'gray'
