@@ -17,6 +17,13 @@ const transactions = [
         amount: '+10',
         datetime: '24/07 19:23'
     },
+    {
+        id: 2,
+        sender: 'Henk',
+        receiver: 'Maarten',
+        amount: '-10',
+        datetime: '24/07 19:23'
+    },
 ];
 
 export default class Transactions extends Component {
@@ -31,8 +38,9 @@ export default class Transactions extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <View style={styles.cta_button}>
-                        <Text style = { styles.cta_button_text }>You have {this.state.event.amount} tokens</Text>
+                    <View style={styles.amount_text_button}>
+                        <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
+
                     </View>
                     
                     <TouchableOpacity
@@ -40,14 +48,15 @@ export default class Transactions extends Component {
                         onPress = {() => {this.props.navigation.navigate('BuyTokens')}}
                     >
                         <Text style = { styles.cta_button_text}>Buy tokens</Text>
-                        <Icon name='angle-right' size={25} color='black' />
+                        <Icon name='angle-right' size={35} color='black' />
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity
+                <TouchableOpacity style = {styles.wallet_button}
                     onPress = {() => {this.props.navigation.navigate('WalletLink')}}
                 >
-                    <Text style={styles.header2}>Wallet link</Text>
+                    <Text style={styles.wallet_button_text}>Wallet link</Text>
+                    <Icon name='angle-right' size={35} color='black' />
                 </TouchableOpacity>
 
                 <Text style={styles.header2}>Transaction History</Text>
@@ -85,13 +94,51 @@ const styles = StyleSheet.create({
         width: 40+'%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 15,
         backgroundColor: 'white',
         borderRadius: 20,
+        flex: 1,
+        margin: 15,
     },
     cta_button_text: {
         fontSize: 20,
         textAlign: 'center',
         padding: 4,
+        marginRight: 10,
+    },
+    amount_text_button: {
+        height: 70,
+        width: 40+'%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 15,
+        backgroundColor: '#F8F9Fb',
+        borderRadius: 10,
+        flex: 1,
+        margin: 15
+    },
+    amount_text: {
+        fontSize: 24,
+        textAlign: 'center',
+        padding: 4,
+    },
+    wallet_button: {
+        flexDirection: 'row',
+        height: 50,
+        width: 94+'%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 15,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        marginLeft: 12,
+        //borderWidth: 1,
+        //borderColor: 'black',
+    },
+    wallet_button_text: {
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 4,
+        marginRight: 10,
     }
+
 });
