@@ -16,9 +16,9 @@ class EventItem extends Component {
                 onPress={() => this.props.navigation.navigate('Transactions', {item: this.props.item})}
             >
                 <View style={styles.info}>
-                    <Text style={styles.datetime}>Zaterdag 14 dec 14:00 - 01:00</Text>
+                    <Text style={styles.datetime}>{this.props.item.datetime}</Text>
                     <Text style={styles.name}>{this.props.item.name}</Text>
-                    <Text style={styles.location}>Autotron, Rosmalen</Text>
+                    <Text style={styles.location}>{this.props.item.location}</Text>
                 </View>
                 <View style={styles.tokens}>
                     <Icon name='right' size={30} color="#80868B" style={{padding:5}} />
