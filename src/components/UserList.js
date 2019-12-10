@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { 
     View,
-    Text,
-    FlatList,
     StyleSheet
 } from 'react-native'
 
 import UserItem from './UserItem'
+import HeaderText from './HeaderText'
 
 export default class UserList extends Component {
     render() {
         return (
             <View style={styles.container}>
-				<Text style={styles.title}>{this.props.headerText}</Text>
+
+				<HeaderText text={this.props.headerText} />
                 {this.props.data.map(
                     (item) => {
                         return <UserItem item={item}/>
@@ -28,12 +28,4 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 5+'%',
     },
-    title: {
-        marginVertical: 10,
-        textAlign: 'right',
-        textTransform: 'uppercase',
-        fontSize: 20,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-    }
 })
