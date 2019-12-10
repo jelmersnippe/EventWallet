@@ -17,48 +17,6 @@ const transactions = [
         amount: '+10',
         datetime: '24/07 19:23'
     },
-    {
-        id: 2,
-        sender: 'Pieter',
-        receiver: 'Sander',
-        amount: '-5',
-        datetime: '21/07 19:23'
-    },
-    {
-        id: 3,
-        sender: 'Jelmer',
-        receiver: 'Sander',
-        amount: '-5',
-        datetime: '21/07 19:23'
-    },
-    {
-        id: 4,
-        sender: 'Jan',
-        receiver: 'Pedro',
-        amount: '+11',
-        datetime: '21/07 19:23'
-    },
-    {
-        id: 5,
-        sender: 'Pieter',
-        receiver: 'Sander',
-        amount: '+3',
-        datetime: '21/07 19:23'
-    },
-    {
-        id: 6,
-        sender: 'Pieter',
-        receiver: 'Sander',
-        amount: '-4',
-        datetime: '21/07 19:23'
-    },
-    {
-        id: 7,
-        sender: 'Pieter',
-        receiver: 'Sander',
-        amount: '+6',
-        datetime: '21/07 19:23'
-    }
 ];
 
 export default class Transactions extends Component {

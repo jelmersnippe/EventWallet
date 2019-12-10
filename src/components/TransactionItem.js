@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 export default class TransactionItem extends Component {
     render() {
         return (
+            <View>
             <View style={styles.container}>
                 <Text style={styles.datetime}>{this.props.datetime}</Text>
                 <View style={styles.transaction_info}>
@@ -28,6 +29,25 @@ export default class TransactionItem extends Component {
                     <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 10}} />
                 </View>
             </View>
+            <View style={styles.container}>
+            <Text style={styles.datetime}>{this.props.datetime}</Text>
+            <View style={styles.transaction_info}>
+                <View style={styles.user_info}>
+                    <View style={styles.user_info_title}>
+                        <Text>From:</Text>
+                        <Text>To:</Text>
+                    </View>
+
+                    <View style={styles.user_info_content}>
+                        <Text>{this.props.sender}</Text>
+                        <Text>{this.props.receiver}</Text>
+                    </View>
+                </View>
+                <Text style={styles.amount}>{this.props.amount}</Text>
+                <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 10}} />
+            </View>
+        </View>
+        </View>
         );
     }
 }
