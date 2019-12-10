@@ -1,11 +1,3 @@
-import React, { Component } from 'react'
-import { 
-    View, 
-	Text,
-    TextInput,
-    Button,
-    StyleSheet,
-} from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 class LoginForm extends Component {
@@ -17,21 +9,42 @@ class LoginForm extends Component {
     render() {
         return (
             <View style={styles.container}>
-				<Text>Login page</Text>
-                <TextInput 
+                <Text style={styles.header1}>FestiFaggot</Text>
+
+				<Text style={styles.header2}>Login page</Text>
+                <TextInput
                     style={styles.input}
                     placeholder='Username'
-                    placeholderTextColor='rgba(255,255,255,0.8)'
+                    //placeholderTextColor='rgba(255,255,255,0.8)'
                 />
-                <TextInput 
+                <TextInput
                     style={styles.input}
                     placeholder='Password'
-                    placeholderTextColor='rgba(255,255,255,0.8)'
+                    //placeholderTextColor='rgba(255,255,255,0.8)'
                 />
-                <Button  // Switch to a TouchableOpacity item so styling can be modified.
-                    title='Login'
-                    onPress={() => { this.login() }}
-                />
+
+				<TouchableOpacity style={styles.button}
+					onPress={this.validate}
+
+				>
+					<Text style={{textAlign: 'center', fontSize: 20, fontWeight: 'bold', marginBottom: 1, }}>
+					    Login
+					</Text>
+				</TouchableOpacity>
+
+                <View style={styles.button2}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Register')}
+                    >
+                        <Text style={styles.text_button2}>Register</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('ForgotPassword')}
+                    >
+                        <Text style={styles.text_button2}>Forgot password?</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         );
     }
@@ -39,19 +52,63 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: 100+'%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20
-    },
+	    flex: 1,
+		justifyContent: 'center',
+		backgroundColor: '#F5FCFF',
+		paddingHorizontal: 5+'%',
+		backgroundColor: '#F5FCFF',
+
+	},
     input: {
-        width: 80+'%',
-        marginVertical: 5,
-        backgroundColor: 'rgb(150, 150, 150)',
-        borderColor: 'rgb(200, 200, 200)',
-        borderWidth: StyleSheet.hairlineWidth
-    }
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		margin: 15,
+		padding: 10,
+		width: '90%',
+    },
+    header1: {
+	    fontSize: 30,
+	    marginBottom: 10,
+	    textAlign: 'center'
+    },
+    header2: {
+        marginVertical: 10,
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+    },
+    button: {
+        borderRadius: 15,
+        backgroundColor: '#F6CF3A',
+        padding: 10,
+        width: 150,
+        width: '90%',
+        margin: 15,
+        borderColor: 'black',
+        borderWidth: 1,
+        color: 'black',
+        //marginBottom: 1,
+        //paddingTop: 15
+   	},
+   	button2: {
+   	    flexDirection: 'row',
+   	    width: '90%',
+   	    justifyContent: 'space-between',
+   	    marginLeft: 18,
+   	    //fontSize: 30,
+   	    //alignItems: 'center',
+   	    //textAlign: 'center'
+   	},
+   	text_button2: {
+   	    fontSize: 18,
+   	    borderBottomColor: 'black',
+   	    borderBottomWidth: 1,
+   	    marginTop: 15
+   	}
 });
 
 export default withNavigation(LoginForm)
-  
