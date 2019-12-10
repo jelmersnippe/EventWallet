@@ -18,16 +18,6 @@ export default class UserList extends Component {
                         return <UserItem item={item}/>
                     }
                 )}
-                {/* <FlatList
-
-
-                    data={this.props.friendData}
-                    renderItem={({ item }) => (
-                        <UserItem
-                            item={item}
-                        />
-                    )}
-                /> */}
             </View>
         );
     }
