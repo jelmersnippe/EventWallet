@@ -11,43 +11,44 @@ export default class TransactionItem extends Component {
     render() {
         return (
             <View>
-            <View style={styles.container}>
-                <Text style={styles.datetime}>{this.props.datetime}</Text>
-                <View style={styles.transaction_info}>
-                    <View style={styles.user_info}>
-                        <View style={styles.user_info_title}>
-                            <Text>From:</Text>
-                            <Text>To:</Text>
+                <View style={styles.container}>
+                    <Text style={styles.datetime}>{this.props.datetime}</Text>
+                    <View style={styles.transaction_info}>
+                        <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
+                            <View style={styles.user_info_title}>
+                                <Icon name='arrow-right' size={25} color='green' style={{padding: 9}} />
+                            </View>
+
+                            <Text style={styles.user_info_content}>{this.props.receiver}</Text>
                         </View>
 
-                        <View style={styles.user_info_content}>
-                            <Text>{this.props.sender}</Text>
-                            <Text>{this.props.receiver}</Text>
+                        <View style={{flexDirection: 'row', flex: 2}}>
+                            <Text style={styles.amount}>{this.props.amount}</Text>
+                            <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 9}} />
                         </View>
                     </View>
-                    <Text style={styles.amount}>{this.props.amount}</Text>
-                    <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 10}} />
                 </View>
-            </View>
-            <View style={styles.container}>
-            <Text style={styles.datetime}>{this.props.datetime}</Text>
-            <View style={styles.transaction_info}>
-                <View style={styles.user_info}>
-                    <View style={styles.user_info_title}>
-                        <Text>From:</Text>
-                        <Text>To:</Text>
-                    </View>
 
-                    <View style={styles.user_info_content}>
-                        <Text>{this.props.sender}</Text>
-                        <Text>{this.props.receiver}</Text>
+
+                <View style={styles.container}>
+                    <Text style={styles.datetime}>{this.props.datetime}</Text>
+                    <View style={styles.transaction_info}>
+                        <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
+                            <View style={styles.user_info_title}>
+                                 <Icon name='arrow-left' size={25} color='red' style={{padding: 9}} />
+                            </View>
+
+                            <Text style={styles.user_info_content}>{this.props.receiver}</Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', flex: 2}}>
+                            <Text style={styles.amount}>{this.props.amount}</Text>
+                            <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 9}} />
+                        </View>
                     </View>
                 </View>
-                <Text style={styles.amount}>{this.props.amount}</Text>
-                <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 10}} />
+
             </View>
-        </View>
-        </View>
         );
     }
 }
@@ -72,19 +73,29 @@ const styles = StyleSheet.create({
         width: 100+'%',
     },
     user_info: {
-        flex: 8,
+        flex: 1,
         flexDirection: 'row',
         margin: 5,
     },
     user_info_title: {
-        alignItems: 'flex-end',
-        marginRight: 5,
+        flex: 1,
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingRight: 10,
+        //flex: 2,
+    },
+    user_info_content: {
+        flex: 6,
+        fontSize: 20,
+        textAlignVertical: 'center',
     },
     amount: {
         flex: 2,
         textAlignVertical: 'center',
         textAlign: 'right',
-        paddingRight: 7,
+        marginRight: 7,
         fontSize: 20,
+        flexDirection: 'row'
     }
 })
