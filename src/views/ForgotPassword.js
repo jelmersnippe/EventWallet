@@ -7,6 +7,10 @@ import {
 	TextInput,
 } from 'react-native';
 
+import {
+    HeaderText
+} from '../components'
+
 export default class ForgotPassword extends Component {
     passwordResetAction () {
 
@@ -17,11 +21,11 @@ export default class ForgotPassword extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.header1}>FestiFaggot</Text>
-                <Text style={styles.header2}>Forgot password?</Text>
+                <HeaderText text='Forgot password?' />
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
 
-                <TextInput style={styles.textinput} placeholder="Email address"/>
+                <TextInput style={styles.input_text} placeholder="Email address"/>
 
                 <TouchableOpacity
                     onPress={() => {
@@ -48,15 +52,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
-    header2: {
-        marginVertical: 10,
-        textAlign: 'right',
-        paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-    },
     text: {
         fontSize: 15,
         color: 'black',
@@ -65,7 +60,7 @@ const styles = StyleSheet.create({
         width: '90%',
         margin: 15
     },
-    textinput: {
+    input_text: {
         fontSize: 20,
         height: 45,
         marginBottom: 25,

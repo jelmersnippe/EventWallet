@@ -7,6 +7,10 @@ import {
     TextInput,
 } from 'react-native'
 
+import {
+    HeaderText
+} from '../components'
+
 export default class Login extends Component {
     login() {
         // Make call to validate login attempt, for now just redirect to app
@@ -18,7 +22,7 @@ export default class Login extends Component {
             <View style={styles.container}>
                 <Text style={styles.header1}>FestiFaggot</Text>
 
-                <Text style={styles.header2}>Login page</Text>
+                <HeaderText text='Login' />
 
                 <TextInput
                     style={styles.input}
@@ -75,15 +79,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginBottom: 10,
         textAlign: 'center'
-    },
-    header2: {
-        marginVertical: 10,
-        textAlign: 'right',
-        paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
     },
     button: {
         borderRadius: 15,
