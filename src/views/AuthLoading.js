@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
 import { 
-    ActivityIndicator, 
-    StatusBar,
+    View,
+    Text,
+    TouchableOpacity,
     StyleSheet,
-    Button,
-    View
 } from 'react-native'
 
 
 export default class AuthLoading extends Component {
     render() {
         return (
-            <View styles={styles.container}>
-                <ActivityIndicator />
-                <StatusBar barStyle='default' />
-                <Button
-                    styles={styles.button}
-                    title='To auth stack'
+            <View style={styles.container}>
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => this.props.navigation.navigate('Auth')}
-                />
-                <Button
-                    styles={styles.button}
-                    title='To app stack'
+                >
+                    <Text style={styles.button_text}>To Authentication Stack</Text>
+
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => this.props.navigation.navigate('App')}
-                />
+                >
+                    <Text style={styles.button_text}>To EventWallet</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -35,10 +35,18 @@ const styles = StyleSheet.create({
       width: 100+'%',
       height: 100+'%',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: '#F6CF3A',
     },
     button: {
-        marginBottom: 10, 
-        backgroundColor: 'rgb(0,0,0)'
+        width: 80+'%',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: 'white',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    button_text: {
+        color: 'white'
     }
   });

@@ -18,10 +18,10 @@ export default class SearchBar extends Component {
 
     searchUpdated(term) {
         this.setState({searchTerm: term})
-        this.props.callback(this.props.list.filter(createFilter(term, this.props.keys))) 
+        this.props.callback(this.props.list.filter(createFilter(term, this.props.keys)), term) 
 
         if(term == ''){
-            this.props.callback([])
+            this.props.callback([], term)
         }
     }
 

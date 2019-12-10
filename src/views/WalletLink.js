@@ -7,19 +7,24 @@ import {
     StyleSheet
 } from 'react-native'
 
+import { HeaderText } from '../components'
+
 export default class WalletLink extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text>Wallet Link: U73A9bf27Jkr</Text>
-                <View style={styles.code_container}>
-                    <Image 
-                        source={{uri:'https://chart.googleapis.com/chart?cht=qr&chl=U73A9bf27Jkr&chs=180x180&choe=UTF-8&chld=L|2'}}
-                        style={{width: 100+'%', height: 100+'%'}}    
-                    />
-                </View>
-                <TouchableOpacity style={styles.cta_button}>
-                    <Text>Create new link</Text>
+                <HeaderText text='Wallet Link' />
+                <Text style={styles.content}>U73A9bf27Jkr</Text>
+
+				<HeaderText text='QR Code' />
+                <Image 
+                    source={{uri:'https://chart.googleapis.com/chart?cht=qr&chl=U73A9bf27Jkr&chs=180x180&choe=UTF-8&chld=L|2'}}
+                    style={styles.qr_code}  
+                    resizeMode={'contain'}  
+                />
+
+                <TouchableOpacity style={{alignItems: 'center'}}>
+                    <Text style={styles.cta_button}>Create new link</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -29,25 +34,43 @@ export default class WalletLink extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: 100+'%',
-        height: 100+'%',
         justifyContent: "flex-start",
-        alignItems: 'center',
         backgroundColor: '#F5FCFF',
-        padding: 20,
-        paddingBottom: 180
+        paddingHorizontal: 3+'%',
     },
-    code_container: {
-        width: 100+'%',
-        backgroundColor: 'white',
-        padding: 10,
+    header: {
         marginVertical: 10,
-        borderWidth: 1
+        textAlign: 'right',
+        paddingRight: 5,
+        textTransform: 'uppercase',
+        fontSize: 21,
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+	},
+	content: {
+		fontSize: 25,
+		marginLeft: 5,
+		fontWeight: 'bold'
+	},
+    qr_code: {
+        width: 100+'%',
+        height: 50+'%',
+        marginBottom: 15,
     },
     cta_button: {
+        height: 70,
         width: 70+'%',
         padding: 10,
+
         borderWidth: 1,
-        alignItems: 'center'
+        borderRadius: 20,
+
+        alignItems: 'center',
+        textAlignVertical: 'center',
+        textAlign: 'center',
+        fontSize: 20,
+
+        backgroundColor: '#0070C0',
+        color: 'white',
     },
 })

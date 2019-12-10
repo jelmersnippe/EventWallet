@@ -1,42 +1,57 @@
 import React, { Component } from 'react'
 import {
 	View,
-	TextInput,
 	StyleSheet
 } from 'react-native'
 
-import EventList from '../components/EventList'
-import SearchBar from '../components/SearchBar'
+import { 
+	EventList, 
+	SearchBar 
+} from '../components'
 
 
 const events = [
 	{
 		name: 'Shockerz - The Raw Gathering',
 		amount: '8',
+		location: 'Autotron, Rosmalen',
+		datetime: 'Zaterdag 14 dec 14:00 - 01:00'
 	},
 	{
-		name: 'Festival 2',
+		name: 'FaggotPop',
 		amount: '20',
+		location: 'Dikke zwans',
+		datetime: 'Zondag 15 dec 15:00 - 02:00'
 	},
 	{
-		name: 'Festival 3',
+		name: 'GayPop - Spread Aids',
 		amount: '30',
+		location: 'Maaskantje',
+		datetime: 'Maandag 16 dec 16:00 - 03:00'
 	},
 	{
-		name: 'Festival 4',
+		name: 'Blyat',
 		amount: '5',
+		location: 'Moskou',
+		datetime: 'Dinsdag 17 dec 17:00 - 04:00'
 	},
 	{
-		name: 'Festival 5',
+		name: 'Priem - Hardcore will never die',
 		amount: '12',
+		location: 'Schijndel',
+		datetime: 'Woensdag 18 dec 18:00 - 05:00'
 	},
 	{
-		name: 'Festival 6',
+		name: 'Blyat69',
 		amount: '23',
+		location: 'Finland',
+		datetime: 'Donderdag 19 dec 19:00 - 06:00'
 	},
 	{
-		name: 'Festival 7',
+		name: 'Berends4Berends - Sing Alone',
 		amount: '50',
+		location: 'Autotron, Rosmalen',
+		datetime: 'Vrijdag 20 dec 20:00 - 07:00'
 	},
 ];
 
@@ -50,9 +65,9 @@ export default class EventOverview extends Component {
         }
     }
 	
-	updateFilteredList = (newFilteredList) => {
-		console.log(newFilteredList)
+	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredEvents: newFilteredList})
+		this.setState({searchTerm: newSearchTerm})
 	}
 
 
@@ -67,11 +82,10 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<SearchBar keys={['name']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
+				<SearchBar keys={['name', 'location', 'datetime']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
 				
 				<EventList
-					// if (filteredEvents) filteredEvents, else events
-					eventData={this.state.filteredEvents}
+                    eventData={this.state.searchTerm != '' ? this.state.filteredEvents : events}
 				/>
 			</View >
 		);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-	Platform,
 	StyleSheet,
 	Text,
 	View,
@@ -8,7 +7,11 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
-export default class App extends Component {
+import {
+	HeaderText
+} from '../components'
+
+export default class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -43,7 +46,7 @@ export default class App extends Component {
         // 1 uppercase letter or more
         // 1 lowercase letter or more
 
-		let length_error = 'Must be atleast 8 characters'
+		let length_error = 'Must be at least 8 characters'
 		let digit_error = 'Must contain a digit'
 		let uppercase_error = 'Must contain an uppercase character'
 		let lowercase_error = 'Must contain a lowercase character'
@@ -101,7 +104,7 @@ export default class App extends Component {
 		this.setState({ usernameError: '' })
 
 		if (!reg.test(username)) {
-			this.setState({ usernameError: "Invalid username\nMust be atleast 6 characters\nOnly alphanumeric characters allowed" })
+			this.setState({ usernameError: "Invalid username\nMust be at least 6 characters\nOnly alphanumeric characters are allowed" })
 			return false;
 		}
 
@@ -146,54 +149,63 @@ export default class App extends Component {
 		return (
 			<View style={styles.container}>
 
+			    <Text style={styles.header}>FestiFaggot</Text>
+
+                <HeaderText text='Register' />
+
 				<TextInput
 					placeholder="Username"
-					style={styles.textstyle}
+					style={styles.input_text}
 					onChangeText={username => this.setState({username: username})}
 					value={this.state.username}
 				/>
-				<Text style={{ color: 'red', textAlign: 'center' }}>
-					{this.state.usernameError}
-				</Text>
+
+                {this.state.usernameError != '' &&
+					<Text style={{ color: 'red', textAlign: 'center' }}>
+						{this.state.usernameError}
+					</Text>
+				}
 
 				<TextInput
 					placeholder="Password"
-					style={styles.textstyle}
+					style={styles.input_text}
 					secureTextEntry={true}
 					onChangeText={password => this.setState({password: password})}
 					value={this.state.password}
 				/>
+
 				<View>
-					{
-						this.state.passwordError.map(item => {
-							return(
-								<Text style={{ color: 'red', textAlign: 'center' }}>{item}</Text>
-							)	
-						})
-					}
+					{this.state.passwordError.map(item => {
+						return(
+							<Text style={{ color: 'red', textAlign: 'center' }}>{item}</Text>
+						)	
+					})}
 				</View>
 
 				<TextInput
 					placeholder="Email"
-					style={styles.textstyle}
+					style={styles.input_text}
 					onChangeText={email => this.setState({email: email})}
 					value={this.state.email}
 				/>
+
 				<Text style={{ color: 'red', textAlign: 'center' }}>
 					{this.state.emailError}
 				</Text>
 
-
-				<TouchableOpacity
+				<TouchableOpacity 
+					style={styles.button}
 					onPress={this.validate}
-					style={{ backgroundColor: 'red', padding: 10, width: 150 }}
 				>
-					<Text style={{
-						color: 'white', textAlign: 'center',
-						fontSize: 20, fontWeight: 'bold'
-					}}>Submit</Text>
+					<Text style={styles.button_text}>Register</Text>
 				</TouchableOpacity>
 
+				<View style={{marginTop: 15, flexDirection: 'row', justifyContent: 'center'}}>
+					<Text style={{fontSize: 18}}>Already have an account? </Text>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+						<Text style={{fontSize: 18, textDecorationLine: 'underline'}}>Log in</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
@@ -202,11 +214,36 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+		paddingHorizontal: 5+'%',
 	},
-	textstyle: {
-		borderWidth: 1, borderColor: '#ccc',
-		margin: 10, padding: 10, width: '90%'
-	}
+	input_text: {
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		margin: 15,
+		padding: 10,
+		width: '90%',
+	},
+	header: {
+	    fontSize: 30,
+	    marginBottom: 10,
+	    textAlign: 'center'
+	},
+	button: {
+	    borderRadius: 15,
+	    backgroundColor: '#F6CF3A',
+	    padding: 10,
+	    width: 150,
+	    width: '90%',
+	    margin: 15,
+	    borderColor: 'black',
+	    borderWidth: 1,
+	    color: 'black'
+	},
+	button_text: {
+		textAlign: 'center',
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
 });
