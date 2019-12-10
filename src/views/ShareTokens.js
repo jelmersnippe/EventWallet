@@ -9,9 +9,6 @@ import {
 
 import NumericTokenInput from '../components/NumericTokenInput'
 
-
-
-
 export default class ShareTokens extends Component {
 	constructor() {
 		super();
@@ -27,10 +24,10 @@ export default class ShareTokens extends Component {
 			<View style={styles.container}>
 
 				<Text style={styles.header}>Receiver</Text>
-				<Text style={styles.description}>You selected {this.state.friend ? this.state.friend.name : 'loading'} to share tokens with.</Text>
+				<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
 
 				<Text style={styles.header}>Wallet</Text>
-				<Text style={styles.description}>Select the wallet of the event you want to share:</Text>
+				<Text style={styles.description}>Select the wallet of the event you want to share tokens for:</Text>
 				<View style={styles.dropdown_container}>
 					<Picker
 						selectedValue={this.state.value}
@@ -45,24 +42,7 @@ export default class ShareTokens extends Component {
 				</View>
 
     			<Text style={styles.header}>Balance</Text>
-  			    <Text style = { styles.tokenammount_text }>You have in total {this.props.navigation.getParam('amount')} tokens</Text>
-
-				
-				{/* <View style={styles.dropdown_container}>
-					<Picker
-						style={{ width: '100%' }}
-						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ language: itemValue })
-						}>
-						<Picker.Item label="Berend101" value="wallet1" />
-						<Picker.Item label="Berend102" value="wallet2" />
-						<Picker.Item label="Berend103" value="wallet3" />
-					</Picker>
-				</View> */}
-
-                
-
-
+  			    <Text style = { styles.tokenammount_text }>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
 
         	<NumericTokenInput />
 
@@ -96,7 +76,11 @@ const styles = StyleSheet.create({
         fontSize: 21,
         borderBottomWidth: 1,
         paddingBottom: 5,
-
+	},
+	receiver: {
+		fontSize: 25,
+		marginLeft: 5,
+		fontWeight: 'bold'
 	},
 	description: {
 	    fontSize: 20,
@@ -106,7 +90,6 @@ const styles = StyleSheet.create({
 	header2: {
 		fontSize: 23,
 		color: 'black',
-		//marginBottom: 5,
 	},
 	textinput: {
 		fontSize: 20,
@@ -121,13 +104,6 @@ const styles = StyleSheet.create({
 	    textAlign: 'left',
 	    marginBottom: 15,
 	    marginLeft: 5,
-	    //borderColor: 'black',
-	    //borderWidth: 1,
-	    //padding: 10,
-	    //marginBottom: 5,
-	    //marginTop: 5,
-	    //borderRadius: 10,
-	    //backgroundColor: 'white'
 	},
    button: {
        flex: 1,
@@ -136,7 +112,7 @@ const styles = StyleSheet.create({
        justifyContent: 'center',
        alignItems: 'center',
        marginHorizontal: 15,
-       backgroundColor: 'gray',
+       backgroundColor: 'lightgray',
        borderRadius: 20,
        marginVertical: 30,
    },
@@ -168,7 +144,5 @@ const styles = StyleSheet.create({
 	   borderRadius: 10,
 	   marginBottom: 5,
 	   marginTop: 5,
-	   //paddingTop: 5,
    }
-
 });
