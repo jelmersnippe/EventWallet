@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {
 	View,
-	TextInput,
 	StyleSheet
 } from 'react-native'
 
-import EventList from '../components/EventList'
-import SearchBar from '../components/SearchBar'
+import { 
+	EventList, 
+	SearchBar 
+} from '../components'
 
 
 const events = [

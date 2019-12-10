@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import {
     View,
-    Text,
     StyleSheet
 } from 'react-native'
 
-import AnnouncementList from '../components/AnnouncementList'
+import { 
+    AnnouncementList, 
+    HeaderText 
+} from '../components'
 
 const announcements = [
     {
@@ -50,7 +52,7 @@ export default class Announcements extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text style={styles.header}>Announcements</Text>
+                <HeaderText text='Announcements' />
                 <AnnouncementList 
                     announcementData={announcements}
                 />

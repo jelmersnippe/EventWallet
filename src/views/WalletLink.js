@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
-import HeaderText from '../components/HeaderText'
+
+import { HeaderText } from '../components'
 
 export default class WalletLink extends Component {
     render() {
