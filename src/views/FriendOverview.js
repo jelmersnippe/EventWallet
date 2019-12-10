@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import {
-	Text,
 	View,
 	StyleSheet,
-	TouchableOpacity,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5'
+} from 'react-native'
+import { createFilter } from 'react-native-search-filter'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import FriendList from '../components/FriendList'
-import SearchBar from '../components/SearchBar'
+import { 
+	UserList, 
+	SearchBar 
+} from '../components'
 
 const users = [
 	{
-		name: 'berend101',
+		name: 'AnaalAdmiraal69',
 		status: 'pending'
 	},
 	{
@@ -29,7 +30,7 @@ const users = [
 	},
 	{
 		name: 'berend105',
-		status: 'unknown'
+		status: 'pending'
 	},
 	{
 		name: 'berend106',
@@ -37,18 +38,18 @@ const users = [
 	},
 	{
 		name: 'berend107',
-		status: 'friend'
+		status: 'unknown'
 	},
 	{
 		name: 'berend108',
+		status: 'friend'
+	},
+	{
+		name: 'Jeukende bilnaad 88',
 		status: 'pending'
 	},
 	{
-		name: 'berend109',
-		status: 'pending'
-	},
-	{
-		name: 'berend110',
+		name: 'Massieve Zwanus',
 		status: 'friend'
 	},
 	{
@@ -82,42 +83,34 @@ export default class FriendOverview extends Component {
         super(props);
         this.state = {
             searchTerm: '',
-            filteredUsers: [],
+			filteredUsers: [],
+			friendList: [],
+			pendingList: [],
         }
     }
 	
-	updateFilteredList = (newFilteredList) => {
+	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredUsers: newFilteredList})
+		this.setState({searchTerm: newSearchTerm})
+	}
+
+	componentDidMount(){
+		this.setState({friendList: users.filter(createFilter('friend', ['status']))})
+		this.setState({pendingList: users.filter(createFilter('pending', ['status']))})
 	}
 
 	render() {
 	    return (
 			<View style={styles.container}>
-
 				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
-			    
-				<Text style={styles.header}>Add friends</Text>
-				<View style={styles.button_container}>
-					{/* <TouchableOpacity style={{marginRight: 5, marginLeft: 10, marginTop: 5, marginBottom: 5, flex: 1}}>
-                        <Icon name='times' size={35} color="#80868B" style={{padding:0}} />
-					</TouchableOpacity> */}
-
-					<Text style={styles.name}>berend101</Text>
-
-					<TouchableOpacity style={styles.button_container2}>
-						<Text style={styles.button1}>Accept</Text>
-						<Icon name='user-plus' size={17} color="white" style={{marginRight: 5, marginLeft: 5}} />
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.button_container2}>
-						<Text style={styles.button1}>Decline</Text>
-						<Icon name='user-plus' size={17} color="white" style={{marginRight: 5, marginLeft: 5}} />
-					</TouchableOpacity>
-
-				</View>
-
-                <FriendList
-                    friendData={this.state.filteredUsers}
-                />
+			
+				<ScrollView>
+					{this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList}/>}
+					
+					{this.state.searchTerm == '' 
+					? <UserList headerText='Friendlist' data={this.state.friendList}/>
+					: <UserList headerText='Users' data={this.state.filteredUsers} />}
+				</ScrollView>
 			</View>
 		);
 	}
@@ -128,53 +121,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F8F9FB',
 	},
-	header: {
+	pending_list_container: {
+        paddingHorizontal: 5+'%',
+    },
+    pending_list_title: {
         marginVertical: 10,
         textAlign: 'right',
         textTransform: 'uppercase',
         fontSize: 20,
-        marginHorizontal: 3+'%',
         borderBottomWidth: 1,
         paddingBottom: 5,
-	},
-    button_container: {
-        marginTop: 10,
-        borderWidth: 1,
-        borderBottomColor: 'black',
-        borderRadius: 10,
-        padding: 3,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        marginHorizontal: 3 + '%'
-    },
-    button_container2: {
-        marginTop: 9,
-        flex: 3,
-        borderWidth: 1,
-        borderBottomColor: 'black',
-        flexDirection: 'row',
-        borderRadius: 10,
-        marginRight: 6,
-        padding: 3,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: 'green',
-        marginBottom: 5,
-        marginTop: 5
-    },
-    button1: {
-        fontSize: 17,
-        color: 'white',
-    },
-    name: {
-        flex: 8,
-        fontSize: 22,
-        marginLeft: 20,
-    },
-	list_header: {
-		fontSize: 23,
-		marginBottom: 5,
-	},
+    }
 });

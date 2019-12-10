@@ -49,6 +49,7 @@ export default class Transactions extends Component {
                     >
                         <Text style = { styles.cta_button_text}>Buy tokens</Text>
                         <Icon name='angle-right' size={35} color='black' />
+                        <Icon name='angle-right' size={30} color='black' style={{padding:5}}/>
                     </TouchableOpacity>
                 </View>
 

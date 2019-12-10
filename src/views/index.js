@@ -11,7 +11,21 @@ import WalletLink from './WalletLink'
 import BuyTokens from './BuyTokens'
 import Announcements from './Announcements'
 import Content from './Content'
+
 import FriendOverview from './FriendOverview'
 import ShareTokens from './ShareTokens'
 
-export { AuthLoading, Login, Register, ForgotPassword, EventOverview, Transactions, WalletLink, BuyTokens, Announcements, Content, FriendOverview, ShareTokens }
+export { 
+    AuthLoading, 
+    Login, 
+    Register, 
+    ForgotPassword, 
+    EventOverview, 
+    Transactions, 
+    WalletLink, 
+    BuyTokens, 
+    Announcements, 
+    Content, 
+    FriendOverview, 
+    ShareTokens 
+}

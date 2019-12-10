@@ -17,6 +17,7 @@ export default class AnnouncementItem extends Component {
                         <Text style={styles.time}>{this.props.time}</Text>
                     </View>
                 </View>
+
                 <Text  style={styles.announcement}>{this.props.announcement}</Text>
                 
             </View>
@@ -36,10 +37,11 @@ const styles = StyleSheet.create({
         width: 100+'%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: 5,
+        padding: 5,
+        backgroundColor: '#F6CF3A'
     },
     title: {
-        width: 70+'%',
+        width: 70+'%', 
         paddingLeft: 10,
     },
     datetime_container: {
