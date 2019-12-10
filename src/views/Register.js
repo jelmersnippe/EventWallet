@@ -203,6 +203,13 @@ export default class App extends Component {
 
 					}}>Register</Text>
 				</TouchableOpacity>
+				<View style={{marginTop: 15, flexDirection: 'row', justifyContent: 'center'}}>
+					<Text style={{fontSize: 18}}>Already have an account? </Text>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+						<Text style={{fontSize: 18, textDecorationLine: 'underline'}}>Log in</Text>
+					</TouchableOpacity>
+				</View>
+				
 
 			</View>
 		);
@@ -247,5 +254,10 @@ const styles = StyleSheet.create({
 	    borderColor: 'black',
 	    borderWidth: 1,
 	    color: 'black'
-	}
+	},
+	text_button2: {
+        fontSize: 18,
+        textDecorationLine: 'underline',
+        marginTop: 15
+    }
 });
