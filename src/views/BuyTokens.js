@@ -6,7 +6,11 @@ import {
     TouchableOpacity,
     Picker,
 } from 'react-native'
-import NumericTokenInput from '../components/NumericTokenInput'
+
+import {
+    NumericTokenInput,
+    RegularButton
+} from '../components'
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -19,9 +23,6 @@ export default class BuyTokens extends Component {
     render() {
         return (
             <View style={styles.container}>
-
-                
-
                 <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
                 <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
                 <Text style={styles.location}>Autotron, Rosmalen</Text>
@@ -29,7 +30,6 @@ export default class BuyTokens extends Component {
                 <Text style={styles.header}>Payment</Text>
 
                 <NumericTokenInput />
-
 
                 <Text style={styles.description}>Select the payment method</Text>
                 <View style={styles.dropdown_container}>
@@ -47,14 +47,8 @@ export default class BuyTokens extends Component {
 
 
                 <View style={styles.button_container}>
-                    <TouchableOpacity style={styles.cancel_button}
-                        onPress={() => { this.props.navigation.goBack() }}
-                    >
-                        <Text style={styles.button_text}>Cancel</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cta_button}>
-                        <Text style={styles.button_text}>Checkout</Text>
-                    </TouchableOpacity>
+                    <RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
+					<RegularButton text={'Checkout'} backgroundColor='#0070C0' />
                 </View>
             </View>
 

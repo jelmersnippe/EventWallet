@@ -7,8 +7,11 @@ import {
 	Picker,
 } from 'react-native'
 
-import NumericTokenInput from '../components/NumericTokenInput'
-import HeaderText from '../components/HeaderText'
+import {
+	NumericTokenInput,
+	HeaderText,
+	RegularButton
+ } from '../components'
 
 export default class ShareTokens extends Component {
 	constructor() {
@@ -47,14 +50,8 @@ export default class ShareTokens extends Component {
 				<NumericTokenInput />
 
 				<View style={styles.button_container}>
-					<TouchableOpacity style={styles.cancel_button}
-						onPress={() => { this.props.navigation.goBack() }}
-					>
-						<Text style={styles.button_text}>Cancel</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.cta_button}>
-						<Text style={styles.button_text}>Share</Text>
-					</TouchableOpacity>
+					<RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
+					<RegularButton text={'Share'} backgroundColor='#0070C0' />
 				</View>
 			</View>
 
@@ -87,27 +84,5 @@ const styles = StyleSheet.create({
 	button_container: { 
 		flexDirection: 'row', 
 		justifyContent: 'space-evenly', 
-	},
-	cancel_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'lightgray',
-		borderRadius: 20,
-	},
-	cta_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#0070C0',
-		borderRadius: 20,
-	},
-	button_text: {
-		fontSize: 20,
-		textAlign: 'center',
-		padding: 4,
-		color: 'white'
 	},
 });
