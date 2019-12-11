@@ -12,16 +12,16 @@ import TransactionList from '../components/TransactionList';
 const transactions = [
     {
         id: 1,
-        sender: 'Henk',
+        sender: 'Me',
         receiver: 'Maarten',
-        amount: '+10',
+        amount: '10',
         datetime: '24/07 19:23'
     },
     {
         id: 2,
         sender: 'Henk',
-        receiver: 'Maarten',
-        amount: '-10',
+        receiver: 'Me',
+        amount: '10',
         datetime: '24/07 19:23'
     },
 ];

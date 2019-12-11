@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-
 export default class TransactionItem extends Component {
     render() {
         return (
@@ -14,40 +13,27 @@ export default class TransactionItem extends Component {
                 <View style={styles.container}>
                     <Text style={styles.datetime}>{this.props.datetime}</Text>
                     <View style={styles.transaction_info}>
-                        <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
-                            <View style={styles.user_info_title}>
-                                <Icon name='arrow-right' size={25} color='green' />
-                            </View>
+                            {this.props.sender == 'Me' 
+                            ? 
 
-                            <Text style={styles.user_info_content}>{this.props.receiver}</Text>
+                        <View style={styles.user_info}>
+                            <Icon style={styles.user_info_icon} name='arrow-left' size={25} color='red' />
+                            <Text style={styles.user_info_text}>{this.props.receiver}</Text>
                         </View>
 
-                        <View style={{flexDirection: 'row', flex: 2}}>
-                            <Text style={styles.amount}>{this.props.amount}</Text>
-                            <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 9}} />
+                        :
+                        <View style={styles.user_info}>
+                            <Icon style={styles.user_info_icon} name='arrow-right' size={25} color='green' />
+                            <Text style={styles.user_info_text}>{this.props.sender}</Text>
                         </View>
-                    </View>
-                </View>
+    }
 
-
-                <View style={styles.container}>
-                    <Text style={styles.datetime}>{this.props.datetime}</Text>
-                    <View style={styles.transaction_info}>
-                        <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
-                            <View style={styles.user_info_title}>
-                                 <Icon name='arrow-left' size={25} color='red' />
-                            </View>
-
-                            <Text style={styles.user_info_content}>{this.props.receiver}</Text>
-                        </View>
-
-                        <View style={{flexDirection: 'row', flex: 2}}>
-                            <Text style={styles.amount}>{this.props.amount}</Text>
-                            <Icon name='coins' size={30} color='#F6CF3A' style={{padding: 9}} />
+                        <View style={styles.amount}>
+<Text style={styles.amount_text}>{this.props.sender == 'Me' ? '-' : '+'}{this.props.amount}</Text>
+                            <Icon style={styles.amount_icon} name='coins' size={30} color='#F6CF3A' />
                         </View>
                     </View>
                 </View>
-
             </View>
         );
     }
@@ -55,8 +41,6 @@ export default class TransactionItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         width: 100+'%',
         borderWidth: 1,
         marginBottom: 10,
@@ -65,36 +49,33 @@ const styles = StyleSheet.create({
         width: 100+'%', 
         padding: 5,
         textAlign: 'center',
-        backgroundColor: 'rgb(200,200,200)',
+        backgroundColor: '#F6CF3A',
         fontSize: 16,
     },
     transaction_info: {
         flexDirection: 'row',
         width: 100+'%',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
     },
     user_info: {
-        flex: 1,
-        flexDirection: 'row',
-        margin: 5,
+        flexDirection: 'row', 
+        flex: 6, 
+        alignItems: 'center'
     },
-    user_info_title: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 10,
-        //flex: 2,
-    },
-    user_info_content: {
-        flex: 6,
+    user_info_text: {
         fontSize: 20,
+        paddingLeft: 5,
         textAlignVertical: 'center',
     },
     amount: {
-        flex: 2,
+        flexDirection: 'row', 
+        justifyContent: 'space-evenly',
+        flex: 2
+    },
+    amount_text: {
         textAlignVertical: 'center',
         textAlign: 'right',
         fontSize: 20,
-        flexDirection: 'row'
-    }
+    },
 })
