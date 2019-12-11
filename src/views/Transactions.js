@@ -10,7 +10,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import {
     TransactionList,
     HeaderText,
-    RegularButton
+    RegularButton,
+    WideButton
 } from '../components';
 
 const transactions = [
@@ -46,13 +47,7 @@ export default class Transactions extends Component {
                     <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens')}} icon='angle-right' text={'Buy Tokens'} backgroundColor='#0070C0' />
                 </View>
 
-                <TouchableOpacity 
-                    style = {styles.wallet_button}
-                    onPress = {() => {this.props.navigation.navigate('WalletLink')}}
-                >
-                    <Text style={styles.wallet_button_text}>Wallet link</Text>
-                    <Icon name='angle-right' size={35} color='black' />
-                </TouchableOpacity>
+                <WideButton callback={() => {this.props.navigation.navigate('WalletLink')}} text='Wallet link' icon='angle-right' />
 
                 <HeaderText text='Transaction History' />
                 <TransactionList

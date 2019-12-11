@@ -8,7 +8,8 @@ import {
 } from 'react-native'
 
 import {
-    HeaderText
+    HeaderText,
+    WideButton
 } from '../components'
 
 export default class Login extends Component {
@@ -33,14 +34,7 @@ export default class Login extends Component {
                     placeholder='Password'
                 />
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => { this.login() }}
-                >
-                    <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: 'bold', marginBottom: 1, }}>
-                        Login
-					</Text>
-                </TouchableOpacity>
+                <WideButton callback={() => {this.login()}} text='Login' backgroundColor='#F6CF3A' />
 
                 <View style={styles.button2}>
                     <TouchableOpacity

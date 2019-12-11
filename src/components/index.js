@@ -15,6 +15,7 @@ import NumericTokenInput from './NumericTokenInput'
 import SearchBar from './SearchBar'
 import HeaderText from './HeaderText'
 import RegularButton from './RegularButton'
+import WideButton from './WideButton'
 
 export { 
     AnnouncementList, 
@@ -29,5 +30,6 @@ export {
     NumericTokenInput, 
     SearchBar, 
     HeaderText,
-    RegularButton 
+    RegularButton,
+    WideButton
 } 

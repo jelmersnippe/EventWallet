@@ -3,12 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
 	TextInput,
 } from 'react-native';
 
 import {
-    HeaderText
+    HeaderText,
+    WideButton
 } from '../components'
 
 export default class ForgotPassword extends Component {
@@ -27,14 +27,8 @@ export default class ForgotPassword extends Component {
 
                 <TextInput style={styles.input_text} placeholder="Email address"/>
 
-                <TouchableOpacity
-                    onPress={() => {
-                        this.passwordResetAction();
-                    }}
-                    style={styles.button}
-                >
-                    <Text style={styles.bttntext}>Submit</Text>
-                </TouchableOpacity>
+                
+                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' backgroundColor='#F6CF3A' />
             </View>
         );
     }

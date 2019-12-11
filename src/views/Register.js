@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 
 import {
-	HeaderText
+	HeaderText,
+	WideButton
 } from '../components'
 
 export default class Register extends Component {
@@ -35,6 +36,7 @@ export default class Register extends Component {
 	}
 
 	validatePassword = (password) => {
+		this.setState({ passwordError: [] })
 		if(password == ''){
 			this.addPasswordError("This field can't be empty")
 			return false;
@@ -56,9 +58,6 @@ export default class Register extends Component {
 		let uppercase_reg = /[A-Z]/ // uppercase alphabet
 		let lowercase_reg = /[a-z]/ // lowercase alphabet
 		let symbol_reg = /[!@#$%^&*\s]/ // symbols: !@#%^&* and space
-
-
-		this.setState({ passwordError: [] })
 
 		let validPassword = true
 		let errors = []
@@ -95,13 +94,13 @@ export default class Register extends Component {
 	};
 
 	validateUsername = (username) => {
+		this.setState({ usernameError: '' })
 		if (username == '') {
 			this.setState({ usernameError: "This field can't be empty" })
 			return false;
 		}
 
 		let reg = /^[a-zA-Z0-9]{5,}$/
-		this.setState({ usernameError: '' })
 
 		if (!reg.test(username)) {
 			this.setState({ usernameError: "Invalid username\nMust be at least 6 characters\nOnly alphanumeric characters are allowed" })
@@ -114,13 +113,13 @@ export default class Register extends Component {
 
 
 	validateEmail = (email) => {
+		this.setState({ emailError: '' })
 		if (email == '') {
 			this.setState({ emailError: "This field can't be empty" })
 			return false;
 		}
 
 		let reg = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/
-		this.setState({ emailError: '' })
 
 		if (!reg.test(email)) {
 			this.setState({ emailError: "Invalid email.\nFollow the format 'johndoe@example.com'" })
@@ -193,12 +192,7 @@ export default class Register extends Component {
 					{this.state.emailError}
 				</Text>
 
-				<TouchableOpacity 
-					style={styles.button}
-					onPress={this.validate}
-				>
-					<Text style={styles.button_text}>Register</Text>
-				</TouchableOpacity>
+				<WideButton callback={() => {this.validate()}} text='Register' backgroundColor='#F6CF3A' />
 
 				<View style={{marginTop: 15, flexDirection: 'row', justifyContent: 'center'}}>
 					<Text style={{fontSize: 18}}>Already have an account? </Text>
@@ -229,21 +223,5 @@ const styles = StyleSheet.create({
 	    fontSize: 30,
 	    marginBottom: 10,
 	    textAlign: 'center'
-	},
-	button: {
-	    borderRadius: 15,
-	    backgroundColor: '#F6CF3A',
-	    padding: 10,
-	    width: 150,
-	    width: '90%',
-	    margin: 15,
-	    borderColor: 'black',
-	    borderWidth: 1,
-	    color: 'black'
-	},
-	button_text: {
-		textAlign: 'center',
-		fontSize: 20,
-		fontWeight: 'bold',
 	},
 });
