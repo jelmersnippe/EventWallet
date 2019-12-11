@@ -16,7 +16,7 @@ export default class TransactionItem extends Component {
                     <View style={styles.transaction_info}>
                         <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
                             <View style={styles.user_info_title}>
-                                <Icon name='arrow-right' size={25} color='green' style={{padding: 9}} />
+                                <Icon name='arrow-right' size={25} color='green' />
                             </View>
 
                             <Text style={styles.user_info_content}>{this.props.receiver}</Text>
@@ -35,7 +35,7 @@ export default class TransactionItem extends Component {
                     <View style={styles.transaction_info}>
                         <View style={{flexDirection: 'row', flex: 6, justifyContent: 'flex-start'}}>
                             <View style={styles.user_info_title}>
-                                 <Icon name='arrow-left' size={25} color='red' style={{padding: 9}} />
+                                 <Icon name='arrow-left' size={25} color='red' />
                             </View>
 
                             <Text style={styles.user_info_content}>{this.props.receiver}</Text>
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
         flex: 2,
         textAlignVertical: 'center',
         textAlign: 'right',
-        marginRight: 7,
         fontSize: 20,
         flexDirection: 'row'
     }
