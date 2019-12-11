@@ -8,7 +8,9 @@ import {
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import UserButton from './UserButton'
+import {
+    UserButton
+ } from './index'
 
 class UserItem extends Component {
     setText(){

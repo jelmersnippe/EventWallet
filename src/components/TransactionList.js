@@ -5,7 +5,9 @@ import {
     StyleSheet
 } from 'react-native'
 
-import TransactionItem from './TransactionItem'
+import { 
+    TransactionItem
+ } from './index'
 
 export default class TransactionList extends Component {
     render() {

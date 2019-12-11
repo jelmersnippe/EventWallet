@@ -6,7 +6,9 @@ import {
     StyleSheet,
 } from 'react-native'
 
-import EventItem from './EventItem'
+import { 
+    EventItem
+ } from './index'
 
 export default class EventList extends Component {
     render() {

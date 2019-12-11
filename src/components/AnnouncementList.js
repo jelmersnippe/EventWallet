@@ -5,7 +5,9 @@ import {
     StyleSheet
 } from 'react-native'
 
-import AnnouncementItem from './AnnouncementItem'
+import { 
+    AnnouncementItem 
+} from './index'
 
 export default class AnnouncementList extends Component {
     render() {

@@ -4,8 +4,10 @@ import {
     StyleSheet
 } from 'react-native'
 
-import UserItem from './UserItem'
-import HeaderText from './HeaderText'
+import {
+    UserItem,
+    HeaderText
+ } from './index'
 
 export default class UserList extends Component {
     render() {
