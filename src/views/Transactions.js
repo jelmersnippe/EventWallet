@@ -24,6 +24,34 @@ const transactions = [
         amount: '10',
         datetime: '24/07 19:23'
     },
+    {
+        id: 3,
+        sender: 'Event',
+        receiver: 'Me',
+        amount: '20',
+        datetime: '24/07 19:23'
+    },
+    {
+        id: 4,
+        sender: 'Me',
+        receiver: 'Event stand #2',
+        amount: '4',
+        datetime: '24/07 19:23'
+    },
+    {
+        id: 5,
+        sender: 'Me',
+        receiver: 'Event stand #5',
+        amount: '6',
+        datetime: '24/07 19:23'
+    },
+    {
+        id: 6,
+        sender: 'Me',
+        receiver: 'Event stand #1',
+        amount: '2',
+        datetime: '24/07 19:23'
+    },
 ];
 
 export default class Transactions extends Component {
