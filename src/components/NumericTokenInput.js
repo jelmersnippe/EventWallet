@@ -3,8 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-} from 'react-native'
-import NumericInput from 'react-native-numeric-input'
+} from 'react-native';
+import InputSpinner from "react-native-input-spinner";
 
 export default class NumericTokenInput extends Component {
 	constructor() {
@@ -16,23 +16,19 @@ export default class NumericTokenInput extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Select the amount of tokens:</Text>
-                <NumericInput
-                    value={this.state.value}
-                    onChange={value => this.setState({ value })}
-                    totalWidth={150}
-                    totalHeight={50}
-                    iconSize={70}
-                    minValue={0}
-                    step={1}
-                    rounded
-                    borderColor='black'
-                    separatorWidth={0}
-                    valueType='real'
-                    textColor='black'
-                    iconStyle={{ color: 'black' }}
-                    rightButtonBackgroundColor='#F8F9FB'
-                    leftButtonBackgroundColor='#F8F9FB'
-                />
+                    <InputSpinner
+                        value={this.state.value}
+                        min={0}
+                        step={1}
+                        value={this.state.number}
+                        height={50}
+                        color='lightgray'
+                        rounded={false}
+                        buttonFontSize={30}
+                        fontSize={20}
+                        showBorder={true}
+                        onChange={value => this.setState({ value })}
+                    />
             </View>
         );
     }
@@ -44,6 +40,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign: 'center',
         marginBottom: 20,
     },
     text: {
