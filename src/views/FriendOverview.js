@@ -120,7 +120,9 @@ export default class FriendOverview extends Component {
 			<View style={styles.container}>
 				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
 			
-				<ScrollView>
+				<ScrollView
+                	showsVerticalScrollIndicator={false}
+				>
 					{this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList}/>}
 					
 					{this.state.searchTerm == '' 
@@ -137,15 +139,4 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F8F9FB',
 	},
-	pending_list_container: {
-        paddingHorizontal: 5+'%',
-    },
-    pending_list_title: {
-        marginVertical: 10,
-        textAlign: 'right',
-        textTransform: 'uppercase',
-        fontSize: 20,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-    }
 });

@@ -6,8 +6,9 @@ import {
 
 import { 
 	EventList, 
-	SearchBar 
+	SearchBar,
 } from '../components'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const events = [
@@ -90,10 +91,15 @@ export default class EventOverview extends Component {
 		return (
 			<View style={styles.container}>
 				<SearchBar keys={['name', 'location', 'datetime']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
-				
-				<EventList
-                    eventData={this.state.searchTerm != '' ? this.state.filteredEvents : events}
-				/>
+
+				<ScrollView
+					style={styles.padded_container}
+					showsVerticalScrollIndicator={false}
+				>
+					<EventList
+						data={this.state.searchTerm != '' ? this.state.filteredEvents : events}
+					/>
+				</ScrollView>
 			</View >
 		);
 	}
@@ -102,19 +108,6 @@ export default class EventOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		width: 100+'%',
 		backgroundColor: '#F8F9FB',
-	},
-	search_container: {
-		backgroundColor: '#F6CF3A',
-	},
-	search_bar: {
-		borderWidth: 1,
-		borderRadius: 5,
-		padding: 10,
-		marginHorizontal: 5+'%',
-		marginVertical: 3+'%',
-
-		backgroundColor: '#FFF'
 	}
 });

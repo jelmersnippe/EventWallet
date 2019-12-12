@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         padding: 5,
 
         borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderBottomWidth: StyleSheet.hairlineWidth,
     },
     info: {
         width: 70+'%',
