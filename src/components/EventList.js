@@ -20,14 +20,16 @@ export default class EventList extends Component {
                     renderItem={({ item }) => (
                         <EventItem
                             item={item}
+                            key={item.id}
                         />
                     )}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </View>
         );
     }
 }
-  
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -13,66 +13,82 @@ import {
 
 const users = [
 	{
+	    id: '1',
 		name: 'AnaalAdmiraal69',
 		status: 'pending'
 	},
 	{
+	    id: '2',
 		name: 'berend102',
 		status: 'friend'
 	},
 	{
+	    id: '3',
 		name: 'berend103',
 		status: 'unknown'
 	},
 	{
+	    id: '4',
 		name: 'berend104',
         status: 'unknown'
 	},
 	{
+	    id: '5',
 		name: 'berend105',
 		status: 'pending'
 	},
 	{
+	    id: '6',
 		name: 'berend106',
 		status: 'friend'
 	},
 	{
+	    id: '7',
 		name: 'berend107',
 		status: 'unknown'
 	},
 	{
+	    id: '8',
 		name: 'berend108',
 		status: 'friend'
 	},
 	{
+	    id: '9',
 		name: 'Jeukende bilnaad 88',
 		status: 'pending'
 	},
 	{
+	    id: '10',
 		name: 'Massieve Zwanus',
 		status: 'friend'
 	},
 	{
+	    id: '11',
 		name: 'berend111',
 		status: 'unknown'
 	},
 	{
+	    id: '12',
 		name: 'berend112',
 		status: 'friend'
 	},
 	{
+	    id: '13',
 		name: 'berend113',
 		status: 'friend'
 	},
 	{
+	    id: '14',
 		name: 'berend114',
 		status: 'pending'
 	},
 	{
+	    id: '15',
 		name: 'berend115',
 		status: 'friend'
 	},
 	{
+	    id: '16',
 		name: 'berend116',
 		status: 'friend'
 	}

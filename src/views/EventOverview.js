@@ -12,42 +12,49 @@ import {
 
 const events = [
 	{
+	    id: '1',
 		name: 'Shockerz - The Raw Gathering',
 		amount: '8',
 		location: 'Autotron, Rosmalen',
 		datetime: 'Zaterdag 14 dec 14:00 - 01:00'
 	},
 	{
+	    id: '2',
 		name: 'FaggotPop',
 		amount: '20',
 		location: 'Dikke zwans',
 		datetime: 'Zondag 15 dec 15:00 - 02:00'
 	},
 	{
+	    id: '3',
 		name: 'GayPop - Spread Aids',
 		amount: '30',
 		location: 'Maaskantje',
 		datetime: 'Maandag 16 dec 16:00 - 03:00'
 	},
 	{
+	    id: '4',
 		name: 'Blyat',
 		amount: '5',
 		location: 'Moskou',
 		datetime: 'Dinsdag 17 dec 17:00 - 04:00'
 	},
 	{
+	    id: '5',
 		name: 'Priem - Hardcore will never die',
 		amount: '12',
 		location: 'Schijndel',
 		datetime: 'Woensdag 18 dec 18:00 - 05:00'
 	},
 	{
+	    id: '6',
 		name: 'Blyat69',
 		amount: '23',
 		location: 'Finland',
 		datetime: 'Donderdag 19 dec 19:00 - 06:00'
 	},
 	{
+	    id: '7',
 		name: 'Berends4Berends - Sing Alone',
 		amount: '50',
 		location: 'Autotron, Rosmalen',
