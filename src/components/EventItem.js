@@ -6,25 +6,29 @@ import {
     StyleSheet
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 class EventItem extends Component {
     render() {
         return (
-            <TouchableOpacity
-                style = { styles.container }
-                onPress={() => this.props.navigation.navigate('Transactions', {item: this.props.item})}
-            >
+            <View style={ styles.container }>
                 <View style={styles.info}>
                     <Text style={styles.datetime}>{this.props.item.datetime}</Text>
                     <Text style={styles.name}>{this.props.item.name}</Text>
                     <Text style={styles.location}>{this.props.item.location}</Text>
                 </View>
-                <View style={styles.tokens}>
-                    <Icon name='right' size={30} color="#80868B" style={{padding:5}} />
-                    <Text style = { styles.amount }>{this.props.item.amount} Tokens</Text>
-                </View>
-            </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.wallet_button}
+                    onPress={() => this.props.navigation.navigate('Transactions', {item: this.props.item})}
+                >
+                    <View style={styles.tokens}>
+                        <Text style={styles.tokens_text}>{this.props.item.amount}</Text>
+                        <Icon name='coins' size={20} color='#F6CF3A'/>
+                    </View>
+                    <Icon name='angle-right' size={40} color="#80868B" />
+                </TouchableOpacity>
+            </View>
         );
     }
 }
@@ -33,6 +37,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: "space-between",
+        alignItems: 'center',
 
         padding: 5,
 
@@ -40,32 +45,39 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     info: {
-        maxWidth: 70+'%',
-    },
-    tokens: {
-        alignItems: 'center',
-        justifyContent: "space-evenly",
+        width: 70+'%',
     },
     datetime: {
         color: '#80868B',
         textTransform: 'uppercase',
         fontSize: 12,
-        marginLeft: 10,
-    },
-    location: {
-        color: '#505155',
-        marginLeft: 10,
+        paddingLeft: 10,
     },  
     name: {
         fontSize: 22,
         fontWeight: 'bold',
         color: '#2D2D2D'
     },
-    amount: {
-        fontWeight: 'bold',
+    location: {
+        color: '#505155',
+        paddingLeft: 10,
+    },
+    wallet_button: {
+        width: 30+'%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
         borderWidth: 1,
         borderRadius: 5,
-        padding: 5,
+    },
+    tokens: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    tokens_text: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        padding: 3,
     },
 })
 
