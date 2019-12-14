@@ -6,6 +6,8 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
+import { Colors } from './GlobalVariables'
+
 export default class TransactionItem extends Component {
     render() {
         return (
@@ -30,7 +32,7 @@ export default class TransactionItem extends Component {
 
                         <View style={styles.amount}>
                             <Text style={styles.amount_text}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
-                            <Icon style={styles.amount_icon} name='coins' size={30} color='#F6CF3A' />
+                            <Icon style={styles.amount_icon} name='coins' size={30} color={Colors.eventColor} />
                         </View>
                     </View>
                 </View>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
         width: 100+'%', 
         padding: 5,
         textAlign: 'center',
-        backgroundColor: '#F6CF3A',
+        backgroundColor: Colors.eventColor,
         fontSize: 16,
     },
     transaction_info: {

@@ -8,6 +8,7 @@ import {
     AnnouncementList, 
     HeaderText 
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 const announcements = [
     {
@@ -64,7 +65,7 @@ export default class Announcements extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F9FB',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 3+'%'
     },
     header: {
