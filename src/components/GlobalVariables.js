@@ -8,8 +8,3 @@ export const Colors = {
 export const Font = {
     mainFont: 'Arial'
 }
-
-// export const padded_container = StyleSheet.create({
-//     flex: 1,
-//     paddingHorizontal: 3+'%'
-// })
