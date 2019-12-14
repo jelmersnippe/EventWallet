@@ -11,6 +11,7 @@ import {
     NumericTokenInput,
     RegularButton
 } from '../components'
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -22,7 +23,7 @@ export default class BuyTokens extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
                 <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
                 <Text style={styles.location}>Autotron, Rosmalen</Text>
@@ -50,7 +51,7 @@ export default class BuyTokens extends Component {
                     <RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
 					<RegularButton text={'Checkout'} backgroundColor='#0070C0' />
                 </View>
-            </View>
+            </ScrollView>
 
         );
     }

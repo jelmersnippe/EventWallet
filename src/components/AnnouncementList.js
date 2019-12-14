@@ -24,7 +24,7 @@ export default class AnnouncementList extends Component {
                             key={item.id}
                         />
                     )}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </SafeAreaView>
         );

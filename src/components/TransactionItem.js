@@ -11,25 +11,25 @@ export default class TransactionItem extends Component {
         return (
             <View>
                 <View style={styles.container}>
-                    <Text style={styles.datetime}>{this.props.datetime}</Text>
+                    <Text style={styles.datetime}>{this.props.item.datetime}</Text>
                     <View style={styles.transaction_info}>
-                            {this.props.sender == 'Me' 
+                            {this.props.item.sender == 'Me' 
                             ? 
 
                         <View style={styles.user_info}>
                             <Icon style={styles.user_info_icon} name='arrow-left' size={25} color='red' />
-                            <Text style={styles.user_info_text}>{this.props.receiver}</Text>
+                            <Text style={styles.user_info_text}>{this.props.item.receiver}</Text>
                         </View>
 
                         :
                         <View style={styles.user_info}>
                             <Icon style={styles.user_info_icon} name='arrow-right' size={25} color='green' />
-                            <Text style={styles.user_info_text}>{this.props.sender}</Text>
+                            <Text style={styles.user_info_text}>{this.props.item.sender}</Text>
                         </View>
     }
 
                         <View style={styles.amount}>
-<Text style={styles.amount_text}>{this.props.sender == 'Me' ? '-' : '+'}{this.props.amount}</Text>
+                            <Text style={styles.amount_text}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
                             <Icon style={styles.amount_icon} name='coins' size={30} color='#F6CF3A' />
                         </View>
                     </View>

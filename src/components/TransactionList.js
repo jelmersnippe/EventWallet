@@ -13,19 +13,11 @@ export default class TransactionList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={this.props.transactionData}
-                    renderItem={({ item }) => (
-                        <TransactionItem
-                            sender={item.sender}
-                            receiver={item.receiver}
-                            amount={item.amount}
-                            datetime={item.datetime}
-                            key={item.id}
-                        />
-                    )}
-                    keyExtractor={item => item.id}
-                />
+                {this.props.data.map(
+                    (item) => {
+                        return <TransactionItem item={item} key={item.id}/>
+                    }
+                )}
             </View>
         );
     }

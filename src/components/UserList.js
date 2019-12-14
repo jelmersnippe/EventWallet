@@ -17,7 +17,7 @@ export default class UserList extends Component {
 				<HeaderText text={this.props.headerText} />
                 {this.props.data.map(
                     (item) => {
-                        return <UserItem item={item}/>
+                        return <UserItem item={item} key={item.id}/>
                     }
                 )}
             </View>
@@ -28,6 +28,6 @@ export default class UserList extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 5+'%',
+        paddingHorizontal: 3+'%',
     },
 })
