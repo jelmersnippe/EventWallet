@@ -112,25 +112,18 @@ export default class FriendOverview extends Component {
 
 	orderSearchResults(searchResults){
 		let friendList = []
-		let pendingList = []
 		let unknownList = []
 
 		searchResults.map((item) => {
 			if(item.status == 'friend'){
 				friendList.push(item)
 			}
-			else if(item.status == 'pending'){
-				pendingList.push(item)
-			}
 			else if(item.status == 'unknown'){
 				unknownList.push(item)
 			}
-			else {
-				console.log('Strange status found in ' + item.toString())
-			}
 		})
 
-		return friendList.concat(pendingList.concat(unknownList))
+		return friendList.concat(unknownList)
 	}
 
 	componentDidMount(){
@@ -146,7 +139,7 @@ export default class FriendOverview extends Component {
 				<ScrollView
                 	showsVerticalScrollIndicator={false}
 				>
-					{this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList}/>}
+					<UserList headerText='Pending requests' data={this.state.pendingList}/>
 					
 					{this.state.searchTerm == '' 
 					? <UserList headerText='Friendlist' data={this.state.friendList}/>
