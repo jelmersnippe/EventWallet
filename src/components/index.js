@@ -16,6 +16,7 @@ import SearchBar from './SearchBar'
 import HeaderText from './HeaderText'
 import RegularButton from './RegularButton'
 import WideButton from './WideButton'
+import Header from './Header'
 
 export { 
     AnnouncementList, 
@@ -31,5 +32,6 @@ export {
     SearchBar, 
     HeaderText,
     RegularButton,
-    WideButton
+    WideButton,
+    Header,
 } 
