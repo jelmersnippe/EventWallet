@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 
 import { HeaderText } from '../components'
+import { Colors } from '../components/GlobalVariables';
 
 export default class WalletLink extends Component {
     render() {
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "flex-start",
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 3+'%',
     },
     header: {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
 
-        backgroundColor: '#0070C0',
+        backgroundColor: Colors.ctaButtonColor,
         color: 'white',
     },
 })

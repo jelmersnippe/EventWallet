@@ -6,13 +6,14 @@ import {
     StyleSheet
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import {
     TransactionList,
     HeaderText,
     RegularButton,
 } from '../components';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Colors } from '../components/GlobalVariables'
 
 const transactions = [
     {
@@ -142,7 +143,7 @@ export default class Transactions extends Component {
                 <View style={styles.padded_container}>
                     <View style={styles.token_info}>
                         <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens')}} icon='angle-right' text={'Buy Tokens'} backgroundColor='#0070C0' />
+                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens')}} icon='angle-right' text={'Buy Tokens'} backgroundColor={Colors.friendColor} />
                     </View>
                     <HeaderText text='Transaction History' />
                 </View>
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100+'%',
         padding: 10,
-        backgroundColor: '#F6CF3A'
+        backgroundColor: Colors.eventColor
     },
     event_info: {
         flex: 7,
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     },
     padded_container: {
         paddingHorizontal: 3+'%', 
-        backgroundColor: '#F8F9Fb',
+        backgroundColor: Colors.backgroundColor,
     },
     token_info: {
         flexDirection: 'row',

@@ -11,6 +11,7 @@ import {
     SearchBar,
     Header,
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 const users = [
     {
@@ -143,7 +144,7 @@ export default class FriendOverview extends Component {
 	render() {
 	    return (
 			<View style={styles.container}>
-				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor={Colors.friendColor} />
 			
 				<ScrollView
                 	showsVerticalScrollIndicator={false}
@@ -160,8 +161,8 @@ export default class FriendOverview extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F8F9FB',
-    },
+	container: {
+		flex: 1,
+		backgroundColor: Colors.backgroundColor,
+	},
 });
