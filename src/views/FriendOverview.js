@@ -99,7 +99,7 @@ export default class FriendOverview extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: (
-                <Header text='Friend Overview' backgroundColor='#0070C0' />
+                <Header text='Friend Overview' textColor='white' backgroundColor='#0070C0' />
             ),
         };
     };

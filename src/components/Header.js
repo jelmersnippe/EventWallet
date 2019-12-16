@@ -1,148 +1,67 @@
 import React, { Component } from 'react';
 import {
-    Platform,
-    StyleSheet,
     Text,
     View,
-    FlatList,
+    Animated,
     TouchableOpacity,
-    Image,
-    SafeAreaView
+    StyleSheet,
 } from 'react-native';
-import Drawer from 'react-native-drawer'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import SidebarMenu from './SidebarMenu'
 
-const menu = [
-    { 'title': 'Home' },
-    { 'title': 'legal disclaimer' },
-    { 'title': 'Contact' },
-    { 'title': 'Log out' }
-]
-
-export default class Home extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    renderDrawer() {
+export default class Header extends Component {
+    renderMenu() {
         return (
-            <View style={styles.menuContainer}>
-                <FlatList
-                    type='overlay'
-                    style={{ flex: 0.9 }}
-                    data={menu}
-                    extraData={this.state}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <TouchableOpacity style={styles.menuTitleContainer}>
-                                <Text style={styles.menuTitle}
-                                    key={index}>
-                                    {item.title}
-                                </Text>
-                            </TouchableOpacity>
-                        )
-                    }} />
-            </View>
-        )
-    }
-
-    openDrawer() {
-        this.drawer.open()
-    }
-
-    closeDrawer() {
-        this.drawer.close()
+            <SidebarMenu ref='SidebarMenu' {...this.props} />
+        );
     }
 
     render() {
         return (
-            <SafeAreaView style={styles.safeAreaStyle}>
-                <View style={styles.mainContainer}>
-                    <Drawer
-                        ref={(ref) => this.drawer = ref}
-                        content={this.renderDrawer()}
-                        type='displace'
-                        tapToClose={true}
-                        openDrawerOffset={0.40}
-                        styles={drawerStyles}>
-                        <View style={styles.headerContainer}>
-                            <View style={styles.menuButton}>
-                                <TouchableOpacity>
-                                    <Icon name='arrow-left' size={25} color='white' />
-                                </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={[styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
 
-                                <Text style={styles.headerTitle}>Friendlist</Text>
+                    <TouchableOpacity style={styles.icon}>
+                        <Icon name='arrow-left' size={25} color={this.props.textColor} />
+                    </TouchableOpacity>
 
-                                <TouchableOpacity
-                                    onPress={this.openDrawer.bind(this)}>
-                                    <Icon name='cog' size={25} color='white' />
-                                </TouchableOpacity>
-                            </View>
+                    <Text style={[styles.text, {color: this.props.textColor}]}>
+                        {this.props.text}
+                    </Text>
 
-                            <View style={styles.menuButton} />
-                        </View>
-                    </Drawer>
+                    <TouchableOpacity
+                        style={styles.icon}
+                        onPress={() => this.refs.SidebarMenu.toggleMenu()}
+                    >
+                        <Icon name='cog' size={25} color={this.props.textColor} />
+                    </TouchableOpacity>
+
                 </View>
-            </SafeAreaView>
+                {this.renderMenu()}
+            </View>
         );
     }
 }
 
-const drawerStyles = {
-    drawer: {
-        flex: 0.5,
-        backgroundColor: '#3B5998',
+const styles = StyleSheet.create({
+    container: {
+        height: 50,
+        width: 100 + '%'
     },
-    main: {
+    header_bar: {
+        flexDirection: 'row',
+        height: 100 + '%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    text: {
+        flex: 8,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 21,
+    },
+    icon: {
         flex: 1,
-        backgroundColor: 'white'
-    }
-}
-
-const styles = {
-    mainContainer: {
-        flex: 1.0,
-        backgroundColor: 'white'
+        alignItems: 'center',
     },
-    safeAreaStyle: {
-        flex: 0.1,
-        backgroundColor: 'transparent',
-    },
-    headerContainer: {
-        height: 40,
-        flexDirection: 'row',
-        backgroundColor: '#3B5998',
-    },
-    headerTitle: {
-        flex: 8.0,
-        textAlign: 'center',
-        alignSelf: 'center',
-        color: 'white',
-        fontSize: 21
-    },
-    menuButton: {
-        flexDirection: 'row',
-        alignSelf: 'center',
-        tintColor: 'white',
-        padding: 5
-    },
-    menuContainer: {
-        paddingTop: 45,
-        flex: 1.0,
-        backgroundColor: '#3B5998',
-    },
-    menuTitleContainer: {
-
-        alignItem:'center',
-        height: 45,
-        width:'100%',
-        flexDirection:'row',
-    },
-    menuTitle: {
-        width:'100%',
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 17,
-        alignSelf:'center',
-    }
-}
+})

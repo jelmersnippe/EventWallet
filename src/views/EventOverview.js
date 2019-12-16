@@ -7,6 +7,7 @@ import {
 import { 
 	EventList, 
 	SearchBar,
+	Header,
 } from '../components'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -71,7 +72,15 @@ export default class EventOverview extends Component {
             searchTerm: '',
             filteredEvents: [],
         }
-    }
+	}
+	
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: (
+                <Header text='Event Overview' textColor='black' backgroundColor='#F6CF3A' />
+            ),
+        };
+    };
 	
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredEvents: newFilteredList})
