@@ -22,10 +22,10 @@ export default class Header extends Component {
                 <View style={[styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
 
                     <TouchableOpacity style={styles.icon}>
-                        <Icon name='arrow-left' size={25} color='white' />
+                        <Icon name='arrow-left' size={25} color={this.props.textColor} />
                     </TouchableOpacity>
 
-                    <Text style={styles.text}>
+                    <Text style={[styles.text, {color: this.props.textColor}]}>
                         {this.props.text}
                     </Text>
 
@@ -33,7 +33,7 @@ export default class Header extends Component {
                         style={styles.icon}
                         onPress={() => this.refs.SidebarMenu.toggleMenu()}
                     >
-                        <Icon name='cog' size={25} color='white' />
+                        <Icon name='cog' size={25} color={this.props.textColor} />
                     </TouchableOpacity>
 
                 </View>
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     text: {
         flex: 8,
         textAlign: 'center',
-        color: 'white',
         fontWeight: 'bold',
         fontSize: 21,
     },
