@@ -78,7 +78,7 @@ export default class EventOverview extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: (
-                <Header text='Event Overview' textColor='black' backgroundColor='#F6CF3A' />
+                <Header text='Event Overview' textColor='black' backgroundColor={Colors.eventColor} />
             ),
         };
     };
