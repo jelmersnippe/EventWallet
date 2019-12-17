@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Colors, Fonts } from '../components/GlobalVariables';
 
 import {
     UserButton
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         textAlignVertical: 'center',
         alignItems: 'center',
-
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
@@ -70,13 +70,14 @@ const styles = StyleSheet.create({
     name_container: {
         width: 55+'%',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     remove_button: {
         paddingHorizontal: 5,
     },
     name: {
         fontSize: 22,
+        fontFamily: Fonts.text,
     },
     button_container: {
         flexDirection: 'row',

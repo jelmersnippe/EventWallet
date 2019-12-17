@@ -6,6 +6,8 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Fonts } from './GlobalVariables'
+
 
 class UserButton extends Component {
     render(){
@@ -22,7 +24,7 @@ class UserButton extends Component {
                     }}
                 >
                     <Text style={styles.button_text}>{this.props.text}</Text>
-                    <Icon name={this.props.icon} size={20} color="white" style={styles.button_icon} />
+                    <Icon name={this.props.icon} size={15} color="white" style={styles.button_icon} />
             </TouchableOpacity>
         );
     }
@@ -36,15 +38,21 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         justifyContent: 'space-between',
-        marginRight: 5,
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 10, },
+        shadowOpacity: 1,
+        shadowRadius: 6.27,
+        elevation: 4,
     },
     button_text: {
         marginRight: 5,
         fontSize: 18,
-        color: 'white'
+        color: 'white',
+        fontFamily: Fonts.text
     },
     button_icon: {
-        padding: 2,
+        //padding: 2,
     }
 })
 

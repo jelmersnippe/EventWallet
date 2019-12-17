@@ -24,9 +24,6 @@ import {
 } from './components'
 import { Colors } from './components/GlobalVariables'
 
-const activeTabColor = 'tomato'
-const inactiveTabColor = 'gray'
-
 
 const TransactionStack = createStackNavigator(
     {
@@ -38,12 +35,11 @@ const TransactionStack = createStackNavigator(
         },
         WalletLink: {
             screen: WalletLink,
-            navigationOptions: {
-
+            navigationOptions: ({navigation}) => ({
                 header: (
-                    <Header backButton={true} text='Wallet Link' textColor='black' backgroundColor={Colors.eventColor} />
+                    <Header backButton={true} text='Wallet Link' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
                 ),
-            }
+            })
         },
         BuyTokens: {
             screen: BuyTokens,
@@ -53,33 +49,19 @@ const TransactionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Transactions'
+        initialRouteName: 'Transactions',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            }
+        }
     }
 )
-
-
-// {"key":"Transactions","routeName":"Transactions","index":1,"routes":
-// [
-//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
-//     ,{"routeName":"WalletLink","key":"id-1576580346332-141"}
-// ],"isTransitioning":false}
-
-// {"key":"Transactions","routeName":"Transactions","routes":
-// [
-//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
-// ],"index":0,"isTransitioning":false}
-
-
-TransactionStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    }
-}
 
 const SpecificEventContent = createBottomTabNavigator(
     {
@@ -106,32 +88,31 @@ const SpecificEventContent = createBottomTabNavigator(
                 return <Icon name={iconName} size={25} color={tintColor} />
             },
         }),
+        navigationOptions: ({ navigation }) => {
+            let headerShown = true;
+            if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
+                headerShown = false;
+            }
+        
+            if (headerShown) {
+                return {
+                    header: (
+                        <Header backButton={true} text='Specific Event' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
+                    ),
+                };
+            }
+            return {
+                header: (
+                    null
+                ),
+            };
+        },
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )
-
-SpecificEventContent.navigationOptions = ({ navigation }) => {
-    let headerShown = true;
-    if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
-        headerShown = false;
-    }
-
-    if (headerShown) {
-        return {
-            header: (
-                <Header backButton={true} text='Specific Event' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
-            ),
-        };
-    }
-    return {
-        header: (
-            null
-        ),
-    };
-}
 
 const EventStack = createStackNavigator(
     {
@@ -139,20 +120,19 @@ const EventStack = createStackNavigator(
         SpecificEvent: SpecificEventContent,
     },
     {
-        initialRouteName: 'Overview'
+        initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 )
-
-EventStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 const FriendStack = createStackNavigator(
     {
@@ -166,20 +146,19 @@ const FriendStack = createStackNavigator(
     },
     {
         initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 
 )
-
-FriendStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 
 const AppStack = createBottomTabNavigator(
@@ -204,8 +183,8 @@ const AppStack = createBottomTabNavigator(
             }
         }),
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )

@@ -12,7 +12,7 @@ import {
 	HeaderText,
 	RegularButton
  } from '../components'
-import { Colors } from '../components/GlobalVariables';
+import { Colors, Fonts } from '../components/GlobalVariables';
 
 export default class ShareTokens extends Component {
 	constructor() {
@@ -70,11 +70,12 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		marginBottom: 5,
 		marginLeft: 5,
+		fontFamily: Fonts.text
 	},
 	receiver: {
 		fontSize: 25,
 		marginLeft: 5,
-		fontWeight: 'bold'
+		fontFamily: Fonts.header
 	},
 	dropdown_container: {
 		borderWidth: 1,

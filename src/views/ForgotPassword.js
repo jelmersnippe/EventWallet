@@ -10,7 +10,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 export default class ForgotPassword extends Component {
     passwordResetAction () {
@@ -45,15 +45,17 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: Fonts.header
     },
     text: {
-        fontSize: 15,
+        fontSize: 18,
         color: 'black',
         marginTop: 5,
         marginBottom: 5,
         width: '90%',
-        margin: 15
+        margin: 15,
+        fontFamily: Fonts.text
     },
     input_text: {
         fontSize: 20,
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
         margin: 15,
         justifyContent: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: 'black'
+        borderBottomColor: 'black',
+        fontFamily: Fonts.text
     },
 });

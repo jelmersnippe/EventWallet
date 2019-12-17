@@ -13,7 +13,7 @@ import {
     HeaderText,
     RegularButton,
 } from '../components';
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 const transactions = [
     {
@@ -130,10 +130,10 @@ export default class Transactions extends Component {
                     </View>
                     <TouchableOpacity 
                         onPress={() => {this.props.navigation.navigate('WalletLink')}}
-                        style={styles.wallet_button}    
+                        style={styles.qr_code_button}
                     >
-                        <Icon style={styles.wallet_button_icon} name='qrcode' size={25} color='black' />
-                        <Icon style={styles.wallet_button_icon} name='angle-right' size={40} color='black' />
+                        <Icon style={styles.qr_code_button_icon} name='qrcode' size={25} color='black' />
+                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={40} color='black' />
                     </TouchableOpacity>
                 </View>
 
@@ -141,7 +141,7 @@ export default class Transactions extends Component {
                 <View style={styles.padded_container}>
                     <View style={styles.token_info}>
                         <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens')}} icon='angle-right' text={'Buy Tokens'} backgroundColor={Colors.friendColor} />
+                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} icon='angle-right' text={'Buy Tokens'} backgroundColor={Colors.friendColor} />
                     </View>
                     <HeaderText text='Transaction History' />
                 </View>
@@ -173,10 +173,11 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 25,
-        fontWeight: 'bold',
-        color: '#2D2D2D'
+        //fontWeight: 'bold',
+        color: '#2D2D2D',
+        fontFamily: Fonts.topheader
     },
-    wallet_button: {
+    qr_code_button: {
         flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -186,8 +187,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderWidth: 1,
         borderRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 10, },
+        shadowOpacity: 1,
+        shadowRadius: 6.27,
+        elevation: 10,
     },
-    wallet_button_icon: {
+    qr_code_button_icon: {
         paddingHorizontal: 3,
     },
     padded_container: {
@@ -206,5 +212,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         textAlignVertical: 'center',
+        fontFamily: Fonts.text
     },
 });

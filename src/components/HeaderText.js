@@ -4,6 +4,8 @@ import {
     StyleSheet 
 } from 'react-native'
 
+import { Fonts } from '../components/GlobalVariables'
+
 export default class HeaderText extends Component {
     render() {
         return(
@@ -17,9 +19,10 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         textAlign: 'right',
         paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
+        //textTransform: 'uppercase',
+        fontSize: 20,
         borderBottomWidth: 1,
-        paddingBottom: 5,
+
+        fontFamily: Fonts.header
 	},
 })

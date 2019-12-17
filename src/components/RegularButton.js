@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Fonts } from './GlobalVariables'
 
 class RegularButton extends Component {
     render(){
@@ -29,12 +30,19 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly',
 		alignItems: 'center',
 		borderRadius: 20,
+		shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5, },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 7,
+
     },
     button_text: {
         fontSize: 20,
         textAlign: 'center',
         padding: 4,
-        color: 'white'
+        color: 'white',
+        fontFamily: Fonts.text
     }
 })
 

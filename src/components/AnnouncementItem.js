@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native'
 
-import { Colors } from './GlobalVariables'
+import { Colors, Fonts } from './GlobalVariables'
 
 export default class AnnouncementItem extends Component {
     render() {
@@ -40,23 +40,34 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
         backgroundColor: Colors.eventColor
+
+
     },
     title: {
         width: 70+'%', 
         paddingLeft: 10,
+        fontFamily: Fonts.text,
+        fontSize: 15,
+        fontFamily: Fonts.topheader
     },
     datetime_container: {
         width: 30+'%',
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        fontFamily: Fonts.text
     },
     date: {
-
+        fontFamily: Fonts.text,
+        fontSize: 15
     },
     time: {
-
+        fontFamily: Fonts.text,
+        fontSize: 15
     },
     announcement: {
         padding: 5,
+        fontFamily: Fonts.text,
+        fontSize: 15,
+
     }
 })

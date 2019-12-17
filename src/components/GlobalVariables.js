@@ -6,4 +6,14 @@ export const Colors = {
 
     ctaButtonColor: '#0070C0',
     cancelButtonColor: 'lightgray',
+
+    activeTabColor: 'tomato',
+    inactiveTabColor: 'gray',
+}
+
+export const Fonts = {
+    text: 'DidactGothic-Regular',
+    header: 'Poppins-Regular',
+    topheader: 'Krub-Regular',
+    eventname: 'Raleway-Bold'
 }

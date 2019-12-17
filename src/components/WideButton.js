@@ -7,7 +7,7 @@ import {
 import { withNavigation } from 'react-navigation'
 
 import Icon from 'react-native-vector-icons/FontAwesome5'
-
+import { Fonts } from '../components/GlobalVariables';
 class WideButton extends Component {
     render(){
         return (
@@ -28,14 +28,18 @@ const styles = StyleSheet.create({
 		width: 100+'%',
 		justifyContent: 'center',
         alignItems: 'center',
-        
         borderRadius: 20,
         borderWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: {	width: 0, height: 5, },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 7,
     },
     button_text: { 
-        fontSize: 20, 
-        fontWeight: 'bold',
+        fontSize: 20,
         padding: 10,
+        fontFamily: Fonts.text
     },
 })
 
