@@ -24,9 +24,6 @@ import {
 } from './components'
 import { Colors } from './components/GlobalVariables'
 
-const activeTabColor = 'tomato'
-const inactiveTabColor = 'gray'
-
 
 const TransactionStack = createStackNavigator(
     {
@@ -56,19 +53,6 @@ const TransactionStack = createStackNavigator(
         initialRouteName: 'Transactions'
     }
 )
-
-
-// {"key":"Transactions","routeName":"Transactions","index":1,"routes":
-// [
-//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
-//     ,{"routeName":"WalletLink","key":"id-1576580346332-141"}
-// ],"isTransitioning":false}
-
-// {"key":"Transactions","routeName":"Transactions","routes":
-// [
-//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
-// ],"index":0,"isTransitioning":false}
-
 
 TransactionStack.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true;
@@ -107,8 +91,8 @@ const SpecificEventContent = createBottomTabNavigator(
             },
         }),
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )
@@ -139,7 +123,7 @@ const EventStack = createStackNavigator(
         SpecificEvent: SpecificEventContent,
     },
     {
-        initialRouteName: 'Overview'
+        initialRouteName: 'Overview',
     }
 )
 
@@ -204,8 +188,8 @@ const AppStack = createBottomTabNavigator(
             }
         }),
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )

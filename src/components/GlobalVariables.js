@@ -6,6 +6,9 @@ export const Colors = {
 
     ctaButtonColor: '#0070C0',
     cancelButtonColor: 'lightgray',
+
+    activeTabColor: 'tomato',
+    inactiveTabColor: 'gray',
 }
 
 export const Fonts = {

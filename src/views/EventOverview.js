@@ -75,13 +75,11 @@ export default class EventOverview extends Component {
         }
 	}
 	
-    static navigationOptions = ({ navigation }) => {
-        return {
-            header: (
-                <Header text='Event Overview' textColor='black' backgroundColor={Colors.eventColor} />
-            ),
-        };
-    }
+    static navigationOptions = {
+		header: (
+			<Header text='Aufgepleurt' textColor='black' backgroundColor={Colors.eventColor} />
+		),
+    };
 	
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredEvents: newFilteredList})
