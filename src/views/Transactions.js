@@ -126,9 +126,7 @@ export default class Transactions extends Component {
             >
                 <View style={styles.header}>
                     <View style={styles.event_info}>
-                        <Text style={styles.datetime}>{this.state.event.datetime}</Text>
                         <Text style={styles.name}>{this.state.event.name}</Text>
-                        <Text style={styles.location}>{this.state.event.location}</Text>
                     </View>
                     <TouchableOpacity 
                         onPress={() => {this.props.navigation.navigate('WalletLink')}}
@@ -173,20 +171,10 @@ const styles = StyleSheet.create({
     event_info: {
         flex: 7,
     },
-    datetime: {
-        color: '#80868B',
-        textTransform: 'uppercase',
-        fontSize: 12,
-        paddingLeft: 10,
-    },  
     name: {
         fontSize: 25,
         fontWeight: 'bold',
         color: '#2D2D2D'
-    },
-    location: {
-        color: '#505155',
-        paddingLeft: 10,
     },
     wallet_button: {
         flex: 2,

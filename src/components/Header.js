@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    Animated,
     TouchableOpacity,
     StyleSheet,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { withNavigation } from 'react-navigation'
+
 import SidebarMenu from './SidebarMenu'
 
-export default class Header extends Component {
+class Header extends Component {
     renderMenu() {
         return (
             <SidebarMenu ref='SidebarMenu' {...this.props} />
@@ -21,9 +22,19 @@ export default class Header extends Component {
             <View style={styles.container}>
                 <View style={[styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
 
-                    <TouchableOpacity style={styles.icon}>
+                    {this.props.backButton ?
+                    <TouchableOpacity 
+                        style={styles.icon}
+                        onPress={() => {
+                            this.props.navigation.goBack();
+                        }}
+                    >
                         <Icon name='arrow-left' size={25} color={this.props.textColor} />
                     </TouchableOpacity>
+                    :
+                    <View 
+                    style={styles.icon}></View>
+    }
 
                     <Text style={[styles.text, {color: this.props.textColor}]}>
                         {this.props.text}
@@ -65,3 +76,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
+export default withNavigation(Header)

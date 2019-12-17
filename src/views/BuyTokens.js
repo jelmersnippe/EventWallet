@@ -24,9 +24,7 @@ export default class BuyTokens extends Component {
     render() {
         return (
             <ScrollView style={styles.container}>
-                <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
                 <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
-                <Text style={styles.location}>Autotron, Rosmalen</Text>
 
                 <Text style={styles.header}>Payment</Text>
 
@@ -77,18 +75,8 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		marginLeft: 5,
 	},
-    datetime: {
-        marginTop: 20,
-        color: '#80868B',
-        textTransform: 'uppercase',
-        fontSize: 12,
-    },
-    location: {
-        color: '#505155',
-        marginBottom: 15,
-        width: '90%'
-    },
     name: {
+        marginTop: 20,
         fontSize: 29,
         fontWeight: 'bold',
         color: '#2D2D2D'

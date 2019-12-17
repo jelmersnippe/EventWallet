@@ -5,19 +5,19 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import { 
-    AuthLoading, 
-    Login, 
-    Register, 
-    ForgotPassword, 
-    EventOverview, 
-    Transactions, 
-    WalletLink, 
-    BuyTokens, 
-    Announcements, 
-    Content, 
-    FriendOverview, 
-    ShareTokens 
+import {
+    AuthLoading,
+    Login,
+    Register,
+    ForgotPassword,
+    EventOverview,
+    Transactions,
+    WalletLink,
+    BuyTokens,
+    Announcements,
+    Content,
+    FriendOverview,
+    ShareTokens
 } from './views'
 import {
     Header,
@@ -39,9 +39,10 @@ const TransactionStack = createStackNavigator(
         WalletLink: {
             screen: WalletLink,
             navigationOptions: {
+
                 header: (
-                    <Header text='Transaction Overview' textColor='black' backgroundColor={Colors.eventColor} />
-                )
+                    <Header backButton={true} text='Wallet Link' textColor='black' backgroundColor={Colors.eventColor} />
+                ),
             }
         },
         BuyTokens: {
@@ -55,6 +56,19 @@ const TransactionStack = createStackNavigator(
         initialRouteName: 'Transactions'
     }
 )
+
+
+// {"key":"Transactions","routeName":"Transactions","index":1,"routes":
+// [
+//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
+//     ,{"routeName":"WalletLink","key":"id-1576580346332-141"}
+// ],"isTransitioning":false}
+
+// {"key":"Transactions","routeName":"Transactions","routes":
+// [
+//     {"routeName":"Transactions","key":"id-1576580346332-139","params":{"item":{"id":"1","name":"Shockerz - The Raw Gathering","amount":"8","location":"Autotron, Rosmalen","datetime":"Zaterdag 14 dec 14:00 - 01:00"}}}
+// ],"index":0,"isTransitioning":false}
+
 
 TransactionStack.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true;
@@ -85,7 +99,7 @@ const SpecificEventContent = createBottomTabNavigator(
                 else if (routeName == 'Announcements') {
                     iconName = 'bullhorn'
                 }
-                else if (routeName == 'Content'){
+                else if (routeName == 'Content') {
                     iconName = 'info'
                 }
 
@@ -104,16 +118,14 @@ SpecificEventContent.navigationOptions = ({ navigation }) => {
     if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
         headerShown = false;
     }
-  
-    
 
-    if(headerShown){
+    if (headerShown) {
         return {
             header: (
-                <Header text='Transaction Overview' textColor='black' backgroundColor={Colors.eventColor} />
+                <Header backButton={true} text='Specific Event' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
             ),
         };
-    } 
+    }
     return {
         header: (
             null
@@ -136,7 +148,7 @@ EventStack.navigationOptions = ({ navigation }) => {
     if (navigation.state.index > 0) {
         tabBarVisible = false;
     }
-  
+
     return {
         tabBarVisible,
     };
@@ -178,7 +190,7 @@ const AppStack = createBottomTabNavigator(
     {
         initialRouteName: 'Events',
         defaultNavigationOptions: ({ navigation }) => ({
-            tabBarIcon: ({ tintColor}) => {
+            tabBarIcon: ({ tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
                 if (routeName == 'Friends') {
