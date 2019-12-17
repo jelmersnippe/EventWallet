@@ -11,7 +11,7 @@ import {
 	HeaderText,
 	WideButton
 } from '../components'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 export default class Register extends Component {
 	constructor(props) {
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: Colors.backgroundColor,
 		paddingHorizontal: 5+'%',
+
 	},
 	input_text: {
 		borderBottomWidth: 1,
@@ -219,11 +220,13 @@ const styles = StyleSheet.create({
 		margin: 15,
 		padding: 10,
 		width: '90%',
+		fontFamily: Fonts.text
 	},
 	title: {
 	    fontSize: 30,
 	    marginBottom: 10,
-	    textAlign: 'center'
+	    textAlign: 'center',
+	    fontFamily: Fonts.header
 	},
 	secondary_button: {
 		marginTop: 15, 
@@ -232,9 +235,11 @@ const styles = StyleSheet.create({
 	},
 	secondary_button_text: {
 		fontSize: 18,
+		fontFamily: Fonts.text
 	},
 	error_text: {
 		color: 'red', 
-		textAlign: 'center'
+		textAlign: 'center',
+		fontFamily: Fonts.text
 	}
 });

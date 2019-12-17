@@ -8,7 +8,7 @@ import {
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import { Colors } from './GlobalVariables'
+import { Colors, Fonts } from './GlobalVariables'
 
 class EventItem extends Component {
     render() {
@@ -40,9 +40,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'center',
-
         padding: 5,
-
         borderTopWidth: 1,
         borderBottomWidth: StyleSheet.hairlineWidth,
     },
@@ -54,15 +52,18 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: 12,
         paddingLeft: 10,
+        fontFamily: Fonts.text
     },  
     name: {
         fontSize: 22,
-        fontWeight: 'bold',
-        color: '#2D2D2D'
+        //fontWeight: 'bold',
+        color: '#2D2D2D',
+        fontFamily: Fonts.eventname
     },
     location: {
         color: '#505155',
         paddingLeft: 10,
+        fontFamily: Fonts.text
     },
     wallet_button: {
         width: 30+'%',
@@ -71,15 +72,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5, },
+        shadowOpacity: 1,
+        shadowRadius: 6,
+        elevation: 5,
+        backgroundColor: 'white'
     },
     tokens: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily: Fonts.text,
+
     },
     tokens_text: {
-        fontWeight: 'bold',
+        //fontWeight: 'bold',
         fontSize: 20,
-        padding: 3,
+        padding: 5,
+        fontFamily: Fonts.text,
+
+
     },
 })
 

@@ -10,5 +10,7 @@ export const Colors = {
 
 export const Fonts = {
     text: 'DidactGothic-Regular',
-    header: 'Poppins-Regular'
+    header: 'Poppins-Regular',
+    topheader: 'Krub-Regular',
+    eventname: 'Raleway-Bold'
 }

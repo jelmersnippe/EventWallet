@@ -11,7 +11,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 export default class Login extends Component {
     login() {
@@ -69,22 +69,26 @@ const styles = StyleSheet.create({
         margin: 15,
         padding: 10,
         width: '90%',
+        fontFamily: Fonts.text
     },
     title: {
         fontSize: 30,
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: Fonts.header
     },
     secondary_button: {
         flexDirection: 'row',
         width: '90%',
         justifyContent: 'space-between',
         margin: 15,
-        marginTop: 5
+        marginTop: 5,
+
     },
     secondary_button_text: {
         fontSize: 18,
         textDecorationLine: 'underline',
-        marginTop: 15
+        marginTop: 15,
+        fontFamily: Fonts.text
     }
 });

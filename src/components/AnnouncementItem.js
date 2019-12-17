@@ -39,14 +39,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
-        backgroundColor: Colors.eventColor,
+        backgroundColor: Colors.eventColor
+
 
     },
     title: {
         width: 70+'%', 
         paddingLeft: 10,
         fontFamily: Fonts.text,
-        fontSize: 15
+        fontSize: 15,
+        fontFamily: Fonts.topheader
     },
     datetime_container: {
         width: 30+'%',

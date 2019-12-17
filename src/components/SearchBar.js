@@ -7,6 +7,7 @@ import {
 
 import { createFilter } from 'react-native-search-filter';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Fonts } from './GlobalVariables'
 
 export default class SearchBar extends Component {
     constructor(props) {
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 1.5,
         shadowRadius: 4.65,
         elevation: 7,
+        //
 	},
 	search_bar: {
 		flexDirection: 'row',
@@ -61,6 +63,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		marginVertical: 15,
 		backgroundColor: '#FFF',
+
+
 	},
 	search_icon: {
 		alignSelf: 'center',
@@ -68,5 +72,7 @@ const styles = StyleSheet.create({
 	},
 	search_input: {
 		flex: 9,
+	    fontFamily: Fonts.text,
+	    fontSize: 13
 	}
 })

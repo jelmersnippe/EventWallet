@@ -5,6 +5,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import InputSpinner from "react-native-input-spinner";
+import { Colors, Fonts } from './GlobalVariables'
 
 export default class NumericTokenInput extends Component {
 	constructor() {
@@ -44,7 +45,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     text: {
-        width: 40+'%',
+        width: 35+'%',
         fontSize: 20,
+        fontFamily: Fonts.text,
+
     },
 })

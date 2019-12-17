@@ -8,10 +8,14 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import {
+    HeaderText,
+} from '../components'
+
+import {
     NumericTokenInput,
     RegularButton
 } from '../components'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -26,7 +30,7 @@ export default class BuyTokens extends Component {
             <ScrollView style={styles.container}>
                 <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
 
-                <Text style={styles.header}>Payment</Text>
+                <HeaderText text='Buy tokens' />
 
                 <NumericTokenInput />
 
@@ -74,12 +78,14 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		marginBottom: 5,
 		marginLeft: 5,
+		fontFamily: Fonts.text
 	},
     name: {
         marginTop: 20,
         fontSize: 29,
-        fontWeight: 'bold',
-        color: '#2D2D2D'
+        //fontWeight: 'bold',
+        color: '#2D2D2D',
+        fontFamily: Fonts.topheader
     },
 	dropdown_container: {
 		borderWidth: 1,
@@ -90,6 +96,8 @@ const styles = StyleSheet.create({
     button_container: { 
 		flexDirection: 'row', 
 		justifyContent: 'space-evenly', 
-		marginTop: 20 
+		marginTop: 20,
+		    paddingBottom: 20,
+
 	},
 });

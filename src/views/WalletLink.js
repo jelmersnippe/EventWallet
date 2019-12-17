@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import { HeaderText } from '../components'
-import { Colors } from '../components/GlobalVariables';
+import { Colors, Fonts } from '../components/GlobalVariables';
 
 export default class WalletLink extends Component {
     render() {
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
 	content: {
 		fontSize: 25,
 		marginLeft: 5,
-		fontWeight: 'bold'
+		//fontWeight: 'bold',
+		fontFamily: Fonts.header
 	},
     qr_code: {
         width: 100+'%',
@@ -62,16 +63,19 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70+'%',
         padding: 10,
-
         borderWidth: 1,
         borderRadius: 20,
-
         alignItems: 'center',
         textAlignVertical: 'center',
         textAlign: 'center',
         fontSize: 20,
-
         backgroundColor: Colors.ctaButtonColor,
         color: 'white',
+        fontFamily: Fonts.text,
+        shadowColor: "#000",
+        shadowOffset: {	width: 0, height: 5, },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 7,
     },
 })

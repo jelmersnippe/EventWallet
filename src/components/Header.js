@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { withNavigation } from 'react-navigation'
+import { Fonts } from './GlobalVariables'
 
 import SidebarMenu from './SidebarMenu'
 
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
     text: {
         flex: 8,
         textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 21,
+        fontSize: 24,
+        fontFamily: Fonts.topheader
+
     },
     icon: {
         flex: 1,
