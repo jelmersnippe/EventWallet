@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import { Colors } from './GlobalVariables'
+import { Colors, Fonts } from './GlobalVariables'
 
 export default class TransactionItem extends Component {
     render() {
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         width: 100+'%',
         borderWidth: 1,
         marginBottom: 10,
+        fontFamily: Fonts.text
     },
     datetime: {
         width: 100+'%', 
@@ -53,31 +54,37 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: Colors.eventColor,
         fontSize: 16,
+        fontFamily: Fonts.text
     },
     transaction_info: {
         flexDirection: 'row',
         width: 100+'%',
         paddingVertical: 5,
         paddingHorizontal: 10,
+        fontFamily: Fonts.text
     },
     user_info: {
         flexDirection: 'row', 
         flex: 6, 
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily: Fonts.text
     },
     user_info_text: {
         fontSize: 20,
         paddingLeft: 5,
         textAlignVertical: 'center',
+        fontFamily: Fonts.text
     },
     amount: {
         flexDirection: 'row', 
         justifyContent: 'space-evenly',
-        flex: 2
+        flex: 2,
+        fontFamily: Fonts.text
     },
     amount_text: {
         textAlignVertical: 'center',
         textAlign: 'right',
         fontSize: 20,
+        fontFamily: Fonts.text
     },
 })

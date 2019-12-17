@@ -8,7 +8,7 @@ import {
     AnnouncementList, 
     HeaderText 
 } from '../components'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 const announcements = [
     {
@@ -77,4 +77,5 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingBottom: 5,
 	},
+
 })

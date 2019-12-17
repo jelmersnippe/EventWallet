@@ -7,3 +7,8 @@ export const Colors = {
     ctaButtonColor: '#0070C0',
     cancelButtonColor: 'lightgray',
 }
+
+export const Fonts = {
+    text: 'DidactGothic-Regular',
+    header: 'Poppins-Regular'
+}

@@ -4,6 +4,8 @@ import {
     StyleSheet 
 } from 'react-native'
 
+import { Fonts } from '../components/GlobalVariables'
+
 export default class HeaderText extends Component {
     render() {
         return(
@@ -20,6 +22,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: 21,
         borderBottomWidth: 1,
-        paddingBottom: 5,
+        //paddingBottom: 5,
+        fontFamily: Fonts.header
 	},
 })
