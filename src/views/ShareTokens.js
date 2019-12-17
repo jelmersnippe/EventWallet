@@ -27,15 +27,14 @@ export default class ShareTokens extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<HeaderText text='Receiver' />
+				<HeaderText text='Receiver' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 				<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
 
-				<HeaderText text='Wallet' />
+				<HeaderText text='Wallet' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 				<Text style={styles.description}>Select the wallet of the event you want to share tokens for:</Text>
 				<View style={styles.dropdown_container}>
 					<Picker
 						selectedValue={this.state.value}
-						style={{ width: '100%' }}
 						onValueChange={(itemValue, itemIndex) =>
 							this.setState({ value: itemValue })
 						}>
@@ -45,14 +44,25 @@ export default class ShareTokens extends Component {
 					</Picker>
 				</View>
 
-				<HeaderText text='Balance' />
+				<HeaderText text='Balance' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
   			    <Text style = { styles.description}>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
 
 				<NumericTokenInput />
 
 				<View style={styles.button_container}>
-					<RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor={Colors.cancelButtonColor} />
-					<RegularButton text={'Share'} backgroundColor={Colors.ctaButtonColor} />
+					<RegularButton 
+						callback={() => {this.props.navigation.goBack()}} 
+						text={'Cancel'} 
+						textColor={Colors.darkTextColor}
+						backgroundColor={Colors.cancelButtonColor}
+						borderColor={Colors.cancelButtonBorderColor} 
+					/>
+					<RegularButton 
+						text={'Share'} 
+						textColor={Colors.darkTextColor}
+						backgroundColor={Colors.ctaButtonColor} 
+						borderColor={Colors.ctaButtonBorderColor}	
+					/>
 				</View>
 			</View>
 
@@ -70,7 +80,8 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		marginBottom: 5,
 		marginLeft: 5,
-		fontFamily: Fonts.text
+		fontFamily: Fonts.text,
+		color: Colors.darkTextColor,
 	},
 	receiver: {
 		fontSize: 25,

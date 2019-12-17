@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },  
     name: {
         fontSize: 22,
-        color: '#2D2D2D',
+        color: Colors.darkTextColor,
         fontFamily: Fonts.eventname
     },
     location: {

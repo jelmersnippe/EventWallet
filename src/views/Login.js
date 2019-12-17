@@ -35,7 +35,7 @@ export default class Login extends Component {
                     placeholder='Password'
                 />
 
-                <WideButton callback={() => { this.login() }} text='Login' backgroundColor={Colors.eventColor} />
+                <WideButton callback={() => { this.login() }} text='Login' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
 
                 <View style={styles.secondary_button}>
                     <TouchableOpacity
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         margin: 15,
         marginTop: 5,
-
     },
     secondary_button_text: {
         fontSize: 18,

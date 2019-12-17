@@ -110,7 +110,7 @@ export default class FriendOverview extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: (
-                <Header text='Friend Overview' textColor='white' backgroundColor={Colors.friendColor} />
+                <Header text='Friend Overview' textColor={Colors.lightTextColor} backgroundColor={Colors.friendColor} />
             ),
         };
     };
@@ -148,6 +148,7 @@ export default class FriendOverview extends Component {
 				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor={Colors.friendColor} />
 			
 				<ScrollView
+                    style={styles.user_list_container}
                 	showsVerticalScrollIndicator={false}
 				>
 					<UserList headerText='Pending requests' data={this.state.pendingList}/>
@@ -165,5 +166,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: Colors.backgroundColor,
-	},
+    },
+    user_list_container: {
+        paddingHorizontal: 3+'%'
+    }
 });

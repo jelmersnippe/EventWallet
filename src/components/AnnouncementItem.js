@@ -14,8 +14,8 @@ export default class AnnouncementItem extends Component {
                 <View style={styles.header}>
                     <Text style={styles.title}>{this.props.item.title}</Text>
                     <View style={styles.datetime_container}>
-                        <Text style={styles.date}>{this.props.item.date}</Text>
-                        <Text style={styles.time}>{this.props.item.time}</Text>
+                        <Text style={styles.date_time}>{this.props.item.date}</Text>
+                        <Text style={styles.date_time}>{this.props.item.time}</Text>
                     </View>
                 </View>
 
@@ -28,27 +28,25 @@ export default class AnnouncementItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         width: 100+'%',
-        marginVertical: 5,
-        borderWidth: 1,
+        marginTop: 10,
+        borderBottomWidth: 1,
     },
     header: {
         width: 100+'%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
-        backgroundColor: Colors.eventColor
-
-
+        backgroundColor: Colors.eventColor,
+        borderRadius: 10,
     },
     title: {
         width: 70+'%', 
         paddingLeft: 10,
         fontFamily: Fonts.text,
         fontSize: 15,
-        fontFamily: Fonts.topheader
+        fontFamily: Fonts.topheader,
+        color: Colors.lightTextColor,
     },
     datetime_container: {
         width: 30+'%',
@@ -56,13 +54,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         fontFamily: Fonts.text
     },
-    date: {
+    date_time: {
         fontFamily: Fonts.text,
-        fontSize: 15
-    },
-    time: {
-        fontFamily: Fonts.text,
-        fontSize: 15
+        fontSize: 15,
+        color: Colors.lightTextColor,
     },
     announcement: {
         padding: 5,

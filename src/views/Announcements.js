@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
-    StyleSheet
+    View,
+    StyleSheet,
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -80,12 +81,16 @@ const announcements = [
 export default class Announcements extends Component {
     render() {
         return(
-            <ScrollView style={styles.container}>
-                <HeaderText text='Announcements' />
-                <AnnouncementList 
-                    data={announcements}
-                />
-            </ScrollView>
+            <View style={styles.container}>
+                <HeaderText text='Announcements' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                <ScrollView 
+                    showsVerticalScrollIndicator={false}
+                >
+                    <AnnouncementList 
+                        data={announcements}
+                    />
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -96,14 +101,4 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 3+'%'
     },
-    header: {
-        marginVertical: 10,
-        textAlign: 'right',
-        paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-	},
-
 })

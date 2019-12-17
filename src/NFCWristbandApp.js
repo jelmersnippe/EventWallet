@@ -37,7 +37,7 @@ const TransactionStack = createStackNavigator(
             screen: WalletLink,
             navigationOptions: ({navigation}) => ({
                 header: (
-                    <Header backButton={true} text='Wallet Link' textColor='white' backgroundColor={Colors.eventColor} navigation={navigation} />
+                    <Header backButton={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                 ),
             })
         },
@@ -97,7 +97,7 @@ const SpecificEventContent = createBottomTabNavigator(
             if (headerShown) {
                 return {
                     header: (
-                        <Header backButton={true} text='Specific Event' textColor={Colors.textColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                        <Header backButton={true} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                     ),
                 };
             }

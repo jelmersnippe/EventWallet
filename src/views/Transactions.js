@@ -141,9 +141,16 @@ export default class Transactions extends Component {
                 <View style={styles.padded_container}>
                     <View style={styles.token_info}>
                         <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} icon='angle-right' text={'Buy Tokens'} textColor='black' borderColor={Colors.darkCtaButtonColor} backgroundColor={Colors.ctaButtonColor} />
+                        <RegularButton 
+                            callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} 
+                            icon='angle-right' 
+                            text={'Buy Tokens'} 
+                            textColor='black' 
+                            borderColor={Colors.ctaButtonBorderColor} 
+                            backgroundColor={Colors.ctaButtonColor} 
+                        />
                     </View>
-                    <HeaderText text='Transaction History' />
+                    <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
                 </View>
 
                 <View style={styles.padded_container}>
@@ -173,7 +180,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 25,
-        color: Colors.textColor,
+        color: Colors.lightTextColor,
         fontFamily: Fonts.topheader
     },
     qr_code_button: {
@@ -211,6 +218,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         textAlignVertical: 'center',
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
 });

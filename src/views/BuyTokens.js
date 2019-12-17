@@ -36,7 +36,7 @@ export default class BuyTokens extends Component {
             <ScrollView style={styles.container}>
                 <Text style={styles.name}>{this.state.event.name}</Text>
 
-                <HeaderText text='Buy tokens' />
+                <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
                 <Text style={styles.description}>Price per token: X</Text>
                 <NumericTokenInput />
@@ -46,11 +46,10 @@ export default class BuyTokens extends Component {
                 <Text style={styles.description}>Select the payment method</Text>
                 <View style={styles.dropdown_container}>
                     <Picker
-                        style={{ height: 50, width: '100%' }}
-                        itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
+                        selectedValue={this.state.paymentMethod}
                         onValueChange={(itemValue, itemIndex) =>
-                            this.setState({ paymentMethod: itemValue })
-                        }>
+                            this.setState({ paymentMethod: itemValue })}
+                    >
                         <Picker.Item label="IDEAL" value="IDEAL" />
                         <Picker.Item label="Paypal" value="Paypal" />
                         <Picker.Item label="Visa" value="Visa" />
@@ -59,8 +58,19 @@ export default class BuyTokens extends Component {
 
 
                 <View style={styles.button_container}>
-                    <RegularButton callback={() => { this.props.navigation.goBack() }} text={'Cancel'} backgroundColor={Colors.cancelButtonColor} />
-                    <RegularButton text={'Checkout'} backgroundColor={Colors.ctaButtonColor} borderColor={Colors.darkCtaButtonColor} />
+                    <RegularButton 
+                        callback={() => { this.props.navigation.goBack() }} 
+                        text={'Cancel'} 
+                        textColor={Colors.darkTextColor}
+                        backgroundColor={Colors.cancelButtonColor} 
+                        borderColor={Colors.cancelButtonBorderColor}
+                    />
+                    <RegularButton 
+                        text={'Checkout'} 
+                        textColor={Colors.darkTextColor}
+                        backgroundColor={Colors.ctaButtonColor} 
+                        borderColor={Colors.ctaButtonBorderColor} 
+                    />
                 </View>
             </ScrollView>
 
@@ -78,13 +88,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 5,
         marginLeft: 5,
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
     name: {
         marginTop: 20,
         fontSize: 29,
-        color: '#2D2D2D',
-        fontFamily: Fonts.topheader
+        fontFamily: Fonts.topheader,
+        color: Colors.darkTextColor,
     },
     dropdown_container: {
         borderWidth: 1,

@@ -22,7 +22,8 @@ export default class Header extends Component {
             <View style={styles.container}>
                 <View style={[styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
 
-                    {this.props.backButton ?
+                    {this.props.backButton 
+                    ?
                     <TouchableOpacity 
                         style={styles.icon}
                         onPress={() => {
@@ -32,9 +33,8 @@ export default class Header extends Component {
                         <Icon name='arrow-left' size={25} color={this.props.textColor} />
                     </TouchableOpacity>
                     :
-                    <View 
-                    style={styles.icon}></View>
-    }
+                    <View style={styles.icon}></View>
+                    }
 
                     <Text style={[styles.text, {color: this.props.textColor}]}>
                         {this.props.text}
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 24,
         fontFamily: Fonts.topheader
-
     },
     icon: {
         flex: 1,

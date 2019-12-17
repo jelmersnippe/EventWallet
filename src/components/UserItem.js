@@ -20,14 +20,24 @@ class UserItem extends Component {
         else if(this.props.item.status == 'unknown') return 'Add'
     }
 
+    setTextColor(){
+        if(this.props.item.status == 'friend') return Colors.darkTextColor
+        else return Colors.lightTextColor
+    }
+
     setIcon(){
         if(this.props.item.status == 'friend') return 'coins'
         else return 'user-plus'
     }
 
-    setColor(){
+    setBackgroundColor(){
         if(this.props.item.status == 'friend') return Colors.ctaButtonColor
         else return 'green'
+    }
+
+    setBorderColor(){
+        if(this.props.item.status == 'friend') return Colors.ctaButtonBorderColor
+        else return Colors.cancelButtonBorderColor
     }
 
     render() {
@@ -45,7 +55,9 @@ class UserItem extends Component {
                     item={this.props.item} 
                     text={this.setText()}
                     icon={this.setIcon()}
-                    backgroundColor={this.setColor()}
+                    textColor={this.setTextColor()}
+                    backgroundColor={this.setBackgroundColor()}
+                    borderColor={this.setBorderColor()}
                 />
             </View>
         );
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
         backgroundColor: 'white',
-        marginVertical: 5,
+        marginTop: 10,
     },
     name_container: {
         width: 55+'%',

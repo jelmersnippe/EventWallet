@@ -177,7 +177,7 @@ export default class Register extends Component {
 				<View>
 					{this.state.passwordError.map(item => {
 						return(
-							<Text style={styles.error_text}>{item}</Text>
+							<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
 						)	
 					})}
 				</View>
@@ -189,11 +189,11 @@ export default class Register extends Component {
 					value={this.state.email}
 				/>
 
-				<Text style={styles.error_text}>
+				<Text style={[styles.error_text, {marginBottom: 30}]}>
 					{this.state.emailError}
 				</Text>
 
-				<WideButton callback={() => {this.validate()}} text='Register' backgroundColor={Colors.eventColor} />
+				<WideButton callback={() => {this.validate()}} text='Register' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
 
 				<View style={styles.secondary_button}>
 					<Text style={styles.secondary_button_text}>Already have an account? </Text>
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		fontSize: 20,
 		borderBottomColor: 'black',
-		margin: 15,
+		marginVertical: 15,
 		padding: 10,
 		width: '90%',
 		fontFamily: Fonts.text

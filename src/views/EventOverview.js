@@ -9,6 +9,7 @@ import {
 	Header,
 	EventList, 
 	SearchBar,
+	HeaderText,
 } from '../components'
 import { Colors } from '../components/GlobalVariables'
 
@@ -77,7 +78,7 @@ export default class EventOverview extends Component {
 	
     static navigationOptions = {
 		header: (
-			<Header text='Event Overview' textColor={Colors.textColor} backgroundColor={Colors.eventColor} />
+			<Header text='Event Overview' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
 		),
     };
 	
@@ -100,14 +101,18 @@ export default class EventOverview extends Component {
 			<View style={styles.container}>
 				<SearchBar keys={['name', 'location', 'datetime']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor={Colors.eventColor} />
 
-				<ScrollView
-					style={styles.padded_container}
-					showsVerticalScrollIndicator={false}
-				>
-					<EventList
-						data={this.state.searchTerm != '' ? this.state.filteredEvents : events}
-					/>
-				</ScrollView>
+				<View style={styles.event_list_container}>
+					<HeaderText text='Events' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+
+					<ScrollView
+						style={styles.padded_container}
+						showsVerticalScrollIndicator={false}
+					>
+						<EventList
+							data={this.state.searchTerm != '' ? this.state.filteredEvents : events}
+						/>
+					</ScrollView>
+				</View>
 			</View >
 		);
 	}
@@ -117,5 +122,9 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: Colors.backgroundColor,
+	},
+	event_list_container: {
+		flex: 1,
+		paddingHorizontal: 3+'%'
 	}
 });

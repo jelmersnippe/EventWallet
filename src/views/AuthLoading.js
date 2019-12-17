@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
         width: 80 + '%',
         padding: 10,
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: Colors.lightTextColor,
         alignItems: 'center',
         marginBottom: 20,
     },
     button_text: {
-        color: 'white'
+        color: Colors.lightTextColor
     }
 });

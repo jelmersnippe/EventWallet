@@ -29,7 +29,7 @@ export default class ForgotPassword extends Component {
                 <TextInput style={styles.input_text} placeholder="Email address"/>
 
                 
-                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' backgroundColor={Colors.eventColor} />
+                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
             </View>
         );
     }
