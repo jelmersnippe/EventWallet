@@ -6,12 +6,11 @@ import {
     StyleSheet,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { withNavigation } from 'react-navigation'
 import { Fonts } from './GlobalVariables'
 
 import SidebarMenu from './SidebarMenu'
 
-class Header extends Component {
+export default class Header extends Component {
     renderMenu() {
         return (
             <SidebarMenu ref='SidebarMenu' {...this.props} />
@@ -78,5 +77,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
-
-export default withNavigation(Header)

@@ -97,14 +97,6 @@ const users = [
 ]
 
 export default class FriendOverview extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            header: (
-                <Header text='Friend Overview' textColor='white' backgroundColor={Colors.friendColor} />
-            ),
-        };
-    };
-
     constructor(props) {
         super(props);
         this.state = {

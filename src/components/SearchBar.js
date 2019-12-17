@@ -8,6 +8,7 @@ import {
 import { createFilter } from 'react-native-search-filter';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Fonts } from './GlobalVariables'
+import { BackHandler } from 'react-native';
 
 export default class SearchBar extends Component {
     constructor(props) {
@@ -17,22 +18,50 @@ export default class SearchBar extends Component {
         }
     }
 
-    searchUpdated(term) {
-        this.setState({searchTerm: term})
-        this.props.callback(this.props.list.filter(createFilter(term, this.props.keys)), term) 
+    componentDidMount() {
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
 
-        if(term == ''){
+    componentWillUnmount() {
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
+
+    handleBackButtonPressAndroid = () => {
+
+        if (this.state.searchTerm != '') {
+            this.searchUpdated('');
+
+            // We have handled the back button
+            // Return `true` to prevent react-navigation from handling it
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    searchUpdated(term) {
+        this.setState({ searchTerm: term })
+        this.props.callback(this.props.list.filter(createFilter(term, this.props.keys)), term)
+
+        if (term == '') {
             this.props.callback([], term)
         }
     }
 
-    render(){
-        return(
-            <View style={[styles.search_container, {backgroundColor: this.props.backgroundColor}]}>
+    render() {
+        return (
+            <View style={[styles.search_container, { backgroundColor: this.props.backgroundColor }]}>
                 <View style={styles.search_bar}>
                     <Icon name='search' size={30} color="#80868B" style={styles.search_icon} />
                     <TextInput
-                        onChangeText={(term) => {this.searchUpdated(term)}}
+                        onChangeText={(term) => { this.searchUpdated(term) }}
+                        value={this.state.searchTerm}
                         placeholder={this.props.placeholder}
                         placeholderTextColor='#80868B'
                         style={styles.search_input}
@@ -44,16 +73,15 @@ export default class SearchBar extends Component {
 }
 
 const styles = StyleSheet.create({
-	search_container: {
-		justifyContent: 'center',
-		width: 100+'%',
-		paddingHorizontal: 5+'%',
+    search_container: {
+        justifyContent: 'center',
+        width: 100 + '%',
+        paddingHorizontal: 5 + '%',
         shadowColor: "black",
-        shadowOffset: {	width: 0, height: 6, },
+        shadowOffset: { width: 0, height: 6, },
         shadowOpacity: 1.5,
         shadowRadius: 4.65,
         elevation: 7,
-        //
 	},
 	search_bar: {
 		flexDirection: 'row',
@@ -63,8 +91,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		marginVertical: 15,
 		backgroundColor: '#FFF',
-
-
 	},
 	search_icon: {
 		alignSelf: 'center',
