@@ -12,14 +12,14 @@ export default class AnnouncementItem extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>{this.props.title}</Text>
+                    <Text style={styles.title}>{this.props.item.title}</Text>
                     <View style={styles.datetime_container}>
-                        <Text style={styles.date}>{this.props.date}</Text>
-                        <Text style={styles.time}>{this.props.time}</Text>
+                        <Text style={styles.date}>{this.props.item.date}</Text>
+                        <Text style={styles.time}>{this.props.item.time}</Text>
                     </View>
                 </View>
 
-                <Text  style={styles.announcement}>{this.props.announcement}</Text>
+                <Text  style={styles.announcement}>{this.props.item.announcement}</Text>
                 
             </View>
         );

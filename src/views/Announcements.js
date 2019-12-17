@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {
-    View,
     StyleSheet
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { 
     AnnouncementList, 
@@ -46,18 +46,46 @@ const announcements = [
         time: '14:26',
         announcement: 'This is a test announcement to apply some styling to this element :)'
     },
+    {
+        id: 6,
+        title: 'Test 6',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 7,
+        title: 'Test 7',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 8,
+        title: 'Test 8',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 9,
+        title: 'Test 9',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
     
 ]
 
 export default class Announcements extends Component {
     render() {
         return(
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <HeaderText text='Announcements' />
                 <AnnouncementList 
-                    announcementData={announcements}
+                    data={announcements}
                 />
-            </View>
+            </ScrollView>
         );
     }
 }
