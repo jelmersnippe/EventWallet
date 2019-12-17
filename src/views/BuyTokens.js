@@ -17,18 +17,27 @@ export default class BuyTokens extends Component {
     constructor() {
         super();
         this.state = {
-            PickerValue: ''
+            paymentMethod: '',
+            totalPrice: 0,
+            event: [],
         }
+    }
+
+    componentDidMount(){
+        this.setState({event: this.props.navigation.getParam('event')})
     }
 
     render() {
         return (
             <ScrollView style={styles.container}>
-                <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
+                <Text style={styles.name}>{this.state.event.name}</Text>
 
                 <Text style={styles.header}>Payment</Text>
+                
+                <Text style={styles.description}>Price per token: X</Text>
+                <NumericTokenInput  />
 
-                <NumericTokenInput />
+                <Text style={styles.description}>Total price: {this.state.totalPrice}</Text>
 
                 <Text style={styles.description}>Select the payment method</Text>
                 <View style={styles.dropdown_container}>
@@ -36,7 +45,7 @@ export default class BuyTokens extends Component {
                         style={{ height: 50, width: '100%' }}
                         itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
                         onValueChange={(itemValue, itemIndex) =>
-                            this.setState({ language: itemValue })
+                            this.setState({ paymentMethod: itemValue })
                         }>
                         <Picker.Item label="IDEAL" value="IDEAL" />
                         <Picker.Item label="Paypal" value="Paypal" />
