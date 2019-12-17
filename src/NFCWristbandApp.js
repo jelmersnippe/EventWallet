@@ -38,12 +38,11 @@ const TransactionStack = createStackNavigator(
         },
         WalletLink: {
             screen: WalletLink,
-            navigationOptions: {
-
+            navigationOptions: ({navigation}) => ({
                 header: (
-                    <Header backButton={true} text='Wallet Link' textColor='black' backgroundColor={Colors.eventColor} />
+                    <Header backButton={true} text='Wallet Link' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
                 ),
-            }
+            })
         },
         BuyTokens: {
             screen: BuyTokens,
