@@ -19,6 +19,10 @@ import {
     FriendOverview, 
     ShareTokens 
 } from './views'
+import {
+    Header,
+} from './components'
+import { Colors } from './components/GlobalVariables'
 
 const activeTabColor = 'tomato'
 const inactiveTabColor = 'gray'
@@ -32,7 +36,14 @@ const TransactionStack = createStackNavigator(
                 header: null,
             }
         },
-        WalletLink: WalletLink,
+        WalletLink: {
+            screen: WalletLink,
+            navigationOptions: {
+                header: (
+                    <Header text='Transaction Overview' textColor='black' backgroundColor={Colors.eventColor} />
+                )
+            }
+        },
         BuyTokens: {
             screen: BuyTokens,
             navigationOptions: {
@@ -94,8 +105,19 @@ SpecificEventContent.navigationOptions = ({ navigation }) => {
         headerShown = false;
     }
   
+    
+
+    if(headerShown){
+        return {
+            header: (
+                <Header text='Transaction Overview' textColor='black' backgroundColor={Colors.eventColor} />
+            ),
+        };
+    } 
     return {
-        headerShown,
+        header: (
+            null
+        ),
     };
 }
 

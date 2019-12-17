@@ -7,9 +7,9 @@ import { createFilter } from 'react-native-search-filter'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import {
+    Header,
     UserList,
     SearchBar,
-    Header,
 } from '../components'
 import { Colors } from '../components/GlobalVariables'
 
