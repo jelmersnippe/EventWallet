@@ -106,6 +106,15 @@ export default class FriendOverview extends Component {
             pendingList: [],
         }
     }
+    
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: (
+                <Header text='Friend Overview' textColor='white' backgroundColor={Colors.friendColor} />
+            ),
+        };
+    };
+
 	
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredUsers: this.orderSearchResults(newFilteredList)})

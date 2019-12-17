@@ -24,9 +24,6 @@ import {
 } from './components'
 import { Colors } from './components/GlobalVariables'
 
-const activeTabColor = 'tomato'
-const inactiveTabColor = 'gray'
-
 
 const TransactionStack = createStackNavigator(
     {
@@ -111,8 +108,8 @@ const SpecificEventContent = createBottomTabNavigator(
             };
         },
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )
@@ -185,17 +182,9 @@ const AppStack = createBottomTabNavigator(
                 return <Icon name={iconName} size={25} color={tintColor} />
             }
         }),
-        navigationOptions: ({ navigation }) => {
-            const { routeName } = navigation.state;
-            return {
-                header: (
-                    <Header text={routeName} textColor='black' backgroundColor={routeName == 'Event Overview' ? Colors.eventColor : Colors.friendColor} />
-                ),
-            };
-        },
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )
