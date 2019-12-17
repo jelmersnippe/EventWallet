@@ -53,20 +53,19 @@ const TransactionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Transactions'
+        initialRouteName: 'Transactions',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            }
+        }
     }
 )
-
-TransactionStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    }
-}
 
 const SpecificEventContent = createBottomTabNavigator(
     {
@@ -93,6 +92,25 @@ const SpecificEventContent = createBottomTabNavigator(
                 return <Icon name={iconName} size={25} color={tintColor} />
             },
         }),
+        navigationOptions: ({ navigation }) => {
+            let headerShown = true;
+            if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
+                headerShown = false;
+            }
+        
+            if (headerShown) {
+                return {
+                    header: (
+                        <Header backButton={true} text='Specific Event' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
+                    ),
+                };
+            }
+            return {
+                header: (
+                    null
+                ),
+            };
+        },
         tabBarOptions: {
             activeTintColor: activeTabColor,
             inactiveTintColor: inactiveTabColor
@@ -100,46 +118,25 @@ const SpecificEventContent = createBottomTabNavigator(
     }
 )
 
-SpecificEventContent.navigationOptions = ({ navigation }) => {
-    let headerShown = true;
-    if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
-        headerShown = false;
-    }
-
-    if (headerShown) {
-        return {
-            header: (
-                <Header backButton={true} text='Specific Event' textColor='black' backgroundColor={Colors.eventColor} navigation={navigation} />
-            ),
-        };
-    }
-    return {
-        header: (
-            null
-        ),
-    };
-}
-
 const EventStack = createStackNavigator(
     {
         Overview: EventOverview,
         SpecificEvent: SpecificEventContent,
     },
     {
-        initialRouteName: 'Overview'
+        initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 )
-
-EventStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 const FriendStack = createStackNavigator(
     {
@@ -153,20 +150,19 @@ const FriendStack = createStackNavigator(
     },
     {
         initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 
 )
-
-FriendStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 
 const AppStack = createBottomTabNavigator(
@@ -190,22 +186,20 @@ const AppStack = createBottomTabNavigator(
                 return <Icon name={iconName} size={25} color={tintColor} />
             }
         }),
+        navigationOptions: ({ navigation }) => {
+            const { routeName } = navigation.state;
+            return {
+                header: (
+                    <Header text={routeName} textColor='black' backgroundColor={routeName == 'Event Overview' ? Colors.eventColor : Colors.friendColor} />
+                ),
+            };
+        },
         tabBarOptions: {
             activeTintColor: activeTabColor,
             inactiveTintColor: inactiveTabColor
         }
     }
 )
-
-AppStack.navigationOptions = ({ navigation }) => {
-    const { routeName } = navigation.state;
-    return {
-        header: (
-            <Header text={routeName} textColor='black' backgroundColor={routeName == 'Event Overview' ? Colors.eventColor : Colors.friendColor} />
-        ),
-    };
-}
-
 
 const AuthStack = createStackNavigator(
     {
