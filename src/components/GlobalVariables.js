@@ -1,13 +1,17 @@
 
 export const Colors = {
-    eventColor: '#F6CF3A',
-    friendColor: '#0070C0',
+    textColor: 'white',
+
+    eventColor: '#4147a8',
+    friendColor: '#4147a8',
     backgroundColor: '#F5FCFF',
 
-    ctaButtonColor: '#0070C0',
+    ctaButtonColor: '#f6c442',
+    darkCtaButtonColor: '#db8e02',
     cancelButtonColor: 'lightgray',
 
-    activeTabColor: 'tomato',
+    coinIconColor: '#f6c442', //'#F6CF3A',
+    activeTabColor: '#4147a8',
     inactiveTabColor: 'gray',
 }
 

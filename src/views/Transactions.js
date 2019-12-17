@@ -141,7 +141,7 @@ export default class Transactions extends Component {
                 <View style={styles.padded_container}>
                     <View style={styles.token_info}>
                         <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} icon='angle-right' text={'Buy Tokens'} backgroundColor={Colors.friendColor} />
+                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} icon='angle-right' text={'Buy Tokens'} textColor='black' borderColor={Colors.darkCtaButtonColor} backgroundColor={Colors.ctaButtonColor} />
                     </View>
                     <HeaderText text='Transaction History' />
                 </View>
@@ -173,8 +173,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 25,
-        //fontWeight: 'bold',
-        color: '#2D2D2D',
+        color: Colors.textColor,
         fontFamily: Fonts.topheader
     },
     qr_code_button: {

@@ -60,7 +60,7 @@ export default class BuyTokens extends Component {
 
                 <View style={styles.button_container}>
                     <RegularButton callback={() => { this.props.navigation.goBack() }} text={'Cancel'} backgroundColor={Colors.cancelButtonColor} />
-                    <RegularButton text={'Checkout'} backgroundColor={Colors.ctaButtonColor} />
+                    <RegularButton text={'Checkout'} backgroundColor={Colors.ctaButtonColor} borderColor={Colors.darkCtaButtonColor} />
                 </View>
             </ScrollView>
 

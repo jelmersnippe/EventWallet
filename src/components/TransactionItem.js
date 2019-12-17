@@ -32,7 +32,7 @@ export default class TransactionItem extends Component {
 
                         <View style={styles.amount}>
                             <Text style={styles.amount_text}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
-                            <Icon style={styles.amount_icon} name='coins' size={30} color={Colors.eventColor} />
+                            <Icon style={styles.amount_icon} name='coins' size={30} color={Colors.coinIconColor} />
                         </View>
                     </View>
                 </View>
@@ -44,7 +44,7 @@ export default class TransactionItem extends Component {
 const styles = StyleSheet.create({
     container: {
         width: 100+'%',
-        borderWidth: 1,
+        borderBottomWidth: 1,
         marginBottom: 10,
         fontFamily: Fonts.text
     },
@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: Colors.eventColor,
         fontSize: 16,
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
+        color: Colors.textColor,
+        borderRadius: 10,
     },
     transaction_info: {
         flexDirection: 'row',

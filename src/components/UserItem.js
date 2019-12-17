@@ -26,7 +26,7 @@ class UserItem extends Component {
     }
 
     setColor(){
-        if(this.props.item.status == 'friend') return '#0070C0'
+        if(this.props.item.status == 'friend') return Colors.ctaButtonColor
         else return 'green'
     }
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
         backgroundColor: 'white',
-        marginBottom: 10,
+        marginVertical: 5,
     },
     name_container: {
         width: 55+'%',

@@ -16,10 +16,9 @@ export default class HeaderText extends Component {
 
 const styles = StyleSheet.create({
 	header: {
-        marginVertical: 10,
+        marginTop: 10,
         textAlign: 'right',
         paddingRight: 5,
-        //textTransform: 'uppercase',
         fontSize: 20,
         borderBottomWidth: 1,
 

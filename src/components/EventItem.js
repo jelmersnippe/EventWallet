@@ -26,7 +26,7 @@ class EventItem extends Component {
                 >
                     <View style={styles.tokens}>
                         <Text style={styles.tokens_text}>{this.props.item.amount}</Text>
-                        <Icon name='coins' size={20} color={Colors.eventColor}/>
+                        <Icon name='coins' size={20} color={Colors.coinIconColor}/>
                     </View>
                     <Icon name='angle-right' size={40} color="#80868B" />
                 </TouchableOpacity>
@@ -41,11 +41,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: 'center',
         padding: 5,
-        borderTopWidth: 1,
         borderBottomWidth: StyleSheet.hairlineWidth,
     },
     info: {
-        width: 70+'%',
+        width: 65+'%',
     },
     datetime: {
         color: '#80868B',
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
     },  
     name: {
         fontSize: 22,
-        //fontWeight: 'bold',
         color: '#2D2D2D',
         fontFamily: Fonts.eventname
     },
@@ -83,15 +81,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         fontFamily: Fonts.text,
-
     },
     tokens_text: {
-        //fontWeight: 'bold',
         fontSize: 20,
         padding: 5,
         fontFamily: Fonts.text,
-
-
     },
 })
 
