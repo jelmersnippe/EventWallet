@@ -3,15 +3,15 @@ import {
     Text,
     View,
     StyleSheet,
-    TouchableOpacity,
     Picker,
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import {
     NumericTokenInput,
     RegularButton
 } from '../components'
-import { ScrollView } from 'react-native-gesture-handler';
+import { Colors } from '../components/GlobalVariables'
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -48,8 +48,8 @@ export default class BuyTokens extends Component {
 
 
                 <View style={styles.button_container}>
-                    <RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
-					<RegularButton text={'Checkout'} backgroundColor='#0070C0' />
+                    <RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor={Colors.cancelButtonColor} />
+					<RegularButton text={'Checkout'} backgroundColor={Colors.ctaButtonColor} />
                 </View>
             </ScrollView>
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     container: {
 		flex: 1,
 		paddingHorizontal: 3 + '%',
-		backgroundColor: '#F8F9FB',
+		backgroundColor: Colors.backgroundColor,
 	},
 	header: {
 		marginVertical: 10,
@@ -104,26 +104,4 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly', 
 		marginTop: 20 
 	},
-	cancel_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'lightgray',
-		borderRadius: 20,
-	},
-	cta_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#0070C0',
-		borderRadius: 20,
-	},
-    button_text: {
-        fontSize: 20,
-        textAlign: 'center',
-        padding: 4,
-        color: 'white'
-    },
 });

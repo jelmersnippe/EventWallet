@@ -10,6 +10,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 export default class ForgotPassword extends Component {
     passwordResetAction () {
@@ -20,7 +21,7 @@ export default class ForgotPassword extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.header1}>FestiFaggot</Text>
+                <Text style={styles.title}>FestiFaggot</Text>
                 <HeaderText text='Forgot password?' />
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
@@ -28,7 +29,7 @@ export default class ForgotPassword extends Component {
                 <TextInput style={styles.input_text} placeholder="Email address"/>
 
                 
-                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' backgroundColor='#F6CF3A' />
+                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' backgroundColor={Colors.eventColor} />
             </View>
         );
     }
@@ -38,10 +39,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 5+'%',
     },
-    header1: {
+    title: {
         fontSize: 30,
         marginBottom: 10,
         textAlign: 'center'
@@ -66,20 +67,4 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'black'
     },
-    button: {
-        borderRadius: 15,
-        backgroundColor: '#F6CF3A',
-        padding: 10,
-        width: 150,
-        width: '90%',
-        margin: 15,
-        borderColor: 'black',
-        borderWidth: 1,
-        color: 'black',
-    },
-    bttntext: {
-        fontSize: 20,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    }
 });

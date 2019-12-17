@@ -3,13 +3,14 @@ import {
 	View,
 	StyleSheet
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { 
 	EventList, 
 	SearchBar,
 	Header,
 } from '../components'
-import { ScrollView } from 'react-native-gesture-handler';
+import { Colors } from '../components/GlobalVariables'
 
 
 const events = [
@@ -77,7 +78,7 @@ export default class EventOverview extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: (
-                <Header text='Event Overview' textColor='black' backgroundColor='#F6CF3A' />
+                <Header text='Event Overview' textColor='black' backgroundColor={Colors.eventColor} />
             ),
         };
     };
@@ -99,7 +100,7 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<SearchBar keys={['name', 'location', 'datetime']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor='#F6CF3A' />
+				<SearchBar keys={['name', 'location', 'datetime']} list={events} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor={Colors.eventColor} />
 
 				<ScrollView
 					style={styles.padded_container}
@@ -117,6 +118,6 @@ export default class EventOverview extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F8F9FB',
+		backgroundColor: Colors.backgroundColor,
 	}
 });

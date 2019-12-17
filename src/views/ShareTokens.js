@@ -12,6 +12,7 @@ import {
 	HeaderText,
 	RegularButton
  } from '../components'
+import { Colors } from '../components/GlobalVariables';
 
 export default class ShareTokens extends Component {
 	constructor() {
@@ -50,8 +51,8 @@ export default class ShareTokens extends Component {
 				<NumericTokenInput />
 
 				<View style={styles.button_container}>
-					<RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
-					<RegularButton text={'Share'} backgroundColor='#0070C0' />
+					<RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor={Colors.cancelButtonColor} />
+					<RegularButton text={'Share'} backgroundColor={Colors.ctaButtonColor} />
 				</View>
 			</View>
 
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingHorizontal: 3 + '%',
-		backgroundColor: '#F8F9FB',
+		backgroundColor: Colors.backgroundColor,
 	},
 	description: {
 		fontSize: 20,

@@ -11,6 +11,7 @@ import {
     SearchBar,
     Header,
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 const users = [
     {
@@ -99,7 +100,7 @@ export default class FriendOverview extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: (
-                <Header text='Friend Overview' textColor='white' backgroundColor='#0070C0' />
+                <Header text='Friend Overview' textColor='white' backgroundColor={Colors.friendColor} />
             ),
         };
     };
@@ -113,39 +114,55 @@ export default class FriendOverview extends Component {
             pendingList: [],
         }
     }
+	
+	updateFilteredList = (newFilteredList, newSearchTerm) => {
+		this.setState({filteredUsers: this.orderSearchResults(newFilteredList)})
+		this.setState({searchTerm: newSearchTerm})
+	}
 
-    updateFilteredList = (newFilteredList, newSearchTerm) => {
-        this.setState({ filteredUsers: newFilteredList })
-        this.setState({ searchTerm: newSearchTerm })
-    }
+	orderSearchResults(searchResults){
+		let friendList = []
+		let unknownList = []
 
-    componentDidMount() {
-        this.setState({ friendList: users.filter(createFilter('friend', ['status'])) })
-        this.setState({ pendingList: users.filter(createFilter('pending', ['status'])) })
-    }
+		searchResults.map((item) => {
+			if(item.status == 'friend'){
+				friendList.push(item)
+			}
+			else if(item.status == 'unknown'){
+				unknownList.push(item)
+			}
+		})
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
+		return friendList.concat(unknownList)
+	}
 
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                >
-                    {this.state.searchTerm == '' && <UserList headerText='Pending requests' data={this.state.pendingList} />}
+	componentDidMount(){
+		this.setState({friendList: users.filter(createFilter('friend', ['status']))})
+		this.setState({pendingList: users.filter(createFilter('pending', ['status']))})
+	}
 
-                    {this.state.searchTerm == ''
-                        ? <UserList headerText='Friendlist' data={this.state.friendList} />
-                        : <UserList headerText='Users' data={this.state.filteredUsers} />}
-                </ScrollView>
-            </View>
-        );
-    }
+	render() {
+	    return (
+			<View style={styles.container}>
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor={Colors.friendColor} />
+			
+				<ScrollView
+                	showsVerticalScrollIndicator={false}
+				>
+					<UserList headerText='Pending requests' data={this.state.pendingList}/>
+					
+					{this.state.searchTerm == '' 
+					? <UserList headerText='Friendlist' data={this.state.friendList}/>
+					: <UserList headerText='Users' data={this.state.filteredUsers} />}
+				</ScrollView>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F8F9FB',
-    },
+	container: {
+		flex: 1,
+		backgroundColor: Colors.backgroundColor,
+	},
 });

@@ -5,6 +5,7 @@ import {
     StyleSheet
 } from 'react-native'
 
+import { Colors } from './GlobalVariables'
 
 export default class AnnouncementItem extends Component {
     render() {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
-        backgroundColor: '#F6CF3A'
+        backgroundColor: Colors.eventColor
     },
     title: {
         width: 70+'%', 

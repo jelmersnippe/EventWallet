@@ -11,6 +11,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 export default class Login extends Component {
     login() {
@@ -21,7 +22,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.header1}>FestiFaggot</Text>
+                <Text style={styles.title}>FestiFaggot</Text>
 
                 <HeaderText text='Login' />
 
@@ -34,18 +35,18 @@ export default class Login extends Component {
                     placeholder='Password'
                 />
 
-                <WideButton callback={() => {this.login()}} text='Login' backgroundColor='#F6CF3A' />
+                <WideButton callback={() => { this.login() }} text='Login' backgroundColor={Colors.eventColor} />
 
-                <View style={styles.button2}>
+                <View style={styles.secondary_button}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Register')}
                     >
-                        <Text style={styles.text_button2}>Register</Text>
+                        <Text style={styles.secondary_button_text}>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('ForgotPassword')}
                     >
-                        <Text style={styles.text_button2}>Forgot password?</Text>
+                        <Text style={styles.secondary_button_text}>Forgot password?</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 5 + '%',
     },
     input: {
@@ -69,30 +70,19 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '90%',
     },
-    header1: {
+    title: {
         fontSize: 30,
         marginBottom: 10,
         textAlign: 'center'
     },
-    button: {
-        borderRadius: 15,
-        backgroundColor: '#F6CF3A',
-        padding: 10,
-        width: 150,
-        width: '90%',
-        margin: 15,
-        borderColor: 'black',
-        borderWidth: 1,
-        color: 'black',
-    },
-    button2: {
+    secondary_button: {
         flexDirection: 'row',
         width: '90%',
         justifyContent: 'space-between',
         margin: 15,
         marginTop: 5
     },
-    text_button2: {
+    secondary_button_text: {
         fontSize: 18,
         textDecorationLine: 'underline',
         marginTop: 15

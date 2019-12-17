@@ -21,14 +21,12 @@ class UserItem extends Component {
 
     setIcon(){
         if(this.props.item.status == 'friend') return 'coins'
-        else if(this.props.item.status == 'pending') return 'user-plus'
-        else if(this.props.item.status == 'unknown') return 'user-plus'
+        else return 'user-plus'
     }
 
     setColor(){
         if(this.props.item.status == 'friend') return '#0070C0'
-        else if(this.props.item.status == 'pending') return 'green'
-        else if(this.props.item.status == 'unknown') return 'yellow'
+        else return 'green'
     }
 
     render() {

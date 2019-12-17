@@ -11,6 +11,7 @@ import {
 	HeaderText,
 	WideButton
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 export default class Register extends Component {
 	constructor(props) {
@@ -148,7 +149,7 @@ export default class Register extends Component {
 		return (
 			<View style={styles.container}>
 
-			    <Text style={styles.header}>FestiFaggot</Text>
+			    <Text style={styles.title}>FestiFaggot</Text>
 
                 <HeaderText text='Register' />
 
@@ -160,7 +161,7 @@ export default class Register extends Component {
 				/>
 
                 {this.state.usernameError != '' &&
-					<Text style={{ color: 'red', textAlign: 'center' }}>
+					<Text style={styles.error_text}>
 						{this.state.usernameError}
 					</Text>
 				}
@@ -176,7 +177,7 @@ export default class Register extends Component {
 				<View>
 					{this.state.passwordError.map(item => {
 						return(
-							<Text style={{ color: 'red', textAlign: 'center' }}>{item}</Text>
+							<Text style={styles.error_text}>{item}</Text>
 						)	
 					})}
 				</View>
@@ -188,16 +189,16 @@ export default class Register extends Component {
 					value={this.state.email}
 				/>
 
-				<Text style={{ color: 'red', textAlign: 'center' }}>
+				<Text style={styles.error_text}>
 					{this.state.emailError}
 				</Text>
 
-				<WideButton callback={() => {this.validate()}} text='Register' backgroundColor='#F6CF3A' />
+				<WideButton callback={() => {this.validate()}} text='Register' backgroundColor={Colors.eventColor} />
 
-				<View style={{marginTop: 15, flexDirection: 'row', justifyContent: 'center'}}>
-					<Text style={{fontSize: 18}}>Already have an account? </Text>
+				<View style={styles.secondary_button}>
+					<Text style={styles.secondary_button_text}>Already have an account? </Text>
 					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-						<Text style={{fontSize: 18, textDecorationLine: 'underline'}}>Log in</Text>
+						<Text style={[styles.secondary_button_text, {textDecorationLine: 'underline'}]}>Log in</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: Colors.backgroundColor,
 		paddingHorizontal: 5+'%',
 	},
 	input_text: {
@@ -219,9 +220,21 @@ const styles = StyleSheet.create({
 		padding: 10,
 		width: '90%',
 	},
-	header: {
+	title: {
 	    fontSize: 30,
 	    marginBottom: 10,
 	    textAlign: 'center'
 	},
+	secondary_button: {
+		marginTop: 15, 
+		flexDirection: 'row', 
+		justifyContent: 'center'
+	},
+	secondary_button_text: {
+		fontSize: 18,
+	},
+	error_text: {
+		color: 'red', 
+		textAlign: 'center'
+	}
 });

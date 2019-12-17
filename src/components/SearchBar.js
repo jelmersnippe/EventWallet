@@ -47,7 +47,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		width: 100+'%',
 		paddingHorizontal: 5+'%',
-
+        shadowColor: "black",
+        shadowOffset: {	width: 0, height: 6, },
+        shadowOpacity: 1.5,
+        shadowRadius: 4.65,
+        elevation: 7,
 	},
 	search_bar: {
 		flexDirection: 'row',
@@ -57,11 +61,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		marginVertical: 15,
 		backgroundColor: '#FFF',
-        shadowColor: "black",
-        shadowOffset: {	width: 0, height: 6, },
-        shadowOpacity: 1.5,
-        shadowRadius: 4.65,
-        elevation: 7,
 	},
 	search_icon: {
 		alignSelf: 'center',

@@ -8,6 +8,8 @@ import {
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
+import { Colors } from './GlobalVariables'
+
 class EventItem extends Component {
     render() {
         return (
@@ -24,7 +26,7 @@ class EventItem extends Component {
                 >
                     <View style={styles.tokens}>
                         <Text style={styles.tokens_text}>{this.props.item.amount}</Text>
-                        <Icon name='coins' size={20} color='#F6CF3A'/>
+                        <Icon name='coins' size={20} color={Colors.eventColor}/>
                     </View>
                     <Icon name='angle-right' size={40} color="#80868B" />
                 </TouchableOpacity>
