@@ -10,7 +10,9 @@ import { Colors, Fonts } from './GlobalVariables'
 export default class NumericTokenInput extends Component {
 	constructor() {
 		super();
-		this.state = {}
+		this.state = {
+            value: 0
+        }
 	}
 
     render() {
@@ -27,7 +29,10 @@ export default class NumericTokenInput extends Component {
                     buttonFontSize={30}
                     fontSize={20}
                     showBorder={true}
-                    onChange={value => this.setState({ value })}
+                    onChange={ (value) => { 
+                        this.setState({ value }), 
+                        this.props.callback( Number(value)) 
+                    }}
                 />
             </View>
         );

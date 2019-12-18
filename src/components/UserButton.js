@@ -6,8 +6,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Fonts } from './GlobalVariables'
-
+import { Fonts, buttonShadow } from './GlobalVariables'
 
 class UserButton extends Component {
     render(){
@@ -15,6 +14,7 @@ class UserButton extends Component {
             <TouchableOpacity
                     style={[
                         styles.button_container, 
+                        buttonShadow,
                         {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}
                     ]}
                     onPress={() => {
@@ -38,11 +38,6 @@ const styles = StyleSheet.create({
         padding: 5,
         justifyContent: 'space-between',
         alignItems: 'center',
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 10, },
-        shadowOpacity: 1,
-        shadowRadius: 6.27,
-        elevation: 4,
     },
     button_text: {
         marginRight: 5,

@@ -17,11 +17,14 @@ import {
 } from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables'
 
+const tokenPrice = 9
+
 export default class BuyTokens extends Component {
     constructor() {
         super();
         this.state = {
             paymentMethod: '',
+            selectedAmount: 0,
             totalPrice: 0,
             event: [],
         }
@@ -31,6 +34,11 @@ export default class BuyTokens extends Component {
         this.setState({ event: this.props.navigation.getParam('event') })
     }
 
+    updateSelectedAmount = (value) => {
+        this.setState({ selectedAmount: value })
+        this.setState({ totalPrice: tokenPrice * value})
+    }
+
     render() {
         return (
             <ScrollView style={styles.container}>
@@ -38,8 +46,8 @@ export default class BuyTokens extends Component {
 
                 <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
-                <Text style={styles.description}>Price per token: X</Text>
-                <NumericTokenInput />
+                <Text style={styles.description}>Price per token: {tokenPrice}</Text>
+                <NumericTokenInput callback={this.updateSelectedAmount}/>
 
                 <Text style={styles.description}>Total price: {this.state.totalPrice}</Text>
 

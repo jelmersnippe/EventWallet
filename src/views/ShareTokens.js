@@ -17,12 +17,18 @@ import { Colors, Fonts } from '../components/GlobalVariables';
 export default class ShareTokens extends Component {
 	constructor() {
 		super();
-		this.state = {}
+		this.state = {
+			selectedAmount: 0,
+		}
 	}
 
 	componentDidMount() {
 		this.setState({ friend: this.props.navigation.getParam('friend') })
 	}
+
+    updateSelectedAmount = (value) => {
+        this.setState({ selectedAmount: value })
+    }
 
 	render() {
 		return (
@@ -47,7 +53,7 @@ export default class ShareTokens extends Component {
 				<HeaderText text='Balance' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
   			    <Text style = { styles.description}>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
 
-				<NumericTokenInput />
+				<NumericTokenInput callback={this.updateSelectedAmount} />
 
 				<View style={styles.button_container}>
 					<RegularButton 

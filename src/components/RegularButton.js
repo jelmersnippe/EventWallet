@@ -6,13 +6,13 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Fonts } from './GlobalVariables'
+import { Fonts, buttonShadow } from './GlobalVariables'
 
 class RegularButton extends Component {
     render(){
         return (
             <TouchableOpacity 
-                style={[styles.button, {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}]}
+                style={[styles.button, buttonShadow, {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}]}
                 onPress={() => { this.props.callback ? this.props.callback() : console.log('no callback') }}
             >
                 <Text style={[styles.button_text, {color: this.props.textColor}]}>{ this.props.text }</Text>
@@ -31,12 +31,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
         borderRadius: 20,
         borderWidth: 2,
-		shadowColor: "#000",
-        shadowOffset: { width: 0, height: 5, },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 7,
-
     },
     button_text: {
         fontSize: 20,
