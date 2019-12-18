@@ -6,7 +6,7 @@ import {
     StyleSheet,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Fonts } from './GlobalVariables'
+import { Fonts, shadow, headerShadow } from './GlobalVariables'
 
 import SidebarMenu from './SidebarMenu'
 
@@ -20,7 +20,7 @@ export default class Header extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={[styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
+                <View style={[this.props.shadow && headerShadow, styles.header_bar, { backgroundColor: this.props.backgroundColor }]}>
 
                     {this.props.backButton 
                     ?
@@ -57,7 +57,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     container: {
         height: 50,
-        width: 100 + '%'
+        width: 100 + '%',
     },
     header_bar: {
         flexDirection: 'row',

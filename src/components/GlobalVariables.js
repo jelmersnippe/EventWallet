@@ -1,3 +1,5 @@
+import StyleSheet from 'react-native'
+
 
 export const Colors = {
     lightTextColor: 'white',
@@ -23,4 +25,12 @@ export const Fonts = {
     header: 'Poppins-Regular',
     topheader: 'Krub-Regular',
     eventname: 'Raleway-Bold'
+}
+
+export const headerShadow = {
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 6, },
+    shadowOpacity: 1.5,
+    shadowRadius: 4.65,
+    elevation: 15,
 }

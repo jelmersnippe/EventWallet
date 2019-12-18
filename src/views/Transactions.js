@@ -13,7 +13,7 @@ import {
     HeaderText,
     RegularButton,
 } from '../components';
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
 const transactions = [
     {
@@ -124,7 +124,7 @@ export default class Transactions extends Component {
                 stickyHeaderIndices={[1]}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={styles.header}>
+                <View style={[styles.header, headerShadow]}>
                     <View style={styles.event_info}>
                         <Text style={styles.name}>{this.state.event.name}</Text>
                     </View>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100+'%',
         padding: 10,
-        backgroundColor: Colors.eventColor
+        backgroundColor: Colors.eventColor,
     },
     event_info: {
         flex: 7,

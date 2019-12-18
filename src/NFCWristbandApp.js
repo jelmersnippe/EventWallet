@@ -37,7 +37,7 @@ const TransactionStack = createStackNavigator(
             screen: WalletLink,
             navigationOptions: ({navigation}) => ({
                 header: (
-                    <Header backButton={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                    <Header backButton={true} shadow={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                 ),
             })
         },
@@ -90,16 +90,21 @@ const SpecificEventContent = createBottomTabNavigator(
         }),
         navigationOptions: ({ navigation }) => {
             let headerShown = true;
+            let shadowShown = true;
             if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
                 headerShown = false;
             }
         
             if (headerShown) {
+                if(navigation.state.index == 0) {
+                    headerShown = false;
+                }
                 return {
                     header: (
-                        <Header backButton={true} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                        <Header backButton={true} shadow={headerShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                     ),
                 };
+                
             }
             return {
                 header: (
