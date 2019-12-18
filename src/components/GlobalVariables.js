@@ -16,6 +16,8 @@ export const Colors = {
     coinIconColor: '#f6c442', //'#F6CF3A',
     activeTabColor: '#4147a8',
     inactiveTabColor: 'gray',
+
+    sideMenuColor: '#353978'
 }
 
 export const Fonts = {
