@@ -63,13 +63,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5 + '%',
     },
     input: {
-        borderBottomWidth: 1,
-        fontSize: 20,
-        borderBottomColor: 'black',
-        margin: 15,
-        padding: 10,
-        width: '90%',
-        fontFamily: Fonts.text
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		marginVertical: 15,
+		padding: 10,
+		width: '90%',
+		fontFamily: Fonts.text,
+		alignSelf: 'center'
     },
     title: {
         fontSize: 30,

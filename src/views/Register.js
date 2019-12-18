@@ -189,9 +189,11 @@ export default class Register extends Component {
 					value={this.state.email}
 				/>
 
-				<Text style={[styles.error_text, {marginBottom: 30}]}>
-					{this.state.emailError}
-				</Text>
+				{this.state.emailError != '' &&
+					<Text style={[styles.error_text, {marginBottom: 30}]}>
+						{this.state.emailError}
+					</Text>
+				}
 
 				<WideButton callback={() => {this.validate()}} text='Register' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
 
@@ -220,7 +222,8 @@ const styles = StyleSheet.create({
 		marginVertical: 15,
 		padding: 10,
 		width: '90%',
-		fontFamily: Fonts.text
+		fontFamily: Fonts.text,
+		alignSelf: 'center'
 	},
 	title: {
 	    fontSize: 30,
@@ -240,6 +243,6 @@ const styles = StyleSheet.create({
 	error_text: {
 		color: 'red', 
 		textAlign: 'center',
-		fontFamily: Fonts.text
+		fontFamily: Fonts.text,
 	}
 });

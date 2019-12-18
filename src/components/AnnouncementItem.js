@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
         padding: 5,
         fontFamily: Fonts.text,
         fontSize: 15,
-
+        color: Colors.darkTextColor
     }
 })

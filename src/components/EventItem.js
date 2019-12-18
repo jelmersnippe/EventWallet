@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+        borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 5,
         shadowColor: "#000",
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 6,
         elevation: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     tokens: {
         flexDirection: 'row',

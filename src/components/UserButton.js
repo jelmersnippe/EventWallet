@@ -24,7 +24,7 @@ class UserButton extends Component {
                     }}
                 >
                     <Text style={[styles.button_text, {color: this.props.textColor}]}>{this.props.text}</Text>
-                    <Icon name={this.props.icon} size={15} color={this.props.textColor} />
+                    <Icon style={styles.icon} name={this.props.icon} size={15} color={this.props.textColor} />
             </TouchableOpacity>
         );
     }
@@ -47,8 +47,14 @@ const styles = StyleSheet.create({
     button_text: {
         marginRight: 5,
         fontSize: 18,
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
+        textShadowColor: 'black',
+        textShadowRadius: 1,
     },
+    icon: {
+        textShadowColor: 'black',
+        textShadowRadius: 1,
+    }
 })
 
 

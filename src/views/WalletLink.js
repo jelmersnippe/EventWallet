@@ -28,7 +28,7 @@ export default class WalletLink extends Component {
                 />
                 <WideButton 
                     text='Create new link' 
-                    textColor={Colors.light}
+                    textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
                 />

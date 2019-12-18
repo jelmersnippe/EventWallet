@@ -58,16 +58,13 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.text
     },
     input_text: {
-        fontSize: 20,
-        height: 45,
-        marginBottom: 25,
-        color: 'black',
-        padding: 10,
-        width: '90%',
-        margin: 15,
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'black',
-        fontFamily: Fonts.text
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		marginVertical: 15,
+		padding: 10,
+		width: '90%',
+		fontFamily: Fonts.text,
+		alignSelf: 'center'
     },
 });

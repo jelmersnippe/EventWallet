@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
 	receiver: {
 		fontSize: 25,
 		marginLeft: 5,
-		fontFamily: Fonts.header
+		fontFamily: Fonts.header,
+		color: Colors.darkTextColor,
 	},
 	dropdown_container: {
 		borderWidth: 1,

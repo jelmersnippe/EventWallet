@@ -21,7 +21,7 @@ class UserItem extends Component {
     }
 
     setTextColor(){
-        if(this.props.item.status == 'friend') return Colors.darkTextColor
+        if(this.props.item.status == 'friend') return Colors.lightTextColor
         else return Colors.lightTextColor
     }
 
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 22,
         fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
     button_container: {
         flexDirection: 'row',

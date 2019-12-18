@@ -132,8 +132,8 @@ export default class Transactions extends Component {
                         onPress={() => {this.props.navigation.navigate('WalletLink')}}
                         style={styles.qr_code_button}
                     >
-                        <Icon style={styles.qr_code_button_icon} name='qrcode' size={25} color='black' />
-                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={40} color='black' />
+                        <Icon style={styles.qr_code_button_icon} name='qrcode' size={25} color={Colors.darkTextColor} />
+                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={40} color={Colors.darkTextColor} />
                     </TouchableOpacity>
                 </View>
 
@@ -145,7 +145,7 @@ export default class Transactions extends Component {
                             callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} 
                             icon='angle-right' 
                             text={'Buy Tokens'} 
-                            textColor='black' 
+                            textColor={Colors.darkTextColor} 
                             borderColor={Colors.ctaButtonBorderColor} 
                             backgroundColor={Colors.ctaButtonColor} 
                         />
