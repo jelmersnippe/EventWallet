@@ -14,6 +14,7 @@ import {
     RegularButton,
 } from '../components';
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
+import { SafeAreaView } from 'react-navigation';
 
 const transactions = [
     {
@@ -123,6 +124,7 @@ export default class Transactions extends Component {
                 style={styles.container}
                 stickyHeaderIndices={[1]}
                 showsVerticalScrollIndicator={false}
+                bounces={false}
             >
                 <View style={[styles.header, headerShadow]}>
                     <View style={styles.event_info}>
@@ -166,6 +168,7 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Colors.eventColor,
     },
     header: {
         flexDirection: 'row',
@@ -173,7 +176,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100+'%',
         padding: 10,
-        backgroundColor: Colors.eventColor,
     },
     event_info: {
         flex: 7,
