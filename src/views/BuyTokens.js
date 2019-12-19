@@ -15,9 +15,9 @@ import {
     NumericTokenInput,
     RegularButton
 } from '../components'
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
-const tokenPrice = 9
+const tokenPrice = 2.5
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -39,49 +39,62 @@ export default class BuyTokens extends Component {
         this.setState({ totalPrice: tokenPrice * value})
     }
 
+    displayTokenPrice(tokenPrice){
+        let priceString = tokenPrice.toString()
+        if(tokenPrice % 1 == 0){
+            priceString += ',-'
+        }
+        return priceString
+    }
+
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <Text style={styles.name}>{this.state.event.name}</Text>
-
-                <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-
-                <Text style={styles.description}>Price per token: {tokenPrice}</Text>
-                <NumericTokenInput callback={this.updateSelectedAmount}/>
-
-                <Text style={styles.description}>Total price: {this.state.totalPrice}</Text>
-
-                <Text style={styles.description}>Select the payment method</Text>
-                <View style={styles.dropdown_container}>
-                    <Picker
-                        selectedValue={this.state.paymentMethod}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({ paymentMethod: itemValue })}
-                    >
-                        <Picker.Item label="IDEAL" value="IDEAL" />
-                        <Picker.Item label="Paypal" value="Paypal" />
-                        <Picker.Item label="Visa" value="Visa" />
-                    </Picker>
+            <View style={styles.container}>
+                <View style={[styles.header, headerShadow]}>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
                 </View>
+                
+                <ScrollView style={styles.content}>
+
+                    <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+
+                    <Text style={styles.description}>Price per token: €{this.displayTokenPrice(tokenPrice)}</Text>
+                    <NumericTokenInput callback={this.updateSelectedAmount}/>
+
+                    <Text style={styles.description}>Total price: €{this.displayTokenPrice(this.state.totalPrice)}</Text>
+
+                    <Text style={styles.description}>Select the payment method</Text>
+                    <View style={styles.dropdown_container}>
+                        <Picker
+                            selectedValue={this.state.paymentMethod}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ paymentMethod: itemValue })}
+                        >
+                            <Picker.Item label="IDEAL" value="IDEAL" />
+                            <Picker.Item label="Paypal" value="Paypal" />
+                            <Picker.Item label="Visa" value="Visa" />
+                        </Picker>
+                    </View>
 
 
-                <View style={styles.button_container}>
-                    <RegularButton 
-                        callback={() => { this.props.navigation.goBack() }} 
-                        text={'Cancel'} 
-                        textColor={Colors.darkTextColor}
-                        backgroundColor={Colors.cancelButtonColor} 
-                        borderColor={Colors.cancelButtonBorderColor}
-                    />
-                    <RegularButton 
-                        text={'Checkout'} 
-                        textColor={Colors.darkTextColor}
-                        backgroundColor={Colors.ctaButtonColor} 
-                        borderColor={Colors.ctaButtonBorderColor} 
-                    />
-                </View>
-            </ScrollView>
-
+                    <View style={styles.button_container}>
+                        <RegularButton 
+                            callback={() => { this.props.navigation.goBack() }} 
+                            text={'Cancel'} 
+                            textColor={Colors.darkTextColor}
+                            backgroundColor={Colors.cancelButtonColor} 
+                            borderColor={Colors.cancelButtonBorderColor}
+                        />
+                        <RegularButton 
+                            text={'Checkout'} 
+                            textColor={Colors.darkTextColor}
+                            backgroundColor={Colors.ctaButtonColor} 
+                            borderColor={Colors.ctaButtonBorderColor} 
+                        />
+                    </View>
+                </ScrollView>
+            
+            </View>
         );
     }
 }
@@ -89,20 +102,25 @@ export default class BuyTokens extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 3 + '%',
         backgroundColor: Colors.backgroundColor,
+    },
+    header:{
+        backgroundColor: Colors.eventColor,
+    },
+    name: {
+        padding: 10,
+        fontSize: 29,
+        fontFamily: Fonts.topheader,
+        color: Colors.lightTextColor,
+    },
+    content: {
+        paddingHorizontal: 3+'%',
     },
     description: {
         fontSize: 20,
         marginBottom: 5,
         marginLeft: 5,
         fontFamily: Fonts.text,
-        color: Colors.darkTextColor,
-    },
-    name: {
-        marginTop: 20,
-        fontSize: 29,
-        fontFamily: Fonts.topheader,
         color: Colors.darkTextColor,
     },
     dropdown_container: {

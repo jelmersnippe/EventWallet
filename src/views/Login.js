@@ -13,7 +13,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 const ip = '145.24.222.83'
 const port = '3304'
@@ -62,7 +62,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>FestiFaggot</Text>
+                <Text style={styles.title}>{appName}</Text>
 
                 <HeaderText text='Login' />
 

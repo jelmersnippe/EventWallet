@@ -32,7 +32,7 @@ class UserItem extends Component {
 
     setBackgroundColor(){
         if(this.props.item.status == 'friend') return Colors.ctaButtonColor
-        else return 'green'
+        else return Colors.eventColor
     }
 
     setBorderColor(){
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
-
         backgroundColor: 'white',
         marginTop: 10,
     },

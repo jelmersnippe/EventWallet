@@ -97,11 +97,11 @@ const SpecificEventContent = createBottomTabNavigator(
         
             if (headerShown) {
                 if(navigation.state.index == 0) {
-                    headerShown = false;
+                    shadowShown = false;
                 }
                 return {
                     header: (
-                        <Header backButton={true} shadow={headerShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                        <Header backButton={true} shadow={shadowShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                     ),
                 };
                 

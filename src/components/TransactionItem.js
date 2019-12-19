@@ -18,12 +18,12 @@ export default class TransactionItem extends Component {
                         {this.props.item.sender == 'Me' 
                         ?
                         <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='arrow-left' size={25} color='red' />
+                            <Icon style={styles.user_info_icon} name='minus' size={20} color='red' />
                             <Text style={styles.user_info_text}>{this.props.item.receiver}</Text>
                         </View>
                         :
                         <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='arrow-right' size={25} color='green' />
+                            <Icon style={styles.user_info_icon} name='plus' size={20} color='green' />
                             <Text style={styles.user_info_text}>{this.props.item.sender}</Text>
                         </View>
                         }

@@ -94,6 +94,6 @@ const styles = StyleSheet.create({
 	search_input: {
 		flex: 9,
 	    fontFamily: Fonts.text,
-	    fontSize: 13
+	    fontSize: 18,
 	}
 })
