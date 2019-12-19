@@ -53,28 +53,28 @@ export default class SidebarMenu extends Component {
                     <SidebarMenuItem
                         text='FAQ'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.toggleMenu()}}
+                        callback={() => {console.log('no nav')}}
                         icon={<FontAwesome style={styles.icon} name="question" size={18} />}
                     />
 
                     <SidebarMenuItem
                         text='Legal disclaimer'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.toggleMenu()}}
+                        callback={() => {console.log('no nav')}}
                         icon={<Icon style={styles.icon} name="balance-scale" size={15} />}
                     />
 
                     <SidebarMenuItem
                         text='Contact'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.toggleMenu()}}
+                        callback={() => {console.log('no nav')}}
                         icon={<IonIcon style={styles.icon} name="md-contact" size={20} />}
                     />
 
                     <SidebarMenuItem
                         text='Log out'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.toggleMenu()}}
+                        callback={() => {console.log('no nav')}}
                         icon={<Feather style={styles.icon} name="log-out" size={17} />}
                     />
 
