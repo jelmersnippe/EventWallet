@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
     View,
     TextInput,
+    TouchableOpacity,
     StyleSheet,
 } from 'react-native'
 
@@ -58,7 +59,14 @@ export default class SearchBar extends Component {
         return (
             <View style={[styles.search_container, headerShadow, { backgroundColor: this.props.backgroundColor }]}>
                 <View style={styles.search_bar}>
+                    {this.state.searchTerm != '' ?
+                    <TouchableOpacity>
+                        <Icon name='arrow-left' size={30} color="#80868B" style={styles.search_icon} />
+                    </TouchableOpacity>
+                    :
                     <Icon name='search' size={30} color="#80868B" style={styles.search_icon} />
+                    }
+                    
                     <TextInput
                         onChangeText={(term) => { this.searchUpdated(term) }}
                         value={this.state.searchTerm}
@@ -66,6 +74,11 @@ export default class SearchBar extends Component {
                         placeholderTextColor='#80868B'
                         style={styles.search_input}
                     />
+                    {this.state.searchTerm != '' && 
+                    <TouchableOpacity>
+                        <Icon name='times' size={30} color="#80868B" style={styles.search_icon} />
+                    </TouchableOpacity>
+                    }
                 </View>
             </View>
         );
@@ -79,7 +92,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5 + '%',
 	},
 	search_bar: {
-		flexDirection: 'row',
+        flexDirection: 'row',
+        alignItems: 'center',
 		width: 100+'%',
 		borderWidth: 1,
 		borderRadius: 5,
@@ -89,11 +103,11 @@ const styles = StyleSheet.create({
 	},
 	search_icon: {
 		alignSelf: 'center',
-		flex: 1,
+        flex: 1,
 	},
 	search_input: {
 		flex: 9,
 	    fontFamily: Fonts.text,
-	    fontSize: 18,
+        fontSize: 18,
 	}
 })
