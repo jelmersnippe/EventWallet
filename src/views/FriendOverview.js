@@ -113,6 +113,24 @@ export default class FriendOverview extends Component {
             pendingList: [],
         }
     }
+    
+    compareUsers(a, b){
+        const userA = a.name.toLowerCase()
+        const userB = b.name.toLowerCase()
+
+        let comparison = 0
+        if(userA > userB){
+            comparison = 1
+        } else {
+            comparison = -1
+        }
+
+        return comparison
+    }
+
+    sortUsers(userList){
+        return userList.sort(this.compareUsers)
+    }
 	
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredUsers: this.orderSearchResults(newFilteredList)})
@@ -130,14 +148,20 @@ export default class FriendOverview extends Component {
 			else if(item.status == 'unknown'){
 				unknownList.push(item)
 			}
-		})
+        })
+        
+        let sortedFriendList = this.sortUsers(friendList)
+        let sortedUnknownList = this.sortUsers(unknownList)
 
-		return friendList.concat(unknownList)
-	}
+		return sortedFriendList.concat(sortedUnknownList)
+    }
 
 	componentDidMount(){
-		this.setState({friendList: users.filter(createFilter('friend', ['status']))})
-		this.setState({pendingList: users.filter(createFilter('pending', ['status']))})
+        let friendList = this.sortUsers(users.filter(createFilter('friend', ['status'])))
+        let pendingList = this.sortUsers(users.filter(createFilter('pending', ['status'])))
+
+		this.setState({friendList: friendList})
+		this.setState({pendingList: pendingList})
 	}
 
 	render() {
