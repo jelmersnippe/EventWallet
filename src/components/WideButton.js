@@ -14,6 +14,7 @@ class WideButton extends Component {
             <TouchableOpacity 
                 style={[styles.button, buttonShadow, {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}]}
                 onPress={() => { this.props.callback ? this.props.callback() : console.log('no callback') }}
+                disabled={this.props.disabled}
             >
                 <Text style={[styles.button_text, {color: this.props.textColor}]}>{ this.props.text }</Text>
                 {this.props.icon && <Icon name={this.props.icon} size={35} color={this.props.textColor} />}
