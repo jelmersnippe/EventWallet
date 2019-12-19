@@ -1,12 +1,31 @@
 import React, { Component } from 'react'
 import {
-    Image,
+    View,
+    Text,
+    StyleSheet,
 } from 'react-native'
+
+import { appName, Colors } from '../components/GlobalVariables'
 
 export default class Content extends Component {
     render() {
         return(
-            <Image source= {{uri: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Maxim_Hartman-1.jpg'}}  style={{flex:1, width:100+'%'}}/>
+            <View style={styles.container}>
+                <Text style={styles.text}>{appName}</Text>    
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.eventColor
+    },
+    text: {
+        fontSize: 30,
+        color: Colors.lightTextColor,
+    }
+})

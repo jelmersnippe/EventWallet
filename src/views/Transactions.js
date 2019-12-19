@@ -5,14 +5,17 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import {
     TransactionList,
     HeaderText,
     RegularButton,
+    Header,
 } from '../components';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
 const transactions = [
     {
@@ -122,19 +125,18 @@ export default class Transactions extends Component {
                 style={styles.container}
                 stickyHeaderIndices={[1]}
                 showsVerticalScrollIndicator={false}
+                bounces={false}
             >
-                <View style={styles.header}>
+                <View style={[styles.header, headerShadow]}>
                     <View style={styles.event_info}>
-                        <Text style={styles.datetime}>{this.state.event.datetime}</Text>
                         <Text style={styles.name}>{this.state.event.name}</Text>
-                        <Text style={styles.location}>{this.state.event.location}</Text>
                     </View>
                     <TouchableOpacity 
                         onPress={() => {this.props.navigation.navigate('WalletLink')}}
-                        style={styles.wallet_button}    
+                        style={styles.qr_code_button}
                     >
-                        <Icon style={styles.wallet_button_icon} name='qrcode' size={25} color='black' />
-                        <Icon style={styles.wallet_button_icon} name='angle-right' size={40} color='black' />
+                        <AntDesign style={styles.qr_code_button_icon} name='qrcode' size={45} color={Colors.darkTextColor} />
+                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={35} color={Colors.darkTextColor} />
                     </TouchableOpacity>
                 </View>
 
@@ -142,9 +144,16 @@ export default class Transactions extends Component {
                 <View style={styles.padded_container}>
                     <View style={styles.token_info}>
                         <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton callback={() => {this.props.navigation.navigate('BuyTokens')}} icon='angle-right' text={'Buy Tokens'} backgroundColor='#0070C0' />
+                        <RegularButton 
+                            callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} 
+                            icon='angle-right' 
+                            text={'Buy Tokens'} 
+                            textColor={Colors.darkTextColor} 
+                            borderColor={Colors.ctaButtonBorderColor} 
+                            backgroundColor={Colors.ctaButtonColor} 
+                        />
                     </View>
-                    <HeaderText text='Transaction History' />
+                    <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
                 </View>
 
                 <View style={styles.padded_container}>
@@ -160,6 +169,7 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Colors.eventColor,
     },
     header: {
         flexDirection: 'row',
@@ -167,43 +177,36 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100+'%',
         padding: 10,
-        backgroundColor: '#F6CF3A'
     },
     event_info: {
         flex: 7,
     },
-    datetime: {
-        color: '#80868B',
-        textTransform: 'uppercase',
-        fontSize: 12,
-        paddingLeft: 10,
-    },  
     name: {
         fontSize: 25,
-        fontWeight: 'bold',
-        color: '#2D2D2D'
+        color: Colors.lightTextColor,
+        fontFamily: Fonts.topheader
     },
-    location: {
-        color: '#505155',
-        paddingLeft: 10,
-    },
-    wallet_button: {
+    qr_code_button: {
         flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 60,
-
+        height: 55,
         backgroundColor: 'white',
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 10, },
+        shadowOpacity: 1,
+        shadowRadius: 6.27,
+        elevation: 10,
     },
-    wallet_button_icon: {
+    qr_code_button_icon: {
         paddingHorizontal: 3,
     },
     padded_container: {
         paddingHorizontal: 3+'%', 
-        backgroundColor: '#F8F9Fb',
+        backgroundColor: Colors.backgroundColor,
     },
     token_info: {
         flexDirection: 'row',
@@ -217,5 +220,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         textAlignVertical: 'center',
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
 });

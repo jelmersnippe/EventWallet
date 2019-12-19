@@ -3,127 +3,136 @@ import {
     Text,
     View,
     StyleSheet,
-    TouchableOpacity,
     Picker,
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
+
+import {
+    HeaderText,
+} from '../components'
 
 import {
     NumericTokenInput,
     RegularButton
 } from '../components'
-import { ScrollView } from 'react-native-gesture-handler';
+import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
+
+const tokenPrice = 2.5
 
 export default class BuyTokens extends Component {
     constructor() {
         super();
         this.state = {
-            PickerValue: ''
+            paymentMethod: '',
+            selectedAmount: 0,
+            totalPrice: 0,
+            event: [],
         }
+    }
+
+    componentDidMount() {
+        this.setState({ event: this.props.navigation.getParam('event') })
+    }
+
+    updateSelectedAmount = (value) => {
+        this.setState({ selectedAmount: value })
+        this.setState({ totalPrice: tokenPrice * value})
+    }
+
+    displayTokenPrice(tokenPrice){
+        let priceString = tokenPrice.toString()
+        if(tokenPrice % 1 == 0){
+            priceString += ',-'
+        }
+        return priceString
     }
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <Text style={styles.datetime}>ZATERDAG 14 DEC 14:00 - 01:00</Text>
-                <Text style={styles.name}>Shockerz - The Raw Gathering</Text>
-                <Text style={styles.location}>Autotron, Rosmalen</Text>
-
-                <Text style={styles.header}>Payment</Text>
-
-                <NumericTokenInput />
-
-                <Text style={styles.description}>Select the payment method</Text>
-                <View style={styles.dropdown_container}>
-                    <Picker
-                        style={{ height: 50, width: '100%' }}
-                        itemStyle={{ fontSize: 17, backgroundColor: 'black' }}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({ language: itemValue })
-                        }>
-                        <Picker.Item label="IDEAL" value="IDEAL" />
-                        <Picker.Item label="Paypal" value="Paypal" />
-                        <Picker.Item label="Visa" value="Visa" />
-                    </Picker>
+            <View style={styles.container}>
+                <View style={[styles.header, headerShadow]}>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
                 </View>
+                
+                <ScrollView style={styles.content}>
+
+                    <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+
+                    <Text style={styles.description}>Price per token: €{this.displayTokenPrice(tokenPrice)}</Text>
+                    <NumericTokenInput callback={this.updateSelectedAmount}/>
+
+                    <Text style={styles.description}>Total price: €{this.displayTokenPrice(this.state.totalPrice)}</Text>
+
+                    <Text style={styles.description}>Select the payment method</Text>
+                    <View style={styles.dropdown_container}>
+                        <Picker
+                            selectedValue={this.state.paymentMethod}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ paymentMethod: itemValue })}
+                        >
+                            <Picker.Item label="IDEAL" value="IDEAL" />
+                            <Picker.Item label="Paypal" value="Paypal" />
+                            <Picker.Item label="Visa" value="Visa" />
+                        </Picker>
+                    </View>
 
 
-                <View style={styles.button_container}>
-                    <RegularButton callback={() => {this.props.navigation.goBack()}} text={'Cancel'} backgroundColor='lightgray' />
-					<RegularButton text={'Checkout'} backgroundColor='#0070C0' />
-                </View>
-            </ScrollView>
-
+                    <View style={styles.button_container}>
+                        <RegularButton 
+                            callback={() => { this.props.navigation.goBack() }} 
+                            text={'Cancel'} 
+                            textColor={Colors.darkTextColor}
+                            backgroundColor={Colors.cancelButtonColor} 
+                            borderColor={Colors.cancelButtonBorderColor}
+                        />
+                        <RegularButton 
+                            text={'Checkout'} 
+                            textColor={Colors.darkTextColor}
+                            backgroundColor={Colors.ctaButtonColor} 
+                            borderColor={Colors.ctaButtonBorderColor} 
+                        />
+                    </View>
+                </ScrollView>
+            
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-		flex: 1,
-		paddingHorizontal: 3 + '%',
-		backgroundColor: '#F8F9FB',
-	},
-	header: {
-		marginVertical: 10,
-		textAlign: 'right',
-		paddingRight: 5,
-		textTransform: 'uppercase',
-		fontSize: 21,
-		borderBottomWidth: 1,
-		paddingBottom: 5,
-	},
-	description: {
-		fontSize: 20,
-		marginBottom: 5,
-		marginLeft: 5,
-	},
-    datetime: {
-        marginTop: 20,
-        color: '#80868B',
-        textTransform: 'uppercase',
-        fontSize: 12,
+        flex: 1,
+        backgroundColor: Colors.backgroundColor,
     },
-    location: {
-        color: '#505155',
-        marginBottom: 15,
-        width: '90%'
+    header:{
+        backgroundColor: Colors.eventColor,
     },
     name: {
+        padding: 10,
         fontSize: 29,
-        fontWeight: 'bold',
-        color: '#2D2D2D'
+        fontFamily: Fonts.topheader,
+        color: Colors.lightTextColor,
     },
-	dropdown_container: {
-		borderWidth: 1,
-		borderRadius: 10,
-		marginBottom: 5,
-		marginTop: 5,
-	},
-    button_container: { 
-		flexDirection: 'row', 
-		justifyContent: 'space-evenly', 
-		marginTop: 20 
-	},
-	cancel_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'lightgray',
-		borderRadius: 20,
-	},
-	cta_button: {
-		height: 70,
-		width: 40 + '%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#0070C0',
-		borderRadius: 20,
-	},
-    button_text: {
+    content: {
+        paddingHorizontal: 3+'%',
+    },
+    description: {
         fontSize: 20,
-        textAlign: 'center',
-        padding: 4,
-        color: 'white'
+        marginBottom: 5,
+        marginLeft: 5,
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
+    },
+    dropdown_container: {
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: 5,
+        marginTop: 5,
+    },
+    button_container: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginTop: 20,
+        paddingBottom: 20,
     },
 });

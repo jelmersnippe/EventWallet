@@ -10,6 +10,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
+import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 export default class ForgotPassword extends Component {
     passwordResetAction () {
@@ -20,7 +21,7 @@ export default class ForgotPassword extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.header1}>FestiFaggot</Text>
+                <Text style={styles.title}>{appName}</Text>
                 <HeaderText text='Forgot password?' />
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
@@ -28,7 +29,7 @@ export default class ForgotPassword extends Component {
                 <TextInput style={styles.input_text} placeholder="Email address"/>
 
                 
-                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' backgroundColor='#F6CF3A' />
+                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
             </View>
         );
     }
@@ -38,48 +39,32 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 5+'%',
     },
-    header1: {
+    title: {
         fontSize: 30,
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: Fonts.header
     },
     text: {
-        fontSize: 15,
+        fontSize: 18,
         color: 'black',
         marginTop: 5,
         marginBottom: 5,
         width: '90%',
-        margin: 15
+        margin: 15,
+        fontFamily: Fonts.text
     },
     input_text: {
-        fontSize: 20,
-        height: 45,
-        marginBottom: 25,
-        color: 'black',
-        padding: 10,
-        width: '90%',
-        margin: 15,
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'black'
+		borderBottomWidth: 1,
+		fontSize: 20,
+		borderBottomColor: 'black',
+		marginVertical: 15,
+		padding: 10,
+		width: '90%',
+		fontFamily: Fonts.text,
+		alignSelf: 'center'
     },
-    button: {
-        borderRadius: 15,
-        backgroundColor: '#F6CF3A',
-        padding: 10,
-        width: 150,
-        width: '90%',
-        margin: 15,
-        borderColor: 'black',
-        borderWidth: 1,
-        color: 'black',
-    },
-    bttntext: {
-        fontSize: 20,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    }
 });

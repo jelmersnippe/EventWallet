@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Colors, Fonts } from '../components/GlobalVariables';
 
 import {
     UserButton
@@ -19,14 +20,24 @@ class UserItem extends Component {
         else if(this.props.item.status == 'unknown') return 'Add'
     }
 
+    setTextColor(){
+        if(this.props.item.status == 'friend') return Colors.lightTextColor
+        else return Colors.lightTextColor
+    }
+
     setIcon(){
         if(this.props.item.status == 'friend') return 'coins'
         else return 'user-plus'
     }
 
-    setColor(){
-        if(this.props.item.status == 'friend') return '#0070C0'
-        else return 'green'
+    setBackgroundColor(){
+        if(this.props.item.status == 'friend') return Colors.ctaButtonColor
+        else return Colors.eventColor
+    }
+
+    setBorderColor(){
+        if(this.props.item.status == 'friend') return Colors.ctaButtonBorderColor
+        else return Colors.cancelButtonBorderColor
     }
 
     render() {
@@ -44,7 +55,9 @@ class UserItem extends Component {
                     item={this.props.item} 
                     text={this.setText()}
                     icon={this.setIcon()}
-                    backgroundColor={this.setColor()}
+                    textColor={this.setTextColor()}
+                    backgroundColor={this.setBackgroundColor()}
+                    borderColor={this.setBorderColor()}
                 />
             </View>
         );
@@ -59,24 +72,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         textAlignVertical: 'center',
         alignItems: 'center',
-
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
-
         backgroundColor: 'white',
-        marginBottom: 10,
+        marginTop: 10,
     },
     name_container: {
         width: 55+'%',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     remove_button: {
         paddingHorizontal: 5,
     },
     name: {
         fontSize: 22,
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
     button_container: {
         flexDirection: 'row',

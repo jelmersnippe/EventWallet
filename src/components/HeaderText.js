@@ -4,22 +4,23 @@ import {
     StyleSheet 
 } from 'react-native'
 
+import { Fonts } from '../components/GlobalVariables'
+
 export default class HeaderText extends Component {
     render() {
         return(
-            <Text style={styles.header}>{this.props.text}</Text>
+            <Text style={[styles.header, {color: this.props.textColor, borderColor: this.props.barColor}]}>{this.props.text}</Text>
         );
     }
 }
 
 const styles = StyleSheet.create({
 	header: {
-        marginVertical: 10,
-        textAlign: 'right',
+        marginTop: 10,
         paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
+        textAlign: 'right',
+        fontSize: 20,
         borderBottomWidth: 1,
-        paddingBottom: 5,
+        fontFamily: Fonts.header,
 	},
 })

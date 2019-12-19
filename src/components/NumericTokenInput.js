@@ -5,30 +5,35 @@ import {
     StyleSheet,
 } from 'react-native';
 import InputSpinner from "react-native-input-spinner";
+import { Colors, Fonts } from './GlobalVariables'
 
 export default class NumericTokenInput extends Component {
 	constructor() {
 		super();
-		this.state = {}
+		this.state = {
+            value: 0
+        }
 	}
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Select the amount of tokens:</Text>
-                    <InputSpinner
-                        value={this.state.value}
-                        min={0}
-                        step={1}
-                        value={this.state.number}
-                        height={50}
-                        color='lightgray'
-                        rounded={false}
-                        buttonFontSize={30}
-                        fontSize={20}
-                        showBorder={true}
-                        onChange={value => this.setState({ value })}
-                    />
+                <InputSpinner
+                    value={this.state.value}
+                    min={0}
+                    step={1}
+                    height={50}
+                    color='lightgray'
+                    rounded={false}
+                    buttonFontSize={30}
+                    fontSize={20}
+                    showBorder={true}
+                    onChange={ (value) => { 
+                        this.setState({ value }), 
+                        this.props.callback( Number(value)) 
+                    }}
+                />
             </View>
         );
     }
@@ -44,7 +49,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     text: {
-        width: 40+'%',
+        width: 35+'%',
         fontSize: 20,
+        fontFamily: Fonts.text,
+        color: Colors.darkTextColor,
     },
 })

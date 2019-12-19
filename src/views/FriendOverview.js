@@ -7,10 +7,11 @@ import { createFilter } from 'react-native-search-filter'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import {
+    Header,
     UserList,
     SearchBar,
-    Header,
 } from '../components'
+import { Colors } from '../components/GlobalVariables'
 
 const users = [
     {
@@ -96,14 +97,6 @@ const users = [
 ]
 
 export default class FriendOverview extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            header: (
-                <Header text='Friend Overview' textColor='white' backgroundColor='#0070C0' />
-            ),
-        };
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -131,6 +124,14 @@ export default class FriendOverview extends Component {
     sortUsers(userList){
         return userList.sort(this.compareUsers)
     }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: (
+                <Header text='Friend Overview' textColor={Colors.lightTextColor} backgroundColor={Colors.friendColor} />
+            ),
+        };
+    };
+
 	
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({filteredUsers: this.orderSearchResults(newFilteredList)})
@@ -167,9 +168,10 @@ export default class FriendOverview extends Component {
 	render() {
 	    return (
 			<View style={styles.container}>
-				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor='#0070C0' />
+				<SearchBar keys={['name']} list={users} callback={this.updateFilteredList} placeholder='Search for a user' backgroundColor={Colors.friendColor} />
 			
 				<ScrollView
+                    style={styles.user_list_container}
                 	showsVerticalScrollIndicator={false}
 				>
 					<UserList headerText='Pending requests' data={this.state.pendingList}/>
@@ -184,8 +186,11 @@ export default class FriendOverview extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F8F9FB',
+	container: {
+		flex: 1,
+		backgroundColor: Colors.backgroundColor,
     },
+    user_list_container: {
+        paddingHorizontal: 3+'%'
+    }
 });

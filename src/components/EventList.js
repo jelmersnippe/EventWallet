@@ -6,14 +6,12 @@ import {
 
 import { 
     EventItem,
-    HeaderText
  } from './index'
 
 export default class EventList extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <HeaderText text='Events' />
+            <View>
                 {this.props.data.map(
                     (item) => {
                         return <EventItem item={item} key={item.id}/>
@@ -23,10 +21,3 @@ export default class EventList extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 3+'%',
-    },
-})

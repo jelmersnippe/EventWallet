@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import {
     View,
-    StyleSheet
+    StyleSheet,
 } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { 
     AnnouncementList, 
     HeaderText 
 } from '../components'
+import { Colors, Fonts } from '../components/GlobalVariables'
 
 const announcements = [
     {
@@ -45,6 +47,34 @@ const announcements = [
         time: '14:26',
         announcement: 'This is a test announcement to apply some styling to this element :)'
     },
+    {
+        id: 6,
+        title: 'Test 6',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 7,
+        title: 'Test 7',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 8,
+        title: 'Test 8',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
+    {
+        id: 9,
+        title: 'Test 9',
+        date: '28/11',
+        time: '14:26',
+        announcement: 'This is a test announcement to apply some styling to this element :)'
+    },
     
 ]
 
@@ -52,10 +82,14 @@ export default class Announcements extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <HeaderText text='Announcements' />
-                <AnnouncementList 
-                    announcementData={announcements}
-                />
+                <HeaderText text='Announcements' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                <ScrollView 
+                    showsVerticalScrollIndicator={false}
+                >
+                    <AnnouncementList 
+                        data={announcements}
+                    />
+                </ScrollView>
             </View>
         );
     }
@@ -64,16 +98,7 @@ export default class Announcements extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F9FB',
+        backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 3+'%'
     },
-    header: {
-        marginVertical: 10,
-        textAlign: 'right',
-        paddingRight: 5,
-        textTransform: 'uppercase',
-        fontSize: 21,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-	},
 })

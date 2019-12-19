@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { 
+import {
     View,
     Text,
     TouchableOpacity,
     StyleSheet,
 } from 'react-native'
+import { Colors } from '../components/GlobalVariables'
 
 
 export default class AuthLoading extends Component {
@@ -31,22 +32,22 @@ export default class AuthLoading extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      width: 100+'%',
-      height: 100+'%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F6CF3A',
+        flex: 1,
+        width: 100 + '%',
+        height: 100 + '%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.eventColor,
     },
     button: {
-        width: 80+'%',
+        width: 80 + '%',
         padding: 10,
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: Colors.lightTextColor,
         alignItems: 'center',
         marginBottom: 20,
     },
     button_text: {
-        color: 'white'
+        color: Colors.lightTextColor
     }
-  });
+});

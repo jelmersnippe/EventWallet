@@ -5,23 +5,24 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import { 
-    AuthLoading, 
-    Login, 
-    Register, 
-    ForgotPassword, 
-    EventOverview, 
-    Transactions, 
-    WalletLink, 
-    BuyTokens, 
-    Announcements, 
-    Content, 
-    FriendOverview, 
-    ShareTokens 
+import {
+    AuthLoading,
+    Login,
+    Register,
+    ForgotPassword,
+    EventOverview,
+    Transactions,
+    WalletLink,
+    BuyTokens,
+    Announcements,
+    Content,
+    FriendOverview,
+    ShareTokens
 } from './views'
-
-const activeTabColor = 'tomato'
-const inactiveTabColor = 'gray'
+import {
+    Header,
+} from './components'
+import { Colors } from './components/GlobalVariables'
 
 
 const TransactionStack = createStackNavigator(
@@ -32,7 +33,14 @@ const TransactionStack = createStackNavigator(
                 header: null,
             }
         },
-        WalletLink: WalletLink,
+        WalletLink: {
+            screen: WalletLink,
+            navigationOptions: ({navigation}) => ({
+                header: (
+                    <Header backButton={true} shadow={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                ),
+            })
+        },
         BuyTokens: {
             screen: BuyTokens,
             navigationOptions: {
@@ -41,20 +49,19 @@ const TransactionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Transactions'
+        initialRouteName: 'Transactions',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            }
+        }
     }
 )
-
-TransactionStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    }
-}
 
 const SpecificEventContent = createBottomTabNavigator(
     {
@@ -74,30 +81,43 @@ const SpecificEventContent = createBottomTabNavigator(
                 else if (routeName == 'Announcements') {
                     iconName = 'bullhorn'
                 }
-                else if (routeName == 'Content'){
+                else if (routeName == 'Content') {
                     iconName = 'info'
                 }
 
                 return <Icon name={iconName} size={25} color={tintColor} />
             },
         }),
+        navigationOptions: ({ navigation }) => {
+            let headerShown = true;
+            let shadowShown = true;
+            if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
+                headerShown = false;
+            }
+        
+            if (headerShown) {
+                if(navigation.state.index == 0) {
+                    shadowShown = false;
+                }
+                return {
+                    header: (
+                        <Header backButton={true} shadow={shadowShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
+                    ),
+                };
+                
+            }
+            return {
+                header: (
+                    null
+                ),
+            };
+        },
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )
-
-SpecificEventContent.navigationOptions = ({ navigation }) => {
-    let headerShown = true;
-    if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
-        headerShown = false;
-    }
-  
-    return {
-        headerShown,
-    };
-}
 
 const EventStack = createStackNavigator(
     {
@@ -105,20 +125,19 @@ const EventStack = createStackNavigator(
         SpecificEvent: SpecificEventContent,
     },
     {
-        initialRouteName: 'Overview'
+        initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 )
-
-EventStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-  
-    return {
-        tabBarVisible,
-    };
-};
 
 const FriendStack = createStackNavigator(
     {
@@ -132,20 +151,19 @@ const FriendStack = createStackNavigator(
     },
     {
         initialRouteName: 'Overview',
+        navigationOptions: ({ navigation }) => {
+            let tabBarVisible = true;
+            if (navigation.state.index > 0) {
+                tabBarVisible = false;
+            }
+        
+            return {
+                tabBarVisible,
+            };
+        }
     }
 
 )
-
-FriendStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 
 const AppStack = createBottomTabNavigator(
@@ -156,7 +174,7 @@ const AppStack = createBottomTabNavigator(
     {
         initialRouteName: 'Events',
         defaultNavigationOptions: ({ navigation }) => ({
-            tabBarIcon: ({ tintColor}) => {
+            tabBarIcon: ({ tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
                 if (routeName == 'Friends') {
@@ -170,8 +188,8 @@ const AppStack = createBottomTabNavigator(
             }
         }),
         tabBarOptions: {
-            activeTintColor: activeTabColor,
-            inactiveTintColor: inactiveTabColor
+            activeTintColor: Colors.activeTabColor,
+            inactiveTintColor: Colors.inactiveTabColor
         }
     }
 )

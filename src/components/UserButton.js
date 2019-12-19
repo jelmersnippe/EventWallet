@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Fonts, buttonShadow } from './GlobalVariables'
 
 class UserButton extends Component {
     render(){
@@ -13,7 +14,8 @@ class UserButton extends Component {
             <TouchableOpacity
                     style={[
                         styles.button_container, 
-                        {backgroundColor: this.props.backgroundColor}
+                        buttonShadow,
+                        {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}
                     ]}
                     onPress={() => {
                         this.props.item.status == 'friend'
@@ -21,8 +23,8 @@ class UserButton extends Component {
                         : console.log('no nav')
                     }}
                 >
-                    <Text style={styles.button_text}>{this.props.text}</Text>
-                    <Icon name={this.props.icon} size={20} color="white" style={styles.button_icon} />
+                    <Text style={[styles.button_text, {color: this.props.textColor}]}>{this.props.text}</Text>
+                    <Icon style={styles.icon} name={this.props.icon} size={15} color={this.props.textColor} />
             </TouchableOpacity>
         );
     }
@@ -32,19 +34,21 @@ const styles = StyleSheet.create({
     button_container: {
         flexDirection: 'row',
         borderWidth: 1,
-        borderBottomColor: 'black',
         borderRadius: 10,
         padding: 5,
         justifyContent: 'space-between',
-        marginRight: 5,
+        alignItems: 'center',
     },
     button_text: {
         marginRight: 5,
         fontSize: 18,
-        color: 'white'
+        fontFamily: Fonts.text,
+        textShadowColor: 'black',
+        textShadowRadius: 1,
     },
-    button_icon: {
-        padding: 2,
+    icon: {
+        textShadowColor: 'black',
+        textShadowRadius: 1,
     }
 })
 

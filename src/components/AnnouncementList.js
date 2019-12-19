@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { 
-    SafeAreaView,
-    FlatList,
-    StyleSheet
+    View,
 } from 'react-native'
 
 import { 
@@ -12,21 +10,13 @@ import {
 export default class AnnouncementList extends Component {
     render() {
         return (
-            <SafeAreaView>
-                <FlatList
-                    data={this.props.announcementData}
-                    renderItem={({ item }) => (
-                        <AnnouncementItem
-                            title={item.title}
-                            date={item.date}
-                            time={item.time}
-                            announcement={item.announcement}
-                            key={item.id}
-                        />
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-            </SafeAreaView>
+            <View>
+                {this.props.data.map(
+                    (item) => {
+                        return <AnnouncementItem item={item} key={item.id}/>
+                    }
+                )}
+            </View>
         );
     }
 }
