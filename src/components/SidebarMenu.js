@@ -6,6 +6,13 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import Feather from 'react-native-vector-icons/Feather'
+import IonIcon from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import { Colors } from './GlobalVariables'
+import SidebarMenuItem from './SidebarMenuItem'
 
 export default class SidebarMenu extends Component {
     constructor(props) {
@@ -36,30 +43,41 @@ export default class SidebarMenu extends Component {
                 })
             }]}>
                 <View style={styles.menu_container}>
-                    <TouchableOpacity
-                        style={styles.menu_item}
-                        onPress={this.toggleMenu}
-                    >
-                        <Text>Hide menu</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.menu_item}
-                        onPress={() => { console.log('hello') }}
-                    >
-                        <Text>Contact</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.menu_item}
-                        onPress={() => { console.log('hello') }}
-                    >
-                        <Text>Fack</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.menu_item}
-                        onPress={() => { console.log('hello') }}
-                    >
-                        <Text>Log out</Text>
-                    </TouchableOpacity>
+                    <SidebarMenuItem
+                        text='Hide menu'
+                        textColor={Colors.lightTextColor}
+                        callback={() => {this.toggleMenu()}}
+                        icon={<Icon style={styles.icon} name="arrow-right" size={15} />}
+                    />
+
+                    <SidebarMenuItem
+                        text='FAQ'
+                        textColor={Colors.lightTextColor}
+                        callback={() => {console.log('no nav')}}
+                        icon={<FontAwesome style={styles.icon} name="question" size={18} />}
+                    />
+
+                    <SidebarMenuItem
+                        text='Legal disclaimer'
+                        textColor={Colors.lightTextColor}
+                        callback={() => {console.log('no nav')}}
+                        icon={<Icon style={styles.icon} name="balance-scale" size={15} />}
+                    />
+
+                    <SidebarMenuItem
+                        text='Contact'
+                        textColor={Colors.lightTextColor}
+                        callback={() => {console.log('no nav')}}
+                        icon={<IonIcon style={styles.icon} name="md-contact" size={20} />}
+                    />
+
+                    <SidebarMenuItem
+                        text='Log out'
+                        textColor={Colors.lightTextColor}
+                        callback={() => {console.log('no nav')}}
+                        icon={<Feather style={styles.icon} name="log-out" size={17} />}
+                    />
+
                 </View>
             </Animated.View>
         );
@@ -68,14 +86,12 @@ export default class SidebarMenu extends Component {
 
 const styles = StyleSheet.create({
     menu_container: {
-        width: 60+'%',
+        width: 50+'%',
         backgroundColor: 'white',
     },
-    menu_item: {
-        alignItems: 'center',
-        width: 100+'%',
-        backgroundColor: 'yellow', 
-        borderWidth: 1, 
-        padding: 10,
-    }
+    icon: {
+        flex: 1,
+        textAlign: 'center',
+        color: Colors.lightTextColor,
+    },
 })
