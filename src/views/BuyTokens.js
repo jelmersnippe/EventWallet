@@ -89,10 +89,9 @@ export default class BuyTokens extends Component {
                         <RegularButton 
                             text={'Checkout'} 
                             textColor={Colors.darkTextColor}
-                            backgroundColor={this.state.selectedAmount == 0 ? Colors.ctaButtonColor + '70' : Colors.ctaButtonColor}
-                            borderColor={this.state.selectedAmount == 0 ? Colors.ctaButtonBorderColor + '70' : Colors.ctaButtonBorderColor}
+                            backgroundColor={Colors.ctaButtonColor}
+                            borderColor={Colors.ctaButtonBorderColor}
                             disabled={this.state.selectedAmount == 0 && true}
-                            hideShadow={this.state.selectedAmount == 0 && true}
                         />
                     </View>
                 </ScrollView>
