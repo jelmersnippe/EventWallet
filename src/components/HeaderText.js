@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         fontSize: 20,
         borderBottomWidth: 1,
-        fontFamily: Fonts.header
+        fontFamily: Fonts.header,
 	},
 })

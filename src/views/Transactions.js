@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -132,8 +133,8 @@ export default class Transactions extends Component {
                         onPress={() => {this.props.navigation.navigate('WalletLink')}}
                         style={styles.qr_code_button}
                     >
-                        <Icon style={styles.qr_code_button_icon} name='qrcode' size={25} color={Colors.darkTextColor} />
-                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={40} color={Colors.darkTextColor} />
+                        <AntDesign style={styles.qr_code_button_icon} name='qrcode' size={45} color={Colors.darkTextColor} />
+                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={35} color={Colors.darkTextColor} />
                     </TouchableOpacity>
                 </View>
 
@@ -188,11 +189,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 60,
-
+        height: 55,
         backgroundColor: 'white',
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 10, },
         shadowOpacity: 1,

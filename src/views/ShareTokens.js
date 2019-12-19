@@ -55,13 +55,13 @@ export default class ShareTokens extends Component {
 						text={'Cancel'} 
 						textColor={Colors.darkTextColor}
 						backgroundColor={Colors.cancelButtonColor}
-						borderColor={Colors.cancelButtonBorderColor} 
+						borderColor={'gray'}
 					/>
 					<RegularButton 
 						text={'Share'} 
 						textColor={Colors.darkTextColor}
-						backgroundColor={Colors.ctaButtonColor} 
-						borderColor={Colors.ctaButtonBorderColor}	
+						backgroundColor={Colors.ctaButtonColor}
+						borderColor={Colors.ctaButtonBorderColor}
 					/>
 				</View>
 			</View>
