@@ -1,5 +1,5 @@
-import StyleSheet from 'react-native'
 
+export const appName = 'FestiFaggot'
 
 export const Colors = {
     lightTextColor: 'white',
@@ -13,7 +13,7 @@ export const Colors = {
     ctaButtonBorderColor: '#db8e02',
 
     cancelButtonColor: 'lightgray',
-    cancelButtonBorderColor: 'black',
+    cancelButtonBorderColor: '#999',
 
     coinIconColor: '#f6c442', //'#F6CF3A',
     activeTabColor: '#4147a8',

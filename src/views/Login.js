@@ -11,7 +11,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 export default class Login extends Component {
     login() {
@@ -22,7 +22,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>FestiFaggot</Text>
+                <Text style={styles.title}>{appName}</Text>
 
                 <HeaderText text='Login' />
 

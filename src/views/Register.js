@@ -11,7 +11,7 @@ import {
 	HeaderText,
 	WideButton
 } from '../components'
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 export default class Register extends Component {
 	constructor(props) {
@@ -149,7 +149,7 @@ export default class Register extends Component {
 		return (
 			<View style={styles.container}>
 
-			    <Text style={styles.title}>FestiFaggot</Text>
+			    <Text style={styles.title}>{appName}</Text>
 
                 <HeaderText text='Register' />
 

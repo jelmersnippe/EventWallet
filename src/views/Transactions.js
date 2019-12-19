@@ -12,9 +12,9 @@ import {
     TransactionList,
     HeaderText,
     RegularButton,
+    Header,
 } from '../components';
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
-import { SafeAreaView } from 'react-navigation';
 
 const transactions = [
     {

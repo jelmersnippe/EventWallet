@@ -10,7 +10,7 @@ import {
     HeaderText,
     WideButton
 } from '../components'
-import { Colors, Fonts } from '../components/GlobalVariables'
+import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 export default class ForgotPassword extends Component {
     passwordResetAction () {
@@ -21,7 +21,7 @@ export default class ForgotPassword extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>FestiFaggot</Text>
+                <Text style={styles.title}>{appName}</Text>
                 <HeaderText text='Forgot password?' />
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
