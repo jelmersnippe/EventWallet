@@ -4,6 +4,7 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
+    Keyboard
 } from 'react-native'
 
 import { createFilter } from 'react-native-search-filter';
@@ -48,10 +49,11 @@ export default class SearchBar extends Component {
 
     searchUpdated(term) {
         this.setState({ searchTerm: term })
-        this.props.callback(this.props.list.filter(createFilter(term, this.props.keys)), term)
 
         if (term == '') {
             this.props.callback([], term)
+        } else {
+            this.props.callback(this.props.list.filter(createFilter(term, this.props.keys)), term)
         }
     }
 
@@ -60,8 +62,11 @@ export default class SearchBar extends Component {
             <View style={[styles.search_container, headerShadow, { backgroundColor: this.props.backgroundColor }]}>
                 <View style={styles.search_bar}>
                     {this.state.searchTerm != '' ?
-                    <TouchableOpacity>
-                        <Icon name='arrow-left' size={30} color="#80868B" style={styles.search_icon} />
+                    <TouchableOpacity 
+                        style={styles.search_icon}
+                        onPress={() => {this.searchUpdated(''), Keyboard.dismiss()}}   
+                    >
+                        <Icon name='arrow-left' size={30} color="#80868B" />
                     </TouchableOpacity>
                     :
                     <Icon name='search' size={30} color="#80868B" style={styles.search_icon} />
@@ -75,8 +80,11 @@ export default class SearchBar extends Component {
                         style={styles.search_input}
                     />
                     {this.state.searchTerm != '' && 
-                    <TouchableOpacity>
-                        <Icon name='times' size={30} color="#80868B" style={styles.search_icon} />
+                    <TouchableOpacity 
+                        style={styles.search_icon}
+                        onPress={() => this.searchUpdated('')}
+                    >
+                        <Icon name='times' size={30} color="#80868B"/>
                     </TouchableOpacity>
                     }
                 </View>
@@ -102,11 +110,11 @@ const styles = StyleSheet.create({
 		backgroundColor: '#FFF',
 	},
 	search_icon: {
-		alignSelf: 'center',
         flex: 1,
+		alignSelf: 'center',
 	},
 	search_input: {
-		flex: 9,
+		flex: 8,
 	    fontFamily: Fonts.text,
         fontSize: 18,
 	}
