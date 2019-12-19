@@ -5,7 +5,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     TextInput,
+    AsyncStorage,
 } from 'react-native'
+
 
 import {
     HeaderText,
@@ -13,11 +15,49 @@ import {
 } from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables'
 
+const ip = '145.24.222.83'
+const port = '3304'
+
 export default class Login extends Component {
-    login() {
-        // Make call to validate login attempt, for now just redirect to app
-        this.props.navigation.navigate('App')
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            error: '',
+        }
     }
+
+    login(username, password) {
+        // Make call to validate login attempt, for now just redirect to app
+        if (username == 'user' && password == 'pass') {
+            this.storeAuthToken()
+        } else {
+            this.setState({ error: 'Unknown username and/or password' })
+        }
+        
+        // fetch('https://145.24.222.83:3304/login', {
+        //         method: 'POST',
+        //         headers: {
+        //             Accept: 'application/json',
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             username: {username},
+        //         }),
+        //     }).then(response => console.log(response));
+
+    }
+
+    storeAuthToken = async () => {
+        try {
+            await AsyncStorage.setItem('AuthToken', '1234').then(
+                this.props.navigation.navigate('App')
+            )
+        } catch (error) {
+            console.log('Problem storing token: ' + error)
+        }
+    };
 
     render() {
         return (
@@ -28,14 +68,25 @@ export default class Login extends Component {
 
                 <TextInput
                     style={styles.input}
+                    autoCapitalize='none'
+                    onChangeText={value => this.setState({ username: value })}
                     placeholder='Username'
                 />
                 <TextInput
                     style={styles.input}
+                    secureTextEntry={true}
+                    autoCapitalize='none'
+                    onChangeText={value => this.setState({ password: value })}
                     placeholder='Password'
                 />
 
-                <WideButton callback={() => { this.login() }} text='Login' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
+                {this.state.error != '' &&
+                    <Text style={styles.error_text}>
+                        {this.state.error}
+                    </Text>
+                }
+
+                <WideButton callback={() => { this.login(this.state.username, this.state.password) }} text='Login' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
 
                 <View style={styles.secondary_button}>
                     <TouchableOpacity
@@ -63,14 +114,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5 + '%',
     },
     input: {
-		borderBottomWidth: 1,
-		fontSize: 20,
-		borderBottomColor: 'black',
-		marginVertical: 15,
-		padding: 10,
-		width: '90%',
-		fontFamily: Fonts.text,
-		alignSelf: 'center'
+        borderBottomWidth: 1,
+        fontSize: 20,
+        borderBottomColor: 'black',
+        marginVertical: 15,
+        padding: 10,
+        width: '90%',
+        fontFamily: Fonts.text,
+        alignSelf: 'center'
     },
     title: {
         fontSize: 30,
@@ -90,5 +141,11 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         marginTop: 15,
         fontFamily: Fonts.text
+    },
+    error_text: {
+        color: 'red',
+        textAlign: 'center',
+        fontFamily: Fonts.text,
+        marginBottom: 10,
     }
 });

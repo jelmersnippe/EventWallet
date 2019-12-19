@@ -4,7 +4,8 @@ import {
     Animated,
     View,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    AsyncStorage
 } from 'react-native'
 
 export default class SidebarMenu extends Component {
@@ -14,6 +15,11 @@ export default class SidebarMenu extends Component {
             isMenuVisible: false,
             animation: new Animated.Value(0)
         }
+    }
+
+    removeAuthToken = async () => {
+        await AsyncStorage.removeItem('AuthToken')
+        // Add navigation to auth stack
     }
 
     toggleMenu = () => {
@@ -56,7 +62,7 @@ export default class SidebarMenu extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.menu_item}
-                        onPress={() => { console.log('hello') }}
+                        onPress={() => { this.removeAuthToken() }}
                     >
                         <Text>Log out</Text>
                     </TouchableOpacity>

@@ -4,27 +4,37 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
+    AsyncStorage
 } from 'react-native'
-import { Colors } from '../components/GlobalVariables'
+import { Colors, Fonts } from '../components/GlobalVariables'
+
+
 
 
 export default class AuthLoading extends Component {
+    componentDidMount(){
+        this.fetchAuthToken()
+    }
+
+    fetchAuthToken = async () => {
+        try {
+            const value = await AsyncStorage.getItem('AuthToken');
+            if (value !== null) {
+                console.log('AuthToken found: ' + value)
+                this.props.navigation.navigate('App')
+            } else {
+                console.log('No AuthToken found')
+                this.props.navigation.navigate('Auth')
+            }
+        } catch (error) {
+            console.log('Error fetching AuthToken: ' + error)
+        }
+    };
+
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate('Auth')}
-                >
-                    <Text style={styles.button_text}>To Authentication Stack</Text>
-
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate('App')}
-                >
-                    <Text style={styles.button_text}>To EventWallet</Text>
-                </TouchableOpacity>
+                <Text style={styles.title}>FestiFaggot</Text>
             </View>
         );
     }
@@ -38,6 +48,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Colors.eventColor,
+    },
+    title: {
+        color: Colors.lightTextColor,
+        fontFamily: Fonts.eventname,
+        fontSize: 30,
     },
     button: {
         width: 80 + '%',
