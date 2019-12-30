@@ -8,6 +8,8 @@ import {
     AsyncStorage,
 } from 'react-native'
 
+import RNFetchBlob from 'rn-fetch-blob'
+const base64 = require('base-64')
 
 import {
     HeaderText,
@@ -29,35 +31,39 @@ export default class Login extends Component {
     }
 
     login(username, password) {
-        // Make call to validate login attempt, for now just redirect to app
-        if (username == 'user' && password == 'pass') {
-            this.storeAuthToken()
-        } else {
-            this.setState({ error: 'Unknown username and/or password' })
-        }
-        
-        // fetch('https://145.24.222.83:3304/login', {
-        //         method: 'POST',
-        //         headers: {
-        //             Accept: 'application/json',
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             username: {username},
-        //         }),
-        //     }).then(response => console.log(response));
+        console.log('User: ' + username)
+        console.log('Pass: ' + password)
 
+        let authString = base64.encode(username + ':' + password)
+        console.log(authString)
+
+        RNFetchBlob.config({
+            trusty: true
+        })
+        .fetch('GET', 'https://145.24.222.83:3304/login', {
+            Authorization: 'Basic ' + authString,
+        })
+        .then(response => {
+            console.log(JSON.stringify(response, null, 4))
+            
+            if(response.respInfo.status == 200){
+                this.storeAuthToken(JSON.parse(response.data).token)
+            } else {
+                this.setState({ error: 'Unknown username and/or password' })
+            }
+        })
     }
 
-    storeAuthToken = async () => {
+    async storeAuthToken(token) {
         try {
-            await AsyncStorage.setItem('AuthToken', '1234').then(
+            console.log('Storing AuthToken: ' + token)
+            await AsyncStorage.setItem('AuthToken', token).then(
                 this.props.navigation.navigate('App')
             )
         } catch (error) {
             console.log('Problem storing token: ' + error)
         }
-    };
+    }
 
     render() {
         return (
