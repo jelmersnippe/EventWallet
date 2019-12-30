@@ -1,6 +1,3 @@
-
-import AuthLoading from './AuthLoading'
-
 import Login from './Login'
 import Register from './Register'
 import ForgotPassword from './ForgotPassword'
@@ -16,7 +13,6 @@ import FriendOverview from './FriendOverview'
 import ShareTokens from './ShareTokens'
 
 export { 
-    AuthLoading, 
     Login, 
     Register, 
     ForgotPassword, 

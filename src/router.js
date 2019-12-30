@@ -6,7 +6,6 @@ import { createStackNavigator } from 'react-navigation-stack'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import {
-    AuthLoading,
     Login,
     Register,
     ForgotPassword,
@@ -35,7 +34,7 @@ const TransactionStack = createStackNavigator(
         },
         WalletLink: {
             screen: WalletLink,
-            navigationOptions: ({navigation}) => ({
+            navigationOptions: ({ navigation }) => ({
                 header: (
                     <Header backButton={true} shadow={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                 ),
@@ -55,7 +54,7 @@ const TransactionStack = createStackNavigator(
             if (navigation.state.index > 0) {
                 tabBarVisible = false;
             }
-        
+
             return {
                 tabBarVisible,
             }
@@ -94,9 +93,9 @@ const SpecificEventContent = createBottomTabNavigator(
             if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
                 headerShown = false;
             }
-        
+
             if (headerShown) {
-                if(navigation.state.index == 0) {
+                if (navigation.state.index == 0) {
                     shadowShown = false;
                 }
                 return {
@@ -104,7 +103,7 @@ const SpecificEventContent = createBottomTabNavigator(
                         <Header backButton={true} shadow={shadowShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
                     ),
                 };
-                
+
             }
             return {
                 header: (
@@ -131,7 +130,7 @@ const EventStack = createStackNavigator(
             if (navigation.state.index > 0) {
                 tabBarVisible = false;
             }
-        
+
             return {
                 tabBarVisible,
             };
@@ -156,7 +155,7 @@ const FriendStack = createStackNavigator(
             if (navigation.state.index > 0) {
                 tabBarVisible = false;
             }
-        
+
             return {
                 tabBarVisible,
             };
@@ -206,15 +205,16 @@ const AuthStack = createStackNavigator(
     }
 )
 
-export default createAppContainer(
-    createSwitchNavigator(
-        {
-            AuthLoading: AuthLoading,
-            App: AppStack,
-            Auth: AuthStack,
-        },
-        {
-            initialRouteName: 'AuthLoading'
-        }
+export const createRootNavigator = (signedIn = false) => {
+    return createAppContainer(
+        createSwitchNavigator(
+            {
+                SignedIn: AppStack,
+                SignedOut: AuthStack,
+            },
+            {
+                initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+            }
+        )
     )
-);
+}

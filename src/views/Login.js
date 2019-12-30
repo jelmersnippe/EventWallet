@@ -5,10 +5,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     TextInput,
-    AsyncStorage,
 } from 'react-native'
 
-import RNFetchBlob from 'rn-fetch-blob'
+import { SignIn } from "../services/Auth";
 const base64 = require('base-64')
 
 import {
@@ -17,9 +16,6 @@ import {
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
-const ip = '145.24.222.83'
-const port = '3304'
-
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -27,41 +23,6 @@ export default class Login extends Component {
             username: '',
             password: '',
             error: '',
-        }
-    }
-
-    login(username, password) {
-        console.log('User: ' + username)
-        console.log('Pass: ' + password)
-
-        let authString = base64.encode(username + ':' + password)
-        console.log(authString)
-
-        RNFetchBlob.config({
-            trusty: true
-        })
-        .fetch('GET', 'https://145.24.222.83:3304/login', {
-            Authorization: 'Basic ' + authString,
-        })
-        .then(response => {
-            console.log(JSON.stringify(response, null, 4))
-            
-            if(response.respInfo.status == 200){
-                this.storeAuthToken(JSON.parse(response.data).token)
-            } else {
-                this.setState({ error: 'Unknown username and/or password' })
-            }
-        })
-    }
-
-    async storeAuthToken(token) {
-        try {
-            console.log('Storing AuthToken: ' + token)
-            await AsyncStorage.setItem('AuthToken', token).then(
-                this.props.navigation.navigate('App')
-            )
-        } catch (error) {
-            console.log('Problem storing token: ' + error)
         }
     }
 
@@ -92,7 +53,19 @@ export default class Login extends Component {
                     </Text>
                 }
 
-                <WideButton callback={() => { this.login(this.state.username, this.state.password) }} text='Login' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
+                <WideButton 
+                    callback={() => { 
+                        SignIn(this.state.username, this.state.password)
+                        .then(response => { 
+                            response 
+                            ? this.props.navigation.navigate('SignedIn')
+                            : this.setState({ error: 'Unknown username and/or password' })
+                        }) 
+                    }} 
+                    text='Login' 
+                    textColor={Colors.lightTextColor} 
+                    backgroundColor={Colors.eventColor} 
+                />
 
                 <View style={styles.secondary_button}>
                     <TouchableOpacity
