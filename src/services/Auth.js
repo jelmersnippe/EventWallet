@@ -40,7 +40,47 @@ export const SignIn = (username, password) => {
             })
             .catch(error => reject(error))
     })
+}
+
+export const SignUp = (username, password, email) => {
+    return new Promise((resolve, reject) => {
+        console.log('User: ' + username)
+        console.log('Pass: ' + password)
+        console.log('Email: ' + email)
     
+        let registerData = {
+            "username": username,
+            "password": password,
+            "email": email
+        }
+
+        RNFetchBlob.config({
+            trusty: true
+        })
+            .fetch('POST', 'https://' + ip + ':' + port + '/register', {
+                'Content-Type': 'application/json'
+            }, JSON.stringify(registerData))
+            .then(response => {
+                console.log(JSON.stringify(response, null, 4))
+
+                // Clean this up to handle failed registrations with a different status code (Like Login)
+                if(response.respInfo.status == 200){
+                    if(response.data == "user already exist") {
+                        resolve('User already exists')
+                    }
+                    else if(response.data == "unsuccesful registration"){
+                        resolve('Unknown failure')
+                    }
+                    else {
+                        resolve(true)
+                    }
+                } else {
+                    resolve('Some real Pepega shit happened :(')
+                }
+                
+            })
+            .catch(error => reject(error))
+    })
 }
 
 export const isSignedIn = () => {
