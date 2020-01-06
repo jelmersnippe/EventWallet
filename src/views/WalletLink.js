@@ -3,7 +3,6 @@ import {
     View, 
     Text,
     Image,
-    TouchableOpacity,
     StyleSheet
 } from 'react-native'
 
@@ -13,12 +12,25 @@ import {
 } from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables';
 
+import { GenerateQR } from '../services/QR'
+import RNFetchBlob from 'rn-fetch-blob'
+
+const walletCode = 'U73A9bf27Jkr'
+
 export default class WalletLink extends Component {
+    componentDidMount(){
+        //GenerateQR(walletCode)
+    }
+
+    test(){
+        GenerateQR(walletCode)
+    }
+
     render() {
         return(
             <View style={styles.container}>
                 <HeaderText text='Wallet Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                <Text style={styles.content}>U73A9bf27Jkr</Text>
+                <Text style={styles.content}>{walletCode}</Text>
 
 				<HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
                 <Image 
@@ -31,6 +43,7 @@ export default class WalletLink extends Component {
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
+                    callback={() => this.test()}
                 />
             </View>
         );
