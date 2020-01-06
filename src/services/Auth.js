@@ -65,17 +65,9 @@ export const SignUp = (username, password, email) => {
 
                 // Clean this up to handle failed registrations with a different status code (Like Login)
                 if(response.respInfo.status == 200){
-                    if(response.data == "user already exist") {
-                        resolve('User already exists')
-                    }
-                    else if(response.data == "unsuccessful registration"){
-                        resolve('Unknown failure')
-                    }
-                    else {
-                        resolve(true)
-                    }
+                    resolve(true)
                 } else {
-                    resolve('Some real Pepega shit happened :(')
+                    resolve(response.data)
                 }
                 
             })
