@@ -86,7 +86,13 @@ export default class Login extends Component {
                     </Text>
                 }
 
-                <WideButton callback={() => { this.login(this.state.username, this.state.password) }} text='Login' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
+                <WideButton 
+                    callback={() => { this.login(this.state.username, this.state.password) }} 
+                    text='Login' 
+                    textColor={Colors.lightTextColor} 
+                    backgroundColor={Colors.eventColor} 
+                    disabled={this.state.username == '' || this.state.password == ''} 
+                />
 
                 <View style={styles.secondary_button}>
                     <TouchableOpacity
