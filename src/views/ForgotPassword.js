@@ -13,6 +13,13 @@ import {
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 export default class ForgotPassword extends Component {
+    constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+		}
+    }
+    
     passwordResetAction () {
 
         // Make call to validate password reset attempt
@@ -26,10 +33,20 @@ export default class ForgotPassword extends Component {
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
 
-                <TextInput style={styles.input_text} placeholder="Email address"/>
+                <TextInput 
+                    style={styles.input_text} 
+                    placeholder="Email address"
+                    onChangeText={email => this.setState({email: email})}
+                />
 
                 
-                <WideButton callback={() => {this.passwordResetAction()}} text='Submit' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
+                <WideButton 
+                    callback={() => {this.passwordResetAction()}} 
+                    text='Submit' 
+                    textColor={Colors.lightTextColor} 
+                    backgroundColor={Colors.eventColor} 
+                    disabled={this.state.email == ''}
+                />
             </View>
         );
     }

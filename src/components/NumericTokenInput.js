@@ -24,7 +24,9 @@ export default class NumericTokenInput extends Component {
                     min={0}
                     step={1}
                     height={50}
-                    color='lightgray'
+                    colorLeft={this.state.value == 0 ? Colors.eventColor+'70' : Colors.eventColor}
+                    colorRight={Colors.eventColor}
+                    colorPress={Colors.darkEventColor}
                     rounded={false}
                     buttonFontSize={30}
                     fontSize={20}

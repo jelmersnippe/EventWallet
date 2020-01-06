@@ -157,7 +157,6 @@ export default class Register extends Component {
 					placeholder="Username"
 					style={styles.input_text}
 					onChangeText={username => this.setState({username: username})}
-					value={this.state.username}
 				/>
 
                 {this.state.usernameError != '' &&
@@ -171,7 +170,6 @@ export default class Register extends Component {
 					style={styles.input_text}
 					secureTextEntry={true}
 					onChangeText={password => this.setState({password: password})}
-					value={this.state.password}
 				/>
 
 				<View>
@@ -186,7 +184,6 @@ export default class Register extends Component {
 					placeholder="Email"
 					style={styles.input_text}
 					onChangeText={email => this.setState({email: email})}
-					value={this.state.email}
 				/>
 
 				{this.state.emailError != '' &&
@@ -195,7 +192,13 @@ export default class Register extends Component {
 					</Text>
 				}
 
-				<WideButton callback={() => {this.validate()}} text='Register' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
+				<WideButton
+					callback={() => {this.validate()}} 
+					text='Register' 
+					textColor={Colors.lightTextColor} 
+					backgroundColor={Colors.eventColor} 
+					disabled={this.state.username == '' || this.state.password == '' || this.state.email == ''} 
+				/>
 
 				<View style={styles.secondary_button}>
 					<Text style={styles.secondary_button_text}>Already have an account? </Text>

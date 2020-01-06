@@ -61,13 +61,15 @@ export default class ShareTokens extends Component {
 						text={'Cancel'} 
 						textColor={Colors.darkTextColor}
 						backgroundColor={Colors.cancelButtonColor}
-						borderColor={'gray'}
+						borderColor={Colors.cancelButtonBorderColor}
+						hideShadow={true}
 					/>
 					<RegularButton 
 						text={'Share'} 
 						textColor={Colors.darkTextColor}
 						backgroundColor={Colors.ctaButtonColor}
 						borderColor={Colors.ctaButtonBorderColor}
+						disabled={this.state.selectedAmount == 0 && true}
 					/>
 				</View>
 			</View>

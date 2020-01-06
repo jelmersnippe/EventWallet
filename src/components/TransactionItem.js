@@ -9,6 +9,17 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Colors, Fonts } from './GlobalVariables'
 
 export default class TransactionItem extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			textColor: Colors.darkTextColor
+		}
+	}
+    
+    componentDidMount(){
+        this.setState({textColor: (this.props.item.sender == 'Me' ? 'red' : 'green')})
+    }
+
     render() {
         return (
             <View>
@@ -18,19 +29,19 @@ export default class TransactionItem extends Component {
                         {this.props.item.sender == 'Me' 
                         ?
                         <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='minus' size={20} color='red' />
+                            <Icon style={styles.user_info_icon} name='minus' size={20} color={this.state.textColor} />
                             <Text style={styles.user_info_text}>{this.props.item.receiver}</Text>
                         </View>
                         :
                         <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='plus' size={20} color='green' />
+                            <Icon style={styles.user_info_icon} name='plus' size={20} color={this.state.textColor} />
                             <Text style={styles.user_info_text}>{this.props.item.sender}</Text>
                         </View>
                         }
 
                         <View style={styles.amount}>
-                            <Text style={styles.amount_text}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
-                            <Icon style={styles.amount_icon} name='coins' size={30} color={Colors.coinIconColor} />
+                            <Text style={[styles.amount_text, {color: this.state.textColor}]}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
+                            <Icon style={styles.amount_icon} name='coins' size={25} color={Colors.coinIconColor} />
                         </View>
                     </View>
                 </View>
@@ -44,7 +55,7 @@ const styles = StyleSheet.create({
         width: 100+'%',
         borderBottomWidth: 1,
         marginTop: 10,
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
     },
     datetime: {
         width: 100+'%', 
@@ -61,7 +72,7 @@ const styles = StyleSheet.create({
         width: 100+'%',
         paddingVertical: 5,
         paddingHorizontal: 10,
-        fontFamily: Fonts.text
+        fontFamily: Fonts.text,
     },
     user_info: {
         flexDirection: 'row', 
@@ -71,22 +82,23 @@ const styles = StyleSheet.create({
         color: Colors.darkTextColor,
     },
     user_info_text: {
-        fontSize: 20,
+        fontSize: 22,
         paddingLeft: 5,
         textAlignVertical: 'center',
         fontFamily: Fonts.text,
         color: Colors.darkTextColor,
     },
     amount: {
+        flex: 2,
         flexDirection: 'row', 
         justifyContent: 'space-evenly',
-        flex: 2,
+        alignItems: 'center',
     },
     amount_text: {
         textAlignVertical: 'center',
         textAlign: 'right',
-        fontSize: 20,
+        fontSize: 22,
         fontFamily: Fonts.text,
-        color: Colors.darkTextColor,
+        color: 'green',
     },
 })

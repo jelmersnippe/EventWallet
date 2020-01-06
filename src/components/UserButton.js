@@ -22,6 +22,7 @@ class UserButton extends Component {
                         ? this.props.navigation.navigate('ShareTokens', {friend: this.props.item})
                         : console.log('no nav')
                     }}
+                    disabled={this.props.disabled}
                 >
                     <Text style={[styles.button_text, {color: this.props.textColor}]}>{this.props.text}</Text>
                     <Icon style={styles.icon} name={this.props.icon} size={15} color={this.props.textColor} />

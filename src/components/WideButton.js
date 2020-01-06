@@ -12,11 +12,22 @@ class WideButton extends Component {
     render(){
         return (
             <TouchableOpacity 
-                style={[styles.button, buttonShadow, {backgroundColor: this.props.backgroundColor, borderColor: this.props.borderColor}]}
+            style={[styles.button, 
+                !this.props.hideShadow && !this.props.disabled && buttonShadow, 
+                {
+                    backgroundColor: this.props.disabled ? this.props.backgroundColor + '70' : this.props.backgroundColor, 
+                    borderColor: this.props.disabled ? this.props.borderColor + '70' : this.props.borderColor,
+                }]}
                 onPress={() => { this.props.callback ? this.props.callback() : console.log('no callback') }}
+                disabled={this.props.disabled}
             >
-                <Text style={[styles.button_text, {color: this.props.textColor}]}>{ this.props.text }</Text>
-                {this.props.icon && <Icon name={this.props.icon} size={35} color={this.props.textColor} />}
+                <Text 
+                    style={[styles.button_text, 
+                    {color: this.props.disabled ? this.props.textColor + '70' : this.props.textColor }]}
+                >
+                    {this.props.text}
+                </Text>
+                {this.props.icon && <Icon name={this.props.icon} size={35} color={ this.props.disabled ? this.props.text + '70' : this.props.textColor } />}
             </TouchableOpacity>
         );
     }

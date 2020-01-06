@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     menu_item: {
         alignItems: 'center',
         width: 100+'%',
-        backgroundColor: Colors.sideMenuColor,
+        backgroundColor: Colors.darkEventColor,
         padding: 10,
         flexDirection: 'row',
     },
