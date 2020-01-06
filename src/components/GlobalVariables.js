@@ -2,24 +2,23 @@
 export const appName = 'FestiFaggot'
 
 export const Colors = {
-    lightTextColor: 'white',
-    darkTextColor: 'black',
+    lightTextColor: '#ffffff',
+    darkTextColor: '#000000',
 
     eventColor: '#4147a8',
+    darkEventColor: '#353978',
     friendColor: '#4147a8',
     backgroundColor: '#F5FCFF',
 
     ctaButtonColor: '#f6c442',
     ctaButtonBorderColor: '#db8e02',
 
-    cancelButtonColor: 'lightgray',
-    cancelButtonBorderColor: '#999',
+    cancelButtonColor: '#d3d3d3',
+    cancelButtonBorderColor: '#d3d3d370',
 
-    coinIconColor: '#f6c442', //'#F6CF3A',
+    coinIconColor: '#f6c442',
     activeTabColor: '#4147a8',
-    inactiveTabColor: 'gray',
-
-    sideMenuColor: '#353978'
+    inactiveTabColor: '#808080',
 }
 
 export const Fonts = {
