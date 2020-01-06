@@ -5,18 +5,16 @@ import {
     StyleSheet,
     TouchableOpacity,
     TextInput,
-    AsyncStorage,
 } from 'react-native'
 
+import { SignIn } from "../services/Auth";
+const base64 = require('base-64')
 
 import {
     HeaderText,
     WideButton
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
-
-const ip = '145.24.222.83'
-const port = '3304'
 
 export default class Login extends Component {
     constructor(props) {
@@ -27,37 +25,6 @@ export default class Login extends Component {
             error: '',
         }
     }
-
-    login(username, password) {
-        // Make call to validate login attempt, for now just redirect to app
-        if (username == 'user' && password == 'pass') {
-            this.storeAuthToken()
-        } else {
-            this.setState({ error: 'Unknown username and/or password' })
-        }
-        
-        // fetch('https://145.24.222.83:3304/login', {
-        //         method: 'POST',
-        //         headers: {
-        //             Accept: 'application/json',
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             username: {username},
-        //         }),
-        //     }).then(response => console.log(response));
-
-    }
-
-    storeAuthToken = async () => {
-        try {
-            await AsyncStorage.setItem('AuthToken', '1234').then(
-                this.props.navigation.navigate('App')
-            )
-        } catch (error) {
-            console.log('Problem storing token: ' + error)
-        }
-    };
 
     render() {
         return (
@@ -87,7 +54,14 @@ export default class Login extends Component {
                 }
 
                 <WideButton 
-                    callback={() => { this.login(this.state.username, this.state.password) }} 
+                    callback={() => { 
+                        SignIn(this.state.username, this.state.password)
+                        .then(response => { 
+                            response 
+                            ? this.props.navigation.navigate('SignedIn')
+                            : this.setState({ error: 'Unknown username and/or password' })
+                        }) 
+                    }} 
                     text='Login' 
                     textColor={Colors.lightTextColor} 
                     backgroundColor={Colors.eventColor} 

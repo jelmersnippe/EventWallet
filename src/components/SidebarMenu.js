@@ -23,8 +23,10 @@ export default class SidebarMenu extends Component {
     }
 
     removeAuthToken = async () => {
-        await AsyncStorage.removeItem('AuthToken')
-        // Add navigation to auth stack
+        await AsyncStorage.removeItem('AuthToken').then(
+            console.log('Removed Auth Token'),
+            // Add navigation to auth stack
+        )
     }
 
     toggleMenu = () => {

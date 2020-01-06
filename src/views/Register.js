@@ -13,6 +13,8 @@ import {
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
+import { SignUp } from '../services/Auth'
+
 export default class Register extends Component {
 	constructor(props) {
 		super(props);
@@ -136,14 +138,20 @@ export default class Register extends Component {
 		let validEmail = this.validateEmail(this.state.email)
 
 		if(validUsername && validEmail && validPassword){
-			alert('Thank you, you registered successfully');
+			SignUp(this.state.username, this.state.password, this.state.email)
+			.then( response => {
+				if(response == true){
+					alert('Thank you, you registered successfully')
+					this.props.navigation.navigate('Login')
+				} else {
+					alert(response)
+				}
+			})
 		} 
 		else {
 			alert('Invalid input. Please correct the comments')
 		}
 	}
-
-
 
 	render() {
 		return (
@@ -210,6 +218,7 @@ export default class Register extends Component {
 		);
 	}
 }
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
