@@ -68,7 +68,7 @@ export const SignUp = (username, password, email) => {
                     if(response.data == "user already exist") {
                         resolve('User already exists')
                     }
-                    else if(response.data == "unsuccesful registration"){
+                    else if(response.data == "unsuccessful registration"){
                         resolve('Unknown failure')
                     }
                     else {

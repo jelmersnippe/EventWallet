@@ -163,6 +163,7 @@ export default class Register extends Component {
 
 				<TextInput
 					placeholder="Username"
+                    autoCapitalize='none'
 					style={styles.input_text}
 					onChangeText={username => this.setState({username: username})}
 				/>
@@ -175,6 +176,7 @@ export default class Register extends Component {
 
 				<TextInput
 					placeholder="Password"
+                    autoCapitalize='none'
 					style={styles.input_text}
 					secureTextEntry={true}
 					onChangeText={password => this.setState({password: password})}
@@ -190,6 +192,8 @@ export default class Register extends Component {
 
 				<TextInput
 					placeholder="Email"
+					autoCapitalize='none'
+					keyboardType='email-address'
 					style={styles.input_text}
 					onChangeText={email => this.setState({email: email})}
 				/>
