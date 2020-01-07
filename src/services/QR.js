@@ -1,4 +1,5 @@
 import RNFetchBlob from 'rn-fetch-blob'
+const base64 = require('base-64')
 
 const ip = '145.24.222.83'
 const port = '3305'
@@ -10,8 +11,6 @@ export const GenerateQR = (code) => {
             "code": code
         }
 
-        console.log(codeData)
-
         RNFetchBlob.config({
             trusty: true
         }).fetch('POST', 'https://' + ip + ':' + port + '/generate-qr', {
@@ -19,14 +18,11 @@ export const GenerateQR = (code) => {
             }, JSON.stringify(codeData))
             .then(response => {
                 console.log(JSON.stringify(response, null, 4))
-
-                
-                // if(response.respInfo.status == 200){
-                //     resolve(true)
-                // } else {
-                //     resolve(response.data)
-                // }
-                resolve(true)
+                if(response.respInfo.status == 200){
+                    resolve(response.data)
+                } else {
+                    resolve(false)
+                }
                 
             })
             .catch(error => reject(error))

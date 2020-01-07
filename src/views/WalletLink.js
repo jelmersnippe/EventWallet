@@ -13,17 +13,28 @@ import {
 import { Colors, Fonts } from '../components/GlobalVariables';
 
 import { GenerateQR } from '../services/QR'
-import RNFetchBlob from 'rn-fetch-blob'
 
 const walletCode = 'U73A9bf27Jkr'
 
 export default class WalletLink extends Component {
+    constructor() {
+		super();
+		this.state = {
+			qr: '',
+		}
+	}
+
+
     componentDidMount(){
-        //GenerateQR(walletCode)
+        GenerateQR(walletCode).then(response => {
+            this.setState({qr: response}) 
+        })
     }
 
-    test(){
-        GenerateQR(walletCode)
+    generateNewLink(){
+        GenerateQR(walletCode).then(response => {
+            this.setState({qr: response}) 
+        })
     }
 
     render() {
@@ -33,17 +44,21 @@ export default class WalletLink extends Component {
                 <Text style={styles.content}>{walletCode}</Text>
 
 				<HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                <Image 
-                    source={{uri:'https://chart.googleapis.com/chart?cht=qr&chl=U73A9bf27Jkr&chs=180x180&choe=UTF-8&chld=L|2'}}
-                    style={styles.qr_code}  
-                    resizeMode={'contain'}  
-                />
+
+                {this.state.qr != '' &&
+                    <Image 
+                        source={{uri: `data:image/jpeg;base64,${this.state.qr}`}}
+                        style={styles.qr_code}  
+                        resizeMode={'contain'}  
+                    />
+                }
+                
                 <WideButton 
                     text='Create new link' 
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
-                    callback={() => this.test()}
+                    callback={() => this.generateNewLink()}
                 />
             </View>
         );
