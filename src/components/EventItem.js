@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { 
+import {
     Text,
     View,
     TouchableOpacity,
@@ -11,30 +11,52 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Colors, Fonts } from './GlobalVariables'
 
 class EventItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            event: {}
+        }
+    }
+
+    componentDidMount(){
+        this.setState({event: this.props.item})
+    }
+
     render() {
         return (
-            <View style={ styles.container }>
+            <View style={styles.container}>
                 <View style={styles.info}>
-                    <Text style={styles.datetime}>{this.props.item.datetime}</Text>
-                    <Text style={styles.name}>{this.props.item.name}</Text>
-                    <Text style={styles.location}>{this.props.item.location}</Text>
+                    <Text style={styles.datetime}>{this.state.event.datetime}</Text>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
+                    <Text style={styles.location}>{this.state.event.location}</Text>
                 </View>
 
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.wallet_button}
-                    onPress={() => this.props.navigation.navigate('Transactions', {item: this.props.item})}
+                    onPress={() => this.props.navigation.navigate('Transactions', 
+                    { 
+                        updateAmount: (amount) => {
+                            updatedEvent = this.state.event
+                            updatedEvent.amount = amount
+                            this.setState({event: updatedEvent})
+                        },
+                        item: this.state.event })}
                 >
-                    <View style={styles.tokens}>
-                        <Text style={styles.tokens_text}>{this.props.item.amount}</Text>
-                        <Icon name='coins' size={20} color={Colors.coinIconColor}/>
-                    </View>
-                    <Icon name='angle-right' size={40} color="#80868B" />
+                    {this.state.event.amount != undefined ?
+                        <View style={styles.tokens}>
+                            <Text style={styles.tokens_text}>{this.state.event.amount}</Text>
+                            <Icon name='coins' size={20} color={Colors.coinIconColor} />
+                        </View>
+                        :
+                        <Text style={styles.register_text}>Register</Text>
+                    }
+                    <Icon name='angle-right' size={40} color='#80868B' />
                 </TouchableOpacity>
             </View>
         );
     }
 }
-  
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -44,7 +66,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
     },
     info: {
-        width: 65+'%',
+        width: 65 + '%',
     },
     datetime: {
         color: '#80868B',
@@ -52,7 +74,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         paddingLeft: 10,
         fontFamily: Fonts.text
-    },  
+    },
     name: {
         fontSize: 22,
         color: Colors.darkTextColor,
@@ -64,7 +86,8 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.text
     },
     wallet_button: {
-        width: 30+'%',
+        backgroundColor: 'white',
+        width: 30 + '%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -76,7 +99,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 6,
         elevation: 5,
-        backgroundColor: 'white',
     },
     tokens: {
         flexDirection: 'row',
@@ -88,6 +110,13 @@ const styles = StyleSheet.create({
         padding: 5,
         fontFamily: Fonts.text,
     },
+    register_text: {
+        color: Colors.darkTextColor,
+        fontSize: 18,
+        fontFamily: Fonts.text,
+        // textShadowColor: 'black',
+        // textShadowRadius: 1,
+    }
 })
 
 export default withNavigation(EventItem)

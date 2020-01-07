@@ -13,7 +13,7 @@ export default class TransactionList extends Component {
             <View>
                 {this.props.data.map(
                     (item) => {
-                        return <TransactionItem item={item} key={item.id}/>
+                        return <TransactionItem item={item} key={item.date_time}/>
                     }
                 )}
             </View>

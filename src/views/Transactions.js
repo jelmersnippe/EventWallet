@@ -18,7 +18,7 @@ import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
 import { GetTransactionHistory, CreateWallet } from '../services/Transaction'
 
-const event = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
+const eventUID = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
 
 export default class Transactions extends Component {
     constructor(props) {
@@ -32,12 +32,19 @@ export default class Transactions extends Component {
     }
 
     componentDidMount() {
+        this.fetchTransactionHistory(eventUID)
+    }
+
+    fetchTransactionHistory(event) {
         GetTransactionHistory(event).then(response => {
-            if (response) {
-                this.setState({ transactionData: response })
-                this.setState({ transactionHistoryFound: true })
-            }
-            this.setState({ historyFetched: true })
+            this.setState({ transactionData: response })
+            this.setState({ transactionHistoryFound: true })
+
+            let updatedEvent = this.state.event
+            updatedEvent.amount = response[0].balance_after
+            this.setState({event: updatedEvent})
+        }).catch(error => {
+            console.log(error)
         })
     }
 
@@ -53,7 +60,7 @@ export default class Transactions extends Component {
                     <View style={styles.event_info}>
                         <Text style={styles.name}>{this.state.event.name}</Text>
                     </View>
-                    {this.state.historyFetched && this.state.transactionHistoryFound &&
+                    {this.state.event.amount != undefined || (this.state.historyFetched && this.state.transactionHistoryFound) &&
                         <TouchableOpacity
                             onPress={() => { this.props.navigation.navigate('WalletLink') }}
                             style={styles.qr_code_button}
@@ -64,46 +71,45 @@ export default class Transactions extends Component {
                     }
                 </View>
 
-                {this.state.historyFetched 
-                    &&
-                    <View style={styles.padded_container}>
-                        {this.state.transactionHistoryFound ?
-                            <View style={styles.token_info}>
-                                <Text style={styles.amount_text}>You have {this.state.transactionData[0].balance_after} tokens</Text>
-                                <RegularButton
-                                    callback={() => { this.props.navigation.navigate('BuyTokens', { event: this.state.event }) }}
-                                    icon='angle-right'
-                                    text={'Buy Tokens'}
-                                    textColor={Colors.darkTextColor}
-                                    borderColor={Colors.ctaButtonBorderColor}
-                                    backgroundColor={Colors.ctaButtonColor}
-                                />
-                            </View>
-                            :
-                            <View style={styles.token_info}>
-                                <Text style={styles.amount_text}>You are not registered</Text>
-                                <RegularButton
-                                    callback={() => { 
-                                        CreateWallet(event)
+                <View style={styles.padded_container}>
+                    {this.state.event.amount != undefined
+                        ?
+                        <View style={styles.token_info}>
+                            <Text style={styles.amount_text}>You have {this.state.event.amount} tokens</Text>
+                            <RegularButton
+                                callback={() => { this.props.navigation.navigate('BuyTokens', { event: this.state.event }) }}
+                                icon='angle-right'
+                                text={'Buy Tokens'}
+                                textColor={Colors.darkTextColor}
+                                borderColor={Colors.ctaButtonBorderColor}
+                                backgroundColor={Colors.ctaButtonColor}
+                            />
+                        </View>
+                        :
+                        <View style={styles.token_info}>
+                            <Text style={styles.amount_text}>You are not registered</Text>
+                            <RegularButton
+                                callback={() => {
+                                    CreateWallet(eventUID)
                                         .then(response => {
-                                            this.setState({historyFetched: false})
-                                        })   
-                                        .catch(error => console.log(error)) 
-                                    }}
-                                    icon='angle-right'
-                                    text={'Register'}
-                                    textColor={Colors.darkTextColor}
-                                    borderColor={Colors.ctaButtonBorderColor}
-                                    backgroundColor={Colors.ctaButtonColor}
-                                />
-                            </View>
-                        }
+                                            this.props.navigation.state.params.updateAmount(0)
+                                            this.fetchTransactionHistory(eventUID)
+                                        })
+                                        .catch(error => console.log(error))
+                                }}
+                                icon='angle-right'
+                                text={'Register'}
+                                textColor={Colors.darkTextColor}
+                                borderColor={Colors.ctaButtonBorderColor}
+                                backgroundColor={Colors.ctaButtonColor}
+                            />
+                        </View>
+                    }
 
-                        {this.state.transactionHistoryFound &&
-                            <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                        }
-                    </View>
-                }
+                    {this.state.event.amount != undefined &&
+                        <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                    }
+                </View>
 
                 {this.state.transactionHistoryFound &&
                     <View style={styles.padded_container}>
@@ -112,7 +118,6 @@ export default class Transactions extends Component {
                         />
                     </View>
                 }
-
             </ScrollView>
         );
     }
