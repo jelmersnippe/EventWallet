@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { 
-    View, 
+import {
+    View,
     Text,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
 } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome5'
@@ -13,115 +13,37 @@ import {
     TransactionList,
     HeaderText,
     RegularButton,
-    Header,
 } from '../components';
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
-const transactions = [
-    {
-        id: 1,
-        sender: 'Me',
-        receiver: 'Maarten',
-        amount: '10',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 2,
-        sender: 'Henk',
-        receiver: 'Me',
-        amount: '10',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 3,
-        sender: 'Event',
-        receiver: 'Me',
-        amount: '20',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 4,
-        sender: 'Me',
-        receiver: 'Event stand #2',
-        amount: '4',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 5,
-        sender: 'Me',
-        receiver: 'Event stand #5',
-        amount: '6',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 6,
-        sender: 'Me',
-        receiver: 'Event stand #1',
-        amount: '2',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 7,
-        sender: 'Me',
-        receiver: 'Event stand #3',
-        amount: '4',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 8,
-        sender: 'Berend110',
-        receiver: 'Me',
-        amount: '8',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 9,
-        sender: 'Me',
-        receiver: 'Event stand #2',
-        amount: '8',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 10,
-        sender: 'Event',
-        receiver: 'Me',
-        amount: '10',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 11,
-        sender: 'Me',
-        receiver: 'Berend110',
-        amount: '8',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 12,
-        sender: 'Me',
-        receiver: 'Event stand #4',
-        amount: '2',
-        datetime: '24/07 19:23'
-    },
-    {
-        id: 13,
-        sender: 'Me',
-        receiver: 'HuisbaasBob',
-        amount: '5',
-        datetime: '24/07 19:23'
-    },
-];
+import { GetTransactionHistory, CreateWallet } from '../services/Transaction'
+
+const event = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
 
 export default class Transactions extends Component {
     constructor(props) {
         super(props);
         this.state = {
             event: this.props.navigation.getParam('item'),
+            historyFetched: false,
+            transactionHistoryFound: false,
+            transactionData: []
         }
+    }
+
+    componentDidMount() {
+        GetTransactionHistory(event).then(response => {
+            if (response) {
+                this.setState({ transactionData: response })
+                this.setState({ transactionHistoryFound: true })
+            }
+            this.setState({ historyFetched: true })
+        })
     }
 
     render() {
         return (
-            <ScrollView 
+            <ScrollView
                 style={styles.container}
                 stickyHeaderIndices={[1]}
                 showsVerticalScrollIndicator={false}
@@ -131,36 +53,62 @@ export default class Transactions extends Component {
                     <View style={styles.event_info}>
                         <Text style={styles.name}>{this.state.event.name}</Text>
                     </View>
-                    <TouchableOpacity 
-                        onPress={() => {this.props.navigation.navigate('WalletLink')}}
-                        style={styles.qr_code_button}
-                    >
-                        <AntDesign style={styles.qr_code_button_icon} name='qrcode' size={45} color={Colors.darkTextColor} />
-                        <Icon style={styles.qr_code_button_icon} name='angle-right' size={35} color={Colors.darkTextColor} />
-                    </TouchableOpacity>
+                    {this.state.historyFetched && this.state.transactionHistoryFound &&
+                        <TouchableOpacity
+                            onPress={() => { this.props.navigation.navigate('WalletLink') }}
+                            style={styles.qr_code_button}
+                        >
+                            <AntDesign style={styles.qr_code_button_icon} name='qrcode' size={45} color={Colors.darkTextColor} />
+                            <Icon style={styles.qr_code_button_icon} name='angle-right' size={35} color={Colors.darkTextColor} />
+                        </TouchableOpacity>
+                    }
                 </View>
 
-                
-                <View style={styles.padded_container}>
-                    <View style={styles.token_info}>
-                        <Text style = { styles.amount_text }>You have {this.state.event.amount} tokens</Text>
-                        <RegularButton 
-                            callback={() => {this.props.navigation.navigate('BuyTokens', {event: this.state.event })}} 
-                            icon='angle-right' 
-                            text={'Buy Tokens'} 
-                            textColor={Colors.darkTextColor} 
-                            borderColor={Colors.ctaButtonBorderColor} 
-                            backgroundColor={Colors.ctaButtonColor} 
+                {this.state.historyFetched 
+                    &&
+                    <View style={styles.padded_container}>
+                        {this.state.transactionHistoryFound ?
+                            <View style={styles.token_info}>
+                                <Text style={styles.amount_text}>You have {this.state.transactionData[0].balance_after} tokens</Text>
+                                <RegularButton
+                                    callback={() => { this.props.navigation.navigate('BuyTokens', { event: this.state.event }) }}
+                                    icon='angle-right'
+                                    text={'Buy Tokens'}
+                                    textColor={Colors.darkTextColor}
+                                    borderColor={Colors.ctaButtonBorderColor}
+                                    backgroundColor={Colors.ctaButtonColor}
+                                />
+                            </View>
+                            :
+                            <View style={styles.token_info}>
+                                <Text style={styles.amount_text}>You are not registered</Text>
+                                <RegularButton
+                                    callback={() => { 
+                                        //CreateWallet().then(response => console.log(response))    
+                                    }}
+                                    icon='angle-right'
+                                    text={'Register'}
+                                    textColor={Colors.darkTextColor}
+                                    borderColor={Colors.ctaButtonBorderColor}
+                                    backgroundColor={Colors.ctaButtonColor}
+                                />
+                            </View>
+                        }
+
+                        {this.state.transactionHistoryFound &&
+                            <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                        }
+                    </View>
+                }
+
+                {this.state.transactionHistoryFound &&
+                    <View style={styles.padded_container}>
+                        <TransactionList
+                            data={this.state.transactionData}
                         />
                     </View>
-                    <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                </View>
+                }
 
-                <View style={styles.padded_container}>
-                    <TransactionList
-                        data={transactions}
-                    />
-                </View>
             </ScrollView>
         );
     }
@@ -169,14 +117,15 @@ export default class Transactions extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.eventColor,
+        backgroundColor: Colors.backgroundColor,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: 100+'%',
+        width: 100 + '%',
         padding: 10,
+        backgroundColor: Colors.eventColor,
     },
     event_info: {
         flex: 7,
@@ -205,17 +154,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 3,
     },
     padded_container: {
-        paddingHorizontal: 3+'%', 
+        paddingHorizontal: 3 + '%',
         backgroundColor: Colors.backgroundColor,
     },
     token_info: {
         flexDirection: 'row',
-        width: 100+'%',
+        width: 100 + '%',
         justifyContent: 'space-evenly',
         marginTop: 15,
     },
     amount_text: {
-        width: 40+'%',
+        width: 40 + '%',
         height: 70,
         fontSize: 24,
         textAlign: 'center',
@@ -223,4 +172,9 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.text,
         color: Colors.darkTextColor,
     },
+    no_transaction_history: {
+        marginTop: 10,
+        fontSize: 16,
+        textAlign: 'center',
+    }
 });

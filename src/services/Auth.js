@@ -11,6 +11,10 @@ const onSignIn = (token) => {
     AsyncStorage.setItem(userKey, token)
 }
 
+export const getToken = () => {
+    AsyncStorage.getItem(userKey).then(response => console.log(response))
+}
+
 const onSignOut = () => {
     AsyncStorage.removeItem(userKey);
 }
@@ -81,7 +85,7 @@ export const isSignedIn = () => {
             .then(response => {
                 if (response !== null) {
                     console.log('AuthToken found: ' + response)
-                    resolve(true);
+                    resolve(response);
                 } else {
                     console.log('No AuthToken found')
                     resolve(false);
