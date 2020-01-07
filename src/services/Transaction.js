@@ -21,11 +21,11 @@ export const CreateWallet = (event) => {
                 }, JSON.stringify(eventData))
                 .then(response => {
                     console.log(JSON.stringify(response, null, 4))
-                    // if(response.respInfo.status == 200){
-                    //     resolve(JSON.parse(response.data))
-                    // } else {
-                    //     resolve(false)
-                    // }
+                    if(response.respInfo.status == 200){
+                        resolve(JSON.parse(response.data))
+                    } else {
+                        reject(response.data)
+                    }
                     
                 })
                 .catch(error => console.log(error))

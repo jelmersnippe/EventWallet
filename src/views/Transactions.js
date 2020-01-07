@@ -84,7 +84,11 @@ export default class Transactions extends Component {
                                 <Text style={styles.amount_text}>You are not registered</Text>
                                 <RegularButton
                                     callback={() => { 
-                                        //CreateWallet().then(response => console.log(response))    
+                                        CreateWallet(event)
+                                        .then(response => {
+                                            this.setState({historyFetched: false})
+                                        })   
+                                        .catch(error => console.log(error)) 
                                     }}
                                     icon='angle-right'
                                     text={'Register'}
