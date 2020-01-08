@@ -81,7 +81,7 @@ export const isSignedIn = () => {
             .then(response => {
                 if (response !== null) {
                     console.log('AuthToken found: ' + response)
-                    resolve(true);
+                    resolve(response);
                 } else {
                     console.log('No AuthToken found')
                     resolve(false);

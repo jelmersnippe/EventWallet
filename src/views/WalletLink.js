@@ -13,27 +13,28 @@ import {
 import { Colors, Fonts } from '../components/GlobalVariables';
 
 import { GenerateQR } from '../services/QR'
+import { GetWalletLink } from '../services/Event'
 
-const walletCode = 'U73A9bf27Jkr'
+const eventUID = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
 
 export default class WalletLink extends Component {
     constructor() {
 		super();
 		this.state = {
+            walletCode: '',
 			qr: '',
 		}
 	}
 
 
     componentDidMount(){
-        GenerateQR(walletCode).then(response => {
-            this.setState({qr: response}) 
-        })
-    }
+        GetWalletLink(eventUID).then(response => {
+            let walletCode = response.wallet_code
 
-    generateNewLink(){
-        GenerateQR(walletCode).then(response => {
-            this.setState({qr: response}) 
+            this.setState({walletCode: walletCode})
+            GenerateQR(walletCode).then(response => {
+                this.setState({qr: response}) 
+            })
         })
     }
 
@@ -41,7 +42,7 @@ export default class WalletLink extends Component {
         return(
             <View style={styles.container}>
                 <HeaderText text='Wallet Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                <Text style={styles.content}>{walletCode}</Text>
+                <Text style={styles.content}>{this.state.walletCode}</Text>
 
 				<HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
@@ -58,7 +59,7 @@ export default class WalletLink extends Component {
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
-                    callback={() => this.generateNewLink()}
+                    callback={() => console.log('no functioanlity yet')}
                 />
             </View>
         );
