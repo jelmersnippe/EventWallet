@@ -60,7 +60,7 @@ export default class Transactions extends Component {
                     <View style={styles.event_info}>
                         <Text style={styles.name}>{this.state.event.name}</Text>
                     </View>
-                    {this.state.event.amount != undefined || (this.state.historyFetched && this.state.transactionHistoryFound) &&
+                    {this.state.event.amount != undefined &&
                         <TouchableOpacity
                             onPress={() => { this.props.navigation.navigate('WalletLink') }}
                             style={styles.qr_code_button}
