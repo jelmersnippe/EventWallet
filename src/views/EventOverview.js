@@ -60,11 +60,13 @@ export default class EventOverview extends Component {
 	fetchFestivalData() {
 		GetEvents().then(response => {
 			this.updateAmounts(response)
-		}).catch(error => console.log(error))
+		})
 
 		GetWallets().then(response => {
+			console.log()
+			console.log('!!!PLEASE REMOVE!!!\n wallets:')
 			console.log(response)
-		}).catch(error => console.log(error))
+		})
 	}
 
 	componentDidMount() {

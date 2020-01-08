@@ -41,8 +41,6 @@ export default class Transactions extends Component {
             let updatedEvent = this.state.event
             updatedEvent.amount = response[0].balance_after
             this.setState({event: updatedEvent})
-        }).catch(error => {
-            console.log('Could not fetch transaction history: ' + error)
         })
     }
 
@@ -112,10 +110,6 @@ export default class Transactions extends Component {
                                         .then(response => {
                                             this.props.navigation.state.params.updateAmount(0)
                                             this.fetchTransactionHistory(this.state.event.uid)
-                                            this.setState({registerInProgress: false})
-                                        })
-                                        .catch(error => {
-                                            console.log(error)
                                             this.setState({registerInProgress: false})
                                         })
                                 }}

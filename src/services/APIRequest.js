@@ -21,9 +21,11 @@ export const APIRequest = async (method, ip, port, route, requiresToken = false,
                 if(method == 'GET'){
                     GetRequest(URL, headers)
                     .then(response => resolve(response))
+                    .catch(error => reject(error))
                 } else if (method == 'POST') {
                     PostRequest(URL, headers, body)
                     .then(response => resolve(response))
+                    .catch(error => reject(error))
                 } else {
                     reject('Allowed methods are GET and POST')
                 }
@@ -33,9 +35,11 @@ export const APIRequest = async (method, ip, port, route, requiresToken = false,
             if(method == 'GET'){
                 GetRequest(URL, headers)
                 .then(response => resolve(response))
+                .catch(error => reject(error))
             } else if (method == 'POST') {
                 PostRequest(URL, headers, body)
                 .then(response => resolve(response))
+                .catch(error => reject(error))
             } else {
                 reject('Allowed methods are GET and POST')
             }
@@ -44,16 +48,15 @@ export const APIRequest = async (method, ip, port, route, requiresToken = false,
 }
 
 const GetRequest = async (URL, headers) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
         RNFetchBlob.config({
             trusty: true
         }).fetch('GET', URL, headers, null)
         .then(response => {
-            console.log(response)
             ProcessResponse(response).then(data => {
                 resolve(data)
             }).catch(error => {
-                console.log(error)
+                reject(error)
             })
         })
         .catch(error => {
@@ -63,7 +66,7 @@ const GetRequest = async (URL, headers) => {
 }
 
 const PostRequest = async (URL, headers, body) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
         RNFetchBlob.config({
             trusty: true
         }).fetch('POST', URL, headers, JSON.stringify(body))
@@ -71,7 +74,7 @@ const PostRequest = async (URL, headers, body) => {
             ProcessResponse(response).then(data => {
                 resolve(data)
             }).catch(error => {
-                console.log(error)
+                reject(error)
             })
         })
         .catch(error => {
@@ -90,6 +93,7 @@ const ProcessResponse = (response) => {
             }
         } 
         else if (response.respInfo.status == 401) {
+            console.log('401 Code: invalid token :)')
             reject(JSON.parse(response.data).message)
         } else {
             reject(response.data)
