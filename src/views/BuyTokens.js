@@ -18,6 +18,7 @@ import {
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
 import { GetTokenPrice } from '../services/Event'
+import { AddFunds } from '../services/Transaction'
 
 export default class BuyTokens extends Component {
     constructor() {
@@ -95,6 +96,12 @@ export default class BuyTokens extends Component {
                             textColor={Colors.darkTextColor}
                             backgroundColor={Colors.ctaButtonColor}
                             borderColor={Colors.ctaButtonBorderColor}
+                            callback={() => {
+                                AddFunds(this.state.event.uid, this.state.selectedAmount).then(response => {
+                                    this.props.navigation.state.params.updateTransactions(response)
+                                    this.props.navigation.goBack()
+                                })
+                            }}
                             disabled={this.state.selectedAmount == 0 || this.state.tokenPrice <= 0}
                         />
                     </View>

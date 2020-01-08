@@ -46,6 +46,18 @@ export default class Transactions extends Component {
         })
     }
 
+    addTransaction(transaction){
+        let updatedTransactions = this.state.transactionData
+        updatedTransactions.unshift(transaction)
+        this.setState({transactionData: updatedTransactions})
+
+        let updatedEvent = this.state.event
+        updatedEvent.amount = transaction.balance_after
+        this.setState({event: updatedEvent})
+
+        this.props.navigation.state.params.updateAmount(transaction.balance_after)
+    }
+
     render() {
         return (
             <ScrollView
@@ -77,7 +89,10 @@ export default class Transactions extends Component {
                         <View style={styles.token_info}>
                             <Text style={styles.amount_text}>You have {this.state.event.amount} tokens</Text>
                             <RegularButton
-                                callback={() => { this.props.navigation.navigate('BuyTokens', { event: this.state.event }) }}
+                                callback={() => {this.props.navigation.navigate('BuyTokens', { 
+                                    updateTransactions: (transaction) => this.addTransaction(transaction),
+                                    event: this.state.event
+                                })}}
                                 icon='angle-right'
                                 text={'Buy Tokens'}
                                 textColor={Colors.darkTextColor}
