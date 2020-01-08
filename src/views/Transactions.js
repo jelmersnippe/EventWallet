@@ -18,8 +18,6 @@ import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
 import { GetTransactionHistory, CreateWallet } from '../services/Transaction'
 
-const eventUID = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
-
 export default class Transactions extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +30,7 @@ export default class Transactions extends Component {
     }
 
     componentDidMount() {
-        this.fetchTransactionHistory(eventUID)
+        this.fetchTransactionHistory(this.state.event.uid)
     }
 
     fetchTransactionHistory(event) {
@@ -44,7 +42,7 @@ export default class Transactions extends Component {
             updatedEvent.amount = response[0].balance_after
             this.setState({event: updatedEvent})
         }).catch(error => {
-            console.log(error)
+            console.log('Could not fetch transaction history: ' + error)
         })
     }
 
@@ -58,11 +56,13 @@ export default class Transactions extends Component {
             >
                 <View style={[styles.header, headerShadow]}>
                     <View style={styles.event_info}>
-                        <Text style={styles.name}>{this.state.event.name}</Text>
+                        <Text style={styles.name}>{this.state.event.description}</Text>
                     </View>
                     {this.state.event.amount != undefined &&
                         <TouchableOpacity
-                            onPress={() => { this.props.navigation.navigate('WalletLink') }}
+                            onPress={() => this.props.navigation.navigate('WalletLink', {
+                                event: this.state.event.uid
+                            })}
                             style={styles.qr_code_button}
                         >
                             <AntDesign style={styles.qr_code_button_icon} name='qrcode' size={45} color={Colors.darkTextColor} />
@@ -87,13 +87,16 @@ export default class Transactions extends Component {
                         </View>
                         :
                         <View style={styles.token_info}>
+                            
                             <Text style={styles.amount_text}>You are not registered</Text>
+                            {console.log(this.state.event.uid)}
                             <RegularButton
+                            
                                 callback={() => {
-                                    CreateWallet(eventUID)
+                                    CreateWallet(this.state.event.uid)
                                         .then(response => {
                                             this.props.navigation.state.params.updateAmount(0)
-                                            this.fetchTransactionHistory(eventUID)
+                                            this.fetchTransactionHistory(this.state.event.uid)
                                         })
                                         .catch(error => console.log(error))
                                 }}

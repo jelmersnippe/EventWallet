@@ -28,7 +28,7 @@ export default class WalletLink extends Component {
 
 
     componentDidMount(){
-        GetWalletLink(eventUID).then(response => {
+        GetWalletLink(this.props.navigation.getParam('event')).then(response => {
             let walletCode = response.wallet_code
 
             this.setState({walletCode: walletCode})

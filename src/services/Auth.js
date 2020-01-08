@@ -33,12 +33,13 @@ export const SignIn = (username, password) => {
                 Authorization: 'Basic ' + authString,
             })
             .then(response => {
-                console.log(JSON.stringify(response, null, 4))
     
                 if (response.respInfo.status == 200) {
                     onSignIn(JSON.parse(response.data).token)
                     resolve(true)
                 } else {
+                    console.log('SignIn failed:')
+                    console.log(JSON.stringify(response, null, 4))
                     resolve(false)
                 }
             })
@@ -65,13 +66,12 @@ export const SignUp = (username, password, email) => {
                 'Content-Type': 'application/json'
             }, JSON.stringify(registerData))
             .then(response => {
-                console.log(JSON.stringify(response, null, 4))
-
-                // Clean this up to handle failed registrations with a different status code (Like Login)
                 if(response.respInfo.status == 200){
                     resolve(true)
                 } else {
                     resolve(response.data)
+                    console.log('SignUp failed:')
+                    console.log(JSON.stringify(response, null, 4))
                 }
                 
             })
@@ -84,10 +84,8 @@ export const isSignedIn = () => {
         AsyncStorage.getItem(userKey)
             .then(response => {
                 if (response !== null) {
-                    console.log('AuthToken found: ' + response)
                     resolve(response);
                 } else {
-                    console.log('No AuthToken found')
                     resolve(false);
                 }
             })

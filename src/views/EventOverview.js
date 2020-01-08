@@ -14,24 +14,14 @@ import {
 import { Colors } from '../components/GlobalVariables'
 
 import { GetLatestTransaction } from '../services/Transaction'
-
-const eventUID = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
-
-const allEvents = [
-	{
-		id: '1',
-		name: 'Shockerz - The Raw Gathering',
-		location: 'Autotron, Rosmalen',
-		datetime: 'Zaterdag 14 dec 14:00 - 01:00'
-	},
-]
+import { GetEvents } from '../services/Event'
 
 export default class EventOverview extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			searchTerm: '',
-			allEvents: allEvents,
+			allEvents: [],
 			filteredEvents: [],
 		}
 	}
@@ -49,12 +39,11 @@ export default class EventOverview extends Component {
 
 	updateAmount = (event) => {
 		return new Promise(async (resolve, reject) => {
-			GetLatestTransaction(eventUID).then(response => {
+			GetLatestTransaction(event.uid).then(response => {
 				event.amount = response.balance_after
 				resolve(event)
 			})
 			.catch(error => {
-				console.log(error)
 				resolve(event)
 			})
 		})
@@ -65,14 +54,13 @@ export default class EventOverview extends Component {
 			events.map(async event => 
 			await this.updateAmount(event))
 		)
-		console.log()
-		console.log(eventsWithAmount)
 		this.setState({allEvents: eventsWithAmount})
 	}
 
 	fetchFestivalData() {
-		// Fetch event data for the user
-		this.updateAmounts(allEvents)
+		GetEvents().then(response => {
+			this.updateAmounts(response)
+		})
 	}
 
 	componentDidMount() {
@@ -82,7 +70,7 @@ export default class EventOverview extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<SearchBar keys={['name', 'location', 'datetime']} list={this.state.allEvents} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor={Colors.eventColor} />
+				<SearchBar keys={['description', 'location', 'begin_date', 'end_date']} list={this.state.allEvents} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor={Colors.eventColor} />
 
 				<View style={styles.event_list_container}>
 					<HeaderText text='Events' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />

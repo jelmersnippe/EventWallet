@@ -17,10 +17,11 @@ export const GenerateQR = (code) => {
                 'Content-Type': 'application/json'
             }, JSON.stringify(codeData))
             .then(response => {
-                console.log(JSON.stringify(response, null, 4))
                 if(response.respInfo.status == 200){
                     resolve(response.data)
                 } else {
+                    console.log('GenerateQR failed:')
+                    console.log(JSON.stringify(response, null, 4))
                     resolve(false)
                 }
                 

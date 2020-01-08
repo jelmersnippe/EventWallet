@@ -7,11 +7,13 @@ const transactionPort = '3306'
 export const CreateWallet = (event) => {
     return new Promise((resolve, reject) => {
 
+        console.log('event: ' + event)
         let eventData = {
             "event": event
         }
-
+        console.log(JSON.stringify(eventData))
         isSignedIn().then(authToken => {
+            console.log('authToken: ' + authToken)
             RNFetchBlob.config({
                 trusty: true
             }).fetch('POST', 'https://' + ip + ':' + transactionPort + '/wallet/create', {
@@ -22,6 +24,8 @@ export const CreateWallet = (event) => {
                     if(response.respInfo.status == 200){
                         resolve(JSON.parse(response.data))
                     } else {
+                        console.log('CreateWallet failed:')
+                        console.log(JSON.stringify(response, null, 4))
                         reject(response.data)
                     }
                 })
@@ -48,6 +52,8 @@ export const GetTransactionHistory = (event) => {
                     if(response.respInfo.status == 200){
                         resolve(JSON.parse(response.data))
                     } else {
+                        console.log('GetTransactionHistory failed:')
+                        console.log(JSON.stringify(response, null, 4))
                         reject(response.data)
                     }
                 })
@@ -74,6 +80,7 @@ export const GetLatestTransaction = (event) => {
                     if(response.respInfo.status == 200){
                         resolve(JSON.parse(response.data))
                     } else {
+                        console.log('GetLatestTransaction failed:')
                         console.log(JSON.stringify(response, null, 4))
                         reject(response.data)
                     }

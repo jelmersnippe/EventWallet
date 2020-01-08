@@ -26,8 +26,8 @@ class EventItem extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.info}>
-                    <Text style={styles.datetime}>{this.state.event.datetime}</Text>
-                    <Text style={styles.name}>{this.state.event.name}</Text>
+                    <Text style={styles.datetime}>{this.state.event.begin_date} - {this.state.event.end_date}</Text>
+                    <Text style={styles.name}>{this.state.event.description}</Text>
                     <Text style={styles.location}>{this.state.event.location}</Text>
                 </View>
 
