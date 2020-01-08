@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import RNFetchBlob from 'rn-fetch-blob'
+import { APIRequest } from './APIRequest'
 const base64 = require('base-64')
 
 const ip = '145.24.222.83'
@@ -9,14 +10,6 @@ const userKey = 'AuthToken'
 
 const onSignIn = (token) => {
     AsyncStorage.setItem(userKey, token)
-}
-
-export const getToken = () => {
-    AsyncStorage.getItem(userKey).then(response => console.log(response))
-}
-
-const onSignOut = () => {
-    AsyncStorage.removeItem(userKey);
 }
 
 export const SignIn = (username, password) => {
@@ -45,39 +38,21 @@ export const SignIn = (username, password) => {
 }
 
 export const SignUp = (username, password, email) => {
-    return new Promise((resolve, reject) => {
-        let registerData = {
-            "username": username,
-            "password": password,
-            "email": email
-        }
+    let bodyData = {
+        "username": username,
+        "password": password,
+        "email": email
+    }
 
-        RNFetchBlob.config({
-            trusty: true
-        })
-            .fetch('POST', 'https://' + ip + ':' + port + '/register', {
-                'Content-Type': 'application/json'
-            }, JSON.stringify(registerData))
-            .then(response => {
-                if(response.respInfo.status == 200){
-                    resolve(true)
-                } else {
-                    resolve(response.data)
-                    console.log('SignUp failed:')
-                    console.log(JSON.stringify(response, null, 4))
-                }
-                
-            })
-            .catch(error => reject(error))
-    })
-}
+    return APIRequest('POST', ip, port, '/register', false, bodyData)
+} 
 
-export const isSignedIn = () => {
+export const isSignedIn = async () => {
     return new Promise((resolve, reject) => {
         AsyncStorage.getItem(userKey)
-            .then(response => {
-                if (response !== null) {
-                    resolve(response);
+            .then(authToken => {
+                if (authToken !== null) {
+                    resolve(authToken)
                 } else {
                     resolve(false);
                 }
@@ -85,3 +60,4 @@ export const isSignedIn = () => {
             .catch(error => reject(error));
     });
 };
+

@@ -1,135 +1,44 @@
-import RNFetchBlob from 'rn-fetch-blob'
-import { isSignedIn } from './Auth'
+import { APIRequest } from './APIRequest'
 
 const ip = '145.24.222.83'
 const port = '3307'
 
 export const GetWalletLink = (event) => {
-    return new Promise((resolve, reject) => {
+    let bodyData = {
+        "event": event
+    }
+    
+    return APIRequest('POST', ip, port, '/wallet/user', true, bodyData)
+}
 
-        let bodyData = {
-            "event": event
-        }
-
-        isSignedIn().then(authToken => {
-            RNFetchBlob.config({
-                trusty: true
-            }).fetch('POST', 'https://' + ip + ':' + port + '/wallet/user', {
-                    'Content-Type': 'application/json',
-                    'x-access-token': authToken
-                }, JSON.stringify(bodyData))
-                .then(response => {
-                    if(response.respInfo.status == 200){
-                        resolve(JSON.parse(response.data))
-                    } else {
-                        console.log(JSON.stringify(response))
-                        reject(response.data)
-                    }
-                })
-                .catch(error => console.log(error))
-        })
-    })
+export const GetWallets = () => {
+    return APIRequest('POST', ip, port, '/wallets/user', true)
 }
 
 export const GetWristband = (event) => {
-    return new Promise((resolve, reject) => {
-
-        let bodyData = {
-            "event": event
-        }
-
-        isSignedIn().then(authToken => {
-            RNFetchBlob.config({
-                trusty: true
-            }).fetch('POST', 'https://' + ip + ':' + port + '/wristband', {
-                    'Content-Type': 'application/json',
-                    'x-access-token': authToken
-                }, JSON.stringify(bodyData))
-                .then(response => {
-                    if(response.respInfo.status == 200){
-                        resolve(JSON.parse(response.data))
-                    } else {
-                        console.log(JSON.stringify(response, null, 4))
-                        reject(response.data)
-                    }
-                })
-                .catch(error => console.log(error))
-        })
-    })
+    let bodyData = {
+        "event": event
+    }
+    
+    return APIRequest('POST', ip, port, '/wristband', true, bodyData)
 }
 
 export const UpdateWristband = (event) => {
-    return new Promise((resolve, reject) => {
+    let bodyData = {
+        "event": event
+    }
 
-        let bodyData = {
-            "event": event
-        }
-
-        isSignedIn().then(authToken => {
-            RNFetchBlob.config({
-                trusty: true
-            }).fetch('POST', 'https://' + ip + ':' + port + '/wristband/update', {
-                    'Content-Type': 'application/json',
-                    'x-access-token': authToken
-                }, JSON.stringify(bodyData))
-                .then(response => {
-                    if(response.respInfo.status == 200){
-                        resolve(JSON.parse(response.data))
-                    } else {
-                        console.log(JSON.stringify(response, 4, null))
-                        reject(response.data)
-                    }
-                })
-                .catch(error => console.log(error))
-        })
-    })
+    return APIRequest('POST', ip, port, '/wristband/update', true, bodyData)
 }
 
 export const GetTokenPrice = (event) => {
-    return new Promise((resolve, reject) => {
-        let bodyData = {
-            "event": event
-        }
+    let bodyData = {
+        "event": event
+    }
 
-        isSignedIn().then(authToken => {
-            RNFetchBlob.config({
-                trusty: true
-            }).fetch('POST', 'https://' + ip + ':' + port + '/tokenprice', {
-                    'Content-Type': 'application/json',
-                    'x-access-token': authToken
-                }, JSON.stringify(bodyData))
-                .then(response => {
-                    if(response.respInfo.status == 200){
-                        resolve(JSON.parse(response.data))
-                    } else {
-                        console.log(JSON.stringify(response))
-                        reject(response.data)
-                    }
-                })
-                .catch(error => console.log(error))
-        })
-    })
+    return APIRequest('POST', ip, port, '/tokenprice', true, bodyData)
 }
 
 export const GetEvents = () => {
-    return new Promise((resolve, reject) => {
-
-        isSignedIn().then(authToken => {
-            RNFetchBlob.config({
-                trusty: true
-            }).fetch('POST', 'https://' + ip + ':' + port + '/events', {
-                    'Content-Type': 'application/json',
-                    'x-access-token': authToken
-                })
-                .then(response => {
-                    if(response.respInfo.status == 200){
-                        resolve(JSON.parse(response.data))
-                    } else {
-                        console.log(JSON.stringify(response))
-                        reject(response.data)
-                    }
-                })
-                .catch(error => console.log(error))
-        })
-    })
+    return APIRequest('POST', ip, port, '/events', true)
 }
