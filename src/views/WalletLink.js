@@ -3,7 +3,7 @@ import {
     View, 
     Text,
     Image,
-    StyleSheet
+    StyleSheet,
 } from 'react-native'
 
 import { 
@@ -13,36 +13,45 @@ import {
 import { Colors, Fonts } from '../components/GlobalVariables';
 
 import { GenerateQR } from '../services/QR'
-import { GetWalletLink } from '../services/Event'
-
-const eventUID = 'BA9FA42EDB69FBB3EE15AF1CFBC5DEAC010DA4F53CC1A9285DE40162C2F2706F'
+import { GetWristband, UpdateWristband } from '../services/Event'
 
 export default class WalletLink extends Component {
     constructor() {
 		super();
 		this.state = {
-            walletCode: '',
+            event: '',
+            wristbandCode: '',
+            wristbandStatus: '',
 			qr: '',
 		}
 	}
 
 
     componentDidMount(){
-        GetWalletLink(this.props.navigation.getParam('event')).then(response => {
-            let walletCode = response.wallet_code
+        this.setState({event: this.props.navigation.getParam('event')})
+        GetWristband(this.props.navigation.getParam('event')).then(response => {
+            let wristbandCode = response.code
+            this.setState({wristbandStatus: response.status})
 
-            this.setState({walletCode: walletCode})
-            GenerateQR(walletCode).then(response => {
-                this.setState({qr: response}) 
-            })
-        })
+            this.setWristbandCode(wristbandCode)
+        }).catch(error => alert('Could not get wristbande code: ' + error))
+    }
+
+    setWristbandCode(wristbandCode){
+        this.setState({wristbandCode: wristbandCode})
+        GenerateQR(wristbandCode).then(response => {
+            this.setState({qr: response}) 
+        }).catch(error => alert('Could not generate QR code: ' + error))
     }
 
     render() {
         return(
             <View style={styles.container}>
                 <HeaderText text='Wallet Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                <Text style={styles.content}>{this.state.walletCode}</Text>
+                <Text style={styles.content}>{this.state.wristbandCode}</Text>
+                {this.state.wristbandCode != '' &&
+                    <Text>Status: {this.state.wristbandStatus}</Text>
+                }
 
 				<HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
@@ -59,6 +68,11 @@ export default class WalletLink extends Component {
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
+                    callback={() => UpdateWristband(this.state.event)
+                        .then(response => this.setWristbandCode(response.code))
+                        .catch(error => alert('Could not update wristband code: ' + error))
+                    }
+                    disabled={this.state.wristbandStatus != 'active'}
                 />
             </View>
         );
