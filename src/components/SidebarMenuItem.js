@@ -12,7 +12,7 @@ export default class SidebarMenuItem extends Component {
 		return (
             <TouchableOpacity
                 style={styles.menu_item}
-                onPress={this.props.callback}
+                onPress={() => { this.props.callback ? this.props.callback() : console.log('no callback') }}
             >
                 {this.props.icon}
                 <Text style={[styles.text, {color: this.props.textColor}]}>{this.props.text}</Text>

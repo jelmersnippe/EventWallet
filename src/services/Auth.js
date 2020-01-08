@@ -21,9 +21,6 @@ const onSignOut = () => {
 
 export const SignIn = (username, password) => {
     return new Promise((resolve, reject) => {
-        console.log('User: ' + username)
-        console.log('Pass: ' + password)
-    
         let authString = base64.encode(username + ':' + password)
     
         RNFetchBlob.config({
@@ -49,10 +46,6 @@ export const SignIn = (username, password) => {
 
 export const SignUp = (username, password, email) => {
     return new Promise((resolve, reject) => {
-        console.log('User: ' + username)
-        console.log('Pass: ' + password)
-        console.log('Email: ' + email)
-    
         let registerData = {
             "username": username,
             "password": password,

@@ -59,7 +59,6 @@ export default class WalletLink extends Component {
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
-                    callback={() => console.log('no functioanlity yet')}
                 />
             </View>
         );

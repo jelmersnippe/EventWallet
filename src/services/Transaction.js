@@ -6,14 +6,11 @@ const transactionPort = '3306'
 
 export const CreateWallet = (event) => {
     return new Promise((resolve, reject) => {
-
-        console.log('event: ' + event)
         let eventData = {
             "event": event
         }
         console.log(JSON.stringify(eventData))
         isSignedIn().then(authToken => {
-            console.log('authToken: ' + authToken)
             RNFetchBlob.config({
                 trusty: true
             }).fetch('POST', 'https://' + ip + ':' + transactionPort + '/wallet/create', {

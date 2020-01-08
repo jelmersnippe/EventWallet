@@ -24,7 +24,7 @@ export default class SidebarMenu extends Component {
 
     removeAuthToken = async () => {
         await AsyncStorage.removeItem('AuthToken').then(
-            console.log('Removed Auth Token'),
+            console.log('Removed Auth Token')
             // Add navigation to auth stack
         )
     }
@@ -59,21 +59,18 @@ export default class SidebarMenu extends Component {
                     <SidebarMenuItem
                         text='FAQ'
                         textColor={Colors.lightTextColor}
-                        callback={() => {console.log('no nav')}}
                         icon={<FontAwesome style={styles.icon} name="question" size={18} />}
                     />
 
                     <SidebarMenuItem
                         text='Legal disclaimer'
                         textColor={Colors.lightTextColor}
-                        callback={() => {console.log('no nav')}}
                         icon={<Icon style={styles.icon} name="balance-scale" size={15} />}
                     />
 
                     <SidebarMenuItem
                         text='Contact'
                         textColor={Colors.lightTextColor}
-                        callback={() => {console.log('no nav')}}
                         icon={<IonIcon style={styles.icon} name="md-contact" size={20} />}
                     />
 
