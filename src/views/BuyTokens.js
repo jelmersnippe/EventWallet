@@ -17,13 +17,14 @@ import {
 } from '../components'
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
-const tokenPrice = 2.5
+import { GetTokenPrice } from '../services/Event'
 
 export default class BuyTokens extends Component {
     constructor() {
         super();
         this.state = {
             paymentMethod: '',
+            tokenPrice: 0,
             selectedAmount: 0,
             totalPrice: 0,
             event: [],
@@ -32,11 +33,13 @@ export default class BuyTokens extends Component {
 
     componentDidMount() {
         this.setState({ event: this.props.navigation.getParam('event') })
+        GetTokenPrice(this.props.navigation.getParam('event').uid)
+        .then(response => this.setState({tokenPrice: response.price}))
     }
 
     updateSelectedAmount = (value) => {
         this.setState({ selectedAmount: value })
-        this.setState({ totalPrice: tokenPrice * value})
+        this.setState({ totalPrice: this.state.tokenPrice * value})
     }
 
     displayTokenPrice(tokenPrice){
@@ -51,14 +54,15 @@ export default class BuyTokens extends Component {
         return (
             <View style={styles.container}>
                 <View style={[styles.header, headerShadow]}>
-                    <Text style={styles.name}>{this.state.event.name}</Text>
+                    <Text style={styles.name}>{this.state.event.description}</Text>
                 </View>
                 
                 <ScrollView style={styles.content}>
 
                     <HeaderText text='Buy tokens' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-
-                    <Text style={styles.description}>Price per token: €{this.displayTokenPrice(tokenPrice)}</Text>
+                    {this.state.tokenPrice > 0 &&
+                        <Text style={styles.description}>Price per token: €{this.displayTokenPrice(this.state.tokenPrice)}</Text>
+                    }
                     <NumericTokenInput callback={this.updateSelectedAmount}/>
 
                     <Text style={styles.description}>Total price: €{this.displayTokenPrice(this.state.totalPrice)}</Text>
@@ -91,7 +95,7 @@ export default class BuyTokens extends Component {
                             textColor={Colors.darkTextColor}
                             backgroundColor={Colors.ctaButtonColor}
                             borderColor={Colors.ctaButtonBorderColor}
-                            disabled={this.state.selectedAmount == 0 && true}
+                            disabled={this.state.selectedAmount == 0 || this.state.tokenPrice <= 0}
                         />
                     </View>
                 </ScrollView>

@@ -31,6 +31,33 @@ export const GetWalletLink = (event) => {
     })
 }
 
+export const GetTokenPrice = (event) => {
+    return new Promise((resolve, reject) => {
+        console.log(event)
+        let bodyData = {
+            "event": event
+        }
+
+        isSignedIn().then(authToken => {
+            RNFetchBlob.config({
+                trusty: true
+            }).fetch('POST', 'https://' + ip + ':' + port + '/tokenprice', {
+                    'Content-Type': 'application/json',
+                    'x-access-token': authToken
+                }, JSON.stringify(bodyData))
+                .then(response => {
+                    if(response.respInfo.status == 200){
+                        resolve(JSON.parse(response.data))
+                    } else {
+                        console.log(JSON.stringify(response))
+                        reject(response.data)
+                    }
+                })
+                .catch(error => console.log(error))
+        })
+    })
+}
+
 export const GetEvents = () => {
     return new Promise((resolve, reject) => {
 
