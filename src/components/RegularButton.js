@@ -27,7 +27,7 @@ class RegularButton extends Component {
                 >
                     {this.props.text}
                 </Text>
-                {this.props.icon && <Icon name={this.props.icon} size={35} color={ this.props.disabled ? this.props.text + '70' : this.props.textColor } />}
+                {this.props.icon && <Icon name={this.props.icon} size={35} color={this.props.disabled ? this.props.textColor + '70' : this.props.textColor } />}
             </TouchableOpacity>
         );
     }

@@ -20,6 +20,7 @@ export default class WalletLink extends Component {
 		super();
 		this.state = {
             event: '',
+            refreshingWristband: false,
             wristbandCode: '',
             wristbandStatus: '',
 			qr: '',
@@ -30,16 +31,14 @@ export default class WalletLink extends Component {
     componentDidMount(){
         this.setState({event: this.props.navigation.getParam('event')})
         GetWristband(this.props.navigation.getParam('event')).then(response => {
-            let wristbandCode = response.code
-            this.setState({wristbandStatus: response.status})
-
-            this.setWristbandCode(wristbandCode)
+            this.setWristband(response)
         }).catch(error => alert('Could not get wristbande code: ' + error))
     }
 
-    setWristbandCode(wristbandCode){
-        this.setState({wristbandCode: wristbandCode})
-        GenerateQR(wristbandCode).then(response => {
+    setWristband(wristband){
+        this.setState({wristbandCode: wristband.code})
+        this.setState({wristbandStatus: wristband.status})
+        GenerateQR(wristband.code).then(response => {
             this.setState({qr: response}) 
         }).catch(error => alert('Could not generate QR code: ' + error))
     }
@@ -62,18 +61,30 @@ export default class WalletLink extends Component {
                         resizeMode={'contain'}  
                     />
                 }
-                
+                {this.state.wristbandCode != '' && 
                 <WideButton 
                     text='Create new link' 
                     textColor={Colors.darkTextColor}
                     backgroundColor={Colors.ctaButtonColor} 
                     borderColor={Colors.ctaButtonBorderColor} 
-                    callback={() => UpdateWristband(this.state.event)
-                        .then(response => this.setWristbandCode(response.code))
-                        .catch(error => alert('Could not update wristband code: ' + error))
+                    callback={() => {
+                        this.setState({refreshingWristband: true})
+                        UpdateWristband(this.state.event)
+                        .then(response => {
+                            this.setWristband(response)
+                            this.setState({refreshingWristband: false})
+                        })
+                        .catch(error => {
+                            this.setState({refreshingWristband: false})
+                            alert('Could not update wristband code: ' + error)
+                        })
                     }
-                    disabled={this.state.wristbandStatus != 'active'}
+                        
+                    }
+                    disabled={this.state.wristbandStatus != 'active' || this.state.refreshingWristband}
                 />
+                }
+                
             </View>
         );
     }

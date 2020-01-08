@@ -23,7 +23,7 @@ export default class Transactions extends Component {
         super(props);
         this.state = {
             event: this.props.navigation.getParam('item'),
-            historyFetched: false,
+            registerInProgress: false,
             transactionHistoryFound: false,
             transactionData: []
         }
@@ -89,22 +89,27 @@ export default class Transactions extends Component {
                         <View style={styles.token_info}>
                             
                             <Text style={styles.amount_text}>You are not registered</Text>
-                            {console.log(this.state.event.uid)}
                             <RegularButton
                             
                                 callback={() => {
+                                    this.setState({registerInProgress: true})
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
                                             this.props.navigation.state.params.updateAmount(0)
                                             this.fetchTransactionHistory(this.state.event.uid)
+                                            this.setState({registerInProgress: false})
                                         })
-                                        .catch(error => console.log(error))
+                                        .catch(error => {
+                                            console.log(error)
+                                            this.setState({registerInProgress: false})
+                                        })
                                 }}
                                 icon='angle-right'
                                 text={'Register'}
                                 textColor={Colors.darkTextColor}
                                 borderColor={Colors.ctaButtonBorderColor}
                                 backgroundColor={Colors.ctaButtonColor}
+                                disabled={this.state.registerInProgress}
                             />
                         </View>
                     }

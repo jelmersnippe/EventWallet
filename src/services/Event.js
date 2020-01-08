@@ -49,7 +49,7 @@ export const GetWristband = (event) => {
                     if(response.respInfo.status == 200){
                         resolve(JSON.parse(response.data))
                     } else {
-                        console.log(JSON.stringify(response))
+                        console.log(JSON.stringify(response, null, 4))
                         reject(response.data)
                     }
                 })
@@ -73,7 +73,6 @@ export const UpdateWristband = (event) => {
                     'x-access-token': authToken
                 }, JSON.stringify(bodyData))
                 .then(response => {
-                    console.log(JSON.stringify(response, null, 4))
                     if(response.respInfo.status == 200){
                         resolve(JSON.parse(response.data))
                     } else {
@@ -88,7 +87,6 @@ export const UpdateWristband = (event) => {
 
 export const GetTokenPrice = (event) => {
     return new Promise((resolve, reject) => {
-        console.log(event)
         let bodyData = {
             "event": event
         }
