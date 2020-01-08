@@ -11,6 +11,10 @@ const onSignIn = (token) => {
     AsyncStorage.setItem(userKey, token)
 }
 
+export const getToken = () => {
+    AsyncStorage.getItem(userKey).then(response => console.log(response))
+}
+
 const onSignOut = () => {
     AsyncStorage.removeItem(userKey);
 }

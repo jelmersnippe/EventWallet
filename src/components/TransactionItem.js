@@ -17,30 +17,22 @@ export default class TransactionItem extends Component {
 	}
     
     componentDidMount(){
-        this.setState({textColor: (this.props.item.sender == 'Me' ? 'red' : 'green')})
+        this.setState({textColor: (this.props.item.amount < 0  ? 'red' : 'green')})
     }
 
     render() {
         return (
             <View>
                 <View style={styles.container}>
-                    <Text style={styles.datetime}>{this.props.item.datetime}</Text>
+                    <Text style={styles.datetime}>{this.props.item.date_time.replace("T", " ")}</Text>
                     <View style={styles.transaction_info}>
-                        {this.props.item.sender == 'Me' 
-                        ?
                         <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='minus' size={20} color={this.state.textColor} />
-                            <Text style={styles.user_info_text}>{this.props.item.receiver}</Text>
+                            <Icon style={styles.user_info_icon} name={this.props.item.amount < 0 ? 'minus' : 'plus'} size={20} color={this.state.textColor} />
+                            <Text style={styles.user_info_text} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.counter_wallet_uid}</Text>
                         </View>
-                        :
-                        <View style={styles.user_info}>
-                            <Icon style={styles.user_info_icon} name='plus' size={20} color={this.state.textColor} />
-                            <Text style={styles.user_info_text}>{this.props.item.sender}</Text>
-                        </View>
-                        }
 
                         <View style={styles.amount}>
-                            <Text style={[styles.amount_text, {color: this.state.textColor}]}>{this.props.item.sender == 'Me' ? '-' : '+'}{this.props.item.amount}</Text>
+                            <Text style={[styles.amount_text, {color: this.state.textColor}]}>{this.props.item.amount > 0 && '+'}{this.props.item.amount}</Text>
                             <Icon style={styles.amount_icon} name='coins' size={25} color={Colors.coinIconColor} />
                         </View>
                     </View>
