@@ -55,7 +55,7 @@ export default class BuyTokens extends Component {
         return (
             <View style={styles.container}>
                 <View style={[styles.header, headerShadow]}>
-                    <Text style={styles.name}>{this.state.event.description}</Text>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
                 </View>
                 
                 <ScrollView style={styles.content}>

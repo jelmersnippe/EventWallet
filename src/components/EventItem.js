@@ -32,7 +32,7 @@ class EventItem extends Component {
                 <View style={styles.info}>
                     <Text style={styles.datetime}>Start:  {this.state.event.begin_date}</Text>
                     <Text style={styles.datetime}>End:      {this.state.event.end_date}</Text>
-                    <Text style={styles.name}>{this.state.event.description}</Text>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
                     <Text style={styles.location}>{this.state.event.location}</Text>
                 </View>
 

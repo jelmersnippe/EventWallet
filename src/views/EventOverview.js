@@ -15,6 +15,7 @@ import { Colors } from '../components/GlobalVariables'
 
 import { GetLatestTransaction } from '../services/TransactionAPI'
 import { GetEvents, GetWallets } from '../services/EventAPI'
+import { APIRequest } from '../services/APIRequest'
 
 export default class EventOverview extends Component {
 	constructor(props) {
@@ -60,14 +61,13 @@ export default class EventOverview extends Component {
 	fetchFestivalData() {
 		GetEvents().then(response => {
 			this.updateAmounts(response)
-			console.log(response)
 		})
 
-		// GetWallets().then(response => {
-		// 	console.log()
-		// 	console.log('!!!PLEASE REMOVE!!!\n wallets:')
-		// 	console.log(response)
-		// })
+		GetWallets().then(response => {
+			console.log()
+			console.log('!!!PLEASE REMOVE!!!\n wallets:')
+			console.log(response)
+		})
 	}
 
 	componentDidMount() {

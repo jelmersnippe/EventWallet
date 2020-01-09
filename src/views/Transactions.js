@@ -103,7 +103,6 @@ export default class Transactions extends Component {
                             
                             <Text style={styles.amount_text}>You are not registered</Text>
                             <RegularButton
-                            
                                 callback={() => {
                                     this.setState({registerInProgress: true})
                                     CreateWallet(this.state.event.uid)

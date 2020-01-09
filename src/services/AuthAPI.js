@@ -31,7 +31,7 @@ export const SignUp = (username, password, email, pin) => {
         "pin": pin
     }
 
-    return APIRequest('POST', ip, port, '/register', false, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/register', false, bodyData)
 } 
 
 export const RefreshToken = (pin) => {
@@ -39,7 +39,7 @@ export const RefreshToken = (pin) => {
         "pin": pin
     }
 
-    return APIRequest('POST', ip, port, '/refresh/token', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/refresh/token', true, bodyData)
 }
 
 export const SignIn = (email, password) => {

@@ -8,11 +8,11 @@ export const GetWalletLink = (event) => {
         "event": event
     }
     
-    return APIRequest('POST', ip, port, '/wallet/user', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/wallet/user', true, bodyData)
 }
 
 export const GetWallets = () => {
-    return APIRequest('POST', ip, port, '/wallets/user', true)
+    return APIRequest('POST', ip + ':' + port + '/wallets/user', true)
 }
 
 export const GetWristband = (event) => {
@@ -20,7 +20,7 @@ export const GetWristband = (event) => {
         "event": event
     }
     
-    return APIRequest('POST', ip, port, '/wristband', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/wristband', true, bodyData)
 }
 
 export const UpdateWristband = (event) => {
@@ -28,7 +28,7 @@ export const UpdateWristband = (event) => {
         "event": event
     }
 
-    return APIRequest('POST', ip, port, '/wristband/update', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/wristband/update', true, bodyData)
 }
 
 export const GetTokenPrice = (event) => {
@@ -36,9 +36,9 @@ export const GetTokenPrice = (event) => {
         "event": event
     }
 
-    return APIRequest('POST', ip, port, '/tokenprice', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/tokenprice', true, bodyData)
 }
 
 export const GetEvents = () => {
-    return APIRequest('POST', ip, port, '/events', true)
+    return APIRequest('POST', ip + ':' + port + '/events', true)
 }

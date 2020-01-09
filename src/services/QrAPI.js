@@ -8,5 +8,5 @@ export const GenerateQR = (code) => {
         "code": code
     }
 
-    return APIRequest('POST', ip, port, '/generate-qr', false, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/generate-qr', false, bodyData)
 }

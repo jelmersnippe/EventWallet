@@ -8,7 +8,7 @@ export const CreateWallet = (event) => {
         "event": event
     }
     
-    return APIRequest('POST', ip, port, '/wallet/create', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/wallet/create', true, bodyData)
 }
 
 export const AddFunds = (event, amount) => {
@@ -17,7 +17,7 @@ export const AddFunds = (event, amount) => {
             "amount": amount
     }
     
-    return APIRequest('POST', ip, port, '/transaction/add_funds', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/transaction/add_funds', true, bodyData)
 }
 
 export const GetTransactionHistory = (event) => {
@@ -25,7 +25,7 @@ export const GetTransactionHistory = (event) => {
         "event": event
     }
     
-    return APIRequest('POST', ip, port, '/transaction/user/all', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/transaction/user/all', true, bodyData)
 }
 
 export const GetLatestTransaction = (event) => {
@@ -33,5 +33,5 @@ export const GetLatestTransaction = (event) => {
         "event": event
     }
     
-    return APIRequest('POST', ip, port, '/transaction/user/latest', true, bodyData)
+    return APIRequest('POST', ip + ':' + port + '/transaction/user/latest', true, bodyData)
 }
