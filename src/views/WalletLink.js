@@ -12,8 +12,8 @@ import {
 } from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables';
 
-import { GenerateQR } from '../services/QR'
-import { GetWristband, UpdateWristband } from '../services/Event'
+import { GenerateQR } from '../services/QrAPI'
+import { GetWristband, UpdateWristband } from '../services/EventAPI'
 
 export default class WalletLink extends Component {
     constructor() {

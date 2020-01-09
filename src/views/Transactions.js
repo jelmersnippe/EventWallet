@@ -16,7 +16,7 @@ import {
 } from '../components';
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
-import { GetTransactionHistory, CreateWallet } from '../services/Transaction'
+import { GetTransactionHistory, CreateWallet } from '../services/TransactionAPI'
 
 export default class Transactions extends Component {
     constructor(props) {

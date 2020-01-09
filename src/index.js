@@ -4,10 +4,10 @@ import {
     Text,
     StyleSheet,
 } from 'react-native'
-import { Colors, Fonts } from './components/GlobalVariables'
+import { Colors, Fonts, appName } from './components/GlobalVariables'
 
 import { createRootNavigator } from './router'
-import { isSignedIn } from './services/Auth'
+import { isSignedIn } from './services/AuthAPI'
 
 export default class App extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class App extends Component {
     componentDidMount() {
         isSignedIn()
             .then(response => this.setState({ signedIn: response, checkedSignIn: true }))
-            .catch(error => alert('An error occurred'));
+            .catch(error => alert('An error occurred: ' + error));
     }
 
     render() {
@@ -31,7 +31,7 @@ export default class App extends Component {
         if (!checkedSignIn) {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.title}>FestiFaggot</Text>
+                    <Text style={styles.title}>{appName}</Text>
                 </View>
             );
         }

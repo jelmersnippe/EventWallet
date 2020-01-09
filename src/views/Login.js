@@ -7,8 +7,7 @@ import {
     TextInput,
 } from 'react-native'
 
-import { SignIn } from "../services/Auth";
-const base64 = require('base-64')
+import { SignIn } from "../services/AuthAPI"
 
 import {
     HeaderText,
@@ -56,11 +55,13 @@ export default class Login extends Component {
                 <WideButton 
                     callback={() => { 
                         SignIn(this.state.username, this.state.password)
-                        .then(response => { 
-                            response 
-                            ? this.props.navigation.navigate('SignedIn')
-                            : this.setState({ error: 'Unknown username and/or password' })
+                        .then(() => { 
+                            this.props.navigation.navigate('SignedIn')
                         }) 
+                        .catch(error => {
+                            alert(error)
+                            this.setState({error: 'Unknown username and/or password' })
+                        })
                     }} 
                     text='Login' 
                     textColor={Colors.lightTextColor} 

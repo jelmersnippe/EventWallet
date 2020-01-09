@@ -19,14 +19,19 @@ class EventItem extends Component {
     }
 
     componentDidMount(){
-        this.setState({event: this.props.item})
+        let updatedEvent = this.props.item
+        updatedEvent.begin_date = this.props.item.begin_date.replace('T', ' ')
+        updatedEvent.end_date = this.props.item.end_date.replace('T', ' ')
+        
+        this.setState({event: updatedEvent})
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.info}>
-                    <Text style={styles.datetime}>{this.state.event.begin_date} - {this.state.event.end_date}</Text>
+                    <Text style={styles.datetime}>Start:  {this.state.event.begin_date}</Text>
+                    <Text style={styles.datetime}>End:      {this.state.event.end_date}</Text>
                     <Text style={styles.name}>{this.state.event.description}</Text>
                     <Text style={styles.location}>{this.state.event.location}</Text>
                 </View>

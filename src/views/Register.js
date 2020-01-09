@@ -13,7 +13,7 @@ import {
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
-import { SignUp } from '../services/Auth'
+import { SignUp } from '../services/AuthAPI'
 
 export default class Register extends Component {
 	constructor(props) {

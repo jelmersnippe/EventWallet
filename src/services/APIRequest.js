@@ -1,5 +1,5 @@
 import RNFetchBlob from 'rn-fetch-blob'
-import { isSignedIn } from './Auth'
+import { getToken } from './AuthAPI'
 
 export const APIRequest = async (method, ip, port, route, requiresToken = false, body = null, contentType = 'application/json') => {
     return new Promise((resolve, reject) => {
@@ -15,34 +15,19 @@ export const APIRequest = async (method, ip, port, route, requiresToken = false,
         }
 
         if(requiresToken){
-            isSignedIn().then(authToken => {
-                headers['x-access-token'] = authToken
+            headers['x-access-token'] = getToken()
+        } 
 
-                if(method == 'GET'){
-                    GetRequest(URL, headers)
-                    .then(response => resolve(response))
-                    .catch(error => reject(error))
-                } else if (method == 'POST') {
-                    PostRequest(URL, headers, body)
-                    .then(response => resolve(response))
-                    .catch(error => reject(error))
-                } else {
-                    reject('Allowed methods are GET and POST')
-                }
-            })
-
+        if(method == 'GET'){
+            GetRequest(URL, headers)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        } else if (method == 'POST') {
+            PostRequest(URL, headers, body)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
         } else {
-            if(method == 'GET'){
-                GetRequest(URL, headers)
-                .then(response => resolve(response))
-                .catch(error => reject(error))
-            } else if (method == 'POST') {
-                PostRequest(URL, headers, body)
-                .then(response => resolve(response))
-                .catch(error => reject(error))
-            } else {
-                reject('Allowed methods are GET and POST')
-            }
+            reject('Allowed methods are GET and POST')
         }
     })
 }
@@ -66,12 +51,6 @@ const GetRequest = async (URL, headers) => {
 }
 
 const PostRequest = async (URL, headers, body) => {
-
-
-    console.log(URL)
-    console.log(headers)
-    console.log(body)
-
     return new Promise((resolve,reject) => {
         RNFetchBlob.config({
             trusty: true
@@ -90,10 +69,9 @@ const PostRequest = async (URL, headers, body) => {
 }
 
 const ProcessResponse = (response) => {
-    console.log(JSON.stringify(response, null, 4))
     return new Promise((resolve, reject) => {
-        if(response.respInfo.status == 200){
-            if(response.respInfo.respType == 'json'){
+        if (response.respInfo.status == 200){
+            if (response.respInfo.respType == 'json'){
                 resolve(JSON.parse(response.data))
             } else {
                 resolve(response.data)
@@ -101,6 +79,9 @@ const ProcessResponse = (response) => {
         } 
         else if (response.respInfo.status == 401) {
             reject(JSON.parse(response.data).message)
+        } else if (response.respInfo.status == 403) {
+            console.log('Token was valid, but expired. Send refresh request, then save it')
+            reject(response.data)
         } else {
             reject(response.data)
         }

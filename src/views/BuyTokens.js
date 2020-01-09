@@ -17,8 +17,8 @@ import {
 } from '../components'
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
-import { GetTokenPrice } from '../services/Event'
-import { AddFunds } from '../services/Transaction'
+import { GetTokenPrice } from '../services/EventAPI'
+import { AddFunds } from '../services/TransactionAPI'
 
 export default class BuyTokens extends Component {
     constructor() {

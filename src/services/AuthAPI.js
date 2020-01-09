@@ -8,9 +8,30 @@ const port = '3304'
 
 const userKey = 'AuthToken'
 
+let currentToken = ''
+
 const onSignIn = (token) => {
     AsyncStorage.setItem(userKey, token)
+    setToken(token)
 }
+
+export const getToken = () => {
+    return currentToken
+}
+
+export const setToken = (token) => {
+    currentToken = token
+}
+
+export const SignUp = (username, password, email) => {
+    let bodyData = {
+        "username": username,
+        "password": password,
+        "email": email
+    }
+
+    return APIRequest('POST', ip, port, '/register', false, bodyData)
+} 
 
 export const SignIn = (username, password) => {
     return new Promise((resolve, reject) => {
@@ -26,32 +47,23 @@ export const SignIn = (username, password) => {
     
                 if (response.respInfo.status == 200) {
                     onSignIn(JSON.parse(response.data).token)
-                    resolve(true)
+                    resolve()
                 } else {
                     console.log('SignIn failed:')
                     console.log(JSON.stringify(response, null, 4))
-                    resolve(false)
+                    reject(response.data)
                 }
             })
             .catch(error => reject(error))
     })
 }
 
-export const SignUp = (username, password, email) => {
-    let bodyData = {
-        "username": username,
-        "password": password,
-        "email": email
-    }
-
-    return APIRequest('POST', ip, port, '/register', false, bodyData)
-} 
-
 export const isSignedIn = async () => {
     return new Promise((resolve, reject) => {
         AsyncStorage.getItem(userKey)
             .then(authToken => {
                 if (authToken !== null) {
+                    onSignIn(authToken)
                     resolve(authToken)
                 } else {
                     resolve(false);

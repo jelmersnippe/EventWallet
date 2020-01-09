@@ -13,8 +13,8 @@ import {
 } from '../components'
 import { Colors } from '../components/GlobalVariables'
 
-import { GetLatestTransaction } from '../services/Transaction'
-import { GetEvents, GetWallets } from '../services/Event'
+import { GetLatestTransaction } from '../services/TransactionAPI'
+import { GetEvents, GetWallets } from '../services/EventAPI'
 
 export default class EventOverview extends Component {
 	constructor(props) {
