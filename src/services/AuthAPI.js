@@ -55,7 +55,7 @@ export const SignIn = (email, password) => {
             .then(response => {
     
                 if (response.respInfo.status == 200) {
-                    onSignIn(JSON.parse(response.data).token)
+                    onSignIn(response.data)
                     resolve()
                 } else {
                     console.log('SignIn failed:')
