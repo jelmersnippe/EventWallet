@@ -11,7 +11,7 @@ import { SignIn } from "../services/AuthAPI"
 
 import {
     HeaderText,
-    WideButton
+    WideButton,
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 

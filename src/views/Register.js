@@ -25,6 +25,7 @@ export default class Register extends Component {
 			passwordError: [],
 			email: '',
 			emailError: '',
+			pin: '',
 		}
 	}
 
@@ -94,7 +95,7 @@ export default class Register extends Component {
 		}
 
 		return validPassword;
-	};
+	}
 
 	validateUsername = (username) => {
 		this.setState({ usernameError: '' })
@@ -111,9 +112,7 @@ export default class Register extends Component {
 		}
 
 		return true;
-	};
-
-
+	}
 
 	validateEmail = (email) => {
 		this.setState({ emailError: '' })
@@ -130,15 +129,16 @@ export default class Register extends Component {
 		}
 
 		return true;
-	};
+	}
 
 	validate = () => {
 		let validUsername = this.validateUsername(this.state.username)
 		let validPassword = this.validatePassword(this.state.password)
 		let validEmail = this.validateEmail(this.state.email)
+		let validPin = this.state.pin.toString().length == 5
 
-		if(validUsername && validEmail && validPassword){
-			SignUp(this.state.username, this.state.password, this.state.email, 12345)
+		if(validUsername && validEmail && validPassword && validPin){
+			SignUp(this.state.username, this.state.password, this.state.email, this.state.pin)
 			.then(response => {
 				alert('Thank you, you registered successfully')
 				this.props.navigation.navigate('Login')
@@ -203,6 +203,14 @@ export default class Register extends Component {
 						{this.state.emailError}
 					</Text>
 				}
+
+				<TextInput
+					placeholder='Pin'
+					keyboardType='numeric'
+					maxLength={5}
+					style={styles.input_text}
+					onChangeText={pin => this.setState({pin: pin})}
+				/>
 
 				<WideButton
 					callback={() => {this.validate()}} 

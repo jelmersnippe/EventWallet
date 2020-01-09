@@ -1,5 +1,11 @@
+import React from 'react'
+
 import RNFetchBlob from 'rn-fetch-blob'
 import { setToken, getToken, RefreshToken } from './AuthAPI'
+
+import {
+    PinCode
+} from '../components'
 
 export const APIRequest = async (method, URL, requiresToken = false, body = null, contentType = 'application/json') => {
     return new Promise((resolve, reject) => {
@@ -14,7 +20,9 @@ export const APIRequest = async (method, URL, requiresToken = false, body = null
         } 
 
         Request(method, URL, headers, body)
-        .then(response => resolve(response))
+        .then(response => {
+            resolve(response)
+        })
         .catch(error => reject(error))
     })
 }
@@ -35,8 +43,6 @@ const Request = async (method, URL, headers, body) => {
             })
             .catch(error => {
                 if(error == 'Retry'){
-                    console.log('Have to retry request here')
-                    console.log('Current token in memory: \n' + getToken())
                     Request(URL, headers, body)
                         .then(response => resolve(response))
                         .catch(error => reject(error))
@@ -66,32 +72,33 @@ const ProcessResponse = (response) => {
         } 
 
         else if (response.respInfo.status == 401) {
-            alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
+            //alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
             reject(responseData.message)
 
         } else if (response.respInfo.status == 403) {
-            alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
+            //alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
 
             // Token has expired: Refresh the token and then retry request
-            RefreshToken(12345)
-            .then(refreshedToken => {
-                setToken(refreshedToken)
+            reject('WiP')
+            // RefreshToken(33333)
+            // .then(refreshedToken => {
+            //     setToken(refreshedToken)
 
-                // Build headers for retry request
-                let retryHeaders = response.respInfo.headers
-                retryHeaders['x-access-token'] = refreshedToken
+            //     // Build headers for retry request
+            //     let retryHeaders = response.respInfo.headers
+            //     retryHeaders['x-access-token'] = refreshedToken
 
-                // Re send Request
-                Request('POST', response.respInfo.redirects[0], retryHeaders)
-                .then(response => resolve(response))
-                .catch(error => reject(error))
-            })
-            .catch(error => {
-                reject(error)
-            })
+            //     // Re send Request
+            //     Request('POST', response.respInfo.redirects[0], retryHeaders)
+            //     .then(response => resolve(response))
+            //     .catch(error => reject(error))
+            // })
+            // .catch(error => {
+            //     reject(error)
+            // })
             
         } else {
-            alert(response.respInfo.redirects[0] + '\n\n' + response.respInfo.status + ' response: ' + responseData)
+            //alert(response.respInfo.redirects[0] + '\n\n' + response.respInfo.status + ' response: ' + responseData)
             reject(responseData)
         }
     })

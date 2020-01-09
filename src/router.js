@@ -213,7 +213,7 @@ export const createRootNavigator = (signedIn = false) => {
                 SignedOut: AuthStack,
             },
             {
-                initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+                initialRouteName: signedIn ? "SignedIn" : "SignedOut",
             }
         )
     )

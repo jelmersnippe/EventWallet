@@ -9,13 +9,18 @@ import { Colors, Fonts, appName } from './components/GlobalVariables'
 import { createRootNavigator } from './router'
 import { isSignedIn } from './services/AuthAPI'
 
+import {
+    PinCode
+} from './components'
+
 export default class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             signedIn: false,
-            checkedSignIn: false
+            checkedSignIn: false,
+            gettingPin: true,
         };
     }
 
@@ -24,6 +29,8 @@ export default class App extends Component {
             .then(response => this.setState({ signedIn: response, checkedSignIn: true }))
             .catch(error => alert('An error occurred: ' + error));
     }
+
+
 
     render() {
         const { checkedSignIn, signedIn } = this.state;
@@ -37,7 +44,23 @@ export default class App extends Component {
         }
 
         const Layout = createRootNavigator(signedIn);
-        return <Layout />;
+
+        const App = () => {
+            return  (
+                <View style={{flex:1, width: 100+'%', height: 100+'%'}}>
+                    <Layout openPin={() => this.setState({gettingPin: true})} />
+                    {this.state.gettingPin && 
+                        <PinCode 
+                            callback={(code) => {
+                                console.log(code)
+                                this.setState({ gettingPin: false })
+                            }} 
+                        />
+                    }
+                </View>
+            )
+        }
+        return <App />;
     }
 }
 

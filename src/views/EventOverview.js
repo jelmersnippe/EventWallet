@@ -10,12 +10,12 @@ import {
 	EventList,
 	SearchBar,
 	HeaderText,
+	PinCode
 } from '../components'
 import { Colors } from '../components/GlobalVariables'
 
 import { GetLatestTransaction } from '../services/TransactionAPI'
 import { GetEvents, GetWallets } from '../services/EventAPI'
-import { APIRequest } from '../services/APIRequest'
 
 export default class EventOverview extends Component {
 	constructor(props) {
@@ -60,6 +60,10 @@ export default class EventOverview extends Component {
 
 	fetchFestivalData() {
 		GetEvents().then(response => {
+			console.log(typeof(response))
+				this.render(
+					<PinCode />
+				)
 			this.updateAmounts(response)
 		})
 
@@ -72,6 +76,7 @@ export default class EventOverview extends Component {
 
 	componentDidMount() {
 		this.fetchFestivalData();
+		console.log(this.props.navigation)
 	}
 
 	render() {
