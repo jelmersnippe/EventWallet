@@ -1,11 +1,5 @@
-import React from 'react'
-
 import RNFetchBlob from 'rn-fetch-blob'
-import { setToken, getToken, RefreshToken } from './AuthAPI'
-
-import {
-    PinCode
-} from '../components'
+import { getToken, RefreshToken } from './AuthAPI'
 
 export const APIRequest = async (method, URL, requiresToken = false, body = null, contentType = 'application/json') => {
     return new Promise((resolve, reject) => {

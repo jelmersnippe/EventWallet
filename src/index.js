@@ -20,16 +20,25 @@ export default class App extends Component {
         this.state = {
             signedIn: false,
             checkedSignIn: false,
-            gettingPin: true,
+            pin: '',
+            showPinOverlay: false,
+            pinEntered: false,
         };
     }
 
     componentDidMount() {
         isSignedIn()
-            .then(response => this.setState({ signedIn: response, checkedSignIn: true }))
+            .then(response => {
+                this.setState({ signedIn: response, checkedSignIn: true })
+                this.openPinOverlay()
+            })
             .catch(error => alert('An error occurred: ' + error));
     }
 
+    openPinOverlay = async () => {
+        this.setState({pinEntered: false})
+        this.setState({showPinOverlay: true})
+    }
 
 
     render() {
@@ -48,12 +57,15 @@ export default class App extends Component {
         const App = () => {
             return  (
                 <View style={{flex:1, width: 100+'%', height: 100+'%'}}>
-                    <Layout openPin={() => this.setState({gettingPin: true})} />
-                    {this.state.gettingPin && 
+                    <Layout />
+                    {this.state.showPinOverlay && 
                         <PinCode 
                             callback={(code) => {
+                                this.setState({pin: code})
+                                this.setState({pinEntered: true})
+                                this.setState({showPinOverlay: false})
+
                                 console.log(code)
-                                this.setState({ gettingPin: false })
                             }} 
                         />
                     }

@@ -59,24 +59,19 @@ export default class EventOverview extends Component {
 	}
 
 	fetchFestivalData() {
-		GetEvents().then(response => {
-			console.log(typeof(response))
-				this.render(
-					<PinCode />
-				)
-			this.updateAmounts(response)
-		})
+		// GetEvents().then(response => {
+		// 	this.updateAmounts(response)
+		// })
 
-		GetWallets().then(response => {
-			console.log()
-			console.log('!!!PLEASE REMOVE!!!\n wallets:')
-			console.log(response)
-		})
+		// GetWallets().then(response => {
+		// 	console.log()
+		// 	console.log('!!!PLEASE REMOVE!!!\n wallets:')
+		// 	console.log(response)
+		// })
 	}
 
 	componentDidMount() {
-		this.fetchFestivalData();
-		console.log(this.props.navigation)
+		this.fetchFestivalData()
 	}
 
 	render() {
