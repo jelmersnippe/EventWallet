@@ -66,6 +66,12 @@ const GetRequest = async (URL, headers) => {
 }
 
 const PostRequest = async (URL, headers, body) => {
+
+
+    console.log(URL)
+    console.log(headers)
+    console.log(body)
+
     return new Promise((resolve,reject) => {
         RNFetchBlob.config({
             trusty: true
@@ -84,6 +90,7 @@ const PostRequest = async (URL, headers, body) => {
 }
 
 const ProcessResponse = (response) => {
+    console.log(JSON.stringify(response, null, 4))
     return new Promise((resolve, reject) => {
         if(response.respInfo.status == 200){
             if(response.respInfo.respType == 'json'){
@@ -93,7 +100,6 @@ const ProcessResponse = (response) => {
             }
         } 
         else if (response.respInfo.status == 401) {
-            console.log('401 Code: invalid token :)')
             reject(JSON.parse(response.data).message)
         } else {
             reject(response.data)

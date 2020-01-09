@@ -139,13 +139,13 @@ export default class Register extends Component {
 
 		if(validUsername && validEmail && validPassword){
 			SignUp(this.state.username, this.state.password, this.state.email)
-			.then( response => {
-				if(response == true){
-					alert('Thank you, you registered successfully')
-					this.props.navigation.navigate('Login')
-				} else {
-					alert(response)
-				}
+			.then(response => {
+				alert('Thank you, you registered successfully')
+				this.props.navigation.navigate('Login')
+			})
+			.catch(error => {
+				console.log(error)
+				alert('Wrong you did: ' + error + ' - Yoda, 2020')
 			})
 		} 
 		else {

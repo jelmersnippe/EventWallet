@@ -1,5 +1,5 @@
 
-export const appName = 'FestiFaggot'
+export const appName = 'EventWallet'
 
 export const Colors = {
     lightTextColor: '#ffffff',
