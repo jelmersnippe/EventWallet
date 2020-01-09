@@ -17,6 +17,7 @@ import HeaderText from './HeaderText'
 import RegularButton from './RegularButton'
 import WideButton from './WideButton'
 import Header from './Header'
+import PinCode from './PinCode'
 
 export { 
     AnnouncementList, 
@@ -34,4 +35,5 @@ export {
     RegularButton,
     WideButton,
     Header,
+    PinCode,
 } 
