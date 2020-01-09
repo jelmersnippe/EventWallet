@@ -138,7 +138,7 @@ export default class Register extends Component {
 		let validEmail = this.validateEmail(this.state.email)
 
 		if(validUsername && validEmail && validPassword){
-			SignUp(this.state.username, this.state.password, this.state.email)
+			SignUp(this.state.username, this.state.password, this.state.email, 12345)
 			.then(response => {
 				alert('Thank you, you registered successfully')
 				this.props.navigation.navigate('Login')

@@ -19,7 +19,7 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
             error: '',
         }
@@ -35,8 +35,9 @@ export default class Login extends Component {
                 <TextInput
                     style={styles.input}
                     autoCapitalize='none'
-                    onChangeText={value => this.setState({ username: value })}
-                    placeholder='Username / Email'
+					keyboardType='email-address'
+                    onChangeText={value => this.setState({ email: value })}
+                    placeholder='Email'
                 />
                 <TextInput
                     style={styles.input}
@@ -54,19 +55,19 @@ export default class Login extends Component {
 
                 <WideButton 
                     callback={() => { 
-                        SignIn(this.state.username, this.state.password)
+                        SignIn(this.state.email, this.state.password)
                         .then(() => { 
                             this.props.navigation.navigate('SignedIn')
                         }) 
                         .catch(error => {
                             alert(error)
-                            this.setState({error: 'Unknown username and/or password' })
+                            this.setState({error: 'Unknown email and/or password' })
                         })
                     }} 
                     text='Login' 
                     textColor={Colors.lightTextColor} 
                     backgroundColor={Colors.eventColor} 
-                    disabled={this.state.username == '' || this.state.password == ''} 
+                    disabled={this.state.email == '' || this.state.password == ''} 
                 />
 
                 <View style={styles.secondary_button}>

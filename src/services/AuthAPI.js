@@ -23,19 +23,28 @@ export const setToken = (token) => {
     currentToken = token
 }
 
-export const SignUp = (username, password, email) => {
+export const SignUp = (username, password, email, pin) => {
     let bodyData = {
         "username": username,
         "password": password,
-        "email": email
+        "email": email,
+        "pin": pin
     }
 
     return APIRequest('POST', ip, port, '/register', false, bodyData)
 } 
 
-export const SignIn = (username, password) => {
+export const RefreshToken = (pin) => {
+    let bodyData = {
+        "pin": pin
+    }
+
+    return APIRequest('POST', ip, port, '/refresh/token', true, bodyData)
+}
+
+export const SignIn = (email, password) => {
     return new Promise((resolve, reject) => {
-        let authString = base64.encode(username + ':' + password)
+        let authString = base64.encode(email + ':' + password)
     
         RNFetchBlob.config({
             trusty: true
