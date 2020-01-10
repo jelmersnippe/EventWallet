@@ -22,13 +22,20 @@ export default class AuthLoading extends Component {
     }
 
     componentDidMount() {
-        isSignedIn()
-            .then(() => {
-                this.setState({ showPinOverlay: true })
-            })
-            .catch(() => {
+        if(this.props.screenProps && this.props.screenProps.signOut){
+            SignOut().then(
                 this.props.navigation.navigate('SignedOut')
-            })
+            )
+        }
+        else {
+            isSignedIn()
+                .then(() => {
+                    this.setState({ showPinOverlay: true })
+                })
+                .catch(() => {
+                    this.props.navigation.navigate('SignedOut')
+                })
+        }
     }
 
     render() {
@@ -43,14 +50,18 @@ export default class AuthLoading extends Component {
                         callback={(pin) => {
                             RefreshToken(pin)
                                 .then(refreshedToken => {
-                                    SetToken(refreshedToken)
-                                    SetPin(pin)
-                                    this.props.navigation.navigate('SignedIn')
+                                    this.setState({showPinOverlay: false})
+                                    SetToken(refreshedToken).then(() => {
+                                        console.log('redirecting to signed in')
+                                        SetPin(pin)
+                                        this.props.navigation.navigate('SignedIn')
+                                    }).catch(error => alert(error))
                                 })
                                 .catch(error => {
                                     alert('Error entering pin: ' + error)
-                                    SignOut()
-                                    this.props.navigation.navigate('SignedOut')
+                                    SignOut().then(
+                                        this.props.navigation.navigate('SignedOut')
+                                    )
                                 })
                         }}
                     />

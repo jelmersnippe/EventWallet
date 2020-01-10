@@ -22,8 +22,8 @@ export const SetPin = (newPin) => {
     pin = newPin
 }
 
-export const SetToken = (token) => {
-    AsyncStorage.setItem(userKey, token)
+export const SetToken = async (token) => {
+    return await AsyncStorage.setItem(userKey, token)
 }
 
 export const SignOut = async () => {
@@ -62,11 +62,10 @@ export const SignIn = (email, password) => {
                 Authorization: 'Basic ' + authString,
             })
             .then(response => {
-
-
                 if (response.respInfo.status == 200) {
-                    SetToken(response.data)
-                    resolve()
+                    SetToken(response.data).then(
+                        resolve()
+                    )
                 } else {
                     console.log('SignIn failed:')
                     console.log(JSON.stringify(response, null, 4))
@@ -85,8 +84,7 @@ export const isSignedIn = async () => {
             .then(authToken => {
                 if (authToken !== null) {
                     console.log('AuthToken found: ' + authToken)
-                    SetToken(authToken)
-                    resolve()
+                    resolve(true)
                 } else {
                     console.log('No AuthToken found')
                     reject();

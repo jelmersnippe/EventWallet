@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import {
 	View,
 	StyleSheet,
-	Button,
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
 import {
-	Header,
 	EventList,
 	SearchBar,
 	HeaderText,
@@ -16,7 +14,6 @@ import { Colors } from '../components/GlobalVariables'
 
 import { GetLatestTransaction } from '../services/TransactionAPI'
 import { GetEvents, GetWallets } from '../services/EventAPI'
-import { SignOut } from '../services/AuthAPI'
 
 export default class EventOverview extends Component {
 	constructor(props) {
@@ -27,12 +24,6 @@ export default class EventOverview extends Component {
 			filteredEvents: [],
 		}
 	}
-
-	static navigationOptions = {
-		header: (
-			<Header text='Event Overview' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} />
-		)
-	};
 
 	updateFilteredList = (newFilteredList, newSearchTerm) => {
 		this.setState({ filteredEvents: newFilteredList })
@@ -80,14 +71,6 @@ export default class EventOverview extends Component {
 			<View style={styles.container}>
 				<SearchBar keys={['description', 'location', 'begin_date', 'end_date']} list={this.state.allEvents} callback={this.updateFilteredList} placeholder={'Search for an event'} backgroundColor={Colors.eventColor} />
 
-				<Button
-					title='Log Out'
-					onPress={() => {
-						SignOut().then(
-							this.props.navigation.navigate('AuthLoading')	
-						).catch(error => 'error removing auth token' + error)
-					}}
-				/>
 				<View style={styles.event_list_container}>
 					<HeaderText text='Events' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 

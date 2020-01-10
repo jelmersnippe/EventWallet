@@ -27,7 +27,6 @@ export default class WalletLink extends Component {
 		}
 	}
 
-
     componentDidMount(){
         this.setState({event: this.props.navigation.getParam('event')})
         GetWristband(this.props.navigation.getParam('event')).then(response => {

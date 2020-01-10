@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import { createSwitchNavigator, createAppContainer, getActiveChildNavigationOptions } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import {
@@ -19,11 +20,7 @@ import {
     FriendOverview,
     ShareTokens
 } from './views'
-import {
-    Header,
-} from './components'
 import { Colors } from './components/GlobalVariables'
-
 
 const TransactionStack = createStackNavigator(
     {
@@ -36,9 +33,7 @@ const TransactionStack = createStackNavigator(
         WalletLink: {
             screen: WalletLink,
             navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header backButton={true} shadow={true} text='Wallet Link' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
-                ),
+                header: null,
             })
         },
         BuyTokens: {
@@ -88,30 +83,6 @@ const SpecificEventContent = createBottomTabNavigator(
                 return <Icon name={iconName} size={25} color={tintColor} />
             },
         }),
-        navigationOptions: ({ navigation }) => {
-            let headerShown = true;
-            let shadowShown = true;
-            if (getActiveChildNavigationOptions(navigation).tabBarVisible == false) {
-                headerShown = false;
-            }
-
-            if (headerShown) {
-                if (navigation.state.index == 0) {
-                    shadowShown = false;
-                }
-                return {
-                    header: (
-                        <Header backButton={true} shadow={shadowShown} text='Specific Event' textColor={Colors.lightTextColor} backgroundColor={Colors.eventColor} navigation={navigation} />
-                    ),
-                };
-
-            }
-            return {
-                header: (
-                    null
-                ),
-            };
-        },
         tabBarOptions: {
             activeTintColor: Colors.activeTabColor,
             inactiveTintColor: Colors.inactiveTabColor
@@ -126,6 +97,19 @@ const EventStack = createStackNavigator(
     },
     {
         initialRouteName: 'Overview',
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                headerRight: (
+                    <Icon
+                    name='cog'
+                    size={30}
+                    style={{paddingRight: 10}}
+                    onPress={() => navigation.openDrawer()}
+                    />
+                ),
+                headerLeft: null
+            }
+        },
         navigationOptions: ({ navigation }) => {
             let tabBarVisible = true;
             if (navigation.state.index > 0) {
@@ -160,13 +144,26 @@ const FriendStack = createStackNavigator(
             return {
                 tabBarVisible,
             };
-        }
+        },
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                headerRight: (
+                    <Icon
+                    name='cog'
+                    size={30}
+                    style={{paddingRight: 10}}
+                    onPress={() => navigation.openDrawer()}
+                    />
+                ),
+                headerLeft: null
+            }
+        },
     }
 
 )
 
 
-const AppStack = createBottomTabNavigator(
+const MainApp = createBottomTabNavigator(
     {
         Events: EventStack,
         Friends: FriendStack,
@@ -206,9 +203,25 @@ const AuthStack = createStackNavigator(
     }
 )
 
-const MainStack = createSwitchNavigator(
+const AppDrawer = createDrawerNavigator(
     {
-        SignedIn: AppStack,
+        App: MainApp,
+        FAQ: Content,
+        LegalDisclaimer: Content,
+        LogOut: {
+            screen: props => <AuthLoading {...props} screenProps={{signOut: true}} />
+        },
+    },
+    {
+        initialRouteName: 'App',
+        drawerPosition: 'right',
+    }
+)
+
+
+const MainSwitch = createSwitchNavigator(
+    {
+        SignedIn: AppDrawer,
         SignedOut: AuthStack,
         AuthLoading: AuthLoading
     },
@@ -217,6 +230,6 @@ const MainStack = createSwitchNavigator(
     }
 )
 
-const App = createAppContainer(MainStack)
+const App = createAppContainer(MainSwitch)
 
 export default App;
