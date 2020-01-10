@@ -8,15 +8,10 @@ const port = '3304'
 
 const userKey = 'AuthToken'
 
-let token = ''
 let pin = undefined
 
-export const GetToken = () => {
-    return token
-}
-
-const setToken = (newToken) => {
-    token = newToken
+export const GetToken = async () => {
+    return await AsyncStorage.getItem(userKey)
 }
 
 export const GetPin = () => {
@@ -29,10 +24,10 @@ export const SetPin = (newPin) => {
 
 export const SetToken = (token) => {
     AsyncStorage.setItem(userKey, token)
-    setToken(token)
 }
 
 export const SignOut = async () => {
+    SetPin(undefined)
     return await AsyncStorage.removeItem(userKey)
 }
 
@@ -67,6 +62,8 @@ export const SignIn = (email, password) => {
                 Authorization: 'Basic ' + authString,
             })
             .then(response => {
+
+
                 if (response.respInfo.status == 200) {
                     SetToken(response.data)
                     resolve()
@@ -76,7 +73,9 @@ export const SignIn = (email, password) => {
                     reject(response.data)
                 }
             })
-            .catch(error => reject(error))
+            .catch(error => {
+                reject(error)
+            })
     })
 }
 

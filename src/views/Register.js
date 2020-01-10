@@ -9,7 +9,8 @@ import {
 
 import {
 	HeaderText,
-	WideButton
+	WideButton,
+	PinCode,
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
@@ -25,14 +26,14 @@ export default class Register extends Component {
 			passwordError: [],
 			email: '',
 			emailError: '',
-			pin: '',
+			showPinOverlay: false,
 		}
 	}
 
 	addPasswordError = (error) => {
-		this.setState(state => { 
+		this.setState(state => {
 			const passwordError = [...state.passwordError, error];
-			
+
 			return {
 				passwordError,
 			}
@@ -41,16 +42,16 @@ export default class Register extends Component {
 
 	validatePassword = (password) => {
 		this.setState({ passwordError: [] })
-		if(password == ''){
+		if (password == '') {
 			this.addPasswordError("This field can't be empty")
 			return false;
 		}
 
 		// 8 characters length or more
-        // 1 digit or more
-        // 1 symbol or more
-        // 1 uppercase letter or more
-        // 1 lowercase letter or more
+		// 1 digit or more
+		// 1 symbol or more
+		// 1 uppercase letter or more
+		// 1 lowercase letter or more
 
 		let length_error = 'Must be at least 8 characters'
 		let digit_error = 'Must contain a digit'
@@ -66,28 +67,28 @@ export default class Register extends Component {
 		let validPassword = true
 		let errors = []
 
-		if(password.length < 8){
+		if (password.length < 8) {
 			validPassword = false
 			errors.push(length_error)
 		}
-		if(password.search(digit_reg) < 0){
+		if (password.search(digit_reg) < 0) {
 			validPassword = false
 			errors.push(digit_error)
 		}
-		if(password.search(uppercase_reg) < 0){
+		if (password.search(uppercase_reg) < 0) {
 			validPassword = false
 			errors.push(uppercase_error)
 		}
-		if(password.search(lowercase_reg) < 0){
+		if (password.search(lowercase_reg) < 0) {
 			validPassword = false
 			errors.push(lowercase_error)
 		}
-		if(password.search(symbol_reg) < 0){
+		if (password.search(symbol_reg) < 0) {
 			validPassword = false
 			errors.push(symbol_error)
 		}
 
-		if(!validPassword){
+		if (!validPassword) {
 			this.addPasswordError('Invalid password');
 			errors.forEach(error => {
 				this.addPasswordError(error)
@@ -135,19 +136,10 @@ export default class Register extends Component {
 		let validUsername = this.validateUsername(this.state.username)
 		let validPassword = this.validatePassword(this.state.password)
 		let validEmail = this.validateEmail(this.state.email)
-		let validPin = this.state.pin.toString().length == 5
 
-		if(validUsername && validEmail && validPassword && validPin){
-			SignUp(this.state.username, this.state.password, this.state.email, this.state.pin)
-			.then(response => {
-				alert('Thank you, you registered successfully')
-				this.props.navigation.navigate('Login')
-			})
-			.catch(error => {
-				console.log(error)
-				alert('Wrong you did: ' + error + ' - Yoda, 2020')
-			})
-		} 
+		if (validUsername && validEmail && validPassword) {
+			this.setState({ showPinOverlay: true })
+		}
 		else {
 			alert('Invalid input. Please correct the comments')
 		}
@@ -156,75 +148,88 @@ export default class Register extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-
-			    <Text style={styles.title}>{appName}</Text>
-
-                <HeaderText text='Register' />
-
-				<TextInput
-					placeholder="Username"
-                    autoCapitalize='none'
-					style={styles.input_text}
-					onChangeText={username => this.setState({username: username})}
-				/>
-
-                {this.state.usernameError != '' &&
-					<Text style={styles.error_text}>
-						{this.state.usernameError}
-					</Text>
+				{this.state.showPinOverlay &&
+					<PinCode
+						callback={(pin) => {
+							if(pin.toString().length == 5){
+								SignUp(this.state.username, this.state.password, this.state.email, pin)
+								.then(response => {
+									alert('Thank you, you registered successfully')
+									this.props.navigation.navigate('Login')
+								})
+								.catch(error => {
+									console.log(error)
+									alert('Wrong you did: ' + error + ' - Yoda, 2020')
+								})
+							} else {
+								alert('Pin should be 5 digits')
+								this.setState({showPinOverlay: true})
+							}
+						}}
+					/>
 				}
+				<View style={{paddingHorizontal: 5 + '%'}}>
+					<Text style={styles.title}>{appName}</Text>
 
-				<TextInput
-					placeholder="Password"
-                    autoCapitalize='none'
-					style={styles.input_text}
-					secureTextEntry={true}
-					onChangeText={password => this.setState({password: password})}
-				/>
+					<HeaderText text='Register' />
 
-				<View>
-					{this.state.passwordError.map(item => {
-						return(
-							<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
-						)	
-					})}
-				</View>
+					<TextInput
+						placeholder="Username"
+						autoCapitalize='none'
+						style={styles.input_text}
+						onChangeText={username => this.setState({ username: username })}
+					/>
 
-				<TextInput
-					placeholder="Email"
-					autoCapitalize='none'
-					keyboardType='email-address'
-					style={styles.input_text}
-					onChangeText={email => this.setState({email: email})}
-				/>
+					{this.state.usernameError != '' &&
+						<Text style={styles.error_text}>
+							{this.state.usernameError}
+						</Text>
+					}
 
-				{this.state.emailError != '' &&
-					<Text style={[styles.error_text, {marginBottom: 30}]}>
-						{this.state.emailError}
-					</Text>
-				}
+					<TextInput
+						placeholder="Password"
+						autoCapitalize='none'
+						style={styles.input_text}
+						secureTextEntry={true}
+						onChangeText={password => this.setState({ password: password })}
+					/>
 
-				<TextInput
-					placeholder='Pin'
-					keyboardType='numeric'
-					maxLength={5}
-					style={styles.input_text}
-					onChangeText={pin => this.setState({pin: pin})}
-				/>
+					<View>
+						{this.state.passwordError.map(item => {
+							return (
+								<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
+							)
+						})}
+					</View>
 
-				<WideButton
-					callback={() => {this.validate()}} 
-					text='Register' 
-					textColor={Colors.lightTextColor} 
-					backgroundColor={Colors.eventColor} 
-					disabled={this.state.username == '' || this.state.password == '' || this.state.email == ''} 
-				/>
+					<TextInput
+						placeholder="Email"
+						autoCapitalize='none'
+						keyboardType='email-address'
+						style={styles.input_text}
+						onChangeText={email => this.setState({ email: email })}
+					/>
 
-				<View style={styles.secondary_button}>
-					<Text style={styles.secondary_button_text}>Already have an account? </Text>
-					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-						<Text style={[styles.secondary_button_text, {textDecorationLine: 'underline'}]}>Log in</Text>
-					</TouchableOpacity>
+					{this.state.emailError != '' &&
+						<Text style={[styles.error_text, { marginBottom: 30 }]}>
+							{this.state.emailError}
+						</Text>
+					}
+
+					<WideButton
+						callback={() => { this.validate() }}
+						text='Register'
+						textColor={Colors.lightTextColor}
+						backgroundColor={Colors.eventColor}
+						disabled={this.state.username == '' || this.state.password == '' || this.state.email == ''}
+					/>
+
+					<View style={styles.secondary_button}>
+						<Text style={styles.secondary_button_text}>Already have an account? </Text>
+						<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+							<Text style={[styles.secondary_button_text, { textDecorationLine: 'underline' }]}>Log in</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			</View>
 		);
@@ -236,7 +241,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		backgroundColor: Colors.backgroundColor,
-		paddingHorizontal: 5+'%',
 
 	},
 	input_text: {
@@ -250,14 +254,14 @@ const styles = StyleSheet.create({
 		alignSelf: 'center'
 	},
 	title: {
-	    fontSize: 30,
-	    marginBottom: 10,
-	    textAlign: 'center',
-	    fontFamily: Fonts.header
+		fontSize: 30,
+		marginBottom: 10,
+		textAlign: 'center',
+		fontFamily: Fonts.header
 	},
 	secondary_button: {
-		marginTop: 15, 
-		flexDirection: 'row', 
+		marginTop: 15,
+		flexDirection: 'row',
 		justifyContent: 'center'
 	},
 	secondary_button_text: {
@@ -265,7 +269,7 @@ const styles = StyleSheet.create({
 		fontFamily: Fonts.text
 	},
 	error_text: {
-		color: 'red', 
+		color: 'red',
 		textAlign: 'center',
 		fontFamily: Fonts.text,
 	}

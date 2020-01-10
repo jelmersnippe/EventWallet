@@ -57,7 +57,7 @@ export default class Login extends Component {
                     callback={() => { 
                         SignIn(this.state.email, this.state.password)
                         .then(() => { 
-                            this.props.navigation.navigate('SignedIn')
+                            this.props.navigation.navigate('AuthLoading')
                         }) 
                         .catch(error => {
                             alert(error)
