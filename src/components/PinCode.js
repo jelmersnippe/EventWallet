@@ -18,7 +18,7 @@ export default class PinCode extends Component {
                          error="You fail"
                          autoFocusFirst={true}
                          keyboardType="numeric"
-                         obfuscation={true}
+                         //obfuscation={true}
                          containerStyle={{backgroundColor: 'white'}}
                     />
                 </View>
@@ -39,16 +39,3 @@ const styles = StyleSheet.create({
         zIndex: 999999999999999999999999999999999999
     }
 })
-
-// All you need is love :)
-
-
-//Put this in the state
-//pin: '',
-//gettingPin: false,
-
-// Put this in the view, in the most outer container -> MAKE SURE TO REMOVE PADDING
-//{this.state.gettingPin && <PinCode callback={(code) => {
-//                    this.setState({gettingPin: false})
-//                    this.setState({pin: code})
-//                }}/>}

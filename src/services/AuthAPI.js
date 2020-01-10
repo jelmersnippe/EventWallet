@@ -8,20 +8,37 @@ const port = '3304'
 
 const userKey = 'AuthToken'
 
-let currentToken = ''
+let token = ''
+let pin = undefined
+
+export const getToken = () => {
+    return token
+}
+
+export const setToken = (newToken) => {
+    token = newToken
+}
+
+export const getPin = () => {
+    return pin
+}
+
+export const setPin = (newPin) => {
+    pin = newPin
+}
 
 const onSignIn = (token) => {
     AsyncStorage.setItem(userKey, token)
     setToken(token)
 }
 
-export const getToken = () => {
-    return currentToken
+export const signOut = async () => {
+    await AsyncStorage.removeItem(userKey)
+    .then(
+        console.log('Removed Auth Token')
+    )
 }
 
-export const setToken = (token) => {
-    currentToken = token
-}
 
 export const SignUp = (username, password, email, pin) => {
     let bodyData = {
@@ -53,7 +70,6 @@ export const SignIn = (email, password) => {
                 Authorization: 'Basic ' + authString,
             })
             .then(response => {
-    
                 if (response.respInfo.status == 200) {
                     onSignIn(response.data)
                     resolve()
@@ -72,13 +88,18 @@ export const isSignedIn = async () => {
         AsyncStorage.getItem(userKey)
             .then(authToken => {
                 if (authToken !== null) {
+                    console.log('AuthToken found: ' + authToken)
                     onSignIn(authToken)
-                    resolve(authToken)
+                    resolve()
                 } else {
-                    resolve(false);
+                    console.log('No AuthToken found')
+                    reject();
                 }
             })
-            .catch(error => reject(error));
+            .catch(error => {
+                console.log(error)
+                reject()
+            });
     });
 };
 

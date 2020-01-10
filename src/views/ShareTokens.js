@@ -3,15 +3,15 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	TouchableOpacity,
 	Picker,
 } from 'react-native'
 
 import {
 	NumericTokenInput,
 	HeaderText,
-	RegularButton
- } from '../components'
+	RegularButton,
+	PinCode
+} from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables';
 
 export default class ShareTokens extends Component {
@@ -19,6 +19,7 @@ export default class ShareTokens extends Component {
 		super();
 		this.state = {
 			selectedAmount: 0,
+			showPinOverlay: false,
 		}
 	}
 
@@ -26,51 +27,58 @@ export default class ShareTokens extends Component {
 		this.setState({ friend: this.props.navigation.getParam('friend') })
 	}
 
-    updateSelectedAmount = (value) => {
-        this.setState({ selectedAmount: value })
-    }
+	updateSelectedAmount = (value) => {
+		this.setState({ selectedAmount: value })
+	}
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<HeaderText text='Receiver' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-				<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
+				{this.state.showPinOverlay && <PinCode callback={(code) => {
+					this.setState({ showPinOverlay: false })
+					this.props.navigation.goBack()
+				}} />}
+				<View style={{paddingHorizontal: 3 + '%'}}>
+					<HeaderText text='Receiver' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+					<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>
 
-				<HeaderText text='Wallet' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-				<Text style={styles.description}>Select the wallet of the event you want to share tokens for:</Text>
-				<View style={styles.dropdown_container}>
-					<Picker
-						selectedValue={this.state.value}
-						onValueChange={(itemValue, itemIndex) =>
-							this.setState({ value: itemValue })
-						}>
-						<Picker.Item label="Wallet1" value="wallet1" />
-						<Picker.Item label="Wallet2" value="wallet2" />
-						<Picker.Item label="Wallet3" value="wallet3" />
-					</Picker>
-				</View>
+					<HeaderText text='Wallet' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+					<Text style={styles.description}>Select the wallet of the event you want to share tokens for:</Text>
+					<View style={styles.dropdown_container}>
+						<Picker
+							selectedValue={this.state.value}
+							onValueChange={(itemValue, itemIndex) =>
+								this.setState({ value: itemValue })
+							}>
+							<Picker.Item label="Wallet1" value="wallet1" />
+							<Picker.Item label="Wallet2" value="wallet2" />
+							<Picker.Item label="Wallet3" value="wallet3" />
+						</Picker>
+					</View>
 
-				<HeaderText text='Balance' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-  			    <Text style = { styles.description}>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
+					<HeaderText text='Balance' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+					<Text style={styles.description}>You have {this.props.navigation.getParam('amount')}X tokens in total</Text>
 
-				<NumericTokenInput callback={this.updateSelectedAmount} />
+					<NumericTokenInput callback={this.updateSelectedAmount} />
 
-				<View style={styles.button_container}>
-					<RegularButton 
-						callback={() => {this.props.navigation.goBack()}} 
-						text={'Cancel'} 
-						textColor={Colors.darkTextColor}
-						backgroundColor={Colors.cancelButtonColor}
-						borderColor={Colors.cancelButtonBorderColor}
-						hideShadow={true}
-					/>
-					<RegularButton 
-						text={'Share'} 
-						textColor={Colors.darkTextColor}
-						backgroundColor={Colors.ctaButtonColor}
-						borderColor={Colors.ctaButtonBorderColor}
-						disabled={this.state.selectedAmount == 0 && true}
-					/>
+					<View style={styles.button_container}>
+						<RegularButton
+							callback={() => { this.props.navigation.goBack() }}
+							text={'Cancel'}
+							textColor={Colors.darkTextColor}
+							backgroundColor={Colors.cancelButtonColor}
+							borderColor={Colors.cancelButtonBorderColor}
+							hideShadow={true}
+						/>
+						<RegularButton
+							callback={() => this.setState({ showPinOverlay: true })}
+							text={'Share'}
+							textColor={Colors.darkTextColor}
+							backgroundColor={Colors.ctaButtonColor}
+							borderColor={Colors.ctaButtonBorderColor}
+							disabled={this.state.selectedAmount == 0 && true}
+						/>
+					</View>
 				</View>
 			</View>
 
@@ -81,7 +89,6 @@ export default class ShareTokens extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 3 + '%',
 		backgroundColor: Colors.backgroundColor,
 	},
 	description: {
@@ -103,8 +110,8 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		marginTop: 5,
 	},
-	button_container: { 
-		flexDirection: 'row', 
-		justifyContent: 'space-evenly', 
+	button_container: {
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
 	},
 });

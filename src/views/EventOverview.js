@@ -59,9 +59,9 @@ export default class EventOverview extends Component {
 	}
 
 	fetchFestivalData() {
-		// GetEvents().then(response => {
-		// 	this.updateAmounts(response)
-		// })
+		GetEvents().then(response => {
+			this.updateAmounts(response)
+		})
 
 		// GetWallets().then(response => {
 		// 	console.log()

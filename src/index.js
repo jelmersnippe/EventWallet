@@ -7,7 +7,7 @@ import {
 import { Colors, Fonts, appName } from './components/GlobalVariables'
 
 import { createRootNavigator } from './router'
-import { isSignedIn } from './services/AuthAPI'
+import { isSignedIn, RefreshToken, signOut, setToken, setPin } from './services/AuthAPI'
 
 import {
     PinCode
@@ -20,59 +20,64 @@ export default class App extends Component {
         this.state = {
             signedIn: false,
             checkedSignIn: false,
-            pin: '',
             showPinOverlay: false,
-            pinEntered: false,
         };
     }
 
     componentDidMount() {
         isSignedIn()
-            .then(response => {
-                this.setState({ signedIn: response, checkedSignIn: true })
-                this.openPinOverlay()
+            .then(() => {
+                this.setState({showPinOverlay: true})
             })
-            .catch(error => alert('An error occurred: ' + error));
+            .catch(() => {
+                this.setState({checkedSignIn: true, signedIn: false})
+            })
     }
 
-    openPinOverlay = async () => {
-        this.setState({pinEntered: false})
-        this.setState({showPinOverlay: true})
+    logOut(){
+        this.setState({signedIn: false})
     }
 
+    checkPin(){
+        this.setState({checkedSignIn: false})
+    }
 
     render() {
         const { checkedSignIn, signedIn } = this.state;
 
         if (!checkedSignIn) {
             return (
+            <View style={{flex:1, width: 100+'%', height: 100+'%'}}>
                 <View style={styles.container}>
                     <Text style={styles.title}>{appName}</Text>
                 </View>
-            );
-        }
 
-        const Layout = createRootNavigator(signedIn);
-
-        const App = () => {
-            return  (
-                <View style={{flex:1, width: 100+'%', height: 100+'%'}}>
-                    <Layout />
-                    {this.state.showPinOverlay && 
+                {this.state.showPinOverlay && 
                         <PinCode 
-                            callback={(code) => {
-                                this.setState({pin: code})
-                                this.setState({pinEntered: true})
-                                this.setState({showPinOverlay: false})
-
-                                console.log(code)
+                            callback={(pin) => {
+                                RefreshToken(pin)
+                                .then(refreshedToken => {
+                                    setToken(refreshedToken)
+                                    setPin(pin)
+                                    this.setState({signedIn: true})
+                                    
+                                })
+                                .catch(error => {
+                                    alert('Error entering pin: ' + error)
+                                    signOut()
+                                    this.setState({signedIn: false})
+                                })
+                                this.setState({checkedSignIn: true, showPinOverlay: false})
                             }} 
                         />
                     }
-                </View>
-            )
+            </View>
+            );
         }
-        return <App />;
+
+        const Layout = createRootNavigator(signedIn)
+
+        return <Layout />;
     }
 }
 

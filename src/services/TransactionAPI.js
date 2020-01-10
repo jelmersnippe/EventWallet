@@ -11,10 +11,12 @@ export const CreateWallet = (event) => {
     return APIRequest('POST', ip + ':' + port + '/wallet/create', true, bodyData)
 }
 
-export const AddFunds = (event, amount) => {
+export const AddFunds = (event, amount, pin) => {
     let bodyData = {
         "event": event,
-            "amount": amount
+        "amount": amount,
+        // Add pin to body data
+        "pin": pin
     }
     
     return APIRequest('POST', ip + ':' + port + '/transaction/add_funds', true, bodyData)

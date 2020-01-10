@@ -13,7 +13,8 @@ import {
 
 import {
     NumericTokenInput,
-    RegularButton
+    RegularButton,
+    PinCode
 } from '../components'
 import { Colors, Fonts, headerShadow } from '../components/GlobalVariables'
 
@@ -29,6 +30,7 @@ export default class BuyTokens extends Component {
             selectedAmount: 0,
             totalPrice: 0,
             event: [],
+            showPinOverlay: false,
         }
     }
 
@@ -54,6 +56,15 @@ export default class BuyTokens extends Component {
     render() {
         return (
             <View style={styles.container}>
+                
+                {this.state.showPinOverlay && <PinCode callback={(code) => {
+                    this.setState({ showPinOverlay: false })
+                    AddFunds(this.state.event.uid, this.state.selectedAmount, code).then(response => {
+                        this.props.navigation.state.params.updateTransactions(response)
+                        this.props.navigation.goBack()
+                    }).catch(error => alert(error))
+                }} />}
+
                 <View style={[styles.header, headerShadow]}>
                     <Text style={styles.name}>{this.state.event.name}</Text>
                 </View>
@@ -96,12 +107,7 @@ export default class BuyTokens extends Component {
                             textColor={Colors.darkTextColor}
                             backgroundColor={Colors.ctaButtonColor}
                             borderColor={Colors.ctaButtonBorderColor}
-                            callback={() => {
-                                AddFunds(this.state.event.uid, this.state.selectedAmount).then(response => {
-                                    this.props.navigation.state.params.updateTransactions(response)
-                                    this.props.navigation.goBack()
-                                })
-                            }}
+                            callback={() => this.setState({ showPinOverlay: true })}
                             disabled={this.state.selectedAmount == 0 || this.state.tokenPrice <= 0}
                         />
                     </View>

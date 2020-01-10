@@ -25,7 +25,7 @@ export default class Transactions extends Component {
             event: this.props.navigation.getParam('item'),
             registerInProgress: false,
             transactionHistoryFound: false,
-            transactionData: []
+            transactionData: [],
         }
     }
 
@@ -40,18 +40,18 @@ export default class Transactions extends Component {
 
             let updatedEvent = this.state.event
             updatedEvent.amount = response[0].balance_after
-            this.setState({event: updatedEvent})
-        })
+            this.setState({ event: updatedEvent })
+        }).catch(error => console.log(error))
     }
 
-    addTransaction(transaction){
+    addTransaction(transaction) {
         let updatedTransactions = this.state.transactionData
         updatedTransactions.unshift(transaction)
-        this.setState({transactionData: updatedTransactions})
+        this.setState({ transactionData: updatedTransactions })
 
         let updatedEvent = this.state.event
         updatedEvent.amount = transaction.balance_after
-        this.setState({event: updatedEvent})
+        this.setState({ event: updatedEvent })
 
         this.props.navigation.state.params.updateAmount(transaction.balance_after)
     }
@@ -87,10 +87,12 @@ export default class Transactions extends Component {
                         <View style={styles.token_info}>
                             <Text style={styles.amount_text}>You have {this.state.event.amount} tokens</Text>
                             <RegularButton
-                                callback={() => {this.props.navigation.navigate('BuyTokens', { 
-                                    updateTransactions: (transaction) => this.addTransaction(transaction),
-                                    event: this.state.event
-                                })}}
+                                callback={() => {
+                                    this.props.navigation.navigate('BuyTokens', {
+                                        updateTransactions: (transaction) => this.addTransaction(transaction),
+                                        event: this.state.event
+                                    })
+                                }}
                                 icon='angle-right'
                                 text={'Buy Tokens'}
                                 textColor={Colors.darkTextColor}
@@ -100,17 +102,15 @@ export default class Transactions extends Component {
                         </View>
                         :
                         <View style={styles.token_info}>
-                            
                             <Text style={styles.amount_text}>You are not registered</Text>
                             <RegularButton
                                 callback={() => {
-                                    this.setState({registerInProgress: true})
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
                                             this.props.navigation.state.params.updateAmount(0)
                                             this.fetchTransactionHistory(this.state.event.uid)
-                                            this.setState({registerInProgress: false})
-                                        })
+                                            this.setState({ registerInProgress: false })
+                                        }).catch(error => console.log('Failed to create wallet: ' + error))
                                 }}
                                 icon='angle-right'
                                 text={'Register'}
@@ -121,12 +121,10 @@ export default class Transactions extends Component {
                             />
                         </View>
                     }
-
                     {this.state.event.amount != undefined &&
                         <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
                     }
                 </View>
-
                 {this.state.transactionHistoryFound &&
                     <View style={styles.padded_container}>
                         <TransactionList
@@ -135,6 +133,7 @@ export default class Transactions extends Component {
                     </View>
                 }
             </ScrollView>
+
         );
     }
 }

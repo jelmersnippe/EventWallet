@@ -1,5 +1,5 @@
 import RNFetchBlob from 'rn-fetch-blob'
-import { getToken, RefreshToken } from './AuthAPI'
+import { setToken, getToken, getPin, RefreshToken } from './AuthAPI'
 
 export const APIRequest = async (method, URL, requiresToken = false, body = null, contentType = 'application/json') => {
     return new Promise((resolve, reject) => {
@@ -9,90 +9,122 @@ export const APIRequest = async (method, URL, requiresToken = false, body = null
 
         URL = 'https://' + URL
 
-        if(requiresToken){
+        if (requiresToken) {
             headers['x-access-token'] = getToken()
-        } 
+        }
 
-        Request(method, URL, headers, body)
-        .then(response => {
-            resolve(response)
-        })
-        .catch(error => reject(error))
+        let request = {
+            "method": method,
+            "URL": URL,
+            "headers": headers,
+            "body": body
+        }
+
+        Request(request)
+            .then(response => {
+                resolve(response)
+            })
+            .catch(error => reject(error))
     })
 }
 
-const Request = async (method, URL, headers, body) => {
-    if(body){
-        body = JSON.stringify(body)
-    }
+const Request = async (request) => {
+    console.log('\n\n\t--- REQUEST INFO ---')
+    console.log(JSON.stringify(request, null, 4))
 
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         RNFetchBlob.config({
             trusty: true
-        }).fetch(method, URL, headers, body)
-        .then(response => {
-            ProcessResponse(response)
-            .then(data => {
-                resolve(data)
+        })
+        .fetch(request.method, request.URL, request.headers, JSON.stringify(request.body))
+            .then(response => {
+                ProcessResponse(response, request)
+                    .then(data => {
+                        resolve(data)
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
             })
             .catch(error => {
-                if(error == 'Retry'){
-                    Request(URL, headers, body)
-                        .then(response => resolve(response))
-                        .catch(error => reject(error))
-                    reject(error)
-                } else {
-                    reject(error)
-                }
+                console.log(error)
             })
-        })
-        .catch(error => {
-            console.log(error)
-        })
     })
 }
 
-const ProcessResponse = (response) => {
+const ProcessResponse = (response,request) => {
     return new Promise((resolve, reject) => {
         let responseData = ''
-        if (response.respInfo.respType == 'json'){
+        if (response.respInfo.respType == 'json') {
             responseData = (JSON.parse(response.data))
         } else {
             responseData = response.data
         }
 
-        if (response.respInfo.status == 200){
+        console.log('\n\t--- RESPONSE INFO ---')
+        console.log(response.respInfo.redirects[0])
+        console.log(response.respInfo.status + ' response: ')
+        console.log(responseData)
+
+        if (response.respInfo.status == 200) {
+            // REQUEST WAS SUCCESSFUL
+            // return the data in the response
+
             resolve(responseData)
-        } 
+        }
 
         else if (response.respInfo.status == 401) {
-            //alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
+            // TOKEN IS INVALID
+            // Force user to be logged out
+            // logOut() from index.js
+
             reject(responseData.message)
 
         } else if (response.respInfo.status == 403) {
-            //alert(response.respInfo.redirects[0] + '\n\n403 response: ' + responseData)
+            // TOKEN HAS EXPIRED
+            // Refresh the token and then retry request
 
-            // Token has expired: Refresh the token and then retry request
-            reject('WiP')
-            // RefreshToken(33333)
-            // .then(refreshedToken => {
-            //     setToken(refreshedToken)
+            // Check if there is a pin saved in memory
+            // This will be true if the user already entered his pin this session
 
-            //     // Build headers for retry request
-            //     let retryHeaders = response.respInfo.headers
-            //     retryHeaders['x-access-token'] = refreshedToken
 
-            //     // Re send Request
-            //     Request('POST', response.respInfo.redirects[0], retryHeaders)
-            //     .then(response => resolve(response))
-            //     .catch(error => reject(error))
-            // })
-            // .catch(error => {
-            //     reject(error)
-            // })
-            
+            // NO PIN IN MEMORY
+            // force the user to enter his pin to refresh the token
+            // checkPin() from index.js
+
+            if(getPin() == undefined){
+
+
+            // PIN IN MEMORY
+            // Attempt to refresh the token with the pin from memory
+            } else {
+                console.log('Trying to refresh token with pin: ' + getPin())
+
+                RefreshToken(getPin())
+                .then(refreshedToken => {
+                    // Refreshed the token with pin from memory
+                    // Set the token in memory then retry
+                    // the previous request with the new token
+                    setToken(refreshedToken)
+                    request.headers['x-access-token'] = refreshedToken
+
+                    Request(request)
+                        .then(response => resolve(response))
+                        .catch(error => reject(error))
+                })
+                .catch(error => {
+                    // Failed to refresh token with the pin in memory
+                    // Log the user logOut
+                    // lofOut() from index.js
+
+                    console.log('Failed to obtain refresh token')
+                    reject(error)
+                })
+            }
         } else {
-            //alert(response.respInfo.redirects[0] + '\n\n' + response.respInfo.status + ' response: ' + responseData)
+            // UNKNOWN ERROR CODE
+            // Reject with the data in the response
+
             reject(responseData)
         }
     })
