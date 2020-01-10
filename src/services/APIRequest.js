@@ -1,5 +1,5 @@
 import RNFetchBlob from 'rn-fetch-blob'
-import { setToken, getToken, getPin, RefreshToken } from './AuthAPI'
+import { SetToken, GetToken, GetPin, RefreshToken } from './AuthAPI'
 
 export const APIRequest = async (method, URL, requiresToken = false, body = null, contentType = 'application/json') => {
     return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ export const APIRequest = async (method, URL, requiresToken = false, body = null
         URL = 'https://' + URL
 
         if (requiresToken) {
-            headers['x-access-token'] = getToken()
+            headers['x-access-token'] = GetToken()
         }
 
         let request = {
@@ -77,7 +77,7 @@ const ProcessResponse = (response,request) => {
             // TOKEN IS INVALID
             // Force user to be logged out
             // logOut() from index.js
-
+            alert('Invalid token, maak dat je wegkomt schooier!')
             reject(responseData.message)
 
         } else if (response.respInfo.status == 403) {
@@ -92,22 +92,23 @@ const ProcessResponse = (response,request) => {
             // force the user to enter his pin to refresh the token
             // checkPin() from index.js
 
-            if(getPin() == undefined){
-
+            if(GetPin() == undefined){
+                alert('No pin in memory, even de applicatie herstarten!')
+                reject(error)
 
             // PIN IN MEMORY
             // Attempt to refresh the token with the pin from memory
             } else {
-                console.log('Trying to refresh token with pin: ' + getPin())
-
-                RefreshToken(getPin())
+                RefreshToken(GetPin())
                 .then(refreshedToken => {
                     // Refreshed the token with pin from memory
                     // Set the token in memory then retry
                     // the previous request with the new token
-                    setToken(refreshedToken)
+                    console.log('refreshed token: ' + refreshedToken)
+                    SetToken(refreshedToken)
                     request.headers['x-access-token'] = refreshedToken
 
+                    console.log(request)
                     Request(request)
                         .then(response => resolve(response))
                         .catch(error => reject(error))
@@ -117,14 +118,14 @@ const ProcessResponse = (response,request) => {
                     // Log the user logOut
                     // lofOut() from index.js
 
-                    console.log('Failed to obtain refresh token')
+                    alert('Refresh token gefaalt - Die backend jongen heeft het verpest, je moet opnieuw inloggen :)')
                     reject(error)
                 })
             }
         } else {
             // UNKNOWN ERROR CODE
             // Reject with the data in the response
-
+            alert('???')
             reject(responseData)
         }
     })

@@ -11,32 +11,29 @@ const userKey = 'AuthToken'
 let token = ''
 let pin = undefined
 
-export const getToken = () => {
+export const GetToken = () => {
     return token
 }
 
-export const setToken = (newToken) => {
+const setToken = (newToken) => {
     token = newToken
 }
 
-export const getPin = () => {
+export const GetPin = () => {
     return pin
 }
 
-export const setPin = (newPin) => {
+export const SetPin = (newPin) => {
     pin = newPin
 }
 
-const onSignIn = (token) => {
+export const SetToken = (token) => {
     AsyncStorage.setItem(userKey, token)
     setToken(token)
 }
 
-export const signOut = async () => {
-    await AsyncStorage.removeItem(userKey)
-    .then(
-        console.log('Removed Auth Token')
-    )
+export const SignOut = async () => {
+    return await AsyncStorage.removeItem(userKey)
 }
 
 
@@ -71,7 +68,7 @@ export const SignIn = (email, password) => {
             })
             .then(response => {
                 if (response.respInfo.status == 200) {
-                    onSignIn(response.data)
+                    SetToken(response.data)
                     resolve()
                 } else {
                     console.log('SignIn failed:')
@@ -89,7 +86,7 @@ export const isSignedIn = async () => {
             .then(authToken => {
                 if (authToken !== null) {
                     console.log('AuthToken found: ' + authToken)
-                    onSignIn(authToken)
+                    SetToken(authToken)
                     resolve()
                 } else {
                     console.log('No AuthToken found')

@@ -15,7 +15,6 @@ export const AddFunds = (event, amount, pin) => {
     let bodyData = {
         "event": event,
         "amount": amount,
-        // Add pin to body data
         "pin": pin
     }
     

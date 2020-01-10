@@ -6,16 +6,16 @@ import {
     StyleSheet,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Fonts, shadow, headerShadow } from './GlobalVariables'
+import { Fonts, headerShadow } from './GlobalVariables'
 
-import SidebarMenu from './SidebarMenu'
+// import SidebarMenu from './_SidebarMenu'
 
 export default class Header extends Component {
-    renderMenu() {
-        return (
-            <SidebarMenu ref='SidebarMenu' {...this.props} />
-        );
-    }
+    // renderMenu() {
+    //     return (
+    //         <SidebarMenu ref='SidebarMenu' {...this.props} />
+    //     );
+    // }
 
     render() {
         return (
@@ -33,22 +33,24 @@ export default class Header extends Component {
                         <Icon name='arrow-left' size={25} color={this.props.textColor} />
                     </TouchableOpacity>
                     :
-                    <View style={styles.icon}></View>
+                    <View style={styles.icon}/>
                     }
 
                     <Text style={[styles.text, {color: this.props.textColor}]}>
                         {this.props.text}
                     </Text>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.icon}
                         onPress={() => this.refs.SidebarMenu.toggleMenu()}
                     >
                         <Icon name='cog' size={25} color={this.props.textColor} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+                    <View style={{flex: 1}}/>
 
                 </View>
-                {this.renderMenu()}
+                {/* {this.renderMenu()} */}
             </View>
         );
     }
@@ -62,8 +64,8 @@ const styles = StyleSheet.create({
     header_bar: {
         flexDirection: 'row',
         height: 100 + '%',
+        width: 100+'%',
         alignItems: 'center',
-        justifyContent: 'space-between',
     },
     text: {
         flex: 8,

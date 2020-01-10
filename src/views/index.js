@@ -1,6 +1,7 @@
 import Login from './Login'
 import Register from './Register'
 import ForgotPassword from './ForgotPassword'
+import AuthLoading from './AuthLoading'
 
 import EventOverview from './EventOverview'
 import Transactions from './Transactions'
@@ -16,6 +17,7 @@ export {
     Login, 
     Register, 
     ForgotPassword, 
+    AuthLoading,
     EventOverview, 
     Transactions, 
     WalletLink, 

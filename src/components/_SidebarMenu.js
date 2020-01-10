@@ -42,7 +42,7 @@ export default class SidebarMenu extends Component {
 
     render() {
         return (
-            <Animated.View style={[{alignItems: 'flex-end'}, {
+            <Animated.View style={[{ alignItems: 'flex-end' }, {
                 left: this.state.animation.interpolate({
                     inputRange: [0, 1],
                     outputRange: [600, 0]
@@ -52,7 +52,7 @@ export default class SidebarMenu extends Component {
                     <SidebarMenuItem
                         text='Hide menu'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.toggleMenu()}}
+                        callback={() => { this.toggleMenu() }}
                         icon={<Icon style={styles.icon} name="arrow-right" size={15} />}
                     />
 
@@ -77,7 +77,9 @@ export default class SidebarMenu extends Component {
                     <SidebarMenuItem
                         text='Log out'
                         textColor={Colors.lightTextColor}
-                        callback={() => {this.removeAuthToken()}}
+                        callback={() => {
+                            this.removeAuthToken()
+                        }}
                         icon={<Feather style={styles.icon} name="log-out" size={17} />}
                     />
 
@@ -89,7 +91,7 @@ export default class SidebarMenu extends Component {
 
 const styles = StyleSheet.create({
     menu_container: {
-        width: 50+'%',
+        width: 50 + '%',
         backgroundColor: 'white',
     },
     icon: {
