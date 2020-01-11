@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import RNFetchBlob from 'rn-fetch-blob'
 import { APIRequest } from './APIRequest'
 const base64 = require('base-64')
@@ -58,23 +58,23 @@ export const SignIn = (email, password) => {
         RNFetchBlob.config({
             trusty: true
         })
-            .fetch('GET', 'https://' + ip + ':' + port + '/login', {
-                Authorization: 'Basic ' + authString,
-            })
-            .then(response => {
-                if (response.respInfo.status == 200) {
-                    SetToken(response.data).then(
-                        resolve()
-                    )
-                } else {
-                    console.log('SignIn failed:')
-                    console.log(JSON.stringify(response, null, 4))
-                    reject(response.data)
-                }
-            })
-            .catch(error => {
-                reject(error)
-            })
+        .fetch('GET', 'https://' + ip + ':' + port + '/login', {
+            Authorization: 'Basic ' + authString,
+        })
+        .then(response => {
+            if (response.respInfo.status == 200) {
+                SetToken(response.data).then(
+                    resolve()
+                ).catch(error => console.log(error))
+            } else {
+                console.log('SignIn failed:')
+                console.log(JSON.stringify(response, null, 4))
+                reject(response.data)
+            }
+        })
+        .catch(error => {
+            reject(error)
+        })
     })
 }
 

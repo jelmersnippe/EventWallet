@@ -1,27 +1,30 @@
 import React, { Component } from 'react'
-import CodePin from 'react-native-pin-code'
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 import {
     View,
     StyleSheet,
 } from 'react-native'
 
 export default class PinCode extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pin: '',
+        }
+    }
+
     render() {
+        const { pin } = this.state
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor: 'white'}}>
-                    <CodePin
-                         number={5}
-                         checkPinCode={(code) => this.props.callback(code)}
-                         success={() => console.log('hurray!')}
-                         text="Confirm with your PIN"
-                         error="You fail"
-                         autoFocusFirst={true}
-                         keyboardType="numeric"
-                         //obfuscation={true}
-                         containerStyle={{backgroundColor: 'white'}}
-                    />
-                </View>
+                <SmoothPinCodeInput password mask='*'
+                    cellStyle={{backgroundColor: 'white'}}
+                    value={pin}
+                    codeLength={5}
+                    onTextChange={pin => this.setState({ pin })}
+                    onFulfill={(pin) => this.props.callback(pin)}
+                    autoFocus={true}
+                />
             </View>
         );
     }
