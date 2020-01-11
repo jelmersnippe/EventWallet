@@ -51,6 +51,14 @@ export const RefreshToken = (pin) => {
     return APIRequest('POST', ip + ':' + port + '/refresh/token', true, bodyData)
 }
 
+export const ValidatePin = (pin) => {
+    let bodyData = {
+        "pin": pin
+    }
+
+    return APIRequest('POST', ip + ':' + port + '/pin/validate', true, bodyData)
+}
+
 export const SignIn = (email, password) => {
     return new Promise((resolve, reject) => {
         let authString = base64.encode(email + ':' + password)

@@ -15,9 +15,10 @@ export const GetWallets = () => {
     return APIRequest('POST', ip + ':' + port + '/wallets/user', true)
 }
 
-export const GetWristband = (event) => {
+export const GetWristband = (event, pin) => {
     let bodyData = {
-        "event": event
+        "event": event,
+        "pin": pin
     }
     
     return APIRequest('POST', ip + ':' + port + '/wristband', true, bodyData)

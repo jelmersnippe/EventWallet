@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
-import { isSignedIn, RefreshToken, SignOut, SetToken, SetPin } from '../services/AuthAPI'
+import { isSignedIn, RefreshToken, ValidatePin, SignOut, SetToken, SetPin } from '../services/AuthAPI'
 
 import {
     PinCode
@@ -48,21 +48,18 @@ export default class AuthLoading extends Component {
                 {this.state.showPinOverlay &&
                     <PinCode
                         callback={(pin) => {
-                            RefreshToken(pin)
-                                .then(refreshedToken => {
-                                    this.setState({showPinOverlay: false})
-                                    SetToken(refreshedToken).then(() => {
-                                        console.log('redirecting to signed in')
-                                        SetPin(pin)
-                                        this.props.navigation.navigate('SignedIn')
-                                    }).catch(error => alert(error))
-                                })
-                                .catch(error => {
-                                    alert('Error entering pin: ' + error)
-                                    SignOut().then(
-                                        this.props.navigation.navigate('SignedOut')
-                                    )
-                                })
+                            SetPin(pin)
+                            ValidatePin(pin)
+                            .then(response => {
+                                this.setState({showPinOverlay: false})
+                                this.props.navigation.navigate('SignedIn')
+                            })
+                            .catch(error => {
+                                alert('Error entering pin: ' + error)
+                                SignOut().then(
+                                    this.props.navigation.navigate('SignedOut')
+                                )
+                            })
                         }}
                     />
                 }

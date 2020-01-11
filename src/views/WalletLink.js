@@ -8,12 +8,14 @@ import {
 
 import { 
     HeaderText,
-    WideButton
+    WideButton,
+    PinCode
 } from '../components'
 import { Colors, Fonts } from '../components/GlobalVariables';
 
 import { GenerateQR } from '../services/QrAPI'
 import { GetWristband, UpdateWristband } from '../services/EventAPI'
+import { GetPin, ValidatePin } from '../services/AuthAPI'
 
 export default class WalletLink extends Component {
     constructor() {
@@ -21,6 +23,7 @@ export default class WalletLink extends Component {
 		this.state = {
             event: '',
             refreshingWristband: false,
+            showPinOverlay: false,
             wristbandCode: '',
             wristbandStatus: '',
 			qr: '',
@@ -29,7 +32,7 @@ export default class WalletLink extends Component {
 
     componentDidMount(){
         this.setState({event: this.props.navigation.getParam('event')})
-        GetWristband(this.props.navigation.getParam('event')).then(response => {
+        GetWristband(this.props.navigation.getParam('event'), GetPin()).then(response => {
             this.setWristband(response)
         }).catch(error => alert('Could not get wristbande code: ' + error))
     }
@@ -45,6 +48,26 @@ export default class WalletLink extends Component {
     render() {
         return(
             <View style={styles.container}>
+
+                {this.state.showPinOverlay && <PinCode callback={(code) => {
+                    this.setState({ showPinOverlay: false })
+                    ValidatePin(code)
+                    .then(() => {
+                        UpdateWristband(this.state.event)
+                        .then(response => {
+                            this.setWristband(response)
+                        })
+                        .catch(error => {
+                            alert('Could not update wristband code: ' + error)
+                        })
+                        this.setState({refreshingWristband: false})
+                    })
+                    .catch(error => {
+                        alert(error)
+                        this.setState({refreshingWristband: false})
+                    })
+                }} />}
+
                 <HeaderText text='Wallet Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
                 <Text style={styles.content}>{this.state.wristbandCode}</Text>
                 {this.state.wristbandCode != '' &&
@@ -68,18 +91,8 @@ export default class WalletLink extends Component {
                     borderColor={Colors.ctaButtonBorderColor} 
                     callback={() => {
                         this.setState({refreshingWristband: true})
-                        UpdateWristband(this.state.event)
-                        .then(response => {
-                            this.setWristband(response)
-                            this.setState({refreshingWristband: false})
-                        })
-                        .catch(error => {
-                            this.setState({refreshingWristband: false})
-                            alert('Could not update wristband code: ' + error)
-                        })
-                    }
-                        
-                    }
+                        this.setState({showPinOverlay: true})
+                    }}
                     disabled={this.state.wristbandStatus != 'active' || this.state.refreshingWristband}
                 />
                 }
