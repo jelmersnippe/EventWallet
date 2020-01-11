@@ -3,18 +3,6 @@ import { APIRequest } from './APIRequest'
 const ip = '145.24.222.83'
 const port = '3307'
 
-export const GetWalletLink = (event) => {
-    let bodyData = {
-        "event": event
-    }
-    
-    return APIRequest('POST', ip + ':' + port + '/wallet/user', true, bodyData)
-}
-
-export const GetWallets = () => {
-    return APIRequest('POST', ip + ':' + port + '/wallets/user', true)
-}
-
 export const GetWristband = (event, pin) => {
     let bodyData = {
         "event": event,

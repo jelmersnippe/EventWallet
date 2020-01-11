@@ -11,6 +11,10 @@ export const CreateWallet = (event) => {
     return APIRequest('POST', ip + ':' + port + '/wallet/create', true, bodyData)
 }
 
+export const GetWallets = () => {
+    return APIRequest('POST', ip + ':' + port + '/wallet/all', true)
+}
+
 export const AddFunds = (event, amount, pin) => {
     let bodyData = {
         "event": event,
