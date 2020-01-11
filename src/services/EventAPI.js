@@ -24,9 +24,10 @@ export const GetWristband = (event, pin) => {
     return APIRequest('POST', ip + ':' + port + '/wristband', true, bodyData)
 }
 
-export const UpdateWristband = (event) => {
+export const UpdateWristband = (event, pin) => {
     let bodyData = {
-        "event": event
+        "event": event,
+        "pin": pin
     }
 
     return APIRequest('POST', ip + ':' + port + '/wristband/update', true, bodyData)

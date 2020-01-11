@@ -53,7 +53,7 @@ export default class WalletLink extends Component {
                     this.setState({ showPinOverlay: false })
                     ValidatePin(code)
                     .then(() => {
-                        UpdateWristband(this.state.event)
+                        UpdateWristband(this.state.event, pin)
                         .then(response => {
                             this.setWristband(response)
                         })
