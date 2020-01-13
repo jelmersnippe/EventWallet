@@ -57,6 +57,7 @@ const Request = async (request) => {
             })
             .catch(error => {
                 console.log(error)
+                reject(error)
             })
     })
 }
@@ -74,7 +75,6 @@ const ProcessResponse = (response,request) => {
         console.log(JSON.stringify(request, null, 4))
 
         console.log('\n\t--- RESPONSE INFO ---')
-        console.log(response.respInfo.redirects[0])
         console.log(response.respInfo.status + ' response: ')
         console.log(responseData)
 
@@ -111,7 +111,7 @@ const ProcessResponse = (response,request) => {
 
             if(GetPin() == undefined){
                 alert('No pin in memory, even de applicatie herstarten!')
-                reject(error)
+                reject(responseData)
 
             // PIN IN MEMORY
             // Attempt to refresh the token with the pin from memory
@@ -121,11 +121,9 @@ const ProcessResponse = (response,request) => {
                     // Refreshed the token with pin from memory
                     // Set the token in memory then retry
                     // the previous request with the new token
-                    console.log('refreshed token: ' + refreshedToken)
                     SetToken(refreshedToken)
                     request.headers['x-access-token'] = refreshedToken
 
-                    console.log(request)
                     Request(request)
                         .then(response => resolve(response))
                         .catch(error => reject(error))

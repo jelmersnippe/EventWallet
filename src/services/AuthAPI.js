@@ -59,6 +59,35 @@ export const ValidatePin = (pin) => {
     return APIRequest('POST', ip + ':' + port + '/pin/validate', true, bodyData)
 }
 
+export const ValidateToken = (token) => {
+    return new Promise((resolve, reject) => {
+
+        RNFetchBlob.config({
+            trusty: true
+        })
+        .fetch('GET', 'https://' + ip + ':' + port + '/token/validate', {
+            'Content-type': 'application/json',
+            'x-access-token': token
+        })
+        .then(response => {
+
+            console.log('\n\t--- RESPONSE INFO ---')
+            console.log(response.respInfo.redirects[0])
+            console.log(response.respInfo.status + ' response: ')
+            console.log(response.data)
+
+            if (response.respInfo.status == 200 || response.respInfo.status == 403) {
+                resolve(response.data)
+            } else {
+                reject(JSON.parse(response.data).message)
+            }
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+}
+
 export const SignIn = (email, password) => {
     return new Promise((resolve, reject) => {
         let authString = base64.encode(email + ':' + password)
@@ -70,13 +99,17 @@ export const SignIn = (email, password) => {
             Authorization: 'Basic ' + authString,
         })
         .then(response => {
+
+            console.log('\n\t--- RESPONSE INFO ---')
+            console.log(response.respInfo.redirects[0])
+            console.log(response.respInfo.status + ' response: ')
+            console.log(response.data)
+
             if (response.respInfo.status == 200) {
                 SetToken(response.data).then(
                     resolve()
                 ).catch(error => console.log(error))
             } else {
-                console.log('SignIn failed:')
-                console.log(JSON.stringify(response, null, 4))
                 reject(response.data)
             }
         })
@@ -92,15 +125,18 @@ export const isSignedIn = async () => {
             .then(authToken => {
                 if (authToken !== null) {
                     console.log('AuthToken found: ' + authToken)
-                    resolve(true)
+                    ValidateToken(authToken).then(response => {
+                        resolve(true)
+                    }).catch(error => {
+                        reject(error)
+                    })
                 } else {
                     console.log('No AuthToken found')
-                    reject();
+                    reject()
                 }
             })
             .catch(error => {
-                console.log(error)
-                reject()
+                reject(error)
             });
     });
 };

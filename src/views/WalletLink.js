@@ -15,7 +15,7 @@ import { Colors, Fonts } from '../components/GlobalVariables';
 
 import { GenerateQR } from '../services/QrAPI'
 import { GetWristband, UpdateWristband } from '../services/EventAPI'
-import { GetPin, ValidatePin } from '../services/AuthAPI'
+import { GetPin } from '../services/AuthAPI'
 
 export default class WalletLink extends Component {
     constructor() {
@@ -51,8 +51,6 @@ export default class WalletLink extends Component {
 
                 {this.state.showPinOverlay && <PinCode callback={(pin) => {
                     this.setState({ showPinOverlay: false })
-                    // ValidatePin(code)
-                    // .then(() => {
                     UpdateWristband(this.state.event, pin)
                         .then(response => {
                             this.setWristband(response)
@@ -61,11 +59,6 @@ export default class WalletLink extends Component {
                             alert('Could not update wristband code: ' + error)
                         })
                     this.setState({ refreshingWristband: false })
-                    // })
-                    // .catch(error => {
-                    //     alert(error)
-                    //     this.setState({refreshingWristband: false})
-                    // })
                 }} />}
                 <View style={{ paddingHorizontal: 3 + '%' }}>
 

@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
-import { isSignedIn, RefreshToken, ValidatePin, SignOut, SetToken, SetPin } from '../services/AuthAPI'
+import { isSignedIn, ValidatePin, SignOut, SetToken, SetPin } from '../services/AuthAPI'
 
 import {
     PinCode
@@ -33,7 +33,9 @@ export default class AuthLoading extends Component {
                     this.setState({ showPinOverlay: true })
                 })
                 .catch(() => {
-                    this.props.navigation.navigate('SignedOut')
+                    SignOut().then(response => {
+                        this.props.navigation.navigate('SignedOut')
+                    })
                 })
         }
     }
