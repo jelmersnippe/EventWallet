@@ -1,10 +1,18 @@
 import React from 'react';
 
+import {
+    View,
+    Text,
+} from 'react-native'
+
 import { createSwitchNavigator, createAppContainer, getActiveChildNavigationOptions } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import Feather from 'react-native-vector-icons/Feather'
+import IonIcon from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import {
     Login,
@@ -20,7 +28,7 @@ import {
     FriendOverview,
     ShareTokens
 } from './views'
-import { Colors } from './components/GlobalVariables'
+import { Colors, Fonts } from './components/GlobalVariables'
 
 const TransactionStack = createStackNavigator(
     {
@@ -99,15 +107,20 @@ const EventStack = createStackNavigator(
         initialRouteName: 'Overview',
         defaultNavigationOptions: ({ navigation }) => {
             return {
-                headerRight: (
-                    <Icon
-                    name='cog'
-                    size={30}
-                    style={{paddingRight: 10}}
-                    onPress={() => navigation.openDrawer()}
-                    />
-                ),
-                headerLeft: null
+                header: (
+                    <View style={{flexDirection: 'row', backgroundColor: Colors.eventColor}}>
+                        <Text style={{padding: 8, fontSize: 25, fontFamily: Fonts.topheader, flex: 10, color: 'white'}}>
+                            EventWallet
+                        </Text>
+
+                        <Icon
+                        name='bars'
+                        size={30}
+                        style={{alignItems: 'center', padding: 9, flex: 1, color: 'white'}}
+                        onPress={() => navigation.openDrawer()}
+                        />
+                    </View>
+                )
             }
         },
         navigationOptions: ({ navigation }) => {
@@ -147,15 +160,20 @@ const FriendStack = createStackNavigator(
         },
         defaultNavigationOptions: ({ navigation }) => {
             return {
-                headerRight: (
-                    <Icon
-                    name='cog'
-                    size={30}
-                    style={{paddingRight: 10}}
-                    onPress={() => navigation.openDrawer()}
-                    />
-                ),
-                headerLeft: null
+                header: (
+                    <View style={{flexDirection: 'row', backgroundColor: Colors.eventColor}}>
+                        <Text style={{padding: 8, fontSize: 25, fontFamily: Fonts.topheader, flex: 10, color: 'white'}}>
+                            EventWallet
+                        </Text>
+
+                        <Icon
+                        name='bars'
+                        size={30}
+                        style={{alignItems: 'center', padding: 9, flex: 1, color: 'white'}}
+                        onPress={() => navigation.openDrawer()}
+                        />
+                    </View>
+                )
             }
         },
     }
@@ -205,16 +223,58 @@ const AuthStack = createStackNavigator(
 
 const AppDrawer = createDrawerNavigator(
     {
-        App: MainApp,
-        FAQ: Content,
-        LegalDisclaimer: Content,
-        LogOut: {
-            screen: props => <AuthLoading {...props} screenProps={{signOut: true}} />
-        },
+        App: {
+            screen: MainApp,
+                navigationOptions: {
+                    drawerIcon: () => (
+                        <Icon name="arrow-right" color='white' size={18}/>
+                        )
+                    }
+                },
+
+        FAQ:  {
+            screen: Content,
+                navigationOptions: {
+                    drawerIcon: () => (
+                       <FontAwesome name="question" color='white' size={20} />
+                    )
+                }
+            },
+        Contact:  {
+            screen: Content,
+                navigationOptions: {
+                    drawerIcon: () => (
+                         <IonIcon name="md-contact" color='white' size={20}/>
+                    )
+                }
+            },
+        LegalDisclaimer:  {
+            screen: Content,
+                navigationOptions: {
+                    drawerIcon: () => (
+                        <Icon name="balance-scale" color='white' size={15}/>
+                    )
+                }
+            },
+        LogOut:  {
+            screen: props => <AuthLoading {...props} screenProps={{signOut: true}} />,
+                navigationOptions: {
+                    drawerIcon: () => (
+                        <Feather name="log-out" color='white' size={18}/>
+                    )
+            },
+        }
     },
     {
         initialRouteName: 'App',
         drawerPosition: 'right',
+        drawerBackgroundColor: Colors.darkEventColor,
+        contentOptions: {
+            activeTintColor: '#ffffff',
+            inactiveTintColor: '#ffffff',
+            activeBackgroundColor: Colors.eventColor,
+            labelStyle: {fontSize: 17}
+        }
     }
 )
 
