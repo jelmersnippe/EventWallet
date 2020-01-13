@@ -19,7 +19,7 @@ export default class PinCode extends Component {
         const { pin } = this.state
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Confirm with your pin</Text>
+                <Text style={styles.title}>{this.props.text ? this.props.text : 'Confirm with your pin'}</Text>
                 <SmoothPinCodeInput password mask='*'
                     cellStyle={{backgroundColor: 'white'}}
                     value={pin}

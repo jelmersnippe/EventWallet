@@ -7,7 +7,7 @@ import {
 
 import { Colors } from '../components/GlobalVariables'
 
-export default class LegalDisclaimer extends Component {
+export default class TermsOfUse extends Component {
     render() {
         return(
             <View style={styles.container}>

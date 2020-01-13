@@ -5,7 +5,9 @@ import {
 	View,
 	TextInput,
 	TouchableOpacity,
+	Switch,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler'
 
 import {
 	HeaderText,
@@ -26,6 +28,7 @@ export default class Register extends Component {
 			passwordError: [],
 			email: '',
 			emailError: '',
+			termsAgreed: false,
 			showPinOverlay: false,
 		}
 	}
@@ -137,7 +140,7 @@ export default class Register extends Component {
 		let validPassword = this.validatePassword(this.state.password)
 		let validEmail = this.validateEmail(this.state.email)
 
-		if (validUsername && validEmail && validPassword) {
+		if (validUsername && validEmail && validPassword && this.state.termsAgreed) {
 			this.setState({ showPinOverlay: true })
 		}
 		else {
@@ -147,91 +150,105 @@ export default class Register extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				{this.state.showPinOverlay &&
-					<PinCode
-						callback={(pin) => {
-							if(pin.toString().length == 5){
-								SignUp(this.state.username, this.state.password, this.state.email, pin)
-								.then(response => {
-									alert('Thank you, you registered successfully')
-									this.props.navigation.navigate('Login')
-								})
-								.catch(error => {
-									console.log(error)
-									alert('Wrong you did: ' + error + ' - Yoda, 2020')
-								})
-							} else {
-								alert('Pin should be 5 digits')
-								this.setState({showPinOverlay: true})
-							}
-						}}
-					/>
-				}
-				<View style={{paddingHorizontal: 5 + '%'}}>
-					<Text style={styles.title}>{appName}</Text>
-
-					<HeaderText text='Register' />
-
-					<TextInput
-						placeholder="Username"
-						autoCapitalize='none'
-						style={styles.input_text}
-						onChangeText={username => this.setState({ username: username })}
-					/>
-
-					{this.state.usernameError != '' &&
-						<Text style={styles.error_text}>
-							{this.state.usernameError}
-						</Text>
+			<ScrollView contentContainerStyle={{flexGrow: 1}}>
+				<View style={styles.container}>
+					{this.state.showPinOverlay &&
+						<PinCode
+							callback={(pin) => {
+								if(pin.toString().length == 5){
+									SignUp(this.state.username, this.state.password, this.state.email, pin)
+									.then(response => {
+										alert('Thank you, you registered successfully')
+										this.props.navigation.navigate('Login')
+									})
+									.catch(error => {
+										console.log(error)
+										alert('Wrong you did: ' + error + ' - Yoda, 2020')
+									})
+								} else {
+									alert('Pin should be 5 digits')
+									this.setState({showPinOverlay: true})
+								}
+							}}
+							text='Enter a pin code'
+						/>
 					}
+					<View style={{paddingHorizontal: 5 + '%', paddingVertical: 30}}>
+						<Text style={styles.title}>{appName}</Text>
 
-					<TextInput
-						placeholder="Password"
-						autoCapitalize='none'
-						style={styles.input_text}
-						secureTextEntry={true}
-						onChangeText={password => this.setState({ password: password })}
-					/>
+						<HeaderText text='Register' />
 
-					<View>
-						{this.state.passwordError.map(item => {
-							return (
-								<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
-							)
-						})}
-					</View>
+						<TextInput
+							placeholder="Username"
+							autoCapitalize='none'
+							style={styles.input_text}
+							onChangeText={username => this.setState({ username: username })}
+						/>
 
-					<TextInput
-						placeholder="Email"
-						autoCapitalize='none'
-						keyboardType='email-address'
-						style={styles.input_text}
-						onChangeText={email => this.setState({ email: email })}
-					/>
+						{this.state.usernameError != '' &&
+							<Text style={styles.error_text}>
+								{this.state.usernameError}
+							</Text>
+						}
 
-					{this.state.emailError != '' &&
-						<Text style={[styles.error_text, { marginBottom: 30 }]}>
-							{this.state.emailError}
-						</Text>
-					}
+						<TextInput
+							placeholder="Password"
+							autoCapitalize='none'
+							style={styles.input_text}
+							secureTextEntry={true}
+							onChangeText={password => this.setState({ password: password })}
+						/>
 
-					<WideButton
-						callback={() => { this.validate() }}
-						text='Register'
-						textColor={Colors.lightTextColor}
-						backgroundColor={Colors.eventColor}
-						disabled={this.state.username == '' || this.state.password == '' || this.state.email == ''}
-					/>
+						<View>
+							{this.state.passwordError.map(item => {
+								return (
+									<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
+								)
+							})}
+						</View>
 
-					<View style={styles.secondary_button}>
-						<Text style={styles.secondary_button_text}>Already have an account? </Text>
-						<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-							<Text style={[styles.secondary_button_text, { textDecorationLine: 'underline' }]}>Log in</Text>
-						</TouchableOpacity>
+						<TextInput
+							placeholder="Email"
+							autoCapitalize='none'
+							keyboardType='email-address'
+							style={styles.input_text}
+							onChangeText={email => this.setState({ email: email })}
+						/>
+
+						{this.state.emailError != '' &&
+							<Text style={[styles.error_text, { marginBottom: 30 }]}>
+								{this.state.emailError}
+							</Text>
+						}
+
+						<View style={styles.legal_disclaimer}>
+							<Switch style={styles.legal_disclaimer_switch} onValueChange={() => this.setState({termsAgreed: !this.state.termsAgreed})} value={this.state.termsAgreed}/>
+							<View style={styles.legal_disclaimer_text}>
+								<Text style={[styles.secondary_button_text, {color: this.state.termsAgreed ? 'black' : 'red'}]}>By registering, I agree to the </Text>
+								<TouchableOpacity onPress={() => this.props.navigation.navigate('AuthTermsOfUse')}>
+									<Text style={[styles.secondary_button_text, {color: this.state.termsAgreed ? 'black' : 'red', textDecorationLine: 'underline'}]}>Legal disclaimer</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+						
+
+						<WideButton
+							callback={() => { this.validate() }}
+							text='Register'
+							textColor={Colors.lightTextColor}
+							backgroundColor={Colors.eventColor}
+							disabled={this.state.username == '' || this.state.password == '' || this.state.email == ''}
+						/>
+
+						<View style={styles.secondary_button}>
+							<Text style={styles.secondary_button_text}>Already have an account? </Text>
+							<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+								<Text style={[styles.secondary_button_text, { textDecorationLine: 'underline' }]}>Log in</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
-			</View>
+			</ScrollView>
 		);
 	}
 }
@@ -241,7 +258,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		backgroundColor: Colors.backgroundColor,
-
 	},
 	input_text: {
 		borderBottomWidth: 1,
@@ -258,6 +274,18 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		textAlign: 'center',
 		fontFamily: Fonts.header
+	},
+	legal_disclaimer: {
+		flexDirection: 'row',
+		width: 90+'%',
+		alignSelf: 'center',
+		marginBottom: 15,
+	},
+	legal_disclaimer_text: {
+
+	},
+	legal_disclaimer_switch: {
+
 	},
 	secondary_button: {
 		marginTop: 15,

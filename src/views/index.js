@@ -15,7 +15,7 @@ import ShareTokens from './ShareTokens'
 
 import Contact from './Contact'
 import FAQ from './FAQ'
-import LegalDisclaimer from './LegalDisclaimer'
+import TermsOfUse from './TermsOfUse'
 
 export { 
     Login, 
@@ -35,5 +35,5 @@ export {
     
     Contact,
     FAQ,
-    LegalDisclaimer
+    TermsOfUse,
 }

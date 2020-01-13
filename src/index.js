@@ -30,7 +30,7 @@ import {
     FriendOverview,
     ShareTokens,
 
-    LegalDisclaimer,
+    TermsOfUse,
     Contact,
     FAQ,
 } from './views'
@@ -219,7 +219,8 @@ const AuthStack = createStackNavigator(
     {
         Login: Login,
         Register: Register,
-        ForgotPassword: ForgotPassword
+        ForgotPassword: ForgotPassword,
+        AuthTermsOfUse: TermsOfUse
     },
     {
         headerMode: 'none',
@@ -253,9 +254,9 @@ const FAQStack = createStackNavigator(
     }
 )
 
-const LegalDisclaimerStack = createStackNavigator(
+const TermsOfUseStack = createStackNavigator(
     {
-        LegalDisclaimer: LegalDisclaimer,
+        TermsOfUse: TermsOfUse,
     },
     {
         defaultNavigationOptions: ({ navigation }) => {
@@ -335,13 +336,13 @@ const AppDrawer = createDrawerNavigator(
                     title: 'Contact'
                 }
             },
-        LegalDisclaimer:  {
-            screen: LegalDisclaimerStack,
+            TermsOfUse:  {
+            screen: TermsOfUseStack,
                 navigationOptions: {
                     drawerIcon: () => (
                         <Icon name="balance-scale" color={Colors.lightTextColor} size={15}/>
                     ),
-                    title: 'Legal disclaimer'
+                    title: 'Terms of use'
                 }
             },
         LogOut:  {
