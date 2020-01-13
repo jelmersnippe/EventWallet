@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {
-    View, 
+    View,
     Text,
     Image,
     StyleSheet,
 } from 'react-native'
 
-import { 
+import {
     HeaderText,
     WideButton,
     PinCode
@@ -19,84 +19,85 @@ import { GetPin, ValidatePin } from '../services/AuthAPI'
 
 export default class WalletLink extends Component {
     constructor() {
-		super();
-		this.state = {
+        super();
+        this.state = {
             event: '',
             refreshingWristband: false,
             showPinOverlay: false,
             wristbandCode: '',
             wristbandStatus: '',
-			qr: '',
-		}
-	}
+            qr: '',
+        }
+    }
 
-    componentDidMount(){
-        this.setState({event: this.props.navigation.getParam('event')})
+    componentDidMount() {
+        this.setState({ event: this.props.navigation.getParam('event') })
         GetWristband(this.props.navigation.getParam('event'), GetPin()).then(response => {
             this.setWristband(response)
         }).catch(error => alert('Could not get wristbande code: ' + error))
     }
 
-    setWristband(wristband){
-        this.setState({wristbandCode: wristband.code})
-        this.setState({wristbandStatus: wristband.status})
+    setWristband(wristband) {
+        this.setState({ wristbandCode: wristband.code })
+        this.setState({ wristbandStatus: wristband.status })
         GenerateQR(wristband.code).then(response => {
-            this.setState({qr: response}) 
+            this.setState({ qr: response })
         }).catch(error => alert('Could not generate QR code: ' + error))
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
 
-                {this.state.showPinOverlay && <PinCode callback={(code) => {
+                {this.state.showPinOverlay && <PinCode callback={(pin) => {
                     this.setState({ showPinOverlay: false })
-                    ValidatePin(code)
-                    .then(() => {
-                        UpdateWristband(this.state.event, pin)
+                    // ValidatePin(code)
+                    // .then(() => {
+                    UpdateWristband(this.state.event, pin)
                         .then(response => {
                             this.setWristband(response)
                         })
                         .catch(error => {
                             alert('Could not update wristband code: ' + error)
                         })
-                        this.setState({refreshingWristband: false})
-                    })
-                    .catch(error => {
-                        alert(error)
-                        this.setState({refreshingWristband: false})
-                    })
+                    this.setState({ refreshingWristband: false })
+                    // })
+                    // .catch(error => {
+                    //     alert(error)
+                    //     this.setState({refreshingWristband: false})
+                    // })
                 }} />}
+                <View style={{ paddingHorizontal: 3 + '%' }}>
 
-                <HeaderText text='Wallet Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                <Text style={styles.content}>{this.state.wristbandCode}</Text>
-                {this.state.wristbandCode != '' &&
-                    <Text>Status: {this.state.wristbandStatus}</Text>
-                }
+                    <HeaderText text='Wristband Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                    <Text style={styles.content}>{this.state.wristbandCode}</Text>
+                    {this.state.wristbandCode != '' &&
+                        <Text>Status: {this.state.wristbandStatus}</Text>
+                    }
 
-				<HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                    <HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
-                {this.state.qr != '' &&
-                    <Image 
-                        source={{uri: `data:image/jpeg;base64,${this.state.qr}`}}
-                        style={styles.qr_code}  
-                        resizeMode={'contain'}  
-                    />
-                }
-                {this.state.wristbandCode != '' && 
-                <WideButton 
-                    text='Create new link' 
-                    textColor={Colors.darkTextColor}
-                    backgroundColor={Colors.ctaButtonColor} 
-                    borderColor={Colors.ctaButtonBorderColor} 
-                    callback={() => {
-                        this.setState({refreshingWristband: true})
-                        this.setState({showPinOverlay: true})
-                    }}
-                    disabled={this.state.wristbandStatus != 'active' || this.state.refreshingWristband}
-                />
-                }
-                
+                    {this.state.qr != '' &&
+                        <Image
+                            source={{ uri: `data:image/jpeg;base64,${this.state.qr}` }}
+                            style={styles.qr_code}
+                            resizeMode={'contain'}
+                        />
+                    }
+                    {this.state.wristbandCode != '' &&
+                        <WideButton
+                            text='Create new link'
+                            textColor={Colors.darkTextColor}
+                            backgroundColor={Colors.ctaButtonColor}
+                            borderColor={Colors.ctaButtonBorderColor}
+                            callback={() => {
+                                this.setState({ refreshingWristband: true })
+                                this.setState({ showPinOverlay: true })
+                            }}
+                            disabled={this.state.wristbandStatus != 'active' || this.state.refreshingWristband}
+                        />
+                    }
+                </View>
             </View>
         );
     }
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-start",
         backgroundColor: Colors.backgroundColor,
-        paddingHorizontal: 3+'%',
     },
     header: {
         marginVertical: 10,
@@ -117,16 +117,16 @@ const styles = StyleSheet.create({
         fontSize: 21,
         borderBottomWidth: 1,
         paddingBottom: 5,
-	},
-	content: {
-		fontSize: 25,
-		marginLeft: 5,
+    },
+    content: {
+        fontSize: 25,
+        marginLeft: 5,
         fontFamily: Fonts.header,
         color: Colors.darkTextColor,
-	},
+    },
     qr_code: {
-        width: 100+'%',
-        height: 50+'%',
+        width: 100 + '%',
+        height: 50 + '%',
         marginBottom: 15,
     },
 })

@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
 import {
     View,
+    Text,
     StyleSheet,
 } from 'react-native'
+import { Fonts, Colors } from './GlobalVariables'
 
 export default class PinCode extends Component {
     constructor(props) {
@@ -17,6 +19,7 @@ export default class PinCode extends Component {
         const { pin } = this.state
         return (
             <View style={styles.container}>
+                <Text style={styles.title}>Confirm with your pin</Text>
                 <SmoothPinCodeInput password mask='*'
                     cellStyle={{backgroundColor: 'white'}}
                     value={pin}
@@ -40,5 +43,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000070',
         position: 'absolute',
         zIndex: 999999999999999999999999999999999999
+    },
+    title: {
+        fontFamily: Fonts.header,
+        color: Colors.lightTextColor,
+        fontSize: 24,
+        marginBottom: 10,
     }
 })
