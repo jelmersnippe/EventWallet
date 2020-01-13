@@ -15,7 +15,6 @@ export default class AnnouncementItem extends Component {
                     <Text style={styles.title}>{this.props.item.title}</Text>
                     <View style={styles.datetime_container}>
                         <Text style={styles.date_time}>{this.props.item.datetime.replace("T", " ")}</Text>
-                        {/* <Text style={styles.date_time}>{this.props.item.time}</Text> */}
                     </View>
                 </View>
 
@@ -29,8 +28,8 @@ export default class AnnouncementItem extends Component {
 const styles = StyleSheet.create({
     container: {
         width: 100+'%',
-        marginTop: 10,
         borderBottomWidth: 1,
+        marginTop: 10,
     },
     header: {
         width: 100+'%',

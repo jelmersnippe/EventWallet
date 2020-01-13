@@ -48,22 +48,26 @@ export default class Announcements extends Component {
 
     render() {
         return(
-            <View style={styles.container}>
-                <View style={[styles.header, headerShadow]}>
-                    <Text style={styles.name}>{this.state.event.name}</Text>
+            <ScrollView 
+                style={styles.container}
+                showsVerticalScrollIndicator={false}
+                stickyHeaderIndices={[0]}
+            >
+                <View>
+                    <View style={[styles.event_name, headerShadow]}>
+                        <Text style={styles.name}>{this.state.event.name}</Text>
+                    </View>
+                    <View style={styles.padded_container}>
+                        <HeaderText text='Announcements' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                    </View>
                 </View>
 
-                <View style={{paddingHorizontal: 3+'%'}}>
-                    <HeaderText text='Announcements' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false}
-                    >
-                        <AnnouncementList 
-                            data={this.state.announcements}
-                        />
-                    </ScrollView>
+                <View style={styles.padded_container}>
+                    <AnnouncementList 
+                        data={this.state.announcements}
+                    />
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -73,14 +77,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.backgroundColor,
     },
-    header: {
-        width: 100 + '%',
-        padding: 10,
-        backgroundColor: Colors.eventColor,
+    padded_container: {
+        paddingHorizontal: 3+'%', 
+        backgroundColor: Colors.backgroundColor
     },
     name: {
-        fontSize: 25,
+        padding: 10,
         color: Colors.lightTextColor,
-        fontFamily: Fonts.topheader
+        backgroundColor: Colors.eventColor,
+        fontSize: 25,
+        fontFamily: Fonts.topheader,
     },
 })
