@@ -57,13 +57,17 @@ export default class BuyTokens extends Component {
         return (
             <View style={styles.container}>
                 
-                {this.state.showPinOverlay && <PinCode callback={(code) => {
-                    this.setState({ showPinOverlay: false })
-                    AddFunds(this.state.event.uid, this.state.selectedAmount, code).then(response => {
-                        this.props.navigation.state.params.updateTransactions(response)
-                        this.props.navigation.goBack()
-                    }).catch(error => alert(error))
-                }} />}
+                {this.state.showPinOverlay && 
+                <PinCode 
+                    callback={(code) => {
+                        this.setState({ showPinOverlay: false })
+                        AddFunds(this.state.event.uid, this.state.selectedAmount, code).then(response => {
+                            this.props.navigation.state.params.updateTransactions(response)
+                            this.props.navigation.goBack()
+                        }).catch(error => alert(error))
+                    }} 
+                    cancelAction={() => this.setState({showPinOverlay: false})}
+                />}
 
                 <View style={[styles.header, headerShadow]}>
                     <Text style={styles.name}>{this.state.event.name}</Text>

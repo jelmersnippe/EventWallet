@@ -52,18 +52,23 @@ export default class WalletLink extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                {this.state.showPinOverlay && <PinCode callback={(pin) => {
-                    this.setState({ showPinOverlay: false })
-                    UpdateWristband(this.state.event, pin)
-                        .then(response => {
-                            this.setWristband(response)
-                        })
-                        .catch(error => {
-                            alert('Could not update wristband code: ' + error)
-                        })
-                    this.setState({ refreshingWristband: false })
-                }} />}
+            <View style={styles.container}>
+                {this.state.showPinOverlay && 
+                    <PinCode 
+                        callback={(pin) => {
+                            this.setState({ showPinOverlay: false, refreshingWristband: false })
+                            UpdateWristband(this.state.event, pin)
+                            .then(response => {
+                                this.setWristband(response)
+                            })
+                            .catch(error => {
+                                alert('Could not update wristband code: ' + error)
+                            })
+                        }} 
+                        cancelAction={() => this.setState({ showPinOverlay: false, refreshingWristband: false })}
+                    />
+                }
+                <ScrollView>
 
                 {this.state.wristbandCode != '' &&
                     <View style={styles.padded_container}>
@@ -109,7 +114,8 @@ export default class WalletLink extends Component {
                         }
                     </View>
                 }
-            </ScrollView>
+                </ScrollView>
+            </View>
         );
     }
 }

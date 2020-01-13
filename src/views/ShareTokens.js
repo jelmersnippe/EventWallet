@@ -34,10 +34,15 @@ export default class ShareTokens extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this.state.showPinOverlay && <PinCode callback={(code) => {
-					this.setState({ showPinOverlay: false })
-					this.props.navigation.goBack()
-				}} />}
+				{this.state.showPinOverlay && 
+					<PinCode 
+						callback={(code) => {
+							this.setState({ showPinOverlay: false })
+							this.props.navigation.goBack()
+						}} 
+						cancelAction={() => this.setState({showPinOverlay: false})}
+					/>
+				}
 				<View style={{paddingHorizontal: 3 + '%'}}>
 					<HeaderText text='Receiver' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 					<Text style={styles.receiver}>{this.state.friend ? this.state.friend.name : 'loading'}</Text>

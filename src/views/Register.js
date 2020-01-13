@@ -173,6 +173,7 @@ export default class Register extends Component {
 							callback={(pin) => {
 								this.setState({ pin: pin, timesPinEntered: this.state.timesPinEntered + 1 })
 							}}
+							cancelAction={() => this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })}
 							text='Enter a pin'
 						/>
 					}
@@ -196,6 +197,7 @@ export default class Register extends Component {
 									this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
 								}
 							}}
+							cancelAction={() => this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })}
 							text='Confirm your pin'
 						/>
 					}

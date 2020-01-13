@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
+
 import {
     View,
     Text,
     StyleSheet,
 } from 'react-native'
 import { Fonts, Colors } from './GlobalVariables'
+
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input'
+import { BackHandler } from 'react-native'
 
 export default class PinCode extends Component {
     constructor(props) {
@@ -14,6 +17,26 @@ export default class PinCode extends Component {
             pin: '',
         }
     }
+
+    componentDidMount() {
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            this.handleBackButtonPressAndroid
+        );
+    }
+
+    handleBackButtonPressAndroid = () => {
+        this.props.cancelAction()
+
+        return true;
+    };
 
     render() {
         const { pin } = this.state

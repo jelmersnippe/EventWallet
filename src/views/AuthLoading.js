@@ -63,6 +63,11 @@ export default class AuthLoading extends Component {
                                 )
                             })
                         }}
+                        cancelAction={() => {
+                            SignOut().then(
+                                this.props.navigation.navigate('SignedOut')
+                            )
+                        }}
                     />
                 }
             </View>
