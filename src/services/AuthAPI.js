@@ -10,20 +10,20 @@ const userKey = 'AuthToken'
 
 let pin = undefined
 
-export const GetToken = async () => {
-    return await AsyncStorage.getItem(userKey)
+export const SetToken = async (token) => {
+    return await AsyncStorage.setItem(userKey, token)
 }
 
-export const GetPin = () => {
-    return pin
+export const GetToken = async () => {
+    return await AsyncStorage.getItem(userKey)
 }
 
 export const SetPin = (newPin) => {
     pin = newPin
 }
 
-export const SetToken = async (token) => {
-    return await AsyncStorage.setItem(userKey, token)
+export const GetPin = () => {
+    return pin
 }
 
 export const SignOut = async () => {

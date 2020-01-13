@@ -9,6 +9,7 @@ import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import { Colors, Fonts } from './GlobalVariables'
+import { SetSpecificEvent } from '../services/EventAPI'
 
 class EventItem extends Component {
     constructor(props) {
@@ -38,14 +39,17 @@ class EventItem extends Component {
 
                 <TouchableOpacity
                     style={styles.wallet_button}
-                    onPress={() => this.props.navigation.navigate('Transactions', 
-                    { 
-                        updateAmount: (amount) => {
-                            updatedEvent = this.state.event
-                            updatedEvent.amount = amount
-                            this.setState({event: updatedEvent})
-                        },
-                        item: this.state.event })}
+                    onPress={() => {
+                        SetSpecificEvent(this.state.event.uid).then(
+                            this.props.navigation.navigate('Transactions', 
+                            { 
+                                updateAmount: (amount) => {
+                                    updatedEvent = this.state.event
+                                    updatedEvent.amount = amount
+                                    this.setState({event: updatedEvent})},
+                                item: this.state.event 
+                            }))
+                        }}
                 >
                     {this.state.event.amount != undefined ?
                         <View style={styles.tokens}>

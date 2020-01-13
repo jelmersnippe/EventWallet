@@ -14,12 +14,12 @@ export default class AnnouncementItem extends Component {
                 <View style={styles.header}>
                     <Text style={styles.title}>{this.props.item.title}</Text>
                     <View style={styles.datetime_container}>
-                        <Text style={styles.date_time}>{this.props.item.date}</Text>
-                        <Text style={styles.date_time}>{this.props.item.time}</Text>
+                        <Text style={styles.date_time}>{this.props.item.datetime.replace("T", " ")}</Text>
+                        {/* <Text style={styles.date_time}>{this.props.item.time}</Text> */}
                     </View>
                 </View>
 
-                <Text  style={styles.announcement}>{this.props.item.announcement}</Text>
+                <Text  style={styles.announcement}>{this.props.item.message}</Text>
                 
             </View>
         );
@@ -41,15 +41,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     title: {
-        width: 70+'%', 
+        flex: 6, 
         paddingLeft: 10,
         fontFamily: Fonts.text,
         fontSize: 15,
         fontFamily: Fonts.topheader,
         color: Colors.lightTextColor,
+        textAlignVertical: 'center',
     },
     datetime_container: {
-        width: 30+'%',
+        flex: 2,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         fontFamily: Fonts.text
