@@ -22,6 +22,7 @@ export default class EventOverview extends Component {
 		super(props);
 		this.state = {
 			searchTerm: '',
+			wallets: [],
 			allEvents: [],
 			filteredEvents: [],
 
@@ -34,45 +35,51 @@ export default class EventOverview extends Component {
 		this.setState({ searchTerm: newSearchTerm })
 	}
 
-	updateAmount = (event) => {
-		return new Promise(async (resolve) => {
-			GetLatestTransaction(event.uid).then(response => {
-				event.amount = response.balance_after
-				resolve(event)
-			})
-			.catch(() => {
-				resolve(event)
-			})
+	mapTransactionsToWallets(items){
+		let mappedWallets = []
+
+		items.map(item => {
+			let wallet = item.wallet
+			wallet.amount = item.transaction.balance_after
+
+			mappedWallets.push(wallet)
 		})
+
+		return mappedWallets
 	}
 
-	updateAmounts = async (events) => {
-		let eventsWithAmount = await Promise.all(
-			events.map(async event => 
-			await this.updateAmount(event))
-		)
-		this.setState({allEvents: eventsWithAmount})
+	mapWalletsToEvents(wallets, events){
+		let mappedEvents = []
+
+		events.map(event => {
+			for(const i in wallets){
+				if(event.uid == wallets[i].event_uid){
+					event.amount = wallets[i].amount
+				}
+			}
+			
+			mappedEvents.push(event)
+		})
+
+		return mappedEvents
 	}
 
 	fetchFestivalData() {
 
-		GetWallets().then(response => {
-			console.log()
-			console.log('!!!PLEASE REMOVE!!!\n wallets:')
-			console.log(JSON.stringify(response, null, 4))
+		GetWallets()
+			.then(response => {
+				let mappedWallets = this.mapTransactionsToWallets(response)
 
-
-			GetEvents().then(response => {
-				console.log()
-				console.log('!!!PLEASE REMOVE!!!\n events:')
-				console.log(JSON.stringify(response, null, 4))
-				this.updateAmounts(response)
+				GetEvents().then(events => {
+					let mappedEvents = this.mapWalletsToEvents(mappedWallets, events)
+					console.log(mappedEvents)
+					this.setState({allEvents: mappedEvents})
+				})
+			}).catch(error => {
+				if (error.message.includes('Failed to connect')) {
+					this.setState({ noConnection: true })
+				}
 			})
-		}).catch(error => {
-			if(error.message.includes('Failed to connect')){
-				this.setState({noConnection: true})
-			}
-		})
 	}
 
 	componentDidMount() {
@@ -92,12 +99,12 @@ export default class EventOverview extends Component {
 						showsVerticalScrollIndicator={false}
 					>
 						{this.state.noConnection
-						?
-						<Text>No connection</Text>
-						:
-						<EventList
-							data={this.state.searchTerm != '' ? this.state.filteredEvents : this.state.allEvents}
-						/>
+							?
+							<Text>No connection</Text>
+							:
+							<EventList
+								data={this.state.searchTerm != '' ? this.state.filteredEvents : this.state.allEvents}
+							/>
 						}
 					</ScrollView>
 				</View>

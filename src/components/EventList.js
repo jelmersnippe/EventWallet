@@ -13,6 +13,7 @@ export default class EventList extends Component {
             <View>
                 {this.props.data.map(
                     (item) => {
+                        console.log(item)
                         return <EventItem item={item} key={item.id}/>
                     }
                 )}
