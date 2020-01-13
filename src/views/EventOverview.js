@@ -37,12 +37,13 @@ export default class EventOverview extends Component {
 	mapTransactionsToWallets(items){
 		let mappedWallets = []
 
-		items.map(item => {
-			let wallet = item.wallet
-			wallet.amount = item.transaction.balance_after
-
-			mappedWallets.push(wallet)
-		})
+        items.map(item => {
+            let wallet = item.wallet
+            if(wallet != undefined){
+                wallet.amount = item.transaction.balance_after
+                mappedWallets.push(wallet)
+            }
+        })
 
 		return mappedWallets
 	}
@@ -50,6 +51,7 @@ export default class EventOverview extends Component {
 	mapWalletsToEvents(wallets, events){
 		let mappedEvents = []
 
+        console.log(wallets)
 		events.map(event => {
 			for(const i in wallets){
 				if(event.uid == wallets[i].event_uid){
@@ -73,6 +75,7 @@ export default class EventOverview extends Component {
 					this.setState({allEvents: mappedEvents})
 				})
 			}).catch(error => {
+			console.log(error)
 				if (error.message.includes('Failed to connect')) {
 					this.setState({ noConnection: true })
 				}

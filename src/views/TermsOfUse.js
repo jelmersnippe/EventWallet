@@ -182,9 +182,7 @@ export default class TermsOfUse extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 3+'%',
-        //justifyContent: 'center',
-        //alignItems: 'center',
+        paddingHorizontal: 3+'%',
         backgroundColor: Colors.backgroundColor
     },
     text: {
@@ -197,7 +195,6 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         textAlign: 'left',
         fontSize: 18,
-        //borderBottomWidth: 1,
         fontFamily: Fonts.header,
     },
     third_title: {
