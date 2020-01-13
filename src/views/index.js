@@ -13,17 +13,27 @@ import Content from './Content'
 import FriendOverview from './FriendOverview'
 import ShareTokens from './ShareTokens'
 
+import Contact from './Contact'
+import FAQ from './FAQ'
+import LegalDisclaimer from './LegalDisclaimer'
+
 export { 
     Login, 
     Register, 
     ForgotPassword, 
     AuthLoading,
+
     EventOverview, 
     Transactions, 
     WalletLink, 
     BuyTokens, 
     Announcements, 
     Content, 
+    
     FriendOverview, 
-    ShareTokens 
+    ShareTokens,
+    
+    Contact,
+    FAQ,
+    LegalDisclaimer
 }

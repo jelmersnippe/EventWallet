@@ -19,14 +19,20 @@ import {
     Register,
     ForgotPassword,
     AuthLoading,
+
     EventOverview,
     Transactions,
     WalletLink,
     BuyTokens,
     Announcements,
     Content,
+
     FriendOverview,
-    ShareTokens
+    ShareTokens,
+
+    LegalDisclaimer,
+    Contact,
+    FAQ,
 } from './views'
 import { Colors, Fonts, appName } from './components/GlobalVariables'
 
@@ -221,6 +227,84 @@ const AuthStack = createStackNavigator(
     }
 )
 
+const FAQStack = createStackNavigator(
+    {
+        FAQ: FAQ,
+    },
+    {
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                header: (
+                    <View style={{flexDirection: 'row', backgroundColor: Colors.eventColor}}>
+                        <Text style={{padding: 8, fontSize: 25, fontFamily: Fonts.topheader, flex: 10, color: 'white'}}>
+                            EventWallet
+                        </Text>
+
+                        <Icon
+                        name='bars'
+                        size={30}
+                        style={{alignItems: 'center', padding: 9, flex: 1, color: 'white'}}
+                        onPress={() => navigation.openDrawer()}
+                        />
+                    </View>
+                )
+            }
+        },
+    }
+)
+
+const LegalDisclaimerStack = createStackNavigator(
+    {
+        LegalDisclaimer: LegalDisclaimer,
+    },
+    {
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                header: (
+                    <View style={{flexDirection: 'row', backgroundColor: Colors.eventColor}}>
+                        <Text style={{padding: 8, fontSize: 25, fontFamily: Fonts.topheader, flex: 10, color: 'white'}}>
+                            EventWallet
+                        </Text>
+
+                        <Icon
+                        name='bars'
+                        size={30}
+                        style={{alignItems: 'center', padding: 9, flex: 1, color: 'white'}}
+                        onPress={() => navigation.openDrawer()}
+                        />
+                    </View>
+                )
+            }
+        },
+    }
+)
+
+const ContactStack = createStackNavigator(
+    {
+        Contact: Contact,
+    },
+    {
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                header: (
+                    <View style={{flexDirection: 'row', backgroundColor: Colors.eventColor}}>
+                        <Text style={{padding: 8, fontSize: 25, fontFamily: Fonts.topheader, flex: 10, color: 'white'}}>
+                            EventWallet
+                        </Text>
+
+                        <Icon
+                        name='bars'
+                        size={30}
+                        style={{alignItems: 'center', padding: 9, flex: 1, color: 'white'}}
+                        onPress={() => navigation.openDrawer()}
+                        />
+                    </View>
+                )
+            }
+        },
+    }
+)
+
 const AppDrawer = createDrawerNavigator(
     {
         App: {
@@ -234,7 +318,7 @@ const AppDrawer = createDrawerNavigator(
                 },
 
         FAQ:  {
-            screen: Content,
+            screen: FAQStack,
                 navigationOptions: {
                     drawerIcon: () => (
                        <FontAwesome name="question" color={Colors.lightTextColor} size={20} />
@@ -243,7 +327,7 @@ const AppDrawer = createDrawerNavigator(
                 }
             },
         Contact:  {
-            screen: Content,
+            screen: ContactStack,
                 navigationOptions: {
                     drawerIcon: () => (
                          <IonIcon name="md-contact" color={Colors.lightTextColor} size={20}/>
@@ -252,7 +336,7 @@ const AppDrawer = createDrawerNavigator(
                 }
             },
         LegalDisclaimer:  {
-            screen: Content,
+            screen: LegalDisclaimerStack,
                 navigationOptions: {
                     drawerIcon: () => (
                         <Icon name="balance-scale" color={Colors.lightTextColor} size={15}/>
