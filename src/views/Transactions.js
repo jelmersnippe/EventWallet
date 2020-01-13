@@ -26,6 +26,7 @@ export default class Transactions extends Component {
             registerInProgress: false,
             transactionHistoryFound: false,
             transactionData: [],
+            refreshingTransactionHistory: false,
         }
     }
 
@@ -35,12 +36,13 @@ export default class Transactions extends Component {
 
     fetchTransactionHistory(event) {
         GetTransactionHistory(event).then(response => {
-            this.setState({ transactionData: response })
-            this.setState({ transactionHistoryFound: true })
-
             let updatedEvent = this.state.event
-            updatedEvent.amount = response[0].balance_after
-            this.setState({ event: updatedEvent })
+
+            let currentBalance = response[0].balance_after
+            updatedEvent.amount = currentBalance
+            this.props.navigation.state.params.updateAmount(currentBalance)
+
+            this.setState({event: updatedEvent, transactionData: response, refreshingTransactionHistory: false, transactionHistoryFound: true})
         }).catch(error => console.log(error))
     }
 
@@ -105,9 +107,9 @@ export default class Transactions extends Component {
                             <Text style={styles.amount_text}>You are not registered</Text>
                             <RegularButton
                                 callback={() => {
+                                    this.setState({ registerInProgress: true })
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
-                                            this.props.navigation.state.params.updateAmount(0)
                                             this.fetchTransactionHistory(this.state.event.uid)
                                             this.setState({ registerInProgress: false })
                                         }).catch(error => console.log('Failed to create wallet: ' + error))
@@ -122,7 +124,24 @@ export default class Transactions extends Component {
                         </View>
                     }
                     {this.state.event.amount != undefined &&
-                        <HeaderText text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                        <View style={styles.transaction_history_header}>
+                            {this.state.transactionHistoryFound &&
+                            <View style={styles.refresh_button_container}>
+                                <TouchableOpacity 
+                                    style={styles.refresh_button}
+                                    disabled={this.state.refreshingTransactionHistory}
+                                    onPress={() => {
+                                        this.setState({refreshingTransactionHistory: true})
+                                        this.fetchTransactionHistory(this.state.event.uid)
+                                    }}
+                                >
+                                    <Icon style={styles.refresh_icon} name='sync-alt' size={26} color={this.state.refreshingTransactionHistory ? 'red' : Colors.eventColor} />
+                                </TouchableOpacity>
+                            </View>
+                            }
+                            
+                            <HeaderText style={{flex: 2}} text='Transaction History' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                        </View>
                     }
                 </View>
                 {this.state.transactionHistoryFound &&
@@ -159,6 +178,7 @@ const styles = StyleSheet.create({
         color: Colors.lightTextColor,
         fontFamily: Fonts.topheader
     },
+
     qr_code_button: {
         flex: 2,
         flexDirection: 'row',
@@ -177,6 +197,7 @@ const styles = StyleSheet.create({
     qr_code_button_icon: {
         paddingHorizontal: 3,
     },
+
     padded_container: {
         paddingHorizontal: 3 + '%',
         backgroundColor: Colors.backgroundColor,
@@ -196,9 +217,21 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.text,
         color: Colors.darkTextColor,
     },
-    no_transaction_history: {
-        marginTop: 10,
-        fontSize: 16,
-        textAlign: 'center',
-    }
+
+    transaction_history_header: {
+        width: 100+'%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
+    refresh_button_container: {
+        flex: 1,
+        borderBottomWidth: 1,
+        justifyContent: 'flex-end',
+    },
+    refresh_button: {
+        width: 40+'%',
+    },
+    refresh_icon: {
+        padding: 5,
+    },
 });

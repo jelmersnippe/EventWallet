@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    ScrollView,
     View,
     Text,
     Image,
@@ -34,12 +35,14 @@ export default class WalletLink extends Component {
         this.setState({ event: this.props.navigation.getParam('event') })
         GetWristband(this.props.navigation.getParam('event'), GetPin()).then(response => {
             this.setWristband(response)
-        }).catch(error => alert('Could not get wristbande code: ' + error))
+        }).catch(error => {
+            alert('Could not get wristbande code: ' + error)
+            this.props.navigation.goBack()
+        })
     }
 
     setWristband(wristband) {
-        this.setState({ wristbandCode: wristband.code })
-        this.setState({ wristbandStatus: wristband.status })
+        this.setState({ wristbandCode: wristband.code, wristbandStatus: wristband.status })
         GenerateQR(wristband.code).then(response => {
             this.setState({ qr: response })
         }).catch(error => alert('Could not generate QR code: ' + error))
@@ -47,7 +50,10 @@ export default class WalletLink extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView 
+                // contentContainerStyle={{ flexGrow: 1 }}
+                style={styles.container}
+            >
 
                 {this.state.showPinOverlay && <PinCode callback={(pin) => {
                     this.setState({ showPinOverlay: false })
@@ -60,38 +66,42 @@ export default class WalletLink extends Component {
                         })
                     this.setState({ refreshingWristband: false })
                 }} />}
-                <View style={{ paddingHorizontal: 3 + '%' }}>
 
-                    <HeaderText text='Wristband Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
-                    <Text style={styles.content}>{this.state.wristbandCode}</Text>
-                    {this.state.wristbandCode != '' &&
+                {this.state.wristbandCode != '' &&
+                    <View style={{height: 100+'%', paddingHorizontal: 3 + '%' }}>
+
+                        <HeaderText text='Wristband Link' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                        <Text style={styles.content}>{this.state.wristbandCode}</Text>
                         <Text>Status: {this.state.wristbandStatus}</Text>
-                    }
 
-                    <HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
+                        <HeaderText text='QR Code' textColor={Colors.darkTextColor} barColor={Colors.darkTextColor} />
 
-                    {this.state.qr != '' &&
-                        <Image
-                            source={{ uri: `data:image/jpeg;base64,${this.state.qr}` }}
-                            style={styles.qr_code}
-                            resizeMode={'contain'}
-                        />
-                    }
-                    {this.state.wristbandCode != '' &&
+                        {this.state.qr != '' &&
+                            <Image
+                                source={{ uri: `data:image/jpeg;base64,${this.state.qr}` }}
+                                style={styles.qr_code}
+                                resizeMode={'contain'}
+                            />
+                        }
+
                         <WideButton
                             text='Create new link'
                             textColor={Colors.darkTextColor}
                             backgroundColor={Colors.ctaButtonColor}
                             borderColor={Colors.ctaButtonBorderColor}
                             callback={() => {
-                                this.setState({ refreshingWristband: true })
                                 this.setState({ showPinOverlay: true })
                             }}
                             disabled={this.state.wristbandStatus != 'active' || this.state.refreshingWristband}
                         />
-                    }
-                </View>
-            </View>
+
+                        {this.state.wristbandStatus == 'active' &&
+                                <Text style={styles.error_text}>Use this button to deactivate the active wristband in case of theft, or if the wristband is lost</Text>
+                            
+                        }
+                    </View>
+                }
+            </ScrollView>
         );
     }
 }
@@ -99,7 +109,7 @@ export default class WalletLink extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "flex-start",
+        height: 100+'%',
         backgroundColor: Colors.backgroundColor,
     },
     header: {
@@ -118,8 +128,15 @@ const styles = StyleSheet.create({
         color: Colors.darkTextColor,
     },
     qr_code: {
-        width: 100 + '%',
-        height: 50 + '%',
-        marginBottom: 15,
+        width: 100+'%',
+        height: 300,
+        marginVertical: 15,
     },
+    error_text: {
+        color: 'red',
+        textAlign: 'center',
+        fontFamily: Fonts.text,
+        fontSize: 16,
+        marginVertical: 10,
+    }
 })

@@ -12,6 +12,7 @@ import { SignIn } from "../services/AuthAPI"
 import {
     HeaderText,
     WideButton,
+    AuthInput
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
@@ -32,26 +33,27 @@ export default class Login extends Component {
 
                 <HeaderText text='Login' />
 
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize='none'
-					keyboardType='email-address'
-                    onChangeText={value => this.setState({ email: value })}
-                    placeholder='Email'
-                />
-                <TextInput
-                    style={styles.input}
-                    secureTextEntry={true}
-                    autoCapitalize='none'
-                    onChangeText={value => this.setState({ password: value })}
-                    placeholder='Password'
-                />
+                <View style={styles.input_fields}>
+                    <AuthInput
+                        text='Email'
+                        placeholder='Email'
+                        keyboardType='email-address'
+                        onChangeText={input => this.setState({ email: input })}
+                    />
 
-                {this.state.error != '' &&
-                    <Text style={styles.error_text}>
-                        {this.state.error}
-                    </Text>
-                }
+                    <AuthInput
+                        text='Password'
+                        placeholder='Password'
+                        password={true}
+                        onChangeText={input => this.setState({ password: input })}
+                    />
+
+                    {this.state.error != '' &&
+                        <Text style={styles.error_text}>
+                            {this.state.error}
+                        </Text>
+                    }
+                </View>
 
                 <WideButton 
                     callback={() => { 
@@ -95,21 +97,14 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundColor,
         paddingHorizontal: 5 + '%',
     },
-    input: {
-        borderBottomWidth: 1,
-        fontSize: 20,
-        borderBottomColor: 'black',
-        marginVertical: 15,
-        padding: 10,
-        width: '90%',
-        fontFamily: Fonts.text,
-        alignSelf: 'center'
-    },
     title: {
         fontSize: 30,
         marginBottom: 10,
         textAlign: 'center',
         fontFamily: Fonts.header
+    },
+    input_fields: {
+        marginBottom: 10,
     },
     secondary_button: {
         flexDirection: 'row',

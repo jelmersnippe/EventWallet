@@ -3,12 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-	TextInput,
 } from 'react-native';
 
 import {
     HeaderText,
-    WideButton
+    WideButton,
+    AuthInput
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
@@ -33,13 +33,15 @@ export default class ForgotPassword extends Component {
 
                 <Text style={styles.text}>Please enter your email address to recieve an email with a reset link.</Text>
 
-                <TextInput 
-                    style={styles.input_text} 
-                    placeholder="Email address"
-                    onChangeText={email => this.setState({email: email})}
-                />
+                <View style={styles.input_fields}>
+                    <AuthInput
+                        text='Email'
+                        placeholder='Email'
+                        keyboardType='email-address'
+                        onChangeText={input => this.setState({ email: input })}
+                    />
+                </View>
 
-                
                 <WideButton 
                     callback={() => {this.passwordResetAction()}} 
                     text='Submit' 
@@ -74,14 +76,7 @@ const styles = StyleSheet.create({
         margin: 15,
         fontFamily: Fonts.text
     },
-    input_text: {
-		borderBottomWidth: 1,
-		fontSize: 20,
-		borderBottomColor: 'black',
-		marginVertical: 15,
-		padding: 10,
-		width: '90%',
-		fontFamily: Fonts.text,
-		alignSelf: 'center'
-    },
+    input_fields: {
+        marginBottom: 10,
+    }
 });

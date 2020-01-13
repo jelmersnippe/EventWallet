@@ -9,7 +9,7 @@ import { Fonts } from '../components/GlobalVariables'
 export default class HeaderText extends Component {
     render() {
         return(
-            <Text style={[styles.header, {color: this.props.textColor, borderColor: this.props.barColor}]}>{this.props.text}</Text>
+            <Text style={[this.props.style, styles.header, {color: this.props.textColor, borderColor: this.props.barColor}]}>{this.props.text}</Text>
         );
     }
 }

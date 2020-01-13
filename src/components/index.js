@@ -11,6 +11,7 @@ import UserList from './UserList'
 import UserItem from './UserItem'
 import UserButton from './UserButton'
 
+import AuthInput from './AuthInput'
 import NumericTokenInput from './NumericTokenInput'
 import SearchBar from './SearchBar'
 import HeaderText from './HeaderText'
@@ -32,6 +33,7 @@ export {
     UserItem, 
     UserButton, 
 
+    AuthInput,
     NumericTokenInput, 
     SearchBar, 
     HeaderText,

@@ -3,7 +3,6 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TextInput,
 	TouchableOpacity,
 	Switch,
 } from 'react-native';
@@ -13,6 +12,7 @@ import {
 	HeaderText,
 	WideButton,
 	PinCode,
+	AuthInput,
 } from '../components'
 import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
@@ -171,11 +171,7 @@ export default class Register extends Component {
 					{this.state.showPinOverlay && this.state.timesPinEntered == 0 &&
 						<PinCode
 							callback={(pin) => {
-								console.log('pin in memory: ' + this.state.pin)
-								console.log('entered pin: ' + pin)
-								console.log('amount of times entered: ' + this.state.timesPinEntered)
-
-								this.setState({pin: pin, timesPinEntered: this.state.timesPinEntered + 1})
+								this.setState({ pin: pin, timesPinEntered: this.state.timesPinEntered + 1 })
 							}}
 							text='Enter a pin'
 						/>
@@ -184,23 +180,20 @@ export default class Register extends Component {
 					{this.state.showPinOverlay && this.state.timesPinEntered > 0 &&
 						<PinCode
 							callback={(pin) => {
-								console.log('pin in memory: ' + this.state.pin)
-								console.log('entered pin: ' + pin)
-								console.log('amount of times entered: ' + this.state.timesPinEntered)
-
-								if(this.state.pin == pin){
+								if (this.state.pin == pin) {
 									SignUp(this.state.username, this.state.password, this.state.email, pin)
-									.then(response => {
-										alert('Thank you, you registered successfully')
-										this.props.navigation.navigate('Login')
-									})
-									.catch(error => {
-										console.log(error)
-										alert('Something went wrong during the registration process, please try again.\nIf this error persists contact support.')
-									})
+										.then(response => {
+											alert('Thank you, you registered successfully')
+											this.props.navigation.navigate('Login')
+										})
+										.catch(error => {
+											console.log(error)
+											alert('Something went wrong during the registration process: ' +error + '\nPlease try again')
+											this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
+										})
 								} else {
 									alert("Entered pins don't match. Please try again")
-									this.setState({pin: '', timesPinEntered: 0})
+									this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
 								}
 							}}
 							text='Confirm your pin'
@@ -213,73 +206,37 @@ export default class Register extends Component {
 
 						<HeaderText text='Register' />
 
-						<View style={styles.input}>
-							<Text>Username</Text>
-							<TextInput
-								placeholder="Username"
-								autoCapitalize='none'
-								style={styles.input_text}
-								onChangeText={username => this.setState({ username: username })}
+						<View>
+							<AuthInput
+								text='Username'
+								placeholder='Username'
+								onChangeText={input => this.setState({ username: input })}
+								singleError={this.state.usernameError}
 							/>
 
-							{this.state.usernameError != '' &&
-								<Text style={styles.error_text}>
-									{this.state.usernameError}
-								</Text>
-							}
-						</View>
-
-						<View>
-							<Text>Email</Text>
-							<TextInput
-								placeholder="Email"
-								autoCapitalize='none'
+							<AuthInput
+								text='Email'
+								placeholder='Email'
 								keyboardType='email-address'
-								style={styles.input_text}
-								onChangeText={email => this.setState({ email: email })}
+								onChangeText={input => this.setState({ email: input })}
+								singleError={this.state.emailError}
 							/>
 
-							{this.state.emailError != '' &&
-								<Text style={[styles.error_text, { marginBottom: 30 }]}>
-									{this.state.emailError}
-								</Text>
-							}
-						</View>
-
-						<View>
-							<Text>Password</Text>
-							<TextInput
-								placeholder="Password"
-								autoCapitalize='none'
-								style={styles.input_text}
-								secureTextEntry={true}
-								onChangeText={password => this.setState({ password: password })}
+							<AuthInput
+								text='Password'
+								placeholder='Password'
+								password={true}
+								onChangeText={input => this.setState({ password: input })}
+								errorList={this.state.passwordError}
 							/>
 
-							<View>
-								{this.state.passwordError.map(item => {
-									return (
-										<Text style={styles.error_text} key={this.state.passwordError.indexOf(item)}>{item}</Text>
-									)
-								})}
-							</View>
-						</View>
-
-						<View>
-							<Text>Re-enter password</Text>
-							<TextInput
-								placeholder="Re-enter password"
-								autoCapitalize='none'
-								style={styles.input_text}
-								secureTextEntry={true}
-								onChangeText={password => this.setState({ passwordRepeat: password })}
+							<AuthInput
+								text='Re-enter password'
+								placeholder='Re-enter password'
+								password={true}
+								onChangeText={input => this.setState({ passwordRepeat: input })}
+								singleError={this.state.passwordRepeatError}
 							/>
-
-							{this.state.passwordRepeatError != '' &&
-								<Text style={styles.error_text}>
-									{this.state.passwordRepeatError}
-								</Text>
-							}
 						</View>
 
 						<View style={styles.legal_disclaimer}>
@@ -287,7 +244,7 @@ export default class Register extends Component {
 							<View>
 								<Text style={[styles.secondary_button_text, { color: this.state.termsAgreed ? 'black' : 'red' }]}>By registering, I agree to the </Text>
 								<TouchableOpacity onPress={() => this.props.navigation.navigate('AuthTermsOfUse')}>
-									<Text style={[styles.secondary_button_text, { color: this.state.termsAgreed ? 'black' : 'red', textDecorationLine: 'underline' }]}>Legal disclaimer</Text>
+									<Text style={[styles.secondary_button_text, { color: this.state.termsAgreed ? 'black' : 'red', textDecorationLine: 'underline' }]}>Terms of Use</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -325,23 +282,6 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		textAlign: 'center',
 		fontFamily: Fonts.header
-	},
-	input: {
-		marginVertical: 15,
-	},
-	input_text: {
-		borderBottomWidth: 1,
-		fontSize: 20,
-		borderBottomColor: 'black',
-		padding: 10,
-		fontFamily: Fonts.text,
-		alignSelf: 'center',
-		width: 90+'%',
-	},
-	error_text: {
-		color: 'red',
-		textAlign: 'center',
-		fontFamily: Fonts.text,
 	},
 	legal_disclaimer: {
 		flexDirection: 'row',
