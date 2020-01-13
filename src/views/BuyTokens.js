@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
     name: {
         padding: 10,
-        fontSize: 29,
+        fontSize: 25,
         fontFamily: Fonts.topheader,
         color: Colors.lightTextColor,
     },

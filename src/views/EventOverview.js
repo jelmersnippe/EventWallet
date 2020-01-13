@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
 	View,
+	Text,
 	StyleSheet,
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -23,6 +24,8 @@ export default class EventOverview extends Component {
 			searchTerm: '',
 			allEvents: [],
 			filteredEvents: [],
+
+			noConnection: false,
 		}
 	}
 
@@ -52,14 +55,23 @@ export default class EventOverview extends Component {
 	}
 
 	fetchFestivalData() {
-		GetEvents().then(response => {
-			this.updateAmounts(response)
-		})
 
 		GetWallets().then(response => {
 			console.log()
 			console.log('!!!PLEASE REMOVE!!!\n wallets:')
-			console.log(response)
+			console.log(JSON.stringify(response, null, 4))
+
+
+			GetEvents().then(response => {
+				console.log()
+				console.log('!!!PLEASE REMOVE!!!\n events:')
+				console.log(JSON.stringify(response, null, 4))
+				this.updateAmounts(response)
+			})
+		}).catch(error => {
+			if(error.message.includes('Failed to connect')){
+				this.setState({noConnection: true})
+			}
 		})
 	}
 
@@ -79,9 +91,14 @@ export default class EventOverview extends Component {
 						style={styles.padded_container}
 						showsVerticalScrollIndicator={false}
 					>
+						{this.state.noConnection
+						?
+						<Text>No connection</Text>
+						:
 						<EventList
 							data={this.state.searchTerm != '' ? this.state.filteredEvents : this.state.allEvents}
 						/>
+						}
 					</ScrollView>
 				</View>
 			</View >

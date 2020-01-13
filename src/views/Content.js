@@ -5,13 +5,39 @@ import {
     StyleSheet,
 } from 'react-native'
 
-import { appName, Colors } from '../components/GlobalVariables'
+import { appName, Colors, Fonts, headerShadow } from '../components/GlobalVariables'
+import { GetSpecificEvent, GetEvent } from '../services/EventAPI'
 
 export default class Content extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            event: {},
+        }
+    }
+
+    componentDidMount() {
+        GetSpecificEvent().then(eventID => {
+            GetEvent(eventID)
+            .then(event => {
+                this.setState({ event: event })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        })
+    }
+
+
     render() {
-        return(
+        return (
             <View style={styles.container}>
-                <Text style={styles.text}>{appName}</Text>    
+                <View style={[styles.header, headerShadow]}>
+                    <Text style={styles.name}>{this.state.event.name}</Text>
+                </View>
+
+                <Text style={styles.text}>{appName}</Text>
             </View>
         );
     }
@@ -20,12 +46,21 @@ export default class Content extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.eventColor
+        backgroundColor: Colors.backgroundColor
+    },
+    header: {
+        backgroundColor: Colors.eventColor,
+    },
+    name: {
+        padding: 10,
+        fontSize: 25,
+        fontFamily: Fonts.topheader,
+        color: Colors.lightTextColor,
     },
     text: {
         fontSize: 30,
-        color: Colors.lightTextColor,
-    }
+        color: Colors.eventColor,
+        textAlign: 'center',
+        marginTop: 30+'%',
+    },
 })
