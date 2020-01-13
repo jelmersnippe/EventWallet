@@ -123,6 +123,7 @@ export default class Transactions extends Component {
                             />
                         </View>
                     }
+                    
                     {this.state.event.amount != undefined &&
                         <View style={styles.transaction_history_header}>
                             {this.state.transactionHistoryFound &&

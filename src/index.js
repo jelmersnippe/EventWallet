@@ -342,7 +342,7 @@ const AppDrawer = createDrawerNavigator(
                     drawerIcon: () => (
                         <Icon name="balance-scale" color={Colors.lightTextColor} size={15}/>
                     ),
-                    title: 'Terms of use'
+                    title: 'Terms of Use'
                 }
             },
         LogOut:  {
