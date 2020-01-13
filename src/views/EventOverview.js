@@ -13,7 +13,6 @@ import {
 } from '../components'
 import { Colors } from '../components/GlobalVariables'
 
-import { GetLatestTransaction } from '../services/TransactionAPI'
 import { GetEvents } from '../services/EventAPI'
 import { GetWallets } from '../services/TransactionAPI'
 
@@ -57,7 +56,6 @@ export default class EventOverview extends Component {
 					event.amount = wallets[i].amount
 				}
 			}
-			
 			mappedEvents.push(event)
 		})
 
@@ -72,7 +70,6 @@ export default class EventOverview extends Component {
 
 				GetEvents().then(events => {
 					let mappedEvents = this.mapWalletsToEvents(mappedWallets, events)
-					console.log(mappedEvents)
 					this.setState({allEvents: mappedEvents})
 				})
 			}).catch(error => {
