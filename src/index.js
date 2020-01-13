@@ -28,7 +28,7 @@ import {
     FriendOverview,
     ShareTokens
 } from './views'
-import { Colors, Fonts } from './components/GlobalVariables'
+import { Colors, Fonts, appName } from './components/GlobalVariables'
 
 const TransactionStack = createStackNavigator(
     {
@@ -227,41 +227,46 @@ const AppDrawer = createDrawerNavigator(
             screen: MainApp,
                 navigationOptions: {
                     drawerIcon: () => (
-                        <Icon name="arrow-right" color='white' size={18}/>
+                        <Icon name="arrow-right" color={Colors.lightTextColor} size={18}/>
                         )
-                    }
+                    },
+                    title: {appName}
                 },
 
         FAQ:  {
             screen: Content,
                 navigationOptions: {
                     drawerIcon: () => (
-                       <FontAwesome name="question" color='white' size={20} />
-                    )
+                       <FontAwesome name="question" color={Colors.lightTextColor} size={20} />
+                    ),
+                    title: 'FAQ'
                 }
             },
         Contact:  {
             screen: Content,
                 navigationOptions: {
                     drawerIcon: () => (
-                         <IonIcon name="md-contact" color='white' size={20}/>
-                    )
+                         <IonIcon name="md-contact" color={Colors.lightTextColor} size={20}/>
+                    ),
+                    title: 'Contact'
                 }
             },
         LegalDisclaimer:  {
             screen: Content,
                 navigationOptions: {
                     drawerIcon: () => (
-                        <Icon name="balance-scale" color='white' size={15}/>
-                    )
+                        <Icon name="balance-scale" color={Colors.lightTextColor} size={15}/>
+                    ),
+                    title: 'Legal disclaimer'
                 }
             },
         LogOut:  {
             screen: props => <AuthLoading {...props} screenProps={{signOut: true}} />,
                 navigationOptions: {
                     drawerIcon: () => (
-                        <Feather name="log-out" color='white' size={18}/>
-                    )
+                        <Feather name="log-out" color={Colors.lightTextColor} size={18}/>
+                    ),
+                    title: 'Log out'
             },
         }
     },
@@ -270,8 +275,8 @@ const AppDrawer = createDrawerNavigator(
         drawerPosition: 'right',
         drawerBackgroundColor: Colors.darkEventColor,
         contentOptions: {
-            activeTintColor: '#ffffff',
-            inactiveTintColor: '#ffffff',
+            activeTintColor: Colors.lightTextColor,
+            inactiveTintColor: Colors.lightTextColor,
             activeBackgroundColor: Colors.eventColor,
             labelStyle: {fontSize: 17}
         }
