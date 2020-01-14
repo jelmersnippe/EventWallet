@@ -26,7 +26,6 @@ export const APIRequest = async (method, URL, requiresToken = false, body = null
                 })
                 .catch(error => reject(error))
             }).catch(error => {
-                console.log('Could not fetch authToken for request that required one')
                 reject(error)
             })
         }
@@ -56,7 +55,6 @@ const Request = async (request) => {
                     })
             })
             .catch(error => {
-                console.log(error)
                 reject(error)
             })
     })
@@ -110,7 +108,6 @@ const ProcessResponse = (response,request) => {
             // checkPin() from index.js
 
             if(GetPin() == undefined){
-                alert('No pin in memory, even de applicatie herstarten!')
                 reject(responseData)
 
             // PIN IN MEMORY
@@ -132,14 +129,13 @@ const ProcessResponse = (response,request) => {
                     // Failed to refresh token with the pin in memory
                     // Log the user logOut
                     // lofOut() from index.js
-                    
+
                     reject(error)
                 })
             }
         } else {
             // UNKNOWN ERROR CODE
             // Reject with the data in the response
-            alert('???')
             reject(responseData)
         } 
     })

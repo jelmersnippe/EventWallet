@@ -29,7 +29,20 @@ class EventItem extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <TouchableOpacity 
+                style={styles.container}
+                onPress={() => {
+                    SetSpecificEvent(this.state.event.uid).then(
+                        this.props.navigation.navigate('Transactions', 
+                        { 
+                            updateAmount: (amount) => {
+                                let updatedEvent = this.state.event
+                                updatedEvent.amount = amount
+                                this.setState({event: updatedEvent})},
+                            item: this.state.event 
+                        }))
+                    }}
+            >
                 <View style={styles.info}>
                     <Text style={styles.datetime}>Start:  {this.state.event.begin_date}</Text>
                     <Text style={styles.datetime}>End:      {this.state.event.end_date}</Text>
@@ -37,20 +50,7 @@ class EventItem extends Component {
                     <Text style={styles.location}>{this.state.event.location}</Text>
                 </View>
 
-                <TouchableOpacity
-                    style={styles.wallet_button}
-                    onPress={() => {
-                        SetSpecificEvent(this.state.event.uid).then(
-                            this.props.navigation.navigate('Transactions', 
-                            { 
-                                updateAmount: (amount) => {
-                                    updatedEvent = this.state.event
-                                    updatedEvent.amount = amount
-                                    this.setState({event: updatedEvent})},
-                                item: this.state.event 
-                            }))
-                        }}
-                >
+                <View style={styles.wallet_button}>
                     {this.state.event.amount != undefined ?
                         <View style={styles.tokens}>
                             <Text style={styles.tokens_text}>{this.state.event.amount}</Text>
@@ -60,8 +60,8 @@ class EventItem extends Component {
                         <Text style={styles.register_text}>Register</Text>
                     }
                     <Icon name='angle-right' size={40} color='#80868B' />
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         );
     }
 }

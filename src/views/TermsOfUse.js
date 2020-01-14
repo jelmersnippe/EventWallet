@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-	View,
 	Text,
 	StyleSheet,
 	ScrollView
@@ -30,8 +29,8 @@ export default class TermsOfUse extends Component {
 					<Text style={styles.third_title}>
 						Who Can Use EventWallet?{"\n"}
 					</Text>
-					We want our Service to be as open and inclusive as possible, but we also want it to be safe, secure, and in accordance with the law. So, we need you to commit to a few restrictions in order to be part of the EventWallet community.
-                      •	You must be at least 18 years old.{"\n"}
+					We want our Service to be as open and inclusive as possible, but we also want it to be safe, secure, and in accordance with the law. So, we need you to commit to a few restrictions in order to be part of the EventWallet community.{"\n"}
+					•	You must be at least 18 years old.{"\n"}
 					•	You must not be prohibited from receiving any aspect of our Service under applicable laws or engaging in payments related Services if you are on an applicable denied party listing.{"\n"}
 					•	We must not have previously disabled your account for violation of law or any of our policies.{"\n"}{"\n"}
 

@@ -31,12 +31,12 @@ export default class Transactions extends Component {
     }
 
     componentDidMount() {
-        this.fetchTransactionHistory(this.state.event.uid)
+        this.fetchTransactionHistory(this.state.event)
     }
 
     fetchTransactionHistory(event) {
-        GetTransactionHistory(event).then(response => {
-            let updatedEvent = this.state.event
+        GetTransactionHistory(event.uid).then(response => {
+            let updatedEvent = event
 
             let currentBalance = response[0].balance_after
             updatedEvent.amount = currentBalance
@@ -110,9 +110,9 @@ export default class Transactions extends Component {
                                     this.setState({ registerInProgress: true })
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
-                                            this.fetchTransactionHistory(this.state.event.uid)
+                                            this.fetchTransactionHistory(this.state.event)
                                             this.setState({ registerInProgress: false })
-                                        }).catch(error => console.log('Failed to create wallet: ' + error))
+                                        }).catch(error => alert('Failed to create wallet: ' + error))
                                 }}
                                 icon='angle-right'
                                 text={'Register'}
@@ -133,7 +133,7 @@ export default class Transactions extends Component {
                                     disabled={this.state.refreshingTransactionHistory}
                                     onPress={() => {
                                         this.setState({refreshingTransactionHistory: true})
-                                        this.fetchTransactionHistory(this.state.event.uid)
+                                        this.fetchTransactionHistory(this.state.event)
                                     }}
                                 >
                                     <Icon style={styles.refresh_icon} name='sync-alt' size={26} color={this.state.refreshingTransactionHistory ? 'red' : Colors.eventColor} />

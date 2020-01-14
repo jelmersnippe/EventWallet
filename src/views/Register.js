@@ -188,7 +188,6 @@ export default class Register extends Component {
 											this.props.navigation.navigate('Login')
 										})
 										.catch(error => {
-											console.log(error)
 											alert('Something went wrong during the registration process: ' +error + '\nPlease try again')
 											this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
 										})

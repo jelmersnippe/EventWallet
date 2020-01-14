@@ -26,7 +26,6 @@ export default class Announcements extends Component {
 
     componentDidMount(){
         GetSpecificEvent().then(eventID => {
-            console.log(eventID)
             GetEvent(eventID)
             .then(event => {
                 this.setState({event: event})

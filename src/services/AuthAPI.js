@@ -108,7 +108,9 @@ export const SignIn = (email, password) => {
             if (response.respInfo.status == 200) {
                 SetToken(response.data).then(
                     resolve()
-                ).catch(error => console.log(error))
+                ).catch(error => {
+                    reject(error)
+                })
             } else {
                 reject(response.data)
             }

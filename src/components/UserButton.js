@@ -20,7 +20,7 @@ class UserButton extends Component {
                     onPress={() => {
                         this.props.item.status == 'friend'
                         ? this.props.navigation.navigate('ShareTokens', {friend: this.props.item})
-                        : console.log('no nav')
+                        : console.log('no callback')
                     }}
                     disabled={this.props.disabled}
                 >
