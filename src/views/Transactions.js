@@ -42,7 +42,7 @@ export default class Transactions extends Component {
             updatedEvent.amount = currentBalance
             this.props.navigation.state.params.updateAmount(currentBalance)
 
-            this.setState({event: updatedEvent, transactionData: response, refreshingTransactionHistory: false, transactionHistoryFound: true})
+            this.setState({event: updatedEvent, transactionData: response, registerInProgress: false, refreshingTransactionHistory: false, transactionHistoryFound: true})
         }).catch(error => console.log(error))
     }
 
@@ -111,7 +111,6 @@ export default class Transactions extends Component {
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
                                             this.fetchTransactionHistory(this.state.event)
-                                            this.setState({ registerInProgress: false })
                                         }).catch(error => alert('Failed to create wallet: ' + error))
                                 }}
                                 icon='angle-right'
