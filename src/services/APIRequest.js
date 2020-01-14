@@ -132,8 +132,7 @@ const ProcessResponse = (response,request) => {
                     // Failed to refresh token with the pin in memory
                     // Log the user logOut
                     // lofOut() from index.js
-
-                    alert('Refresh token gefaalt - Die backend jongen heeft het verpest, je moet opnieuw inloggen :)')
+                    
                     reject(error)
                 })
             }

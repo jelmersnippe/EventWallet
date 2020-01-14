@@ -18,6 +18,7 @@ export default class AuthLoading extends Component {
 
         this.state = {
             showPinOverlay: false,
+            counter: 0,
         }
     }
 
@@ -48,7 +49,7 @@ export default class AuthLoading extends Component {
                 </View>
 
                 {this.state.showPinOverlay &&
-                    <PinCode
+                    <PinCode key={this.state.counter}
                         callback={(pin) => {
                             SetPin(pin)
                             ValidatePin(pin)
@@ -58,9 +59,7 @@ export default class AuthLoading extends Component {
                             })
                             .catch(error => {
                                 alert('Error entering pin: ' + error)
-                                SignOut().then(
-                                    this.props.navigation.navigate('SignedOut')
-                                )
+                                this.setState({counter: this.state.counter + 1})
                             })
                         }}
                         cancelAction={() => {
@@ -89,5 +88,6 @@ const styles = StyleSheet.create({
         color: Colors.lightTextColor,
         fontFamily: Fonts.eventname,
         fontSize: 30,
+        paddingBottom: 50+'%',
     },
 });
