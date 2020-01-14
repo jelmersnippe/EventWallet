@@ -214,6 +214,7 @@ export default class Register extends Component {
 								placeholder='Username'
 								onChangeText={input => this.setState({ username: input })}
 								singleError={this.state.usernameError}
+								maxLength={255}
 							/>
 
 							<AuthInput
@@ -222,6 +223,7 @@ export default class Register extends Component {
 								keyboardType='email-address'
 								onChangeText={input => this.setState({ email: input })}
 								singleError={this.state.emailError}
+								maxLength={255}
 							/>
 
 							<AuthInput
@@ -230,6 +232,7 @@ export default class Register extends Component {
 								password={true}
 								onChangeText={input => this.setState({ password: input })}
 								errorList={this.state.passwordError}
+								maxLength={100}
 							/>
 
 							<AuthInput
@@ -238,6 +241,7 @@ export default class Register extends Component {
 								password={true}
 								onChangeText={input => this.setState({ passwordRepeat: input })}
 								singleError={this.state.passwordRepeatError}
+								maxLength={100}
 							/>
 						</View>
 

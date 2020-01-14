@@ -20,6 +20,7 @@ export default class AuthInput extends Component {
                     secureTextEntry={this.props.password}
                     style={styles.input_text}
                     onChangeText={this.props.onChangeText}
+                    maxLength={this.props.maxLength}
                 />
 
                 {this.props.singleError != '' && this.props.singleError != undefined ?

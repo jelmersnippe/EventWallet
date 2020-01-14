@@ -39,6 +39,7 @@ export default class Login extends Component {
                         placeholder='Email'
                         keyboardType='email-address'
                         onChangeText={input => this.setState({ email: input })}
+                        maxLength={255}
                     />
 
                     <AuthInput
@@ -46,6 +47,7 @@ export default class Login extends Component {
                         placeholder='Password'
                         password={true}
                         onChangeText={input => this.setState({ password: input })}
+                        maxLength={100}
                     />
 
                     {this.state.error != '' &&
