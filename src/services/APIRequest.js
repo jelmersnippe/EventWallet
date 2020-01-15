@@ -133,6 +133,8 @@ const ProcessResponse = (response,request) => {
                     reject(error)
                 })
             }
+        } else if (response.respInfo.status == 429) {
+            reject('Too many requests. Try again in one minute')
         } else {
             // UNKNOWN ERROR CODE
             // Reject with the data in the response

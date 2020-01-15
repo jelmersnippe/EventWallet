@@ -78,6 +78,8 @@ export const ValidateToken = (token) => {
 
             if (response.respInfo.status == 200 || response.respInfo.status == 403) {
                 resolve(response.data)
+            } else if (response.respInfo.status == 429) {
+                reject('Too many requests. Try again in one minute')
             } else {
                 reject(JSON.parse(response.data).message)
             }
@@ -101,6 +103,7 @@ export const SignIn = (email, password) => {
         .then(response => {
 
             console.log('\n\t--- RESPONSE INFO ---')
+            console.log(JSON.stringify(response, null, 4))
             console.log(response.respInfo.redirects[0])
             console.log(response.respInfo.status + ' response: ')
             console.log(response.data)
@@ -111,6 +114,8 @@ export const SignIn = (email, password) => {
                 ).catch(error => {
                     reject(error)
                 })
+            } else if (response.respInfo.status == 429) {
+                reject('Too many requests. Try again in one minute')
             } else {
                 reject(response.data)
             }
