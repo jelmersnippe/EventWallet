@@ -35,19 +35,22 @@ export default class WalletLink extends Component {
 
     componentDidMount() {
         this.setState({ event: this.props.navigation.getParam('event') })
-        GetWristband(this.props.navigation.getParam('event'), GetPin()).then(response => {
-            this.setWristband(response)
-        }).catch(error => {
-            alert('Could not get wristbande code: ' + error)
-            this.props.navigation.goBack()
-        })
+        GetWristband(this.props.navigation.getParam('event'), GetPin())
+            .then(response => {
+                this.setWristband(response)
+            }).catch(error => {
+                alert('Could not get wristbande code: ' + error)
+                this.props.navigation.goBack()
+            })
     }
 
     setWristband(wristband) {
         this.setState({ wristbandCode: wristband.code, wristbandStatus: wristband.status })
-        GenerateQR(wristband.code).then(response => {
-            this.setState({ qr: response })
-        }).catch(error => alert('Could not generate QR code: ' + error))
+        GenerateQR(wristband.code)
+            .then(response => {
+                this.setState({ qr: response })
+            })
+            .catch(error => alert('Could not generate QR code: ' + error))
     }
 
     render() {
@@ -58,12 +61,12 @@ export default class WalletLink extends Component {
                         callback={(pin) => {
                             this.setState({ showPinOverlay: false, refreshingWristband: false })
                             UpdateWristband(this.state.event, pin)
-                            .then(response => {
-                                this.setWristband(response)
-                            })
-                            .catch(error => {
-                                alert('Could not update wristband code: ' + error)
-                            })
+                                .then(response => {
+                                    this.setWristband(response)
+                                })
+                                .catch(error => {
+                                    alert('Could not update wristband code: ' + error)
+                                })
                         }} 
                         cancelAction={() => this.setState({ showPinOverlay: false, refreshingWristband: false })}
                     />
@@ -110,7 +113,6 @@ export default class WalletLink extends Component {
 
                         {this.state.wristbandStatus == 'active' &&
                             <Text style={styles.error_text}>Use this button to deactivate the active wristband in case of theft, or if the wristband is lost</Text>
-
                         }
                     </View>
                 }

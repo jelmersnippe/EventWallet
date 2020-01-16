@@ -60,13 +60,13 @@ export default class Login extends Component {
                 <WideButton 
                     callback={() => { 
                         SignIn(this.state.email, this.state.password)
-                        .then(() => { 
-                            this.props.navigation.navigate('AuthLoading')
-                        }) 
-                        .catch(error => {
-                            alert(error)
-                            this.setState({error: 'Unknown email and/or password' })
-                        })
+                            .then(() => { 
+                                this.props.navigation.navigate('AuthLoading')
+                            }) 
+                            .catch(error => {
+                                alert('Login failed:\n' + error)
+                                this.setState({error: 'Unknown email and/or password' })
+                            })
                     }} 
                     text='Login' 
                     textColor={Colors.lightTextColor} 

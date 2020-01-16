@@ -37,7 +37,11 @@ export default class BuyTokens extends Component {
     componentDidMount() {
         this.setState({ event: this.props.navigation.getParam('event') })
         GetTokenPrice(this.props.navigation.getParam('event').uid)
-        .then(response => this.setState({tokenPrice: response.price}))
+            .then(response => this.setState({tokenPrice: response.price}))
+            .catch(error => {
+                alert('Could not get token price:\n' + error)
+                this.props.navigation.goBack()
+            })
     }
 
     updateSelectedAmount = (value) => {
@@ -61,10 +65,13 @@ export default class BuyTokens extends Component {
                 <PinCode 
                     callback={(code) => {
                         this.setState({ showPinOverlay: false })
-                        AddFunds(this.state.event.uid, this.state.selectedAmount, code).then(response => {
-                            this.props.navigation.state.params.updateTransactions(response)
-                            this.props.navigation.goBack()
-                        }).catch(error => alert(error))
+                        AddFunds(this.state.event.uid, this.state.selectedAmount, code)
+                            .then(response => {
+                                alert('Transaction successful')
+                                this.props.navigation.state.params.updateTransactions(response)
+                                this.props.navigation.goBack()
+                            })
+                            .catch(error => alert('Transaction failed:\n' + error))
                     }} 
                     cancelAction={() => this.setState({showPinOverlay: false})}
                 />}

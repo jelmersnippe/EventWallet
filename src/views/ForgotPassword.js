@@ -21,7 +21,7 @@ export default class ForgotPassword extends Component {
     }
     
     passwordResetAction () {
-
+        alert('Not implemented yet')
         // Make call to validate password reset attempt
     }
 

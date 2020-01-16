@@ -39,8 +39,6 @@ export default class SearchBar extends Component {
         if (this.state.searchTerm != '') {
             this.searchUpdated('');
 
-            // We have handled the back button
-            // Return `true` to prevent react-navigation from handling it
             return true;
         } else {
             return false;

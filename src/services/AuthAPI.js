@@ -69,24 +69,22 @@ export const ValidateToken = (token) => {
             'Content-type': 'application/json',
             'x-access-token': token
         })
-        .then(response => {
+            .then(response => {
 
-            console.log('\n\t--- RESPONSE INFO ---')
-            console.log(response.respInfo.redirects[0])
-            console.log(response.respInfo.status + ' response: ')
-            console.log(response.data)
+                // console.log('\n\t--- RESPONSE INFO ---')
+                // console.log(response.respInfo.redirects[0])
+                // console.log(response.respInfo.status + ' response: ')
+                // console.log(response.data)
 
-            if (response.respInfo.status == 200 || response.respInfo.status == 403) {
-                resolve(response.data)
-            } else if (response.respInfo.status == 429) {
-                reject('Too many requests. Try again in one minute')
-            } else {
-                reject(JSON.parse(response.data).message)
-            }
-        })
-        .catch(error => {
-            reject(error)
-        })
+                if (response.respInfo.status == 200 || response.respInfo.status == 403) {
+                    resolve(response.data)
+                } else if (response.respInfo.status == 429) {
+                    reject('Too many requests. Try again in one minute')
+                } else {
+                    reject(JSON.parse(response.data).message)
+                }
+            })
+            .catch(error => reject(error))
     })
 }
 
@@ -100,29 +98,24 @@ export const SignIn = (email, password) => {
         .fetch('GET', 'https://' + ip + ':' + port + '/login', {
             Authorization: 'Basic ' + authString,
         })
-        .then(response => {
+            .then(response => {
+                // console.log('\n\t--- RESPONSE INFO ---')
+                // console.log(JSON.stringify(response, null, 4))
+                // console.log(response.respInfo.redirects[0])
+                // console.log(response.respInfo.status + ' response: ')
+                // console.log(response.data)
 
-            console.log('\n\t--- RESPONSE INFO ---')
-            console.log(JSON.stringify(response, null, 4))
-            console.log(response.respInfo.redirects[0])
-            console.log(response.respInfo.status + ' response: ')
-            console.log(response.data)
-
-            if (response.respInfo.status == 200) {
-                SetToken(response.data).then(
-                    resolve()
-                ).catch(error => {
-                    reject(error)
-                })
-            } else if (response.respInfo.status == 429) {
-                reject('Too many requests. Try again in one minute')
-            } else {
-                reject(response.data)
-            }
-        })
-        .catch(error => {
-            reject(error)
-        })
+                if (response.respInfo.status == 200) {
+                    SetToken(response.data)
+                        .then(resolve())
+                        .catch(error => reject(error))
+                } else if (response.respInfo.status == 429) {
+                    reject('Too many requests. Try again in one minute')
+                } else {
+                    reject(response.data)
+                }
+            })
+            .catch(error => reject(error))
     })
 }
 
@@ -131,20 +124,14 @@ export const isSignedIn = async () => {
         AsyncStorage.getItem(userKey)
             .then(authToken => {
                 if (authToken !== null) {
-                    console.log('AuthToken found: ' + authToken)
-                    ValidateToken(authToken).then(response => {
-                        resolve(true)
-                    }).catch(error => {
-                        reject(error)
-                    })
+                    ValidateToken(authToken)
+                        .then(response => resolve(response))
+                        .catch(error => reject(error))
                 } else {
-                    console.log('No AuthToken found')
                     reject()
                 }
             })
-            .catch(error => {
-                reject(error)
-            });
+            .catch(error => reject(error))
     });
 };
 

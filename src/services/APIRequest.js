@@ -17,24 +17,20 @@ export const APIRequest = async (method, URL, requiresToken = false, body = null
         }
 
         if (requiresToken) {
-            GetToken().then(authToken => {
-                request.headers['x-access-token'] = authToken
+            GetToken()
+                .then(authToken => {
+                    request.headers['x-access-token'] = authToken
 
-                Request(request)
-                .then(response => {
-                    resolve(response)
+                    Request(request)
+                        .then(response => resolve(response))
+                        .catch(error => reject(error))
                 })
                 .catch(error => reject(error))
-            }).catch(error => {
-                reject(error)
-            })
         }
         else{
             Request(request)
-            .then(response => {
-                resolve(response)
-            })
-            .catch(error => reject(error))
+                .then(response => resolve(response))
+                .catch(error => reject(error))
         }
     })
 }
@@ -47,16 +43,10 @@ const Request = async (request) => {
         .fetch(request.method, request.URL, request.headers, JSON.stringify(request.body))
             .then(response => {
                 ProcessResponse(response, request)
-                    .then(data => {
-                        resolve(data)
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                    .then(data => resolve(data))
+                    .catch(error => reject(error))
             })
-            .catch(error => {
-                reject(error)
-            })
+            .catch(error => reject(error))
     })
 }
 
@@ -69,12 +59,12 @@ const ProcessResponse = (response,request) => {
             responseData = response.data
         }
 
-        console.log('\n\n\t--- REQUEST INFO ---')
-        console.log(JSON.stringify(request, null, 4))
+        // console.log('\n\n\t--- REQUEST INFO ---')
+        // console.log(JSON.stringify(request, null, 4))
 
-        console.log('\n\t--- RESPONSE INFO ---')
-        console.log(response.respInfo.status + ' response: ')
-        console.log(responseData)
+        // console.log('\n\t--- RESPONSE INFO ---')
+        // console.log(response.respInfo.status + ' response: ')
+        // console.log(responseData)
 
         if (response.respInfo.status == 200) {
             // REQUEST WAS SUCCESSFUL
@@ -87,10 +77,8 @@ const ProcessResponse = (response,request) => {
             // TOKEN IS INVALID
             // Force user to be logged out
             // logOut() from index.js
-            alert('Invalid token, maak dat je wegkomt schooier!')
-            SignOut().then(
-                reject(responseData.message)
-            )
+            alert('Invalid token.\nPlease log out of the application and log back in to generate a new token.\nIf this error keeps persisting, contact support.')
+            SignOut().then(reject(responseData.message))
     
         } else if (response.respInfo.status == 402) {
             reject(responseData)
@@ -104,8 +92,6 @@ const ProcessResponse = (response,request) => {
 
 
             // NO PIN IN MEMORY
-            // force the user to enter his pin to refresh the token
-            // checkPin() from index.js
 
             if(GetPin() == undefined){
                 reject(responseData)
@@ -114,24 +100,18 @@ const ProcessResponse = (response,request) => {
             // Attempt to refresh the token with the pin from memory
             } else {
                 RefreshToken(GetPin())
-                .then(refreshedToken => {
-                    // Refreshed the token with pin from memory
-                    // Set the token in memory then retry
-                    // the previous request with the new token
-                    SetToken(refreshedToken)
-                    request.headers['x-access-token'] = refreshedToken
+                    .then(refreshedToken => {
+                        // Refreshed the token with pin from memory
+                        // Set the token in memory then retry
+                        // the previous request with the new token
+                        SetToken(refreshedToken)
+                        request.headers['x-access-token'] = refreshedToken
 
-                    Request(request)
-                        .then(response => resolve(response))
-                        .catch(error => reject(error))
-                })
-                .catch(error => {
-                    // Failed to refresh token with the pin in memory
-                    // Log the user logOut
-                    // lofOut() from index.js
-
-                    reject(error)
-                })
+                        Request(request)
+                            .then(response => resolve(response))
+                            .catch(error => reject(error))
+                    })
+                    .catch(error => reject(error))
             }
         } else if (response.respInfo.status == 429) {
             reject('Too many requests. Try again in one minute')

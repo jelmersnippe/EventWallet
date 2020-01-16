@@ -35,15 +35,17 @@ export default class Transactions extends Component {
     }
 
     fetchTransactionHistory(event) {
-        GetTransactionHistory(event.uid).then(response => {
-            let updatedEvent = event
+        GetTransactionHistory(event.uid)
+            .then(response => {
+                let updatedEvent = event
 
-            let currentBalance = response[0].balance_after
-            updatedEvent.amount = currentBalance
-            this.props.navigation.state.params.updateAmount(currentBalance)
+                let currentBalance = response[0].balance_after
+                updatedEvent.amount = currentBalance
+                this.props.navigation.state.params.updateAmount(currentBalance)
 
-            this.setState({event: updatedEvent, transactionData: response, registerInProgress: false, refreshingTransactionHistory: false, transactionHistoryFound: true})
-        }).catch(error => console.log(error))
+                this.setState({event: updatedEvent, transactionData: response, registerInProgress: false, refreshingTransactionHistory: false, transactionHistoryFound: true})
+            })
+            .catch(error => alert('Could not get transaction history:\n' + error))
     }
 
     addTransaction(transaction) {
@@ -111,7 +113,8 @@ export default class Transactions extends Component {
                                     CreateWallet(this.state.event.uid)
                                         .then(response => {
                                             this.fetchTransactionHistory(this.state.event)
-                                        }).catch(error => alert('Failed to create wallet: ' + error))
+                                        })
+                                        .catch(error => alert('Failed to create wallet: ' + error))
                                 }}
                                 icon='angle-right'
                                 text={'Register'}

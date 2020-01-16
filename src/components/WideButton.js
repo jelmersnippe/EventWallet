@@ -18,7 +18,7 @@ class WideButton extends Component {
                     backgroundColor: this.props.disabled ? this.props.backgroundColor + '70' : this.props.backgroundColor, 
                     borderColor: this.props.disabled ? this.props.borderColor + '70' : this.props.borderColor,
                 }]}
-                onPress={() => { this.props.callback ? this.props.callback() : console.log('no callback') }}
+                onPress={() => { this.props.callback ? this.props.callback() : alert('Not implemented yet') }}
                 disabled={this.props.disabled}
             >
                 <Text 

@@ -53,14 +53,14 @@ export default class AuthLoading extends Component {
                         callback={(pin) => {
                             SetPin(pin)
                             ValidatePin(pin)
-                            .then(response => {
-                                this.setState({showPinOverlay: false})
-                                this.props.navigation.navigate('SignedIn')
-                            })
-                            .catch(error => {
-                                alert('Error entering pin: ' + error)
-                                this.setState({counter: this.state.counter + 1})
-                            })
+                                .then(response => {
+                                    this.setState({showPinOverlay: false})
+                                    this.props.navigation.navigate('SignedIn')
+                                })
+                                .catch(error => {
+                                    alert('Error entering pin: ' + error)
+                                    this.setState({counter: this.state.counter + 1})
+                                })
                         }}
                         cancelAction={() => {
                             SignOut().then(

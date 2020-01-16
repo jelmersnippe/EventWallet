@@ -69,12 +69,15 @@ export default class EventOverview extends Component {
 			.then(response => {
 				let mappedWallets = this.mapTransactionsToWallets(response)
 
-				GetEvents().then(events => {
-					let mappedEvents = this.mapWalletsToEvents(mappedWallets, events)
-					this.setState({allEvents: mappedEvents})
-				})
-			}).catch(error => {
-				console.log(error)
+				GetEvents()
+					.then(events => {
+						let mappedEvents = this.mapWalletsToEvents(mappedWallets, events)
+						this.setState({allEvents: mappedEvents})
+					})
+					.catch(error => alert('Could not get event overview:\n' + error))
+			})
+			.catch(error => {
+				alert('Could not get your wallets:\n' + error)
 				if (error.message.includes('Failed to connect')) {
 					this.setState({ noConnection: true })
 				}

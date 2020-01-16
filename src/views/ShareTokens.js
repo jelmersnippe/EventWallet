@@ -37,6 +37,7 @@ export default class ShareTokens extends Component {
 				{this.state.showPinOverlay && 
 					<PinCode 
 						callback={(code) => {
+							alert('Tokens successfully shared')
 							this.setState({ showPinOverlay: false })
 							this.props.navigation.goBack()
 						}} 

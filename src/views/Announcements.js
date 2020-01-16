@@ -25,24 +25,25 @@ export default class Announcements extends Component {
     }
 
     componentDidMount(){
-        GetSpecificEvent().then(eventID => {
-            GetEvent(eventID)
-            .then(event => {
-                this.setState({event: event})
+        GetSpecificEvent()
+            .then(eventID => {
+                GetEvent(eventID)
+                    .then(event => {
+                        this.setState({event: event})
 
-                GetAnnouncements(eventID)
-                .then(announcements => {
-                    this.setState({announcements: announcements})
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                        GetAnnouncements(eventID)
+                            .then(announcements => {
+                                this.setState({announcements: announcements})
+                            })
+                            .catch(error => {
+                                alert('Could not get announcements:\n' + error)
+                            })
+                    })
+                    .catch(error => {
+                        alert('Could not find get data for the event you are trying to view:\n' + error)
+                    })
             })
-            .catch(error => {
-                console.log(error)
-            })
-        })
-        
+            .catch(alert('Could not find event you are trying to view'))
     }
 
     render() {

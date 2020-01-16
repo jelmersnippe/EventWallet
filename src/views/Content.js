@@ -18,15 +18,17 @@ export default class Content extends Component {
     }
 
     componentDidMount() {
-        GetSpecificEvent().then(eventID => {
-            GetEvent(eventID)
-            .then(event => {
-                this.setState({ event: event })
+        GetSpecificEvent()
+            .then(eventID => {
+                GetEvent(eventID)
+                    .then(event => {
+                        this.setState({ event: event })
+                    })
+                    .catch(error => {
+                        alert('Could not find get data for the event you are trying to view:\n' + error)
+                    })
             })
-            .catch(error => {
-                console.log(error)
-            })
-        })
+            .catch(alert('Could not find event you are trying to view'))
     }
 
 
