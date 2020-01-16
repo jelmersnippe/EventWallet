@@ -50,6 +50,7 @@ export default class PinCode extends Component {
                     onTextChange={pin => this.setState({ pin })}
                     onFulfill={(pin) => this.props.callback(pin)}
                     autoFocus={true}
+                    restrictToNumbers={true}
                 />
             </View>
         );
