@@ -123,7 +123,7 @@ export default class Register extends Component {
 			return false;
 		}
 
-		let reg = /^[a-zA-Z0-9]$/
+		let reg = /^[a-zA-Z0-9]{1,}$/
 
 		if (!reg.test(username)) {
 			this.setState({ usernameError: "Invalid username\nOnly alphanumeric characters are allowed" })
