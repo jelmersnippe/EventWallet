@@ -82,7 +82,7 @@ export default class ShareTokens extends Component {
 							textColor={Colors.darkTextColor}
 							backgroundColor={Colors.ctaButtonColor}
 							borderColor={Colors.ctaButtonBorderColor}
-							disabled={this.state.selectedAmount == 0 && true}
+							disabled={this.state.selectedAmount == 0 || this.state.showPinOverlay}
 						/>
 					</View>
 				</View>

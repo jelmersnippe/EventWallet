@@ -119,7 +119,7 @@ export default class BuyTokens extends Component {
                             backgroundColor={Colors.ctaButtonColor}
                             borderColor={Colors.ctaButtonBorderColor}
                             callback={() => this.setState({ showPinOverlay: true })}
-                            disabled={this.state.selectedAmount == 0 || this.state.tokenPrice <= 0}
+                            disabled={this.state.selectedAmount == 0 || this.state.tokenPrice <= 0 || this.state.showPinOverlay}
                         />
                     </View>
                 </ScrollView>
