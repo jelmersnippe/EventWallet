@@ -20,7 +20,7 @@ import { SignUp } from '../services/AuthAPI'
 
 const usernameLimit = 255
 const emailLimit= 255
-const passwordLimit = 100
+const passwordLimit = 255
 
 export default class Register extends Component {
 	constructor(props) {
@@ -62,7 +62,7 @@ export default class Register extends Component {
 			return false;
 		}
 
-		if(password.length() > passwordLimit){
+		if(password.length > passwordLimit){
 			this.addPasswordError("No more than " + passwordLimit + " characters allowed")
 			return false;
 		}
@@ -139,7 +139,7 @@ export default class Register extends Component {
 			return false;
 		}
 
-		if(username.length() > usernameLimit){
+		if(username.length > usernameLimit){
 			this.setState({ usernameError: "Invalid username.\nNo more than " + usernameLimit + " characters allowed" })
 			return false;
 		}
@@ -161,7 +161,7 @@ export default class Register extends Component {
 			return false;
 		}
 
-		if(email.length() > emailLimit){
+		if(email.length > emailLimit){
 			this.setState({ emailError: "Invalid email.\nNo more than " + emailLimit + " characters allowed" })
 			return false;
 		}
