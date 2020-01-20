@@ -45,7 +45,7 @@ export default class Transactions extends Component {
 
                 this.setState({event: updatedEvent, transactionData: response, registerInProgress: false, refreshingTransactionHistory: false, transactionHistoryFound: true})
             })
-            .catch(error => alert('Could not get transaction history:\n' + error))
+            .catch(error => console.log('Could not get transaction history:\n' + error))
     }
 
     addTransaction(transaction) {

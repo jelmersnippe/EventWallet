@@ -28,7 +28,9 @@ export default class Content extends Component {
                         alert('Could not find get data for the event you are trying to view:\n' + error)
                     })
             })
-            .catch(alert('Could not find event you are trying to view'))
+            .catch(error => {
+                alert('Could not find event you are trying to view:\n' + error)
+            })
     }
 
 

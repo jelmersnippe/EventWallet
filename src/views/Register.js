@@ -18,6 +18,10 @@ import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 import { SignUp } from '../services/AuthAPI'
 
+const userLimit = 255
+const emailLimit= 255
+const passwordLimit = 100
+
 export default class Register extends Component {
 	constructor(props) {
 		super(props);
@@ -55,6 +59,11 @@ export default class Register extends Component {
 		this.setState({ passwordError: [] })
 		if (password == '') {
 			this.addPasswordError("This field can't be empty")
+			return false;
+		}
+
+		if(password.length() > passwordLimit){
+			this.addPasswordError("No more than " + passwordLimit + " characters allowed")
 			return false;
 		}
 
@@ -130,6 +139,11 @@ export default class Register extends Component {
 			return false;
 		}
 
+		if(username.length() > usernameLimit){
+			this.setState({ usernameError: "Invalid username.\nNo more than " + usernameLimit + " characters allowed" })
+			return false;
+		}
+
 		return true;
 	}
 
@@ -144,6 +158,11 @@ export default class Register extends Component {
 
 		if (!reg.test(email)) {
 			this.setState({ emailError: "Invalid email.\nFollow the format 'johndoe@example.com'" })
+			return false;
+		}
+
+		if(email.length() > emailLimit){
+			this.setState({ emailError: "Invalid email.\nNo more than " + emailLimit + " characters allowed" })
 			return false;
 		}
 
@@ -213,7 +232,7 @@ export default class Register extends Component {
 								placeholder='Username'
 								onChangeText={input => this.setState({ username: input })}
 								singleError={this.state.usernameError}
-								maxLength={255}
+								maxLength={usernameLimit}
 							/>
 
 							<AuthInput
@@ -222,7 +241,7 @@ export default class Register extends Component {
 								keyboardType='email-address'
 								onChangeText={input => this.setState({ email: input })}
 								singleError={this.state.emailError}
-								maxLength={255}
+								maxLength={emailLimit}
 							/>
 
 							<AuthInput
@@ -231,7 +250,7 @@ export default class Register extends Component {
 								password={true}
 								onChangeText={input => this.setState({ password: input })}
 								errorList={this.state.passwordError}
-								maxLength={100}
+								maxLength={passwordLimit}
 							/>
 
 							<AuthInput
@@ -240,7 +259,7 @@ export default class Register extends Component {
 								password={true}
 								onChangeText={input => this.setState({ passwordRepeat: input })}
 								singleError={this.state.passwordRepeatError}
-								maxLength={100}
+								maxLength={passwordLimit}
 							/>
 						</View>
 
