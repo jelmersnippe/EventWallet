@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
         width: 100 + '%',
         justifyContent: 'space-evenly',
         marginTop: 15,
+        paddingBottom: 10,
     },
     amount_text: {
         width: 40 + '%',
