@@ -71,10 +71,10 @@ export const ValidateToken = (token) => {
         })
             .then(response => {
 
-                // console.log('\n\t--- RESPONSE INFO ---')
-                // console.log(response.respInfo.redirects[0])
-                // console.log(response.respInfo.status + ' response: ')
-                // console.log(response.data)
+                console.log('\n\t--- RESPONSE INFO ---')
+                console.log(response.respInfo.redirects[0])
+                console.log(response.respInfo.status + ' response: ')
+                console.log(response.data)
 
                 if (response.respInfo.status == 200 || response.respInfo.status == 403) {
                     resolve(response.data)
@@ -99,11 +99,10 @@ export const SignIn = (email, password) => {
             Authorization: 'Basic ' + authString,
         })
             .then(response => {
-                // console.log('\n\t--- RESPONSE INFO ---')
-                // console.log(JSON.stringify(response, null, 4))
-                // console.log(response.respInfo.redirects[0])
-                // console.log(response.respInfo.status + ' response: ')
-                // console.log(response.data)
+                console.log('\n\t--- RESPONSE INFO ---')
+                console.log(response.respInfo.redirects[0])
+                console.log(response.respInfo.status + ' response: ')
+                console.log(response.data)
 
                 if (response.respInfo.status == 200) {
                     SetToken(response.data)

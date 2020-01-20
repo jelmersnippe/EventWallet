@@ -59,12 +59,12 @@ const ProcessResponse = (response,request) => {
             responseData = response.data
         }
 
-        // console.log('\n\n\t--- REQUEST INFO ---')
-        // console.log(JSON.stringify(request, null, 4))
+        console.log('\n\n\t--- REQUEST INFO ---')
+        console.log(JSON.stringify(request, null, 4))
 
-        // console.log('\n\t--- RESPONSE INFO ---')
-        // console.log(response.respInfo.status + ' response: ')
-        // console.log(responseData)
+        console.log('\n\t--- RESPONSE INFO ---')
+        console.log(response.respInfo.status + ' response: ')
+        console.log(responseData)
 
         if (response.respInfo.status == 200) {
             // REQUEST WAS SUCCESSFUL
