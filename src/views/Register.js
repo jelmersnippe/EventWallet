@@ -18,7 +18,7 @@ import { Colors, Fonts, appName } from '../components/GlobalVariables'
 
 import { SignUp } from '../services/AuthAPI'
 
-const userLimit = 255
+const usernameLimit = 255
 const emailLimit= 255
 const passwordLimit = 100
 
