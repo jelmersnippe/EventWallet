@@ -77,8 +77,14 @@ export const GetEvent = (uid) => {
 
     return new Promise((resolve, reject) => {
         if(uid) {
-            resolve({
-
+            resolve( {
+                id: "1",
+                uid: "event1",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 1",
+                location: "Event location 1",
+                description: "Event 1 description",
             })
         } else {
             reject()
@@ -103,6 +109,7 @@ export const GetEvents = () => {
                 end_date: "June 27 2020",
                 name: "Event 1",
                 location: "Event location 1",
+                description: "Event 1 description",
             },
             {
                 id: "2",
@@ -111,6 +118,7 @@ export const GetEvents = () => {
                 end_date: "June 27 2020",
                 name: "Event 2",
                 location: "Event location 2",
+                description: "Event 2 description",
             },
             {
                 id: "3",
@@ -119,6 +127,7 @@ export const GetEvents = () => {
                 end_date: "June 27 2020",
                 name: "Event 3",
                 location: "Event location 3",
+                description: "Event 3 description",
             },
             {
                 id: "4",
@@ -127,6 +136,7 @@ export const GetEvents = () => {
                 end_date: "June 27 2020",
                 name: "Event 4",
                 location: "Event location 4",
+                description: "Event 4 description",
             },
             {
                 id: "5",
@@ -135,6 +145,7 @@ export const GetEvents = () => {
                 end_date: "June 27 2020",
                 name: "Event 5",
                 location: "Event location 5",
+                description: "Event 5 description",
             },
         ])
     })
