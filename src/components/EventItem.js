@@ -33,6 +33,7 @@ class EventItem extends Component {
                 style={styles.container}
                 onPress={() => {
                     SetSpecificEvent(this.state.event.uid).then(
+                        this.state.event.amount > 0 ?
                         this.props.navigation.navigate('Transactions', 
                         { 
                             updateAmount: (amount) => {
@@ -40,7 +41,13 @@ class EventItem extends Component {
                                 updatedEvent.amount = amount
                                 this.setState({event: updatedEvent})},
                             item: this.state.event 
-                        }))
+                        })
+                        :
+                        this.props.navigation.navigate('Transactions', 
+                        { 
+                            item: this.state.event 
+                        })
+                        )
                     }}
             >
                 <View style={styles.info}>

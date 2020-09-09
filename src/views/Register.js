@@ -201,15 +201,16 @@ export default class Register extends Component {
 						<PinCode
 							callback={(pin) => {
 								if (this.state.pin == pin) {
-									SignUp(this.state.username, this.state.password, this.state.email, pin)
-										.then(response => {
-											alert('Thank you, you registered successfully')
-											this.props.navigation.navigate('Login')
-										})
-										.catch(error => {
-											alert('Something went wrong during the registration process: ' + error + '\nPlease try again')
-											this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
-										})
+									alert('Thanks for registering!\n To login use the credentials "demo" as email and password\nPincode: 1234')
+									// SignUp(this.state.username, this.state.password, this.state.email, pin)
+									// 	.then(response => {
+									// 		alert('Thank you, you registered successfully')
+									// 		this.props.navigation.navigate('Login')
+									// 	})
+									// 	.catch(error => {
+									// 		alert('Something went wrong during the registration process: ' + error + '\nPlease try again')
+									// 		this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })
+									// 	})
 								} else {
 									alert("Entered pins don't match. Please try again")
 									this.setState({showPinOverlay: false, pin: '', timesPinEntered: 0 })

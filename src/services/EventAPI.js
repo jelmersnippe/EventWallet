@@ -15,47 +15,165 @@ export const GetSpecificEvent = async () => {
 }
 
 export const GetWristband = (event, pin) => {
-    let bodyData = {
-        "event": event,
-        "pin": pin
-    }
+
+    return new Promise((resolve, reject) => {
+        if(event && pin){
+            resolve({
+                code: "ABCDEF12345",
+                status: "active",
+            })
+        } else {
+            reject('No event or pin specified')
+        }
+    })
+
+    // let bodyData = {
+    //     "event": event,
+    //     "pin": pin
+    // }
     
-    return APIRequest('POST', ip + ':' + port + '/wristband', true, bodyData)
+    // return APIRequest('POST', ip + ':' + port + '/wristband', true, bodyData)
 }
 
 export const UpdateWristband = (event, pin) => {
-    let bodyData = {
-        "event": event,
-        "pin": pin
-    }
 
-    return APIRequest('POST', ip + ':' + port + '/wristband/update', true, bodyData)
+    return new Promise((resolve, reject) => {
+        if(event && pin){
+            resolve({
+                code: "NOTHARDCODED",
+                status: "pending",
+            })
+        } else {
+            reject('No event or pin specified')
+        }
+    })
+
+    // let bodyData = {
+    //     "event": event,
+    //     "pin": pin
+    // }
+
+    // return APIRequest('POST', ip + ':' + port + '/wristband/update', true, bodyData)
 }
 
 export const GetTokenPrice = (event) => {
-    let bodyData = {
-        "event": event
-    }
 
-    return APIRequest('POST', ip + ':' + port + '/tokenprice', true, bodyData)
+    return new Promise((resolve, reject) => {
+        if(event){
+            resolve({price: 2.50})
+        } else {
+            reject('No event specified')
+        }
+    })
+
+    // let bodyData = {
+    //     "event": event
+    // }
+
+    // return APIRequest('POST', ip + ':' + port + '/tokenprice', true, bodyData)
 }
 
 export const GetEvent = (uid) => {
-    let bodyData = {
-        "uid": uid
-    }
 
-    return APIRequest('POST', ip + ':' + port + '/event/id', true, bodyData)
+    return new Promise((resolve, reject) => {
+        if(uid) {
+            resolve({
+
+            })
+        } else {
+            reject()
+        }
+    })
+
+    // let bodyData = {
+    //     "uid": uid
+    // }
+
+    // return APIRequest('POST', ip + ':' + port + '/event/id', true, bodyData)
 }
 
 export const GetEvents = () => {
-    return APIRequest('POST', ip + ':' + port + '/events', true)
+
+    return new Promise((resolve) => {
+        resolve([
+            {
+                id: "1",
+                uid: "event1",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 1",
+                location: "Event location 1",
+            },
+            {
+                id: "2",
+                uid: "event2",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 2",
+                location: "Event location 2",
+            },
+            {
+                id: "3",
+                uid: "event3",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 3",
+                location: "Event location 3",
+            },
+            {
+                id: "4",
+                uid: "event4",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 4",
+                location: "Event location 4",
+            },
+            {
+                id: "5",
+                uid: "event5",
+                begin_date: "June 25 2020",
+                end_date: "June 27 2020",
+                name: "Event 5",
+                location: "Event location 5",
+            },
+        ])
+    })
+
+    // return APIRequest('POST', ip + ':' + port + '/events', true)
 }
 
 export const GetAnnouncements = (event) => {
-    let bodyData = {
-        "event": event
-    }
 
-    return APIRequest('POST', ip + ':' + port + '/announcements', true, bodyData)
+    return new Promise((resolve, reject) => {
+        if(event) {
+            resolve([
+                {
+                    id: 1,
+                    title: 'Announcement 1',
+                    datetime: '7 Sept 2020',
+                    message: 'This a demo announcement',
+                },
+                {
+                    id: 2,
+                    title: 'Announcement 2',
+                    datetime: '8 Sept 2020',
+                    message: 'This a demo announcement',
+                },
+                {
+                    id: 3,
+                    title: 'Announcement 3',
+                    datetime: '9 Sept 2020',
+                    message: 'This a demo announcement',
+                },
+            ])
+        } else {
+            reject('No event specified')
+        }
+    })
+
+    // let bodyData = {
+    //     "event": event
+    // }
+
+    // return APIRequest('POST', ip + ':' + port + '/announcements', true, bodyData)
 }

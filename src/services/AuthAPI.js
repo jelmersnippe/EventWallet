@@ -6,6 +6,12 @@ const base64 = require('base-64')
 const ip = '145.24.222.83'
 const port = '3304'
 
+// DEMO
+const demoToken = 'abcd1234'
+const demoPin = '12345'
+const demoEmail = 'demo'
+const demoPass = 'demo'
+
 const userKey = 'AuthToken'
 
 let pin = undefined
@@ -52,69 +58,91 @@ export const RefreshToken = (pin) => {
 }
 
 export const ValidatePin = (pin) => {
-    let bodyData = {
-        "pin": pin
-    }
 
-    return APIRequest('POST', ip + ':' + port + '/pin/validate', true, bodyData)
+    return new Promise((resolve, reject) => {
+        if(pin == demoPin) {
+            resolve();
+        } else {
+            reject();
+        }
+    })
+
+    // let bodyData = {
+    //     "pin": pin
+    // }
+
+    // return APIRequest('POST', ip + ':' + port + '/pin/validate', true, bodyData)
 }
 
 export const ValidateToken = (token) => {
     return new Promise((resolve, reject) => {
 
-        RNFetchBlob.config({
-            trusty: true
-        })
-        .fetch('GET', 'https://' + ip + ':' + port + '/token/validate', {
-            'Content-type': 'application/json',
-            'x-access-token': token
-        })
-            .then(response => {
+        if(token == demoToken) {
+            resolve();
+        } else {
+            reject();
+        }
 
-                console.log('\n\t--- RESPONSE INFO ---')
-                console.log(response.respInfo.redirects[0])
-                console.log(response.respInfo.status + ' response: ')
-                console.log(response.data)
+        // RNFetchBlob.config({
+        //     trusty: true
+        // })
+        // .fetch('GET', 'https://' + ip + ':' + port + '/token/validate', {
+        //     'Content-type': 'application/json',
+        //     'x-access-token': token
+        // })
+        //     .then(response => {
 
-                if (response.respInfo.status == 200 || response.respInfo.status == 403) {
-                    resolve(response.data)
-                } else if (response.respInfo.status == 429) {
-                    reject('Too many requests. Try again in one minute')
-                } else {
-                    reject(JSON.parse(response.data).message)
-                }
-            })
-            .catch(error => reject(error))
+        //         console.log('\n\t--- RESPONSE INFO ---')
+        //         console.log(response.respInfo.redirects[0])
+        //         console.log(response.respInfo.status + ' response: ')
+        //         console.log(response.data)
+
+        //         if (response.respInfo.status == 200 || response.respInfo.status == 403) {
+        //             resolve(response.data)
+        //         } else if (response.respInfo.status == 429) {
+        //             reject('Too many requests. Try again in one minute')
+        //         } else {
+        //             reject(JSON.parse(response.data).message)
+        //         }
+        //     })
+        //     .catch(error => reject(error))
     })
 }
 
 export const SignIn = (email, password) => {
     return new Promise((resolve, reject) => {
-        let authString = base64.encode(email + ':' + password)
-    
-        RNFetchBlob.config({
-            trusty: true
-        })
-        .fetch('GET', 'https://' + ip + ':' + port + '/login', {
-            Authorization: 'Basic ' + authString,
-        })
-            .then(response => {
-                console.log('\n\t--- RESPONSE INFO ---')
-                console.log(response.respInfo.redirects[0])
-                console.log(response.respInfo.status + ' response: ')
-                console.log(response.data)
 
-                if (response.respInfo.status == 200) {
-                    SetToken(response.data)
-                        .then(resolve())
-                        .catch(error => reject(error))
-                } else if (response.respInfo.status == 429) {
-                    reject('Too many requests. Try again in one minute')
-                } else {
-                    reject(response.data)
-                }
-            })
-            .catch(error => reject(error))
+        if(email == demoEmail && password == demoPass) {
+            SetToken(demoToken).then(resolve());
+        } else {
+            reject('invalid credentials');
+        }
+
+        // let authString = base64.encode(email + ':' + password)
+    
+        // RNFetchBlob.config({
+        //     trusty: true
+        // })
+        // .fetch('GET', 'https://' + ip + ':' + port + '/login', {
+        //     Authorization: 'Basic ' + authString,
+        // })
+        //     .then(response => {
+        //         console.log('\n\t--- RESPONSE INFO ---')
+        //         console.log(response.respInfo.redirects[0])
+        //         console.log(response.respInfo.status + ' response: ')
+        //         console.log(response.data)
+
+        //         if (response.respInfo.status == 200) {
+        //             SetToken(response.data)
+        //                 .then(resolve())
+        //                 .catch(error => reject(error))
+        //         } else if (response.respInfo.status == 429) {
+        //             reject('Too many requests. Try again in one minute')
+        //         } else {
+        //             reject(response.data)
+        //         }
+        //     })
+        //     .catch(error => reject(error))
     })
 }
 
