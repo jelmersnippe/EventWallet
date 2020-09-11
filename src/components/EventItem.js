@@ -110,11 +110,6 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 5,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 5, },
-        shadowOpacity: 1,
-        shadowRadius: 6,
-        elevation: 5,
     },
     tokens: {
         flexDirection: 'row',
